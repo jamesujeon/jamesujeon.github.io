@@ -9,12 +9,12 @@ function setupScrollToTopButton() {
   });
 
   $(window).scroll(function() {
-    if ($(this).scrollTop() > 100 && $(this).scrollTop() < lastScrollTop) {
+    if ($('html, body').scrollTop() > 100 && $('html, body').scrollTop() < lastScrollTop) {
       topButton.fadeIn(200);
     } else {
       topButton.fadeOut(200);
     }
 
-    lastScrollTop = $(this).scrollTop();
+    lastScrollTop = $('html, body').scrollTop();
   });
 }
