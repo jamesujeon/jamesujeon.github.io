@@ -1,3 +1,5 @@
+var lastScrollTop = 0;
+
 function setupScrollToTopButton() {
   var topButton = $('#scrollToTop');
   topButton.hide();
@@ -6,12 +8,11 @@ function setupScrollToTopButton() {
     return false;
   });
 
-  var lastScrollTop = 0;
   $(window).scroll(function() {
     if ($(this).scrollTop() > 100 && $(this).scrollTop() < lastScrollTop) {
-      topButton.fadeIn();
+      topButton.fadeIn(200);
     } else {
-      topButton.fadeOut();
+      topButton.fadeOut(200);
     }
 
     lastScrollTop = $(this).scrollTop();
