@@ -1,4 +1,205 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-02T18:42:49+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Jekyll 환경설정 파일 이해하기</title><link href="https://jamesujeon.github.io/posts/2019/12/02/understanding-jekyll-config-file/" rel="alternate" type="text/html" title="Jekyll 환경설정 파일 이해하기" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/understanding-jekyll-config-file</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/understanding-jekyll-config-file/">&lt;h1 id=&quot;jekyll-환경설정-파일이란&quot;&gt;Jekyll 환경설정 파일이란?&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-03T18:27:59+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Codeforces 코딩 문제 풀기: 71A - Way Too Long Words</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 71A - Way Too Long Words" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_71a_way_too_long_words.png&quot; alt=&quot;71A - Way Too Long Words&quot; title=&quot;71A - Way Too Long Words&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/71/A&quot; target=&quot;_blank&quot;&gt;Way Too Long Words 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;입력받은 단어의 길이가 10자보다 긴 경우, 첫 글자와 마지막 글자를 제외한 나머지 글자는 글자수로 표현한다.&lt;br /&gt;
+10자 이하인 경우, 그대로 출력한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;단어의 길이가 10자를 초과하거나 이하인 경우로 분기해 로직을 처리할 수도 있으나,&lt;br /&gt;
+10자 이하인 경우에는 특별한 처리를 하지 않으므로 초과인 경우에만 단어를 변경해 결과를 수집한다.&lt;/p&gt;
+
+&lt;p&gt;Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;word[-1]&lt;/code&gt;와 같이 &lt;strong&gt;마이너스 인덱스&lt;/strong&gt;를 통해 마지막 요소에 접근할 수 있다.&lt;br /&gt;
+또한, 중앙의 글자수 부분은 전체 길이에서 첫 글자와 마지막 글자를 제외한 글자수이므로, 전체 길이에서 2를 빼면 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;words&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;abbr_words&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;abbr_words&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abbr_words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 158A - Next Round</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 158A - Next Round" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_158a_next_round.png&quot; alt=&quot;158A - Next Round&quot; title=&quot;158A - Next Round&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/158/A&quot; target=&quot;_blank&quot;&gt;Next Round 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;k번째의 점수 이상이면, 다음 라운드로 넘어갈 수 있다.&lt;br /&gt;
+또한, 양수인 점수를 얻을 때만 가능하다.&lt;/p&gt;
+
+&lt;p&gt;점수가 양수이면서 k번째의 점수 이상인 사람 수를 세면 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;두 번째 열의 입력을 배열로 받으면, k번째의 점수를 쉽게 얻을 수 있다.&lt;br /&gt;
+입력받은 점수 배열을 순회하면서 조건에 맞는 경우, 사람 수를 증가시킨다.&lt;/p&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;리팩토링&quot;&gt;리팩토링&lt;/h1&gt;
+
+&lt;p&gt;위 코드는 항상 입력받은 점수 배열의 요소를 모두 순회하도록 되어 있다.&lt;br /&gt;
+이를 개선시켜 &lt;strong&gt;반대 조건일 때 순회를 중지&lt;/strong&gt;하도록 해 불필요한 순회를 하지 않도록 한다.&lt;/p&gt;
+
+&lt;p&gt;반대 조건을 구할 때, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%93%9C_%EB%AA%A8%EB%A5%B4%EA%B0%84%EC%9D%98_%EB%B2%95%EC%B9%99#%EB%85%BC%EB%A6%AC_%ED%9A%8C%EB%A1%9C%EC%97%90%EC%84%9C%EC%9D%98_%EB%93%9C_%EB%AA%A8%EB%A5%B4%EA%B0%84%EC%9D%98_%EB%B2%95%EC%B9%99&quot; target=&quot;_blank&quot;&gt;드 모르간의 법칙&lt;/a&gt;을 이용하면 쉽게 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/De_Morgan's_laws.png&quot; alt=&quot;De Morgan's laws&quot; title=&quot;De Morgan's laws&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;말로 풀어 설명하면,&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;A 또는 B일 때의 부정&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;A의 부정이고 B의 부정&lt;/code&gt;과 같다.&lt;br /&gt;
+또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;A이고 B일 때의 부정&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;A의 부정 또는 B의 부정&lt;/code&gt;과 같다.&lt;/p&gt;
+
+&lt;p&gt;Python으로 표현하면,&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;not (A or B) == not A and not B&lt;/code&gt;이고, &lt;code class=&quot;highlighter-rouge&quot;&gt;not (A and B) == not A or not B&lt;/code&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;위 코드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt; 0 and score &amp;gt;= scores[k - 1]&lt;/code&gt;의 부정은&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;not (score &amp;gt; 0 and score &amp;gt;= scores[k - 1])&lt;/code&gt;이지만,&lt;br /&gt;
+드 모르간의 법칙을 적용해 각각의 부정을 &lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt; 연산한 것으로 대체할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt; 0&lt;/code&gt;의 부정은 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;lt;= 0&lt;/code&gt;이지만,&lt;br /&gt;
+이 문제에서는 0 이하로는 입력될 수 없으므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;score is 0&lt;/code&gt;로 표현해도 된다.&lt;br /&gt;
+또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt;= scores[k - 1]&lt;/code&gt;의 부정은 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;lt; scores[k - 1]&lt;/code&gt;이 된다.&lt;br /&gt;
+결론적으로 다음과 같이 작성할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이로써 불필요한 순회를 줄일 수 있다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4A - Watermelon</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4A - Watermelon" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4a_watermelon.png&quot; alt=&quot;4A - Watermelon&quot; title=&quot;4A - Watermelon&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/contest/4/problem/A&quot; target=&quot;_blank&quot;&gt;Watermelon 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;1 이상 100 이하의 수박 무게가 주어졌을 때,&lt;br /&gt;
+짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;짝수 무게로만 두 부분으로 나누기 위해 &lt;strong&gt;주어진 무게가 짝수&lt;/strong&gt;여야 2로 나누어 떨어질 수 있다.&lt;br /&gt;
+하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 1A - Theatre Square</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 1A - Theatre Square" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_1a_theatre_square.png&quot; alt=&quot;1A - Theatre Square&quot; title=&quot;1A - Theatre Square&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/1/A&quot; target=&quot;_blank&quot;&gt;Theatre Square 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;n × m 미터의 직사각형 모양의 광장이 있을 때,&lt;br /&gt;
+a x a 미터의 정사각형 모양의 판석을 이용해 덮으려면 몇 개가 필요할 지를 구하는 문제다.&lt;br /&gt;
+이 때, 판석은 겹쳐질 수 있다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;판석이 겹쳐질 수 있다는 조건이 있으므로, &lt;strong&gt;판석이 광장의 크기에 딱 맞을 필요가 없다&lt;/strong&gt;.&lt;br /&gt;
+따라서, 각 방향으로 필요한 판석 수를 구해, 그 둘을 곱하면 필요한 전체 판석 수가 된다.&lt;/p&gt;
+
+&lt;p&gt;한쪽 방향에 대해서 광장의 크기를 판석으로 나눴을 때, 딱 맞지 않아 소숫점이 나올 수 있다.&lt;br /&gt;
+이 때, 판석을 겹칠 수 있으므로 정수로 &lt;strong&gt;올림 처리&lt;/strong&gt;를 하면, 겹쳐지면서 필요한 판석 수가 구해진다.&lt;br /&gt;
+다른 방향에 대해서도 똑같은 방식으로 구할 수 있다.&lt;/p&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Jekyll 환경설정 파일 이해하기</title><link href="https://jamesujeon.github.io/posts/2019/11/28/understanding-jekyll-config-file/" rel="alternate" type="text/html" title="Jekyll 환경설정 파일 이해하기" /><published>2019-11-28T00:00:00+09:00</published><updated>2019-11-28T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/11/28/understanding-jekyll-config-file</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/11/28/understanding-jekyll-config-file/">&lt;h1 id=&quot;jekyll-환경설정-파일이란&quot;&gt;Jekyll 환경설정 파일이란?&lt;/h1&gt;
 
 &lt;p&gt;Jekyll은 정적 사이트 생성을 위한 다양한 옵션이 준비되어 있다.&lt;br /&gt;
 옵션은 루트 경로에 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; 파일에 해당하는 환경설정 파일을 통해 설정할 수 있다.&lt;br /&gt;
@@ -166,73 +367,4 @@
 
 &lt;h1 id=&quot;한-줄-요약&quot;&gt;한 줄 요약&lt;/h1&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt; 파일에 환경설정 옵션을 설정하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;site&lt;/code&gt; 변수를 통해 사용하자.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="jekyll" /><category term="github-pages" /><summary type="html">Jekyll 환경설정 파일이란?</summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4A - Watermelon</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4A - Watermelon" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4a_watermelon.png&quot; alt=&quot;4A - Watermelon&quot; title=&quot;4A - Watermelon&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/contest/4/problem/A&quot; target=&quot;_blank&quot;&gt;Watermelon 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;1 이상 100 이하의 수박 무게가 주어졌을 때,&lt;br /&gt;
-짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;짝수 무게로만 두 부분으로 나누기 위해 &lt;strong&gt;주어진 무게가 짝수&lt;/strong&gt;여야 2로 나누어 떨어질 수 있다.&lt;br /&gt;
-하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 1A - Theatre Square</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 1A - Theatre Square" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_1a_theatre_square.png&quot; alt=&quot;1A - Theatre Square&quot; title=&quot;1A - Theatre Square&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/1/A&quot; target=&quot;_blank&quot;&gt;Theatre Square 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;n × m 미터의 직사각형 모양의 광장이 있을 때,&lt;br /&gt;
-a x a 미터의 정사각형 모양의 판석을 이용해 덮으려면 몇 개가 필요할 지를 구하는 문제다.&lt;br /&gt;
-이 때, 판석은 겹쳐질 수 있다.&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;판석이 겹쳐질 수 있다는 조건이 있으므로, &lt;strong&gt;판석이 광장의 크기에 딱 맞을 필요가 없다&lt;/strong&gt;.&lt;br /&gt;
-따라서, 각 방향으로 필요한 판석 수를 구해, 그 둘을 곱하면 필요한 전체 판석 수가 된다.&lt;/p&gt;
-
-&lt;p&gt;한쪽 방향에 대해서 광장의 크기를 판석으로 나눴을 때, 딱 맞지 않아 소숫점이 나올 수 있다.&lt;br /&gt;
-이 때, 판석을 겹칠 수 있으므로 정수로 &lt;strong&gt;올림 처리&lt;/strong&gt;를 하면, 겹쳐지면서 필요한 판석 수가 구해진다.&lt;br /&gt;
-다른 방향에 대해서도 똑같은 방식으로 구할 수 있다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt; 파일에 환경설정 옵션을 설정하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;site&lt;/code&gt; 변수를 통해 사용하자.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="jekyll" /><category term="github-pages" /><summary type="html">Jekyll 환경설정 파일이란?</summary></entry></feed>
