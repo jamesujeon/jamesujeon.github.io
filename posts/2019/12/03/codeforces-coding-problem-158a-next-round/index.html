@@ -225,12 +225,11 @@
 <p>Python으로 표현하면,<br />
 <code class="highlighter-rouge">not (A or B) == not A and not B</code>이고, <code class="highlighter-rouge">not (A and B) == not A or not B</code>이다.</p>
 
-<p>위 코드에서 <code class="highlighter-rouge">score &gt; 0 and score &gt;= scores[k - 1]</code>의 부정은 <code class="highlighter-rouge">not (score &gt; 0 and score &gt;= scores[k - 1])</code>이지만,<br />
-드 모르간의 법칙을 적용해 각각의 부정을 <code class="highlighter-rouge">or</code> 연산한 것으로 대체할 수 있다.</p>
+<p>위 코드에서 <code class="highlighter-rouge">score &gt; 0 and score &gt;= scores[k - 1]</code>의 부정은 <code class="highlighter-rouge">not (score &gt; 0 and score &gt;= scores[k - 1])</code>이지만, 드 모르간의 법칙을 적용해 각각의 부정을 <code class="highlighter-rouge">or</code> 연산한 것으로 대체할 수 있다.</p>
 
-<p><code class="highlighter-rouge">score &gt; 0</code>의 부정은 <code class="highlighter-rouge">score &lt;= 0</code>이지만, 이 문제에서는 0 이하로는 입력될 수 없으므로 <code class="highlighter-rouge">score is 0</code>로 표현해도 된다.<br />
-또한, <code class="highlighter-rouge">score &gt;= scores[k - 1]</code>의 부정은 <code class="highlighter-rouge">score &lt; scores[k - 1]</code>이 된다.<br />
-결론적으로 다음과 같이 작성할 수 있다.</p>
+<p><code class="highlighter-rouge">score &gt; 0</code>의 부정은 <code class="highlighter-rouge">score &lt;= 0</code>이지만, 이 문제에서는 0 이하로는 입력될 수 없으므로 <code class="highlighter-rouge">score is 0</code>로 표현해도 된다. 또한, <code class="highlighter-rouge">score &gt;= scores[k - 1]</code>의 부정은 <code class="highlighter-rouge">score &lt; scores[k - 1]</code>이 된다.</p>
+
+<p>결론적으로 다음과 같이 작성할 수 있다.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
