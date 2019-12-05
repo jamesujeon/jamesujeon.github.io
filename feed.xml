@@ -1,4 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-04T18:43:09+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Codeforces 코딩 문제 풀기: 71A - Way Too Long Words</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 71A - Way Too Long Words" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_71a_way_too_long_words.png&quot; alt=&quot;71A - Way Too Long Words&quot; title=&quot;71A - Way Too Long Words&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-05T18:30:57+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Codeforces 코딩 문제 풀기: 231A - Team</title><link href="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 231A - Team" /><published>2019-12-05T00:00:00+09:00</published><updated>2019-12-05T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_231a_team.png&quot; alt=&quot;231A - Team&quot; title=&quot;231A - Team&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/231/A&quot; target=&quot;_blank&quot;&gt;Team 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;3명이 각 문제의 정답을 확신하는 지를 입력받는다.&lt;br /&gt;
+정답 확신 수가 2명 이상일 때의 개수를 세면 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;입력받는 시점에서 3명의 정답 확신 여부를 튜플로 준비해두면, 해당 값들을 원활하게 이용할 수 있다.&lt;br /&gt;
+확신 여부는 숫자 0 또는 1로 입력받으므로 이를 이용해 총 확신 여부 수를 알 수 있다.&lt;br /&gt;
+Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 기본적으로 제공하므로, 각 튜플에 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 적용해 확신 여부의 합을 구하면 그것이 문제에 대한 확신 여부 수가 된다.&lt;br /&gt;
+확신 여부 수가 2 이상일 때만 개수를 올리도록 한다.&lt;/p&gt;
+
+&lt;p&gt;다른 방식으로 확신 여부 수가 2 이상일 때는 1을 반환하고, 아닐 때는 0을 반환해 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 적용하는 방법이 있다.&lt;br /&gt;
+하지만, 2 미만일 때도 0을 더하는 연산을 수행하므로 불필요한 연산이 발생한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 71A - Way Too Long Words</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 71A - Way Too Long Words" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_71a_way_too_long_words.png&quot; alt=&quot;71A - Way Too Long Words&quot; title=&quot;71A - Way Too Long Words&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
 
@@ -127,7 +182,53 @@
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;이로써 불필요한 순회를 줄일 수 있다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4A - Watermelon</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4A - Watermelon" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4a_watermelon.png&quot; alt=&quot;4A - Watermelon&quot; title=&quot;4A - Watermelon&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;이로써 불필요한 순회를 줄일 수 있다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 118A - String Task</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 118A - String Task" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_118a_string_task.png&quot; alt=&quot;118A - String Task&quot; title=&quot;118A - String Task&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/118/A&quot; target=&quot;_blank&quot;&gt;String Task 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;입력받은 문자열에 다음 규칙들을 적용한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;문자열의 모음(A, O, Y, E, U, I)을 모두 없앤다.&lt;/li&gt;
+  &lt;li&gt;각 자음 앞에 점 문자(“.”)를 하나 추가한다.&lt;/li&gt;
+  &lt;li&gt;모든 대문자는 소문자로 변환한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;원활한 처리를 위해 규칙을 순차적으로 적용하는 것이 아닌 효율적인 순서로 적용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;모음을 없애기 전에 문자열을 소문자화 해서 대소문자 구분없이 모음을 제거할 수 있도록 한다.&lt;br /&gt;
+문자열의 문자를 순회하면서 모음 배열에 속하지 않도록 필터링을 한다.&lt;br /&gt;
+필터링된 문자열에 조인을 통해 점 문자를 삽입한다.&lt;br /&gt;
+조인할 때 첫 글자 앞에는 점 문자가 삽입되지 않으므로, 마지막에 점 문자를 문자열 앞에 추가한다.&lt;br /&gt;
+이때, 문자열이 존재하는 경우에만 점 문자를 추가하도록 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;vowels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'o'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'e'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'u'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'i'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vowels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'.'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4A - Watermelon</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4A - Watermelon" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4a_watermelon.png&quot; alt=&quot;4A - Watermelon&quot; title=&quot;4A - Watermelon&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
 
