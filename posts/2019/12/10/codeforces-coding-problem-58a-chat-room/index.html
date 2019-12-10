@@ -8,22 +8,22 @@
   
   
 
-  <title>Codeforces 코딩 문제 풀기: 4A - Watermelon - Jamesu Devlog</title>
+  <title>Codeforces 코딩 문제 풀기: 58A - Chat room - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Codeforces 코딩 문제 풀기: 4A - Watermelon" />
+<meta property="og:title" content="Codeforces 코딩 문제 풀기: 58A - Chat room" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="Dev Blog by James Minsu Jeon" />
 <meta property="og:description" content="Dev Blog by James Minsu Jeon" />
-<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" />
-<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2019-12-10T00:00:00+09:00" />
 <script type="application/ld+json">
-{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/","headline":"Codeforces 코딩 문제 풀기: 4A - Watermelon","dateModified":"2019-12-02T00:00:00+09:00","datePublished":"2019-12-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/"},"@context":"http://schema.org"}</script>
+{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/","headline":"Codeforces 코딩 문제 풀기: 58A - Chat room","dateModified":"2019-12-10T00:00:00+09:00","datePublished":"2019-12-10T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <h1 class="post-title">Codeforces 코딩 문제 풀기: 4A - Watermelon</h1>
+  <h1 class="post-title">Codeforces 코딩 문제 풀기: 58A - Chat room</h1>
 
   
 
@@ -166,49 +166,65 @@
 
 
   <div class="post-time">
-    <time datetime="2019-12-02 00:00:00 +0900">2019.12.02</time>
+    <time datetime="2019-12-10 00:00:00 +0900">2019.12.10</time>
   </div>
 
-  <p><img src="assets/codeforces_4a_watermelon.png" alt="4A - Watermelon" title="4A - Watermelon" /></p>
+  <p><img src="assets/codeforces_58a_chat_room.png" alt="58A - Chat room" title="58A - Chat room" /></p>
 
 <h1 id="문제-파악">문제 파악</h1>
 
-<p><a href="http://codeforces.com/contest/4/problem/A" target="_blank">Watermelon 문제 링크</a></p>
+<p><a href="http://codeforces.com/problemset/problem/58/A" target="_blank">Chat room 문제 링크</a></p>
 
-<p>1 이상 100 이하의 수박 무게가 주어졌을 때,<br />
-짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.</p>
+<p>입력한 문자열에 “hello” 문자열의 문자들이 분해되어 차례대로 존재하는지 판단하는 문제이다.<br />
+각 문자 사이에는 다른 문자가 존재할 수 있으며, 단지 한 글자씩 차례대로 추출해 “hello” 문자열을 완성할 수 있으면 된다.</p>
+
+<p>예를 들어,<br />
+“ahhellllloou” 문자열은 2번째 ‘h’, 4번째 ‘e’, 5~6번째 “ll”, 10번째 ‘o’까지 차례대로 존재하므로 “YES”를 출력한다.<br />
+반면에, “hlelo” 문자열은 1번째 ‘h’, 3번째 ‘e’, 4번째 ‘l’까지 만족하지만, 그 이후로 다른 ‘l’이 없어 “NO”를 출력한다.</p>
 
 <h1 id="문제-풀이">문제 풀이</h1>
 
-<p>짝수 무게로만 두 부분으로 나누기 위해 <strong>주어진 무게가 짝수</strong>여야 2로 나누어 떨어질 수 있다.<br />
-하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.</p>
+<p>이 문제는 <a href="https://en.wikipedia.org/wiki/Greedy_algorithm">탐욕(Greedy) 알고리즘</a>으로 해결할 수도 있지만, <a href="https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D">정규 표현식(정규식, Regular Expression, regex)</a>을 이용하면 더 쉽게 해결할 수 있다.</p>
 
-<h1 id="전체-소스">전체 소스</h1>
+<h3 id="탐욕-알고리즘">탐욕 알고리즘</h3>
+
+<p>탐욕 알고리즘을 사용한다면, 입력받은 문자열이 <strong>“hello” 문자열의 문자를 하나씩 차례대로 만족하는지</strong>를 확인하면 된다.<br />
+하나를 만족할 때마다 지역적으로 최적이기 때문에 최종적으로 ‘o’를 만족하면, 해당 문자열은 문제의 조건을 만족한다.</p>
+
+<h3 id="정규-표현식">정규 표현식</h3>
+
+<p>정규 표현식(이하 정규식)은 문자열에 특정 패턴이 존재하는지 확인하거나 다른 문자열로 교체하는 등의 작업을 가능하게 해주는 형식 언어이다.<br />
+추출하고자 하는 문자열의 패턴이 일정하다면, 언제든지 정규식을 이용해 해당 부분을 추출할 수 있다.</p>
+
+<p>이 문제에서 판단하고자 하는 문자열은 일정한 패턴을 가지고 있다.</p>
+
+<ol>
+  <li>“hello” 문자열의 문자들은 <strong>차례대로 존재</strong>해야 한다.</li>
+  <li>“hello” 문자열의 <strong>각 문자 사이에는 어떤 문자도 존재</strong>할 수 있다.</li>
+</ol>
+
+<p>이를 차례대로 정규식으로 표현하면 다음과 같다.</p>
+
+<ol>
+  <li><code class="highlighter-rouge">hello</code></li>
+  <li>각 문자 사이에 <code class="highlighter-rouge">.*</code></li>
+</ol>
+
+<p>최종적으로 <code class="highlighter-rouge">h.*e.*l.*l.*o</code>와 같은 정규식이 탄생한다.<br />
+이는 <strong>각 문자 ‘h’, ‘e’, ‘l’, ‘l’, ‘o’ 사이에 어떤 문자든 0자 이상이 존재</strong>한다는 의미이다.</p>
+
+<p>Python에서 <code class="highlighter-rouge">re</code> 모듈을 통해 위 정규식에 해당하는 부분 문자열을 검색해, 조건을 만족하는지 판단할 수 있다.</p>
+
+<h1 id="풀이-소스">풀이 소스</h1>
 
 <p>문제 풀이 환경: Python 3.7</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
-4
-5
-</pre></td><td class="code"><pre><span class="n">weight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
-<span class="k">if</span> <span class="n">weight</span> <span class="o">%</span> <span class="mi">2</span> <span class="ow">is</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">2</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"YES"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"NO"</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">re</span>
 
-<p>문제 풀이 환경: Kotlin 1.3.61 (2019.12.10 추가)</p>
-
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">weight</span> <span class="p">=</span> <span class="nf">readLine</span><span class="p">()</span><span class="o">!!</span><span class="p">.</span><span class="nf">toInt</span><span class="p">()</span>
-    <span class="nf">println</span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="n">weight</span> <span class="p">%</span> <span class="m">2</span> <span class="p">==</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">weight</span> <span class="p">!=</span> <span class="m">2</span><span class="p">)</span> <span class="s">"YES"</span> <span class="k">else</span> <span class="s">"NO"</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'YES'</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'h.*e.*l.*l.*o'</span><span class="p">,</span> <span class="nb">input</span><span class="p">())</span> <span class="k">else</span> <span class="s">'NO'</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 
@@ -216,15 +232,10 @@
   
     <div class="post-pagination">
       
-        <a href="/posts/2019/12/03/codeforces-coding-problem-118a-string-task/" class="left arrow">
-          <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">Codeforces 코딩 문제 풀기: 118A - String Task</span>
-        </a>
       
-      
-        <a href="/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/" class="right arrow">
+        <a href="/posts/2019/12/09/codeforces-coding-problem-263a-beautiful-matrix/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">Codeforces 코딩 문제 풀기: 1A - Theatre Square</span>
+          <span class="right arrow-title">Codeforces 코딩 문제 풀기: 263A - Beautiful Matrix</span>
         </a>
       
     </div>
