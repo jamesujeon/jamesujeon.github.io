@@ -1,4 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-10T18:37:50+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Codeforces 코딩 문제 풀기: 58A - Chat room</title><link href="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 58A - Chat room" /><published>2019-12-10T00:00:00+09:00</published><updated>2019-12-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_58a_chat_room.png&quot; alt=&quot;58A - Chat room&quot; title=&quot;58A - Chat room&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-19T17:35:16+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Docker 컨테이너 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/" rel="alternate" type="text/html" title="Docker 컨테이너 자동으로 시작하기" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/">&lt;p&gt;Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다.&lt;br /&gt;
+하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다.&lt;br /&gt;
+따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.&lt;/p&gt;
+
+&lt;p&gt;Docker를 재시작하는 방법은 다음으로 미루고, 여기서는 Docker 컨테이너를 재시작하는 방법을 다룬다.&lt;/p&gt;
+
+&lt;h1 id=&quot;기본적인-docker-run&quot;&gt;기본적인 &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt;&lt;/h1&gt;
+
+&lt;p&gt;Docker에서 특정 옵션 없이 기본 명령어인 &lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt;으로 컨테이너를 구동한 경우, Docker가 재시작한다면 컨테이너는 자동으로 시작되지 않는다.&lt;/p&gt;
+
+&lt;p&gt;다음과 같이, 재시작 관련 옵션 없이 컨테이너가 종료되지 않도록 구동시키고, Docker를 재시작한다.&lt;br /&gt;
+(이미지는 Public Repository로부터 &lt;code class=&quot;highlighter-rouge&quot;&gt;centos&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;docker pull centos&lt;/code&gt;로 받아 사용한다.)&lt;br /&gt;
+(Docker 재시작 명령어는 OS 별로 상이할 수 있다.)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;docker run -d --name test centos tail -f /dev/null
+docker ps -a
+service docker restart
+docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;마지막 &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps -a&lt;/code&gt; 명령어를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 컨테이너가 종료 상태인 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이는 재시작 옵션(&lt;code class=&quot;highlighter-rouge&quot;&gt;--restart&lt;/code&gt;)에 기본값으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt;가 들어가기 때문이다.&lt;br /&gt;
+말그대로 재시작을 하지 않겠다는 뜻이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;재시작-옵션과-함께&quot;&gt;재시작 옵션과 함께&lt;/h1&gt;
+
+&lt;p&gt;위 옵션을 주면, Docker가 갑작스럽게 종료되었다가 다시 시작할 때, 컨테이너 또한 재시작하게 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;docker run -d --restart always --name test centos tail -f /dev/null
+docker ps -a
+service docker restart
+docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Docker 재시작 시간에 맞춰 &lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt; 컨테이너도 재시작된 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이 외에도 다른 재시작 옵션이 존재한다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;no&lt;/strong&gt; : 말그대로 NO (기본값)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;on-failure&lt;/strong&gt; : 에러로 인해 종료될 시 재시작한다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;always&lt;/strong&gt; : 항상 재시작한다. 수동으로 종료한 경우, Docker가 재시작되면 같이 재시작된다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;unless-stopped&lt;/strong&gt; : 컨테이너가 종료되지 않는다면, 항상 재시작하한다. 종료되었다면, 직접 시작하기 전까지는 Docker가 재시작되도 컨테이너는 재시작되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;자세한 내용은 &lt;a href=&quot;https://docs.docker.com/config/containers/start-containers-automatically/&quot;&gt;Docker Documentation&lt;/a&gt;에서 확인할 수 있다. (영어 주의 ⚠️)&lt;/p&gt;
+
+&lt;h1 id=&quot;그-외-방법&quot;&gt;그 외 방법&lt;/h1&gt;
+
+&lt;p&gt;이렇게 컨테이너를 구동할 때마다 재시작 옵션을 주는 방법밖에 없을까?&lt;/p&gt;
+
+&lt;p&gt;조건에 Docker를 걸어둔 일종의 서비스 파일을 작성하면 가능하다.&lt;br /&gt;
+이는 컨테이너를 항상 재시작할 때는 문제 없지만, 개인적으로는 직접 옵션을 주는 것을 선호한다.&lt;br /&gt;
+옵션에 따라 원하는 동작이 명확하고, 누군가는 서비스 파일을 인지하지 못할 수도 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;취향에 따라 방법을 선택해 적용하도록 한다.&lt;br /&gt;
+참고로 서비스 파일을 작성한다면, OS마다 서비스 등록법이 상이할 수 있으니 유의해서 적용하길 바란다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="docker" /><category term="container" /><summary type="html">Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다. 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다. 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.</summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 337A - Puzzles</title><link href="https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 337A - Puzzles" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_337a_puzzles.png&quot; alt=&quot;337A - Puzzles&quot; title=&quot;337A - Puzzles&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/337/A&quot; target=&quot;_blank&quot;&gt;Puzzles 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;첫 줄에 학생 수와 상점에서 판매하는 직소 퍼즐의 수가 주어지고, 둘째 줄에 각 퍼즐의 조각 수가 주어진다.&lt;br /&gt;
+학생 수에 맞춰 다수의 직소 퍼즐을 구매할 때, &lt;strong&gt;퍼즐 간의 최대 조각 수 차이가 가장 작을 때의 조각 수 차이&lt;/strong&gt;를 구해야 한다.&lt;br /&gt;
+판매하는 퍼즐의 수는 학생 수보다 크거나 같으므로, 퍼즐 간의 최대 조각 수 차이는 여러 경우가 나올 수 있기 때문이다.&lt;/p&gt;
+
+&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;의 접근 방식을 이용해 풀이할 수 있다.&lt;br /&gt;
+각 경우에서 최적해를 먼저 구하고, 구한 최적해들을 이용해 최종 최적해를 구한다.&lt;/p&gt;
+
+&lt;p&gt;무작위로 학생 수에 맞춰 퍼즐을 선택하는 것은 경우의 수가 너무 많고 효율이 떨어진다.&lt;br /&gt;
+퍼즐을 조각 수를 기준으로 정렬한다면, 최대 조각 수 차이가 가장 작게 되도록 퍼즐끼리 인접한 그룹을 형성할 수 있다.&lt;br /&gt;
+&lt;strong&gt;해당 그룹에서 최대 조각 수 차이를 구하고, 구한 최대 조각 수 차이들 중에 가장 작은 값이 정답이 된다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;각 그룹은 이미 조각 수에 따라 정렬되어 있으므로, &lt;strong&gt;최대 조각 수 차이는 그룹의 끝과 처음의 값 차이&lt;/strong&gt;로 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, 주어진 예시를 정렬 후에 각 경우에 따라 추적하면 다음과 같다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;5 7 10 10 12 22 : 정렬된 퍼즐 조각 수 목록
+5 7 10 10       : 최대 조각 수 차이 = 10 - 5 = 5
+  7 10 10 12    : 최대 조각 수 차이 = 12 - 7 = 5
+    10 10 12 22 : 최대 조각 수 차이 = 22 - 10 = 12&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;따라서, 정답에 해당하는 퍼즐 그룹은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5 7 10 10&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;7 10 10 12&lt;/code&gt;가 되고, 가장 작은 값은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;가 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 58A - Chat room</title><link href="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 58A - Chat room" /><published>2019-12-10T00:00:00+09:00</published><updated>2019-12-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_58a_chat_room.png&quot; alt=&quot;58A - Chat room&quot; title=&quot;58A - Chat room&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
 
@@ -497,87 +598,6 @@ Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함�
 &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vowels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'.'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4A - Watermelon</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4A - Watermelon" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-4a-watermelon/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4a_watermelon.png&quot; alt=&quot;4A - Watermelon&quot; title=&quot;4A - Watermelon&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/contest/4/problem/A&quot; target=&quot;_blank&quot;&gt;Watermelon 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;1 이상 100 이하의 수박 무게가 주어졌을 때,&lt;br /&gt;
-짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;짝수 무게로만 두 부분으로 나누기 위해 &lt;strong&gt;주어진 무게가 짝수&lt;/strong&gt;여야 2로 나누어 떨어질 수 있다.&lt;br /&gt;
-하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;문제 풀이 환경: Kotlin 1.3.61 (2019.12.10 추가)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot; data-lang=&quot;kotlin&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;toInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 1A - Theatre Square</title><link href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 1A - Theatre Square" /><published>2019-12-02T00:00:00+09:00</published><updated>2019-12-02T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/02/codeforces-coding-problem-1a-theatre-square/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_1a_theatre_square.png&quot; alt=&quot;1A - Theatre Square&quot; title=&quot;1A - Theatre Square&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/1/A&quot; target=&quot;_blank&quot;&gt;Theatre Square 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;n × m 미터의 직사각형 모양의 광장이 있을 때,&lt;br /&gt;
-a x a 미터의 정사각형 모양의 판석을 이용해 덮으려면 몇 개가 필요할 지를 구하는 문제다.&lt;br /&gt;
-이 때, 판석은 겹쳐질 수 있다.&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;판석이 겹쳐질 수 있다는 조건이 있으므로, &lt;strong&gt;판석이 광장의 크기에 딱 맞을 필요가 없다&lt;/strong&gt;.&lt;br /&gt;
-따라서, 각 방향으로 필요한 판석 수를 구해, 그 둘을 곱하면 필요한 전체 판석 수가 된다.&lt;/p&gt;
-
-&lt;p&gt;한쪽 방향에 대해서 광장의 크기를 판석으로 나눴을 때, 딱 맞지 않아 소숫점이 나올 수 있다.&lt;br /&gt;
-이 때, 판석을 겹칠 수 있으므로 정수로 &lt;strong&gt;올림 처리&lt;/strong&gt;를 하면, 겹쳐지면서 필요한 판석 수가 구해진다.&lt;br /&gt;
-다른 방향에 대해서도 똑같은 방식으로 구할 수 있다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hori_stones&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vert_stones&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
