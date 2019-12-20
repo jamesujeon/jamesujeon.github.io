@@ -8,22 +8,22 @@
   
   
 
-  <title>Codeforces 코딩 문제 풀기: 231A - Team - Jamesu Devlog</title>
+  <title>Codeforces 코딩 문제 풀기: 4C - Registration system - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Codeforces 코딩 문제 풀기: 231A - Team" />
+<meta property="og:title" content="Codeforces 코딩 문제 풀기: 4C - Registration system" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="Dev Blog by James Minsu Jeon" />
 <meta property="og:description" content="Dev Blog by James Minsu Jeon" />
-<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/" />
-<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-05T00:00:00+09:00" />
+<meta property="article:published_time" content="2019-12-20T00:00:00+09:00" />
 <script type="application/ld+json">
-{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/","headline":"Codeforces 코딩 문제 풀기: 231A - Team","dateModified":"2019-12-05T00:00:00+09:00","datePublished":"2019-12-05T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/"},"@context":"http://schema.org"}</script>
+{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/","headline":"Codeforces 코딩 문제 풀기: 4C - Registration system","dateModified":"2019-12-20T00:00:00+09:00","datePublished":"2019-12-20T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <h1 class="post-title">Codeforces 코딩 문제 풀기: 231A - Team</h1>
+  <h1 class="post-title">Codeforces 코딩 문제 풀기: 4C - Registration system</h1>
 
   
 
@@ -166,41 +166,36 @@
 
 
   <div class="post-time">
-    <time datetime="2019-12-05 00:00:00 +0900">2019.12.05</time>
+    <time datetime="2019-12-20 00:00:00 +0900">2019.12.20</time>
   </div>
 
-  <p><img src="assets/codeforces_231a_team.png" alt="231A - Team" title="231A - Team" /></p>
+  <p><img src="assets/codeforces_4c_registration_system.png" alt="4C - Registration system" title="4C - Registration system" /></p>
 
 <h2 id="문제-파악">문제 파악</h2>
 
-<p><a href="http://codeforces.com/problemset/problem/231/A" target="_blank">Team 문제 링크</a></p>
+<p><a href="http://codeforces.com/problemset/problem/4/C" target="_blank">Registration system 문제 링크</a></p>
 
-<p>3명이 각 문제의 정답을 확신하는 지를 입력받는다.<br />
-정답 확신 수가 2명 이상일 때의 개수를 세면 된다.</p>
+<p>사용자 이름을 등록하는 시스템으로 중복 이름을 허용하지 않는다.<br />
+다수의 이름을 입력받아 차례대로 시스템에 등록을 요청해 정상적으로 등록되는 경우, “OK”를 출력한다.<br />
+이름이 중복되는 경우, 이름 뒤에 숫자를 추가해 등록하고 변경된 이름을 출력한다.<br />
+중복되는 이름이 다수인 경우, 차례대로 숫자를 증가시켜 추가한다.<br />
+입력하는 이름은 모두 소문자 영문자만 가능하다. (숫자를 입력하는 경우가 없다.)</p>
 
 <h2 id="문제-풀이">문제 풀이</h2>
 
-<p>입력받는 시점에서 3명의 정답 확신 여부를 튜플로 준비해두면, 해당 값들을 원활하게 이용할 수 있다.<br />
-확신 여부는 숫자 0 또는 1로 입력받으므로 이를 이용해 총 확신 여부 수를 알 수 있다.<br />
-Python은 <code class="highlighter-rouge">sum</code> 함수를 기본적으로 제공하므로, 각 튜플에 <code class="highlighter-rouge">sum</code> 함수를 적용해 확신 여부의 합을 구하면 그것이 문제에 대한 확신 여부 수가 된다.<br />
-확신 여부 수가 2 이상일 때만 개수를 올리도록 한다.</p>
+<p>중복되는 이름이 다수인 경우에 차례대로 숫자를 증가시켜 추가해야 하므로, 중복될 때마다 그 수를 기억해야 한다.<br />
+그러면, 저장할 데이터는 이름과 중복 수가 되고, 이를 효율적으로 관리하기 위해 <a href="https://namu.wiki/w/%ED%95%B4%EC%8B%9C">해시</a> 테이블을 사용할 수 있다.</p>
 
-<p>다른 방식으로 확신 여부 수가 2 이상일 때는 1을 반환하고, 아닐 때는 0을 반환해 <code class="highlighter-rouge">sum</code> 함수를 적용하는 방법이 있다.<br />
-하지만, 2 미만일 때도 0을 더하는 연산을 수행하므로 불필요한 연산이 발생한다.</p>
+<p><strong>해시 테이블</strong>은 Key-Value 구조로 데이터를 보관하는 자료구조로, Key를 위해 해시 함수를 이용한다.<br />
+일반적으로 별도의 해시 함수를 구현하지 않으면, 객체의 주소값 등을 Key로 이용할 수 있다.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
-<span class="n">isSureList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<p>Python에서는 이러한 해시 테이블로 이용할 수 있는 자료구조로 <strong>Dictionary</strong>라 하는 <code class="highlighter-rouge">dict</code>가 존재한다.<br />
+이 문제에서 입력받는 이름을 Key로, 중복 수를 Value로 사용하면, 효율적으로 데이터를 보관할 수 있다.<br />
+키를 바탕으로 값에 접근하기 때문에 순차적으로 검색해서 원하는 값을 얻는 배열에 비해 효율적이고, 편리하다.</p>
 
-<span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">isSure</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">isSure</span> <span class="ow">in</span> <span class="n">isSureList</span><span class="p">)</span>
-
-<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+<p>입력받은 이름들을 차례대로 Dictionary에 존재하는지 확인하고, 존재하면 중복 수를 증가시키고, 존재하지 않으면 Dictionary에 추가한다.
+키로 존재 여부를 확인하고, 키로 값에 접근하기 때문에 속도가 매우 빠르다.<br />
+중복되는 경우, 중복 수를 이용해 이름을 변경하도록 한다.</p>
 
 <h2 id="풀이-소스">풀이 소스</h2>
 
@@ -215,15 +210,25 @@ Python은 <code class="highlighter-rouge">sum</code> 함수를 기본적으로 �
 7
 8
 9
+10
+11
+12
+13
+14
 </pre></td><td class="code"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
-<span class="n">isSureList</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
 
-<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">isSure</span> <span class="ow">in</span> <span class="n">isSureList</span><span class="p">:</span>
-  <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">isSure</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">name_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">name_dict</span><span class="p">:</span>
+    <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">"OK"</span>
+    <span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 
@@ -231,15 +236,15 @@ Python은 <code class="highlighter-rouge">sum</code> 함수를 기본적으로 �
   
     <div class="post-pagination">
       
-        <a href="/posts/2019/12/06/codeforces-coding-problem-50a-domino-piling/" class="left arrow">
+        <a href="/posts/2019/12/20/start-service-automatically-on-boot-in-linux/" class="left arrow">
           <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">Codeforces 코딩 문제 풀기: 50A - Domino piling</span>
+          <span class="left arrow-title">Linux 부팅 시, 서비스 자동으로 시작하기</span>
         </a>
       
       
-        <a href="/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/" class="right arrow">
+        <a href="/posts/2019/12/19/start-containers-automatically/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">Codeforces 코딩 문제 풀기: 71A - Way Too Long Words</span>
+          <span class="right arrow-title">Docker 컨테이너 자동으로 시작하기</span>
         </a>
       
     </div>

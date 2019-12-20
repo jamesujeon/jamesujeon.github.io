@@ -1,10 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-19T17:35:16+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Docker 컨테이너 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/" rel="alternate" type="text/html" title="Docker 컨테이너 자동으로 시작하기" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/">&lt;p&gt;Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-20T18:26:40+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Linux 부팅 시, 서비스 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux/" rel="alternate" type="text/html" title="Linux 부팅 시, 서비스 자동으로 시작하기" /><published>2019-12-20T00:00:00+09:00</published><updated>2019-12-20T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux/">&lt;p&gt;&lt;a href=&quot;https://jamesu.dev/posts/2019/12/19/start-containers-automatically/&quot;&gt;이전 글&lt;/a&gt;에서 Docker 컨테이너를 자동으로 시작하는 법을 알았다.&lt;br /&gt;
+그렇다면, 서버가 죽었을 때 Docker가 시작되어야 Docker 컨테이너 또한 재시작을 할 수 있지 않을까?&lt;/p&gt;
+
+&lt;p&gt;이 글에서는 Docker를 자주 사용하는 OS인 Linux 상에서 서비스를 자동으로 시작하는 법을 알아보도록 한다.&lt;br /&gt;
+모두 적용한다면, 서버가 재시작됐을 때, Docker 서비스도 재시작되고, Docker 컨테이너도 재시작될 것이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;linux-배포판별-버전별-차이&quot;&gt;Linux 배포판별, 버전별 차이&lt;/h2&gt;
+
+&lt;p&gt;이미 알고 있는 것처럼 Linux는 Linux Kernel을 기반으로 다양한 배포판이 존재한다.&lt;br /&gt;
+그런 배포판들은 제작자의 입맛에 맞춰 만들어진 것이므로 &lt;strong&gt;배포판별로 명령어가 상이할 수 있다&lt;/strong&gt;.&lt;br /&gt;
+또한, 각 배포판은 버전이 오름에 따라 변화를 하면서 명렁어가 바뀌기도 한다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 배포판별, 버전별로 명렁어 차이가 존재할 수 있기 때문에 현재 사용하는 것에 맞춰 알아보고 사용해야 한다.&lt;br /&gt;
+여기서는 자주 사용하는 명령어를 바탕으로 설명하며, 동일한 명령어가 존재하지 않을 수도 있으니 유의하길 바란다.&lt;/p&gt;
+
+&lt;p&gt;한 쪽에 있는 명령어를 사용하는 배포판에서는 동일한 명령어들을 사용하므로, 같은 쪽의 명령어를 사용하면 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;서비스-관리-명령어&quot;&gt;서비스 관리 명령어&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;service&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;서비스 상태 확인 : &lt;code class=&quot;highlighter-rouge&quot;&gt;service 서비스명 status&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl status 서비스명&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 시작 : &lt;code class=&quot;highlighter-rouge&quot;&gt;service 서비스명 start&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl start 서비스명&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 정지 : &lt;code class=&quot;highlighter-rouge&quot;&gt;service 서비스명 stop&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl stop 서비스명&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;서비스 재시작 : &lt;code class=&quot;highlighter-rouge&quot;&gt;service 서비스명 restart&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl restart 서비스명&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;서비스-자동-시작-명령어&quot;&gt;서비스 자동 시작 명령어&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chkconfig&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;자동 시작 확인 : &lt;code class=&quot;highlighter-rouge&quot;&gt;chkconfig 서비스명 --list&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl is-enabled 서비스명&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;자동 시작 설정 : &lt;code class=&quot;highlighter-rouge&quot;&gt;chkconfig 서비스명 on&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl enable 서비스명&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;자동 시작 해제 : &lt;code class=&quot;highlighter-rouge&quot;&gt;chkconfig 서비스명 off&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl disable 서비스명&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>jamesujeon</name></author><category term="linux" /><category term="command" /><summary type="html">이전 글에서 Docker 컨테이너를 자동으로 시작하는 법을 알았다. 그렇다면, 서버가 죽었을 때 Docker가 시작되어야 Docker 컨테이너 또한 재시작을 할 수 있지 않을까?</summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 4C - Registration system</title><link href="https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 4C - Registration system" /><published>2019-12-20T00:00:00+09:00</published><updated>2019-12-20T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/20/codeforces-coding-problem-4c-registration-system/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_4c_registration_system.png&quot; alt=&quot;4C - Registration system&quot; title=&quot;4C - Registration system&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/4/C&quot; target=&quot;_blank&quot;&gt;Registration system 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;사용자 이름을 등록하는 시스템으로 중복 이름을 허용하지 않는다.&lt;br /&gt;
+다수의 이름을 입력받아 차례대로 시스템에 등록을 요청해 정상적으로 등록되는 경우, “OK”를 출력한다.&lt;br /&gt;
+이름이 중복되는 경우, 이름 뒤에 숫자를 추가해 등록하고 변경된 이름을 출력한다.&lt;br /&gt;
+중복되는 이름이 다수인 경우, 차례대로 숫자를 증가시켜 추가한다.&lt;br /&gt;
+입력하는 이름은 모두 소문자 영문자만 가능하다. (숫자를 입력하는 경우가 없다.)&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;중복되는 이름이 다수인 경우에 차례대로 숫자를 증가시켜 추가해야 하므로, 중복될 때마다 그 수를 기억해야 한다.&lt;br /&gt;
+그러면, 저장할 데이터는 이름과 중복 수가 되고, 이를 효율적으로 관리하기 위해 &lt;a href=&quot;https://namu.wiki/w/%ED%95%B4%EC%8B%9C&quot;&gt;해시&lt;/a&gt; 테이블을 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;해시 테이블&lt;/strong&gt;은 Key-Value 구조로 데이터를 보관하는 자료구조로, Key를 위해 해시 함수를 이용한다.&lt;br /&gt;
+일반적으로 별도의 해시 함수를 구현하지 않으면, 객체의 주소값 등을 Key로 이용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Python에서는 이러한 해시 테이블로 이용할 수 있는 자료구조로 &lt;strong&gt;Dictionary&lt;/strong&gt;라 하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;가 존재한다.&lt;br /&gt;
+이 문제에서 입력받는 이름을 Key로, 중복 수를 Value로 사용하면, 효율적으로 데이터를 보관할 수 있다.&lt;br /&gt;
+키를 바탕으로 값에 접근하기 때문에 순차적으로 검색해서 원하는 값을 얻는 배열에 비해 효율적이고, 편리하다.&lt;/p&gt;
+
+&lt;p&gt;입력받은 이름들을 차례대로 Dictionary에 존재하는지 확인하고, 존재하면 중복 수를 증가시키고, 존재하지 않으면 Dictionary에 추가한다.
+키로 존재 여부를 확인하고, 키로 값에 접근하기 때문에 속도가 매우 빠르다.&lt;br /&gt;
+중복되는 경우, 중복 수를 이용해 이름을 변경하도록 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;name_dict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;OK&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;name_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Docker 컨테이너 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/" rel="alternate" type="text/html" title="Docker 컨테이너 자동으로 시작하기" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/">&lt;p&gt;Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다.&lt;br /&gt;
 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다.&lt;br /&gt;
 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.&lt;/p&gt;
 
 &lt;p&gt;Docker를 재시작하는 방법은 다음으로 미루고, 여기서는 Docker 컨테이너를 재시작하는 방법을 다룬다.&lt;/p&gt;
 
-&lt;h1 id=&quot;기본적인-docker-run&quot;&gt;기본적인 &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;기본적인-docker-run&quot;&gt;기본적인 &lt;code class=&quot;highlighter-rouge&quot;&gt;docker run&lt;/code&gt;&lt;/h2&gt;
 
 &lt;p&gt;Docker에서 특정 옵션 없이 기본 명령어인 &lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt;으로 컨테이너를 구동한 경우, Docker가 재시작한다면 컨테이너는 자동으로 시작되지 않는다.&lt;/p&gt;
 
@@ -22,7 +118,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;이는 재시작 옵션(&lt;code class=&quot;highlighter-rouge&quot;&gt;--restart&lt;/code&gt;)에 기본값으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt;가 들어가기 때문이다.&lt;br /&gt;
 말그대로 재시작을 하지 않겠다는 뜻이다.&lt;/p&gt;
 
-&lt;h1 id=&quot;재시작-옵션과-함께&quot;&gt;재시작 옵션과 함께&lt;/h1&gt;
+&lt;h2 id=&quot;재시작-옵션과-함께&quot;&gt;재시작 옵션과 함께&lt;/h2&gt;
 
 &lt;p&gt;위 옵션을 주면, Docker가 갑작스럽게 종료되었다가 다시 시작할 때, 컨테이너 또한 재시작하게 된다.&lt;/p&gt;
 
@@ -36,15 +132,15 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;이 외에도 다른 재시작 옵션이 존재한다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;no&lt;/strong&gt; : 말그대로 NO (기본값)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;on-failure&lt;/strong&gt; : 에러로 인해 종료될 시 재시작한다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;always&lt;/strong&gt; : 항상 재시작한다. 수동으로 종료한 경우, Docker가 재시작되면 같이 재시작된다.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;unless-stopped&lt;/strong&gt; : 컨테이너가 종료되지 않는다면, 항상 재시작하한다. 종료되었다면, 직접 시작하기 전까지는 Docker가 재시작되도 컨테이너는 재시작되지 않는다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt; : 말그대로 NO (기본값)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;on-failure&lt;/code&gt; : 에러로 인해 종료될 시 재시작한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;always&lt;/code&gt; : 항상 재시작한다. 수동으로 종료한 경우, Docker가 재시작되면 같이 재시작된다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;unless-stopped&lt;/code&gt; : 컨테이너가 종료되지 않는다면, 항상 재시작하한다. 종료되었다면, 직접 시작하기 전까지는 Docker가 재시작되도 컨테이너는 재시작되지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;자세한 내용은 &lt;a href=&quot;https://docs.docker.com/config/containers/start-containers-automatically/&quot;&gt;Docker Documentation&lt;/a&gt;에서 확인할 수 있다. (영어 주의 ⚠️)&lt;/p&gt;
 
-&lt;h1 id=&quot;그-외-방법&quot;&gt;그 외 방법&lt;/h1&gt;
+&lt;h2 id=&quot;그-외-방법&quot;&gt;그 외 방법&lt;/h2&gt;
 
 &lt;p&gt;이렇게 컨테이너를 구동할 때마다 재시작 옵션을 주는 방법밖에 없을까?&lt;/p&gt;
 
@@ -55,7 +151,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;취향에 따라 방법을 선택해 적용하도록 한다.&lt;br /&gt;
 참고로 서비스 파일을 작성한다면, OS마다 서비스 등록법이 상이할 수 있으니 유의해서 적용하길 바란다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="docker" /><category term="container" /><summary type="html">Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다. 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다. 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.</summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 337A - Puzzles</title><link href="https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 337A - Puzzles" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/codeforces-coding-problem-337a-puzzles/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_337a_puzzles.png&quot; alt=&quot;337A - Puzzles&quot; title=&quot;337A - Puzzles&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/337/A&quot; target=&quot;_blank&quot;&gt;Puzzles 문제 링크&lt;/a&gt;&lt;/p&gt;
 
@@ -63,7 +159,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 학생 수에 맞춰 다수의 직소 퍼즐을 구매할 때, &lt;strong&gt;퍼즐 간의 최대 조각 수 차이가 가장 작을 때의 조각 수 차이&lt;/strong&gt;를 구해야 한다.&lt;br /&gt;
 판매하는 퍼즐의 수는 학생 수보다 크거나 같으므로, 퍼즐 간의 최대 조각 수 차이는 여러 경우가 나올 수 있기 때문이다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;의 접근 방식을 이용해 풀이할 수 있다.&lt;br /&gt;
 각 경우에서 최적해를 먼저 구하고, 구한 최적해들을 이용해 최종 최적해를 구한다.&lt;/p&gt;
@@ -83,7 +179,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;따라서, 정답에 해당하는 퍼즐 그룹은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5 7 10 10&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;7 10 10 12&lt;/code&gt;가 되고, 가장 작은 값은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;가 된다.&lt;/p&gt;
 
-&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -101,7 +197,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 58A - Chat room</title><link href="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 58A - Chat room" /><published>2019-12-10T00:00:00+09:00</published><updated>2019-12-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/10/codeforces-coding-problem-58a-chat-room/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_58a_chat_room.png&quot; alt=&quot;58A - Chat room&quot; title=&quot;58A - Chat room&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/58/A&quot; target=&quot;_blank&quot;&gt;Chat room 문제 링크&lt;/a&gt;&lt;/p&gt;
 
@@ -112,7 +208,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 “ahhellllloou” 문자열은 2번째 ‘h’, 4번째 ‘e’, 5~6번째 “ll”, 10번째 ‘o’까지 차례대로 존재하므로 “YES”를 출력한다.&lt;br /&gt;
 반면에, “hlelo” 문자열은 1번째 ‘h’, 3번째 ‘e’, 4번째 ‘l’까지 만족하지만, 그 이후로 다른 ‘l’이 없어 “NO”를 출력한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;이 문제는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;으로 해결할 수도 있지만, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D&quot;&gt;정규 표현식(정규식, Regular Expression, regex)&lt;/a&gt;을 이용하면 더 쉽게 해결할 수 있다.&lt;/p&gt;
 
@@ -145,7 +241,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Python에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;re&lt;/code&gt; 모듈을 통해 위 정규식에 해당하는 부분 문자열을 검색해, 조건을 만족하는지 판단할 수 있다.&lt;/p&gt;
 
-&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -157,7 +253,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'YES'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'h.*e.*l.*l.*o'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'NO'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 263A - Beautiful Matrix</title><link href="https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-263a-beautiful-matrix/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 263A - Beautiful Matrix" /><published>2019-12-09T00:00:00+09:00</published><updated>2019-12-09T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-263a-beautiful-matrix</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-263a-beautiful-matrix/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_263a_beautiful_matrix.png&quot; alt=&quot;263A - Beautiful Matrix&quot; title=&quot;263A - Beautiful Matrix&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/263/A&quot; target=&quot;_blank&quot;&gt;Beautiful Matrix 문제 링크&lt;/a&gt;&lt;/p&gt;
 
@@ -165,7 +261,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 1이 배열의 정가운데에 위치하게 하기 위해, 반복적으로 인접해 있는 요소끼리 자리를 1칸씩 바꿀 수 있다.&lt;br /&gt;
 이때, 그렇게 하기 위해 필요한 최소 이동 수를 구해야 한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;이 문제에서 자리를 바꾸는 방향이 제약되어 있다던지 등과 같은 특별한 제약이 걸려있지 않다.&lt;br /&gt;
 따라서, 단순히 이동 거리만 계산하면 되고 목적지가 정해져 있으므로, 1의 위치를 구해 정가운데와의 거리를 구하면 된다.&lt;/p&gt;
@@ -180,7 +276,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;그래프에서 두 점의 거리는 두 점의 차이의 절댓값과 같기 때문에, 정가운데 위치를 빼고 &lt;code class=&quot;highlighter-rouge&quot;&gt;abs()&lt;/code&gt; 함수로 절댓값을 구한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -212,7 +308,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 158B - Taxi</title><link href="https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-158b-taxi/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 158B - Taxi" /><published>2019-12-09T00:00:00+09:00</published><updated>2019-12-09T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-158b-taxi</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/09/codeforces-coding-problem-158b-taxi/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_158b_taxi.png&quot; alt=&quot;158B - Taxi&quot; title=&quot;158B - Taxi&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/158/B&quot; target=&quot;_blank&quot;&gt;Taxi 문제 링크&lt;/a&gt;&lt;/p&gt;
 
@@ -236,7 +332,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;다수의 그룹이 같이 탈 수 있는 경우를 고려해야 한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;문제의 예시에서도 힌트가 주어졌듯이, 택시를 채울 수 있는 경우의 수를 하나씩 생각해가며 문제를 해결할 수 있다.&lt;br /&gt;
 이렇게 그때그때 최적의 답을 구해서, 최종적으로 최적의 해답을 구하는 방식을 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;이라 한다.&lt;br /&gt;
@@ -264,7 +360,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;첫 줄의 입력은 사용하지 않아도 되므로, 무시하도록 처리했다. (&lt;code class=&quot;highlighter-rouge&quot;&gt;_ = input()&lt;/code&gt;)&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; 변수는 사용하려면 사용할 수 있지만, Python에서는 &lt;strong&gt;대입되는 값을 무시하는 용도&lt;/strong&gt;로 많이 사용된다.&lt;/p&gt;
 
-&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -288,14 +384,14 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;taxi_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 50A - Domino piling</title><link href="https://jamesujeon.github.io/posts/2019/12/06/codeforces-coding-problem-50a-domino-piling/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 50A - Domino piling" /><published>2019-12-06T00:00:00+09:00</published><updated>2019-12-06T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/06/codeforces-coding-problem-50a-domino-piling</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/06/codeforces-coding-problem-50a-domino-piling/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_50a_domino_piling.png&quot; alt=&quot;50A - Domino piling&quot; title=&quot;50A - Domino piling&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/50/A&quot; target=&quot;_blank&quot;&gt;Domino piling 문제 링크&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;2 x 1 크기의 도미노 조각을 이용해 M x N 크기의 판을 채울 때, 필요한 최대 도미노 조각 수를 구한다.&lt;br /&gt;
 이때, 도미노 조각은 서로 겹칠 수 없으며, 판 안에 존재해야 한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;조각의 긴 변이 높이가 되도록 세운 후, 판의 좌상단 부분부터 채운다.&lt;br /&gt;
 여기서 긴 변은 2가 되고, 1 크기의 변으로 한 줄부터 채운다고 생각하면, 판의 너비와 동일하게 된다.&lt;br /&gt;
@@ -356,7 +452,7 @@ Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;int()&lt;/code&g
 왜냐하면, 좌상단 부분부터 최대한 채워서 남는 영역은 판의 마지막 줄의 우측 부분이기 때문이다.&lt;br /&gt;
 (항상 마지막 줄을 제외한 나머지 줄을 꽉 채울 수 있다.)&lt;/p&gt;
 
-&lt;h1 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -372,14 +468,14 @@ Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;int()&lt;/code&g
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 231A - Team</title><link href="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 231A - Team" /><published>2019-12-05T00:00:00+09:00</published><updated>2019-12-05T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_231a_team.png&quot; alt=&quot;231A - Team&quot; title=&quot;231A - Team&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/231/A&quot; target=&quot;_blank&quot;&gt;Team 문제 링크&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;3명이 각 문제의 정답을 확신하는 지를 입력받는다.&lt;br /&gt;
 정답 확신 수가 2명 이상일 때의 개수를 세면 된다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;입력받는 시점에서 3명의 정답 확신 여부를 튜플로 준비해두면, 해당 값들을 원활하게 이용할 수 있다.&lt;br /&gt;
 확신 여부는 숫자 0 또는 1로 입력받으므로 이를 이용해 총 확신 여부 수를 알 수 있다.&lt;br /&gt;
@@ -403,7 +499,7 @@ Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함�
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -427,14 +523,14 @@ Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함�
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 71A - Way Too Long Words</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 71A - Way Too Long Words" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-71a-way-too-long-words/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_71a_way_too_long_words.png&quot; alt=&quot;71A - Way Too Long Words&quot; title=&quot;71A - Way Too Long Words&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/71/A&quot; target=&quot;_blank&quot;&gt;Way Too Long Words 문제 링크&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;입력받은 단어의 길이가 10자보다 긴 경우, 첫 글자와 마지막 글자를 제외한 나머지 글자는 글자수로 표현한다.&lt;br /&gt;
 10자 이하인 경우, 그대로 출력한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;단어의 길이가 10자를 초과하거나 이하인 경우로 분기해 로직을 처리할 수도 있으나,&lt;br /&gt;
 10자 이하인 경우에는 특별한 처리를 하지 않으므로 초과인 경우에만 단어를 변경해 결과를 수집한다.&lt;/p&gt;
@@ -442,7 +538,7 @@ Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함�
 &lt;p&gt;Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;word[-1]&lt;/code&gt;와 같이 &lt;strong&gt;마이너스 인덱스&lt;/strong&gt;를 통해 마지막 요소에 접근할 수 있다.&lt;br /&gt;
 또한, 중앙의 글자수 부분은 전체 길이에서 첫 글자와 마지막 글자를 제외한 글자수이므로, 전체 길이에서 2를 빼면 된다.&lt;/p&gt;
 
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
 &lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
 
@@ -468,136 +564,4 @@ Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함�
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;word&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;abbr_words&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;word&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 158A - Next Round</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 158A - Next Round" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-158a-next-round/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_158a_next_round.png&quot; alt=&quot;158A - Next Round&quot; title=&quot;158A - Next Round&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/158/A&quot; target=&quot;_blank&quot;&gt;Next Round 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;k번째의 점수 이상이면, 다음 라운드로 넘어갈 수 있다.&lt;br /&gt;
-또한, 양수인 점수를 얻을 때만 가능하다.&lt;/p&gt;
-
-&lt;p&gt;점수가 양수이면서 k번째의 점수 이상인 사람 수를 세면 된다.&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;두 번째 열의 입력을 배열로 받으면, k번째의 점수를 쉽게 얻을 수 있다.&lt;br /&gt;
-입력받은 점수 배열을 순회하면서 조건에 맞는 경우, 사람 수를 증가시킨다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h1 id=&quot;리팩토링&quot;&gt;리팩토링&lt;/h1&gt;
-
-&lt;p&gt;위 코드는 항상 입력받은 점수 배열의 요소를 모두 순회하도록 되어 있다.&lt;br /&gt;
-이를 개선시켜 &lt;strong&gt;반대 조건일 때 순회를 중지&lt;/strong&gt;하도록 해 불필요한 순회를 하지 않도록 한다.&lt;/p&gt;
-
-&lt;p&gt;반대 조건을 구할 때, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%93%9C_%EB%AA%A8%EB%A5%B4%EA%B0%84%EC%9D%98_%EB%B2%95%EC%B9%99#%EB%85%BC%EB%A6%AC_%ED%9A%8C%EB%A1%9C%EC%97%90%EC%84%9C%EC%9D%98_%EB%93%9C_%EB%AA%A8%EB%A5%B4%EA%B0%84%EC%9D%98_%EB%B2%95%EC%B9%99&quot; target=&quot;_blank&quot;&gt;드 모르간의 법칙&lt;/a&gt;을 이용하면 쉽게 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/De_Morgan's_laws.png&quot; alt=&quot;De Morgan's laws&quot; title=&quot;De Morgan's laws&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;말로 풀어 설명하면,&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;A 또는 B일 때의 부정&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;A의 부정이고 B의 부정&lt;/code&gt;과 같다.&lt;br /&gt;
-또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;A이고 B일 때의 부정&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;A의 부정 또는 B의 부정&lt;/code&gt;과 같다.&lt;/p&gt;
-
-&lt;p&gt;Python으로 표현하면,&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;not (A or B) == not A and not B&lt;/code&gt;이고, &lt;code class=&quot;highlighter-rouge&quot;&gt;not (A and B) == not A or not B&lt;/code&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;위 코드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt; 0 and score &amp;gt;= scores[k - 1]&lt;/code&gt;의 부정은 &lt;code class=&quot;highlighter-rouge&quot;&gt;not (score &amp;gt; 0 and score &amp;gt;= scores[k - 1])&lt;/code&gt;이지만, 드 모르간의 법칙을 적용해 각각의 부정을 &lt;code class=&quot;highlighter-rouge&quot;&gt;or&lt;/code&gt; 연산한 것으로 대체할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt; 0&lt;/code&gt;의 부정은 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;lt;= 0&lt;/code&gt;이지만, 이 문제에서는 0 이하로는 입력될 수 없으므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;score is 0&lt;/code&gt;로 표현해도 된다. 또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;gt;= scores[k - 1]&lt;/code&gt;의 부정은 &lt;code class=&quot;highlighter-rouge&quot;&gt;score &amp;lt; scores[k - 1]&lt;/code&gt;이 된다.&lt;/p&gt;
-
-&lt;p&gt;결론적으로 다음과 같이 작성할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advancer_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이로써 불필요한 순회를 줄일 수 있다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 118A - String Task</title><link href="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 118A - String Task" /><published>2019-12-03T00:00:00+09:00</published><updated>2019-12-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/03/codeforces-coding-problem-118a-string-task/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_118a_string_task.png&quot; alt=&quot;118A - String Task&quot; title=&quot;118A - String Task&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/118/A&quot; target=&quot;_blank&quot;&gt;String Task 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;입력받은 문자열에 다음 규칙들을 적용한다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;문자열의 모음(A, O, Y, E, U, I)을 모두 없앤다.&lt;/li&gt;
-  &lt;li&gt;각 자음 앞에 점 문자(“.”)를 하나 추가한다.&lt;/li&gt;
-  &lt;li&gt;모든 대문자는 소문자로 변환한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h1&gt;
-
-&lt;p&gt;원활한 처리를 위해 규칙을 순차적으로 적용하는 것이 아닌 효율적인 순서로 적용할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;모음을 없애기 전에 문자열을 소문자화 해서 대소문자 구분없이 모음을 제거할 수 있도록 한다.&lt;br /&gt;
-문자열의 문자를 순회하면서 모음 배열에 속하지 않도록 필터링을 한다.&lt;br /&gt;
-필터링된 문자열에 조인을 통해 점 문자를 삽입한다.&lt;br /&gt;
-조인할 때 첫 글자 앞에는 점 문자가 삽입되지 않으므로, 마지막에 점 문자를 문자열 앞에 추가한다.&lt;br /&gt;
-이때, 문자열이 존재하는 경우에만 점 문자를 추가하도록 한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;전체-소스&quot;&gt;전체 소스&lt;/h1&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;vowels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'o'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'e'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'u'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'i'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vowels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'.'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
