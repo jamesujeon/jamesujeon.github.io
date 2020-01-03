@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Jekyll에 Disqus 댓글 서비스 연동하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Jekyll에 Disqus 댓글 서비스 연동하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="별도의 댓글 서비스를 이용해야 하는 이유" />
+<meta property="og:description" content="별도의 댓글 서비스를 이용해야 하는 이유" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-03T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"별도의 댓글 서비스를 이용해야 하는 이유","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/","headline":"Jekyll에 Disqus 댓글 서비스 연동하기","dateModified":"2020-01-03T00:00:00+09:00","datePublished":"2020-01-03T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesujeon.github.io/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+    <div class="post-title-image"><img src="/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/assets/octojekyll_title.png"></div>
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/blog" class="category-item">
+        Blog
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Jekyll에 Disqus 댓글 서비스 연동하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/github-pages" class="tag-item">
+        #github-pages
+      </a>
+    
+      <a href="/tags/jekyll" class="tag-item">
+        #jekyll
+      </a>
+    
+      <a href="/tags/disqus" class="tag-item">
+        #disqus
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2020-01-03 00:00:00 +0900">2020.01.03</time>
+  </div>
+
+  <h2 id="별도의-댓글-서비스를-이용해야-하는-이유">별도의 댓글 서비스를 이용해야 하는 이유</h2>
+
+<p>Jekyll을 통해 생성한 블로그는 <strong>정적으로 생성된 블로그</strong>이다.<br />
+이 말은 즉, 동적으로 데이터를 보관하며 사용자에게 보여줄 수 있는 블로그가 아니다.</p>
+
+<p>댓글 서비스를 운영하기 위해서는 댓글이라는 데이터의 보관이 필요하고, 이는 Jekyll만 사용해서는 불가능하다.<br />
+따라서 외부 플러그인을 통해 댓글 서비스를 이용하는 방법을 사용하도록 한다.<br />
+여기서는 많은 GitHub Pages 블로그에서 사용하고 있는 Disqus 댓글 서비스를 연동하도록 한다.</p>
+
+<p>Disqus에서 제공하는 댓글 서비스는 간단한 블로그를 위해서는 무료 정책으로 충분하다.<br />
+혹시 다른 부가적인 기능이나 특징이 필요하다면, <a href="https://disqus.com/pricing/">여기</a>에서 가격 정책을 확인할 수 있다.</p>
+
+<h2 id="disqus-가입-및-설정">Disqus 가입 및 설정</h2>
+
+<p>블로그는 이미 준비되어 있다고 가정하고, 일단 Disqus에 가입해서 블로그 정보를 설정해야 한다.<br />
+<a href="https://disqus.com/">Disqus</a>에 접속해 이메일 또는 페이스북, 트위터, 구글 등의 계정을 통해 가입한다.</p>
+
+<p>가입 후에 홈페이지에서 ‘GET STARTED’ &gt; ‘I want to install Disqus on my site’ 순서로 버튼을 누른다.<br />
+생성 화면에서 ‘Website Name’은 Disqus의 관리자 사이트로 이용되므로 블로그와 관련된 이름으로 작성한다.<br />
+이때, 생성되는 URL은 Disqus에서 유일해야 하므로 유의하도록 한다.<br />
+언어는 현재 한국어를 제공하지 않으므로 영어로 선택해 진행한다.</p>
+
+<p><img src="assets/disqus_guide/1.png" alt="Disqus Guide Step 1" />
+ </p>
+
+<p>플랜은 ‘Basic’ 플랜의 ‘Subscribe Now’ 버튼을 눌러 무료 플랜을 선택한다.</p>
+
+<p><img src="assets/disqus_guide/2.png" alt="Disqus Guide Step 2" />
+ </p>
+
+<p>플랫폼 선택 화면에서 ‘Jekyll’ 항목을 누른다.</p>
+
+<p><img src="assets/disqus_guide/3.png" alt="Disqus Guide Step 3" />
+ </p>
+
+<p>그러면 Jekyll에 댓글 서비스를 설정하는 방법이 나오는데, 아래에서 알아보도록 한다.<br />
+여기서는 <strong>2번 항목의 ‘Universal Embed Code’ 링크</strong>만 새 창에 띄워 놓고, ‘Configure’ 버튼을 누른다.<br />
+해당 링크는 추후 댓글 서비스를 설정할 때 필요한 페이지로, <strong>설정한 사이트마다 다른 코드가 생성되므로 미리 띄워 놓는다</strong>.</p>
+
+<p><img src="assets/disqus_guide/4.png" alt="Disqus Guide Step 4" />
+ </p>
+
+<p>설정 화면에서 필요한 항목들을 작성하도록 한다.<br />
+<strong>‘Website URL’ 항목이 실제 연동할 사이트 주소에 해당한다</strong>.<br />
+여기서 ‘Comment Policy’ 관련 항목들은 입력하지 않으면, 알아서 Disqus 정책에 따라 적용된다.<br />
+‘Complete Setup’ 버튼을 누르면, Disqus에 사이트 설정이 완료된다.</p>
+
+<p><img src="assets/disqus_guide/5.png" alt="Disqus Guide Step 5" />
+ </p>
+
+<p>사이트 설정이 완료된 후에는 언제든지 Admin 화면으로 접속해 사이트를 관리할 수 있다.<br />
+생성 시에 설정한 것들 외에도 다양한 옵션이 있으니 살펴보는 것도 좋을 것 같다.</p>
+
+<p><img src="assets/disqus_guide/6.png" alt="Disqus Guide Step 6" />
+<img src="assets/disqus_guide/7.png" alt="Disqus Guide Step 7" />
+ </p>
+
+<h2 id="disqus-연동">Disqus 연동</h2>
+
+<p>앞서 띄워 놓은 ‘Universal Embed Code’ 링크 페이지를 열어 보면, 첫 1번 항목에 소스 코드가 있을 것이다.<br />
+이 소스 코드가 <strong>Disqus 댓글 영역이 생기는 부분</strong>이다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="cm">/**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/</span>
+  <span class="cm">/*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  */</span>
+
+  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// DON'T EDIT BELOW THIS LINE</span>
+    <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jamesu-blog.disqus.com/embed.js</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-timestamp</span><span class="dl">'</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+    <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://disqus.com/?ref_noscript"</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>만약, 해당 링크 페이지를 별도로 띄워 놓지 않았다면, 위 코드를 그대로 붙여 넣은 후, 15번째 줄에 <code class="highlighter-rouge">s.src</code>에 대입하는 부분에 블로그에 해당하는 Disqus 관리자 사이트 URL을 입력하면 된다.<br />
+<code class="highlighter-rouge">jamesu-blog</code> 대신, 해당하는 <strong>관리자 사이트 URL</strong>을 입력하도록 한다.</p>
+
+<p>그리고 Disqus는 다음과 같은 추가 작업을 추천한다.<br />
+(전체 내용은 <a href="https://help.disqus.com/en/articles/1717137-use-configuration-variables-to-avoid-split-threads-and-missing-comments">이 문서</a>를 참고한다.)</p>
+
+<blockquote>
+  <p>This works well for some sites, however, this method of creating threads can lead to duplicate “split threads” for the same page of content, especially when your site accepts many different URLs for the same page of content.</p>
+</blockquote>
+
+<p>즉, 같은 컨텐츠이지만 접근하는 URL이 달라 서로 다른 쓰레드(댓글 그룹)가 생성될 수도 있다는 말이다.</p>
+
+<p>예를 들어, 로컬 환경에서 띄운 블로그와 실제 배포된 블로그에 각각 접근했을 때, 서로 다른 쓰레드가 생성될 수 있다.<br />
+로컬 환경은 URL이 <code class="highlighter-rouge">localhost</code>로 시작하고, 배포된 블로그는 <code class="highlighter-rouge">실제 도메인</code>으로 시작하기 때문이다.<br />
+서로 다른 쓰레드는 같은 컨텐츠임에도 불구하고, <strong>댓글의 불일치</strong>를 발생시킬 수 있다.</p>
+
+<p>이런 현상을 방지하기 위해, 아래와 같이 주석을 해제하여 <code class="highlighter-rouge">disqus_config</code> 함수를 정의하도록 한다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="cm">/**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/</span>
+  <span class="kd">var</span> <span class="nx">disqus_config</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jamesu.blog{{ page.url }}</span><span class="dl">'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">identifier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{{ page.id }}</span><span class="dl">'</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// DON'T EDIT BELOW THIS LINE</span>
+    <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jamesu-blog.disqus.com/embed.js</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-timestamp</span><span class="dl">'</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+    <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://disqus.com/?ref_noscript"</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">this.page.url</code> 변수에는 동일한 URL을 가리키도록, 도메인 주소와 <code class="highlighter-rouge">{{ page.url }}</code>을 이용한다.<br />
+<code class="highlighter-rouge">this.page.identifier</code> 변수에는 <code class="highlighter-rouge">{{ page.id }}</code>를 이용해 유일한 페이지 ID를 대입한다.</p>
+
+<h3 id="댓글-영역을-꾸미고-싶다면">댓글 영역을 꾸미고 싶다면</h3>
+
+<p>위 코드에서 보이는 것처럼, <code class="highlighter-rouge">&lt;div id="disqus_thread"&gt;&lt;/div&gt;</code> 요소 내부에 댓글 영역이 생긴다.<br />
+댓글 영역을 꾸미고 싶다면, 다음과 같이 <code class="highlighter-rouge">disqus_thread</code> ID를 이용해 원하는 대로 꾸밀 수도 있다.<br />
+(여기서는 댓글 영역에 회색 외곽선을 추가했다.)</p>
+
+<p><img src="assets/disqus_guide/8.png" alt="Disqus Guide Step 8" />
+ </p>
+
+<h2 id="그-외-활용">그 외 활용</h2>
+
+<p>기본적인 댓글 기능은 위와 같이 설정해서 사용할 수 있다.<br />
+만약, 포스트별로 댓글 기능의 사용 유무를 정하고 싶다면, <a href="https://jekyllrb.com/docs/front-matter/">YAML Front Matter</a>의 변수를 이용하면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>---
+layout: default
+comments: true
+# other options
+---
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">comments</code> 변수와 같이, 페이지 변수를 설정하고 그것에 따라 댓글 영역 코드를 넣을지 말지를 결정하면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre>{% if page.comments %}
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"disqus_thread"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="cm">/**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/</span>
+    <span class="kd">var</span> <span class="nx">disqus_config</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jamesu.blog{{ page.url }}</span><span class="dl">'</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">identifier</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">{{ page.id }}</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// DON'T EDIT BELOW THIS LINE</span>
+      <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">document</span><span class="p">,</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://jamesu-blog.disqus.com/embed.js</span><span class="dl">'</span><span class="p">;</span>
+      <span class="nx">s</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">data-timestamp</span><span class="dl">'</span><span class="p">,</span> <span class="o">+</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+      <span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">head</span> <span class="o">||</span> <span class="nx">d</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+    <span class="p">})();</span>
+  <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://disqus.com/?ref_noscript"</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+{% endif %}
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>이 밖에도 Disqus는 댓글 서비스와 관련해서 다양한 옵션을 제공하므로, 홈페이지를 참고하길 바란다.<br />
+또한, Disqus 관리자 사이트에서 댓글을 확인하고 관리할 수 있으므로 활용하길 바란다.</p>
+
+<p>성공적으로 댓글 서비스를 연동해 이용하길 바라며, 더불어 본 블로그도 댓글이 활성화되길 바란다. 😅</p>
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2019/12/23/codeforces-coding-problem-230b-t-primes/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">Codeforces 코딩 문제 풀기: 230B - T-primes</span>
+        </a>
+      
+    </div>
+  
+
+  <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+    this.page.url = 'https://jamesu.dev/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/';
+    this.page.identifier = '/posts/2020/01/03/adding-disqus-comment-service-to-jekyll';
+  };
+
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jamesu-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

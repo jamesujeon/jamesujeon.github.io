@@ -1,4 +1,240 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2019-12-28T23:21:29+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Codeforces 코딩 문제 풀기: 230B - T-primes</title><link href="https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 230B - T-primes" /><published>2019-12-23T00:00:00+09:00</published><updated>2019-12-23T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_230b_t-primes.png&quot; alt=&quot;230B - T-primes&quot; title=&quot;230B - T-primes&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-03T15:06:55+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Jekyll에 Disqus 댓글 서비스 연동하기</title><link href="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" rel="alternate" type="text/html" title="Jekyll에 Disqus 댓글 서비스 연동하기" /><published>2020-01-03T00:00:00+09:00</published><updated>2020-01-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/">&lt;h2 id=&quot;별도의-댓글-서비스를-이용해야-하는-이유&quot;&gt;별도의 댓글 서비스를 이용해야 하는 이유&lt;/h2&gt;
+
+&lt;p&gt;Jekyll을 통해 생성한 블로그는 &lt;strong&gt;정적으로 생성된 블로그&lt;/strong&gt;이다.&lt;br /&gt;
+이 말은 즉, 동적으로 데이터를 보관하며 사용자에게 보여줄 수 있는 블로그가 아니다.&lt;/p&gt;
+
+&lt;p&gt;댓글 서비스를 운영하기 위해서는 댓글이라는 데이터의 보관이 필요하고, 이는 Jekyll만 사용해서는 불가능하다.&lt;br /&gt;
+따라서 외부 플러그인을 통해 댓글 서비스를 이용하는 방법을 사용하도록 한다.&lt;br /&gt;
+여기서는 많은 GitHub Pages 블로그에서 사용하고 있는 Disqus 댓글 서비스를 연동하도록 한다.&lt;/p&gt;
+
+&lt;p&gt;Disqus에서 제공하는 댓글 서비스는 간단한 블로그를 위해서는 무료 정책으로 충분하다.&lt;br /&gt;
+혹시 다른 부가적인 기능이나 특징이 필요하다면, &lt;a href=&quot;https://disqus.com/pricing/&quot;&gt;여기&lt;/a&gt;에서 가격 정책을 확인할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;disqus-가입-및-설정&quot;&gt;Disqus 가입 및 설정&lt;/h2&gt;
+
+&lt;p&gt;블로그는 이미 준비되어 있다고 가정하고, 일단 Disqus에 가입해서 블로그 정보를 설정해야 한다.&lt;br /&gt;
+&lt;a href=&quot;https://disqus.com/&quot;&gt;Disqus&lt;/a&gt;에 접속해 이메일 또는 페이스북, 트위터, 구글 등의 계정을 통해 가입한다.&lt;/p&gt;
+
+&lt;p&gt;가입 후에 홈페이지에서 ‘GET STARTED’ &amp;gt; ‘I want to install Disqus on my site’ 순서로 버튼을 누른다.&lt;br /&gt;
+생성 화면에서 ‘Website Name’은 Disqus의 관리자 사이트로 이용되므로 블로그와 관련된 이름으로 작성한다.&lt;br /&gt;
+이때, 생성되는 URL은 Disqus에서 유일해야 하므로 유의하도록 한다.&lt;br /&gt;
+언어는 현재 한국어를 제공하지 않으므로 영어로 선택해 진행한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/1.png&quot; alt=&quot;Disqus Guide Step 1&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;p&gt;플랜은 ‘Basic’ 플랜의 ‘Subscribe Now’ 버튼을 눌러 무료 플랜을 선택한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/2.png&quot; alt=&quot;Disqus Guide Step 2&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;p&gt;플랫폼 선택 화면에서 ‘Jekyll’ 항목을 누른다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/3.png&quot; alt=&quot;Disqus Guide Step 3&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;p&gt;그러면 Jekyll에 댓글 서비스를 설정하는 방법이 나오는데, 아래에서 알아보도록 한다.&lt;br /&gt;
+여기서는 &lt;strong&gt;2번 항목의 ‘Universal Embed Code’ 링크&lt;/strong&gt;만 새 창에 띄워 놓고, ‘Configure’ 버튼을 누른다.&lt;br /&gt;
+해당 링크는 추후 댓글 서비스를 설정할 때 필요한 페이지로, &lt;strong&gt;설정한 사이트마다 다른 코드가 생성되므로 미리 띄워 놓는다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/4.png&quot; alt=&quot;Disqus Guide Step 4&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;p&gt;설정 화면에서 필요한 항목들을 작성하도록 한다.&lt;br /&gt;
+&lt;strong&gt;‘Website URL’ 항목이 실제 연동할 사이트 주소에 해당한다&lt;/strong&gt;.&lt;br /&gt;
+여기서 ‘Comment Policy’ 관련 항목들은 입력하지 않으면, 알아서 Disqus 정책에 따라 적용된다.&lt;br /&gt;
+‘Complete Setup’ 버튼을 누르면, Disqus에 사이트 설정이 완료된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/5.png&quot; alt=&quot;Disqus Guide Step 5&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;p&gt;사이트 설정이 완료된 후에는 언제든지 Admin 화면으로 접속해 사이트를 관리할 수 있다.&lt;br /&gt;
+생성 시에 설정한 것들 외에도 다양한 옵션이 있으니 살펴보는 것도 좋을 것 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/6.png&quot; alt=&quot;Disqus Guide Step 6&quot; /&gt;
+&lt;img src=&quot;assets/disqus_guide/7.png&quot; alt=&quot;Disqus Guide Step 7&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;h2 id=&quot;disqus-연동&quot;&gt;Disqus 연동&lt;/h2&gt;
+
+&lt;p&gt;앞서 띄워 놓은 ‘Universal Embed Code’ 링크 페이지를 열어 보면, 첫 1번 항목에 소스 코드가 있을 것이다.&lt;br /&gt;
+이 소스 코드가 &lt;strong&gt;Disqus 댓글 영역이 생기는 부분&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/*
+  var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  };
+  */&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;만약, 해당 링크 페이지를 별도로 띄워 놓지 않았다면, 위 코드를 그대로 붙여 넣은 후, 15번째 줄에 &lt;code class=&quot;highlighter-rouge&quot;&gt;s.src&lt;/code&gt;에 대입하는 부분에 블로그에 해당하는 Disqus 관리자 사이트 URL을 입력하면 된다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;jamesu-blog&lt;/code&gt; 대신, 해당하는 &lt;strong&gt;관리자 사이트 URL&lt;/strong&gt;을 입력하도록 한다.&lt;/p&gt;
+
+&lt;p&gt;그리고 Disqus는 다음과 같은 추가 작업을 추천한다.&lt;br /&gt;
+(전체 내용은 &lt;a href=&quot;https://help.disqus.com/en/articles/1717137-use-configuration-variables-to-avoid-split-threads-and-missing-comments&quot;&gt;이 문서&lt;/a&gt;를 참고한다.)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This works well for some sites, however, this method of creating threads can lead to duplicate “split threads” for the same page of content, especially when your site accepts many different URLs for the same page of content.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;즉, 같은 컨텐츠이지만 접근하는 URL이 달라 서로 다른 쓰레드(댓글 그룹)가 생성될 수도 있다는 말이다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, 로컬 환경에서 띄운 블로그와 실제 배포된 블로그에 각각 접근했을 때, 서로 다른 쓰레드가 생성될 수 있다.&lt;br /&gt;
+로컬 환경은 URL이 &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost&lt;/code&gt;로 시작하고, 배포된 블로그는 &lt;code class=&quot;highlighter-rouge&quot;&gt;실제 도메인&lt;/code&gt;으로 시작하기 때문이다.&lt;br /&gt;
+서로 다른 쓰레드는 같은 컨텐츠임에도 불구하고, &lt;strong&gt;댓글의 불일치&lt;/strong&gt;를 발생시킬 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이런 현상을 방지하기 위해, 아래와 같이 주석을 해제하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;disqus_config&lt;/code&gt; 함수를 정의하도록 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;cm&quot;&gt;/**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu.blog{{ page.url }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ page.id }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this.page.url&lt;/code&gt; 변수에는 동일한 URL을 가리키도록, 도메인 주소와 &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ page.url }}&lt;/code&gt;을 이용한다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;this.page.identifier&lt;/code&gt; 변수에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ page.id }}&lt;/code&gt;를 이용해 유일한 페이지 ID를 대입한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;댓글-영역을-꾸미고-싶다면&quot;&gt;댓글 영역을 꾸미고 싶다면&lt;/h3&gt;
+
+&lt;p&gt;위 코드에서 보이는 것처럼, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div id=&quot;disqus_thread&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; 요소 내부에 댓글 영역이 생긴다.&lt;br /&gt;
+댓글 영역을 꾸미고 싶다면, 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;disqus_thread&lt;/code&gt; ID를 이용해 원하는 대로 꾸밀 수도 있다.&lt;br /&gt;
+(여기서는 댓글 영역에 회색 외곽선을 추가했다.)&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/8.png&quot; alt=&quot;Disqus Guide Step 8&quot; /&gt;
+ &lt;/p&gt;
+
+&lt;h2 id=&quot;그-외-활용&quot;&gt;그 외 활용&lt;/h2&gt;
+
+&lt;p&gt;기본적인 댓글 기능은 위와 같이 설정해서 사용할 수 있다.&lt;br /&gt;
+만약, 포스트별로 댓글 기능의 사용 유무를 정하고 싶다면, &lt;a href=&quot;https://jekyllrb.com/docs/front-matter/&quot;&gt;YAML Front Matter&lt;/a&gt;의 변수를 이용하면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;---
+layout: default
+comments: true
+# other options
+---
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;comments&lt;/code&gt; 변수와 같이, 페이지 변수를 설정하고 그것에 따라 댓글 영역 코드를 넣을지 말지를 결정하면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;{% if page.comments %}
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu.blog{{ page.url }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ page.id }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이 밖에도 Disqus는 댓글 서비스와 관련해서 다양한 옵션을 제공하므로, 홈페이지를 참고하길 바란다.&lt;br /&gt;
+또한, Disqus 관리자 사이트에서 댓글을 확인하고 관리할 수 있으므로 활용하길 바란다.&lt;/p&gt;
+
+&lt;p&gt;성공적으로 댓글 서비스를 연동해 이용하길 바라며, 더불어 본 블로그도 댓글이 활성화되길 바란다. 😅&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github-pages" /><category term="jekyll" /><category term="disqus" /><summary type="html">별도의 댓글 서비스를 이용해야 하는 이유</summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 230B - T-primes</title><link href="https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 230B - T-primes" /><published>2019-12-23T00:00:00+09:00</published><updated>2019-12-23T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/23/codeforces-coding-problem-230b-t-primes/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_230b_t-primes.png&quot; alt=&quot;230B - T-primes&quot; title=&quot;230B - T-primes&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -73,7 +309,7 @@
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Linux 부팅 시, 서비스 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux/" rel="alternate" type="text/html" title="Linux 부팅 시, 서비스 자동으로 시작하기" /><published>2019-12-20T00:00:00+09:00</published><updated>2019-12-20T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/20/start-service-automatically-on-boot-in-linux/">&lt;p&gt;&lt;a href=&quot;https://jamesu.dev/posts/2019/12/19/start-containers-automatically/&quot;&gt;이전 글&lt;/a&gt;에서 Docker 컨테이너를 자동으로 시작하는 법을 알았다.&lt;br /&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Linux 부팅 시, 서비스 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/20/starting-service-automatically-on-boot-in-linux/" rel="alternate" type="text/html" title="Linux 부팅 시, 서비스 자동으로 시작하기" /><published>2019-12-20T00:00:00+09:00</published><updated>2019-12-20T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/20/starting-service-automatically-on-boot-in-linux</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/20/starting-service-automatically-on-boot-in-linux/">&lt;p&gt;&lt;a href=&quot;https://jamesu.dev/posts/2019/12/19/start-containers-automatically/&quot;&gt;이전 글&lt;/a&gt;에서 Docker 컨테이너를 자동으로 시작하는 법을 알았다.&lt;br /&gt;
 그렇다면, 서버가 죽었을 때 Docker가 시작되어야 Docker 컨테이너 또한 재시작을 할 수 있지 않을까?&lt;/p&gt;
 
 &lt;p&gt;이 글에서는 Docker를 자주 사용하는 OS인 Linux 상에서 서비스를 자동으로 시작하는 법을 알아보도록 한다.&lt;br /&gt;
@@ -169,7 +405,7 @@
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Docker 컨테이너 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/" rel="alternate" type="text/html" title="Docker 컨테이너 자동으로 시작하기" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/start-containers-automatically/">&lt;p&gt;Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다.&lt;br /&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Docker 컨테이너 자동으로 시작하기</title><link href="https://jamesujeon.github.io/posts/2019/12/19/starting-container-automatically/" rel="alternate" type="text/html" title="Docker 컨테이너 자동으로 시작하기" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/starting-container-automatically</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/starting-container-automatically/">&lt;p&gt;Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다.&lt;br /&gt;
 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다.&lt;br /&gt;
 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.&lt;/p&gt;
 
@@ -541,59 +777,4 @@ Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;int()&lt;/code&g
 &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 코딩 문제 풀기: 231A - Team</title><link href="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/" rel="alternate" type="text/html" title="Codeforces 코딩 문제 풀기: 231A - Team" /><published>2019-12-05T00:00:00+09:00</published><updated>2019-12-05T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/05/codeforces-coding-problem-231a-team/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_231a_team.png&quot; alt=&quot;231A - Team&quot; title=&quot;231A - Team&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/231/A&quot; target=&quot;_blank&quot;&gt;Team 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;3명이 각 문제의 정답을 확신하는 지를 입력받는다.&lt;br /&gt;
-정답 확신 수가 2명 이상일 때의 개수를 세면 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;입력받는 시점에서 3명의 정답 확신 여부를 튜플로 준비해두면, 해당 값들을 원활하게 이용할 수 있다.&lt;br /&gt;
-확신 여부는 숫자 0 또는 1로 입력받으므로 이를 이용해 총 확신 여부 수를 알 수 있다.&lt;br /&gt;
-Python은 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 기본적으로 제공하므로, 각 튜플에 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 적용해 확신 여부의 합을 구하면 그것이 문제에 대한 확신 여부 수가 된다.&lt;br /&gt;
-확신 여부 수가 2 이상일 때만 개수를 올리도록 한다.&lt;/p&gt;
-
-&lt;p&gt;다른 방식으로 확신 여부 수가 2 이상일 때는 1을 반환하고, 아닐 때는 0을 반환해 &lt;code class=&quot;highlighter-rouge&quot;&gt;sum&lt;/code&gt; 함수를 적용하는 방법이 있다.&lt;br /&gt;
-하지만, 2 미만일 때도 0을 더하는 연산을 수행하므로 불필요한 연산이 발생한다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tuple&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;isSureList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isSure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="coding-problem" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
