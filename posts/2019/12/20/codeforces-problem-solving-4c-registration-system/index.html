@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Codeforces 문제 풀이: 4C - Registration system - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Codeforces 문제 풀이: 4C - Registration system" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="Dev Blog by James Minsu Jeon" />
+<meta property="og:description" content="Dev Blog by James Minsu Jeon" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-20T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/","headline":"Codeforces 문제 풀이: 4C - Registration system","dateModified":"2019-12-20T00:00:00+09:00","datePublished":"2019-12-20T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesujeon.github.io/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/algorithm" class="category-item">
+        Algorithm
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Codeforces 문제 풀이: 4C - Registration system</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/problem-solving" class="tag-item">
+        #problem-solving
+      </a>
+    
+      <a href="/tags/codeforces" class="tag-item">
+        #codeforces
+      </a>
+    
+      <a href="/tags/python" class="tag-item">
+        #python
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2019-12-20 00:00:00 +0900">2019.12.20</time>
+  </div>
+
+  <p><img src="assets/codeforces_4c_registration_system.png" alt="4C - Registration system" title="4C - Registration system" /></p>
+
+<h2 id="문제-파악">문제 파악</h2>
+
+<p><a href="http://codeforces.com/problemset/problem/4/C" target="_blank">Registration system 문제 링크</a></p>
+
+<p>사용자 이름을 등록하는 시스템으로 중복 이름을 허용하지 않는다.<br />
+다수의 이름을 입력받아 차례대로 시스템에 등록을 요청해 정상적으로 등록되는 경우, “OK”를 출력한다.<br />
+이름이 중복되는 경우, 이름 뒤에 숫자를 추가해 등록하고 변경된 이름을 출력한다.<br />
+중복되는 이름이 다수인 경우, 차례대로 숫자를 증가시켜 추가한다.<br />
+입력하는 이름은 모두 소문자 영문자만 가능하다. (숫자를 입력하는 경우가 없다.)</p>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<p>중복되는 이름이 다수인 경우에 차례대로 숫자를 증가시켜 추가해야 하므로, 중복될 때마다 그 수를 기억해야 한다.<br />
+그러면, 저장할 데이터는 이름과 중복 수가 되고, 이를 효율적으로 관리하기 위해 <a href="https://namu.wiki/w/%ED%95%B4%EC%8B%9C">해시</a> 테이블을 사용할 수 있다.</p>
+
+<p><strong>해시 테이블</strong>은 Key-Value 구조로 데이터를 보관하는 자료구조로, Key를 위해 해시 함수를 이용한다.<br />
+일반적으로 별도의 해시 함수를 구현하지 않으면, 객체의 주소값 등을 Key로 이용할 수 있다.</p>
+
+<p>Python에서는 이러한 해시 테이블로 이용할 수 있는 자료구조로 <strong>Dictionary</strong>라 하는 <code class="highlighter-rouge">dict</code>가 존재한다.<br />
+이 문제에서 입력받는 이름을 Key로, 중복 수를 Value로 사용하면, 효율적으로 데이터를 보관할 수 있다.<br />
+키를 바탕으로 값에 접근하기 때문에 순차적으로 검색해서 원하는 값을 얻는 배열에 비해 효율적이고, 편리하다.</p>
+
+<p>입력받은 이름들을 차례대로 Dictionary에 존재하는지 확인하고, 존재하면 중복 수를 증가시키고, 존재하지 않으면 Dictionary에 추가한다.
+키로 존재 여부를 확인하고, 키로 값에 접근하기 때문에 속도가 매우 빠르다.<br />
+중복되는 경우, 중복 수를 이용해 이름을 변경하도록 한다.</p>
+
+<h2 id="풀이-소스">풀이 소스</h2>
+
+<p>문제 풀이 환경: Python 3.7</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="nb">input</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="n">name_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">name_dict</span><span class="p">:</span>
+    <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+    <span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s">"OK"</span>
+    <span class="n">name_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+
+  
+    <div class="post-pagination">
+      
+        <a href="/posts/2019/12/20/starting-service-automatically-on-boot-in-linux/" class="left arrow">
+          <i class="fas fa-chevron-left fa-fw"></i>
+          <span class="left arrow-title">Linux 부팅 시, 서비스 자동으로 시작하기</span>
+        </a>
+      
+      
+        <a href="/posts/2019/12/19/starting-container-automatically/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">Docker 컨테이너 자동으로 시작하기</span>
+        </a>
+      
+    </div>
+  
+
+  <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+    this.page.url = 'https://jamesu.dev/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/';
+    this.page.identifier = '/posts/2019/12/20/codeforces-problem-solving-4c-registration-system';
+  };
+
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jamesu-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

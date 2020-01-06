@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Codeforces 문제 풀이: 4A - Watermelon - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Codeforces 문제 풀이: 4A - Watermelon" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="Dev Blog by James Minsu Jeon" />
+<meta property="og:description" content="Dev Blog by James Minsu Jeon" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-02T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/","headline":"Codeforces 문제 풀이: 4A - Watermelon","dateModified":"2019-12-02T00:00:00+09:00","datePublished":"2019-12-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesujeon.github.io/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/algorithm" class="category-item">
+        Algorithm
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Codeforces 문제 풀이: 4A - Watermelon</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/problem-solving" class="tag-item">
+        #problem-solving
+      </a>
+    
+      <a href="/tags/codeforces" class="tag-item">
+        #codeforces
+      </a>
+    
+      <a href="/tags/python" class="tag-item">
+        #python
+      </a>
+    
+      <a href="/tags/kotlin" class="tag-item">
+        #kotlin
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2019-12-02 00:00:00 +0900">2019.12.02</time>
+  </div>
+
+  <p><img src="assets/codeforces_4a_watermelon.png" alt="4A - Watermelon" title="4A - Watermelon" /></p>
+
+<h2 id="문제-파악">문제 파악</h2>
+
+<p><a href="http://codeforces.com/contest/4/problem/A" target="_blank">Watermelon 문제 링크</a></p>
+
+<p>1 이상 100 이하의 수박 무게가 주어졌을 때,<br />
+짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.</p>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<p>짝수 무게로만 두 부분으로 나누기 위해 <strong>주어진 무게가 짝수</strong>여야 2로 나누어 떨어질 수 있다.<br />
+하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.</p>
+
+<h2 id="풀이-소스">풀이 소스</h2>
+
+<p>문제 풀이 환경: Python 3.7</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="n">weight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">weight</span> <span class="o">%</span> <span class="mi">2</span> <span class="ow">is</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">2</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"YES"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"NO"</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>문제 풀이 환경: Kotlin 1.3.61 (2019.12.10 추가)</p>
+
+<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">weight</span> <span class="p">=</span> <span class="nf">readLine</span><span class="p">()</span><span class="o">!!</span><span class="p">.</span><span class="nf">toInt</span><span class="p">()</span>
+    <span class="nf">println</span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="n">weight</span> <span class="p">%</span> <span class="m">2</span> <span class="p">==</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">weight</span> <span class="p">!=</span> <span class="m">2</span><span class="p">)</span> <span class="s">"YES"</span> <span class="k">else</span> <span class="s">"NO"</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+
+  
+    <div class="post-pagination">
+      
+        <a href="/posts/2019/12/03/codeforces-problem-solving-118a-string-task/" class="left arrow">
+          <i class="fas fa-chevron-left fa-fw"></i>
+          <span class="left arrow-title">Codeforces 문제 풀이: 118A - String Task</span>
+        </a>
+      
+      
+        <a href="/posts/2019/12/02/codeforces-problem-solving-1a-theatre-square/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">Codeforces 문제 풀이: 1A - Theatre Square</span>
+        </a>
+      
+    </div>
+  
+
+  <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+    this.page.url = 'https://jamesu.dev/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/';
+    this.page.identifier = '/posts/2019/12/02/codeforces-problem-solving-4a-watermelon';
+  };
+
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jamesu-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>
