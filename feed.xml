@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-06T11:50:27+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Jekyll에 Disqus 댓글 서비스 연동하기</title><link href="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" rel="alternate" type="text/html" title="Jekyll에 Disqus 댓글 서비스 연동하기" /><published>2020-01-03T00:00:00+09:00</published><updated>2020-01-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/">&lt;h2 id=&quot;별도의-댓글-서비스를-이용해야-하는-이유&quot;&gt;별도의 댓글 서비스를 이용해야 하는 이유&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-07T17:14:11+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기</title><link href="https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/" rel="alternate" type="text/html" title="Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기" /><published>2020-01-07T00:00:00+09:00</published><updated>2020-01-07T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_9095.png&quot; alt=&quot;9095 - 1, 2, 3 더하기&quot; title=&quot;9095 - 1, 2, 3 더하기&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/9095&quot; target=&quot;_blank&quot;&gt;1, 2, 3 더하기 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;1, 2, 3의 합으로 나타내는 방법에는 순서가 다른 것도 다른 방법으로 취급한다.&lt;br /&gt;
+또한, 수는 총 1개 이상이므로, 자기 자신만 존재하는 것도 하나의 방법으로 취급해야 함을 유의한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;입력된 정수가 커질수록 합으로 나타내는 경우의 수는 기하급수적으로 커진다.
+또한, 그 방법을 수식으로 표현할 방법조차 아주 복잡하거나 불가능하다.
+이때, 유용한 방법이 &lt;strong&gt;동적 계획법&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95&quot; target=&quot;_blank&quot;&gt;동적 계획법(Dynamic Programming)&lt;/a&gt;은 큰 문제를 작은 문제로 쪼개어, 작은 문제의 해답을 이용해 큰 문제를 해결하는 방법이다.
+이때, 작은 문제들의 해답으로 큰 문제의 해답을 구할 수 있는 반복 구조여야 적용이 가능하다.
+또한, &lt;strong&gt;작은 문제들의 해답을 미리 저장하고, 동일한 해답이 다시 필요한 경우 재활용&lt;/strong&gt;함으로써, 속도를 최적화할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;주어진 문제가 동적 계획법을 이용할 수 있는지, 정수 4를 1, 2, 3의 합으로 나타내는 방법에 대한 예시를 분석해보자.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;맨 앞에 수를 하나 두면, &lt;strong&gt;나머지 부분은 주어진 수에 앞에 둔 수를 빼고 동일한 방법을 적용&lt;/strong&gt;해 구성할 수 있다.&lt;/li&gt;
+  &lt;li&gt;맨 앞에 올 수 있는 수는 &lt;strong&gt;1, 2, 3의 3가지 수&lt;/strong&gt;뿐이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;예시에 적용해보면, 다음과 같다.&lt;br /&gt;
+맨 앞에 1이 있으면, 나머지 부분은 4에서 1을 뺀 3에 동일한 방법을 적용할 수 있다.&lt;br /&gt;
+맨 앞에 3이 있으면, 나머지 부분은 4에서 3을 뺀 1에 동일한 방법을 적용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이는 &lt;strong&gt;동일한 문제가 작은 수에 대해 반복&lt;/strong&gt;적인 것을 알 수 있다.
+주어진 수는 작은 수들의 문제로 쪼개지고, 그 작은 수들은 또 작은 수들의 문제로 쪼개지고, 결국은 최소에 해당하는 초기값까지 쪼개질 것이다.
+우리는 초기값을 쉽게 구할 수 있으므로, 거꾸로 작은 수부터 해답을 찾아가면, 최종적으로 주어진 수의 해답을 구할 수 있을 것이다.&lt;/p&gt;
+
+&lt;p&gt;이때, 구했던 작은 문제의 해답이 다른 문제에서 필요할 때 다시 구하게 되면, 시간 낭비가 되므로 &lt;strong&gt;해답을 저장해두고 재활용&lt;/strong&gt;하도록 한다.
+이를 통해 반복적으로 계산하던 방식에 비해 &lt;strong&gt;빠른 속도 향상&lt;/strong&gt;을 이룰 수 있다.&lt;/p&gt;
+
+&lt;p&gt;해답 저장을 위해서 &lt;strong&gt;해시 테이블&lt;/strong&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;를 이용한다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;의 키로 구하려는 수를 이용하면, 해당 수(키)에 대한 즉각적인 값을 얻을 수 있으므로 아주 빠르게 얻을 수 있다.
+이에 비해 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;의 인덱스를 구하려는 수로 이용하면, 사용하지 않는 공간이 많이 낭비될 수 있다.&lt;/p&gt;
+
+&lt;p&gt;주어진 수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이라 하면, 합으로 나타내는 경우의 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n)&lt;/code&gt;는 맨 앞에 각각 1, 2, 3을 놓았을 때, 나머지 부분의 경우의 수들의 합이라 할 수 있다.
+맨 앞에 1을 놓았을 때는 n에서 1을 뺀 나머지의 경우의 수이므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 1)&lt;/code&gt;이고, 나머지 수에 대해서는 각각 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 2)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 3)&lt;/code&gt;가 된다.&lt;/p&gt;
+
+&lt;p&gt;이것은, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n) = count(n - 1) + count(n - 2) + count(n - 3), n &amp;gt; 3&lt;/code&gt;와 같이 일반화할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;위의 식에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;은 3보다 커야, 주어진 수가 양수라는 조건에 맞게 해답을 구할 수 있다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;lt;= 3&lt;/code&gt;인 1, 2, 3인 경우는 직접 구해서 미리 저장해 이용하도록 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;lt;= 3&lt;/code&gt;인 경우에 대해서, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(1) = 1, count(2) = 2, count(3) = 4&lt;/code&gt;와 같이 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;동적 계획법 문제는 반복 구조이므로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)&quot; target=&quot;_blank&quot;&gt;재귀 함수&lt;/a&gt;를 통해 일반식을 쉽게 구현할 수 있다.
+이때, &lt;strong&gt;해답을 저장하는 처리와 이미 해답이 존재하는 경우 그대로 반환하는 처리를 잊지 말자&lt;/strong&gt;.
+그렇지 않으면, 무한 재귀 호출이 되어 프로그램이 종료되는 것을 경험할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;ns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Jekyll에 Disqus 댓글 서비스 연동하기</title><link href="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" rel="alternate" type="text/html" title="Jekyll에 Disqus 댓글 서비스 연동하기" /><published>2020-01-03T00:00:00+09:00</published><updated>2020-01-03T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/">&lt;h2 id=&quot;별도의-댓글-서비스를-이용해야-하는-이유&quot;&gt;별도의 댓글 서비스를 이용해야 하는 이유&lt;/h2&gt;
 
 &lt;p&gt;Jekyll을 통해 생성한 블로그는 &lt;strong&gt;정적으로 생성된 블로그&lt;/strong&gt;이다.&lt;br /&gt;
 이 말은 즉, 동적으로 데이터를 보관하며 사용자에게 보여줄 수 있는 블로그가 아니다.&lt;/p&gt;
@@ -255,7 +336,7 @@ comments: true
 &lt;/ol&gt;
 
 &lt;p&gt;이때, 제곱근이 소수인지 판별하는 로직이 필요하다.&lt;br /&gt;
-공간이 충분할 때, 효율적이고 빠른 방법으로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4&quot;&gt;에라토스테네스의 체(Sieve of Eratosthenes)&lt;/a&gt;가 있다.&lt;/p&gt;
+공간이 충분할 때, 효율적이고 빠른 방법으로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4&quot; target=&quot;_blank&quot;&gt;에라토스테네스의 체(Sieve of Eratosthenes)&lt;/a&gt;가 있다.&lt;/p&gt;
 
 &lt;p&gt;에라토스테네스의 체는 &lt;strong&gt;특정 범위의 수를 체로 걸러내듯이 소수가 아닌 수를 걸러 소수만 남겨내는 방법&lt;/strong&gt;이다.&lt;br /&gt;
 이때, 작은 수부터 차례대로 증가시키면서 소수인 경우, 범위 내 배수를 모두 소수에서 걸러내는 방식을 취한다. (배수는 분해가 된다는 뜻이므로, 소수에 해당하지 않는다.)&lt;br /&gt;
@@ -358,7 +439,7 @@ comments: true
 &lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;중복되는 이름이 다수인 경우에 차례대로 숫자를 증가시켜 추가해야 하므로, 중복될 때마다 그 수를 기억해야 한다.&lt;br /&gt;
-그러면, 저장할 데이터는 이름과 중복 수가 되고, 이를 효율적으로 관리하기 위해 &lt;a href=&quot;https://namu.wiki/w/%ED%95%B4%EC%8B%9C&quot;&gt;해시&lt;/a&gt; 테이블을 사용할 수 있다.&lt;/p&gt;
+그러면, 저장할 데이터는 이름과 중복 수가 되고, 이를 효율적으로 관리하기 위해 &lt;a href=&quot;https://namu.wiki/w/%ED%95%B4%EC%8B%9C&quot; target=&quot;_blank&quot;&gt;해시&lt;/a&gt; 테이블을 사용할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;해시 테이블&lt;/strong&gt;은 Key-Value 구조로 데이터를 보관하는 자료구조로, Key를 위해 해시 함수를 이용한다.&lt;br /&gt;
 일반적으로 별도의 해시 함수를 구현하지 않으면, 객체의 주소값 등을 Key로 이용할 수 있다.&lt;/p&gt;
@@ -470,7 +551,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;의 접근 방식을 이용해 풀이할 수 있다.&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;의 접근 방식을 이용해 풀이할 수 있다.&lt;br /&gt;
 각 경우에서 최적해를 먼저 구하고, 구한 최적해들을 이용해 최종 최적해를 구한다.&lt;/p&gt;
 
 &lt;p&gt;무작위로 학생 수에 맞춰 퍼즐을 선택하는 것은 경우의 수가 너무 많고 효율이 떨어진다.&lt;br /&gt;
@@ -519,7 +600,8 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
-&lt;p&gt;이 문제는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;으로 해결할 수도 있지만, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D&quot;&gt;정규 표현식(정규식, Regular Expression, regex)&lt;/a&gt;을 이용하면 더 쉽게 해결할 수 있다.&lt;/p&gt;
+&lt;p&gt;이 문제는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;으로 해결할 수도 있지만,
+&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D&quot; target=&quot;_blank&quot;&gt;정규 표현식(정규식, Regular Expression, regex)&lt;/a&gt;을 이용하면 더 쉽게 해결할 수 있다.&lt;/p&gt;
 
 &lt;h3 id=&quot;탐욕-알고리즘&quot;&gt;탐욕 알고리즘&lt;/h3&gt;
 
@@ -644,7 +726,7 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
 &lt;p&gt;문제의 예시에서도 힌트가 주어졌듯이, 택시를 채울 수 있는 경우의 수를 하나씩 생각해가며 문제를 해결할 수 있다.&lt;br /&gt;
-이렇게 그때그때 최적의 답을 구해서, 최종적으로 최적의 해답을 구하는 방식을 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;이라 한다.&lt;br /&gt;
+이렇게 그때그때 최적의 답을 구해서, 최종적으로 최적의 해답을 구하는 방식을 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;이라 한다.&lt;br /&gt;
 이 알고리즘은 &lt;strong&gt;지역적으로 최적이면서 전역적으로 최적인 문제&lt;/strong&gt;에만 적용할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;이 문제에서 택시의 최대 탑승 가능 인원 수는 정해져 있고, 그룹이 몇 명으로 구성되어 있는 지 알 수 있다.&lt;br /&gt;
@@ -691,88 +773,4 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;n&quot;&gt;taxi_count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;taxi_count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 문제 풀이: 50A - Domino piling</title><link href="https://jamesujeon.github.io/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/" rel="alternate" type="text/html" title="Codeforces 문제 풀이: 50A - Domino piling" /><published>2019-12-06T00:00:00+09:00</published><updated>2019-12-06T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_50a_domino_piling.png&quot; alt=&quot;50A - Domino piling&quot; title=&quot;50A - Domino piling&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/50/A&quot; target=&quot;_blank&quot;&gt;Domino piling 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;2 x 1 크기의 도미노 조각을 이용해 M x N 크기의 판을 채울 때, 필요한 최대 도미노 조각 수를 구한다.&lt;br /&gt;
-이때, 도미노 조각은 서로 겹칠 수 없으며, 판 안에 존재해야 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;조각의 긴 변이 높이가 되도록 세운 후, 판의 좌상단 부분부터 채운다.&lt;br /&gt;
-여기서 긴 변은 2가 되고, 1 크기의 변으로 한 줄부터 채운다고 생각하면, 판의 너비와 동일하게 된다.&lt;br /&gt;
-따라서, 하나의 줄을 채우는데 필요한 조각 수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt;만큼이 된다.&lt;br /&gt;
-반복적으로 여러 줄에 대해 채울 수 없을 때까지 조각을 채우면, 반복적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;N&lt;/code&gt;을 개수에 더하면 된다.&lt;/p&gt;
-
-&lt;p&gt;하나의 줄에 더 이상 조각을 세운 채로(긴 변이 높이가 되도록) 채울 수 없으면, 눕혀서 채운다.&lt;br /&gt;
-조각을 눕히면 조각의 너비는 2가 되고, 판의 너비에 대해 최대로 넣는 개수는 &lt;code class=&quot;highlighter-rouge&quot;&gt;(N / 2)의 내림 수&lt;/code&gt;만큼이 된다.&lt;br /&gt;
-Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;int()&lt;/code&gt; 함수를 이용하면, 정수로 변환하며 &lt;strong&gt;자동으로 소숫점을 내림 처리&lt;/strong&gt;한다.&lt;br /&gt;
-눕혀서 채우는 것을 마지막으로 개수에 더하면, 총 조각 수를 구할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;도미노 조각의 높이와 너비를 일반화해서 코드를 수정하면 다음과 같다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;piece_height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;piece_width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# result += int(n / piece_width) if m &amp;gt; piece_height - 1 else int(n / piece_height)
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;piece_width&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;piece_height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;piece_height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;piece_height&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;하지만, 이 문제의 경우, &lt;strong&gt;조각의 크기가 2 x 1&lt;/strong&gt;인 관계로 더 간단한 풀이가 가능하다.&lt;br /&gt;
-사각형 모양의 판을 한 줄로 쭉 펴고 조각을 눕혀서 채우면, 한 번의 계산 만으로 총 조각 수를 구할 수 있다.&lt;br /&gt;
-왜냐하면, 좌상단 부분부터 최대한 채워서 남는 영역은 판의 마지막 줄의 우측 부분이기 때문이다.&lt;br /&gt;
-(항상 마지막 줄을 제외한 나머지 줄을 꽉 채울 수 있다.)&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry></feed>

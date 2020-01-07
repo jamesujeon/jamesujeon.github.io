@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="Dev Blog by James Minsu Jeon" />
+<meta property="og:description" content="Dev Blog by James Minsu Jeon" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-07T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"Dev Blog by James Minsu Jeon","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","url":"https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/","headline":"Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기","dateModified":"2020-01-07T00:00:00+09:00","datePublished":"2020-01-07T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2020/01/07/baekjoon-problem-solving-9095/"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesujeon.github.io/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/algorithm" class="category-item">
+        Algorithm
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Baekjoon 문제 풀이: 9095 - 1, 2, 3 더하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/problem-solving" class="tag-item">
+        #problem-solving
+      </a>
+    
+      <a href="/tags/baekjoon" class="tag-item">
+        #baekjoon
+      </a>
+    
+      <a href="/tags/dynamic-programming" class="tag-item">
+        #dynamic-programming
+      </a>
+    
+      <a href="/tags/python" class="tag-item">
+        #python
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2020-01-07 00:00:00 +0900">2020.01.07</time>
+  </div>
+
+  <p><img src="assets/baekjoon_9095.png" alt="9095 - 1, 2, 3 더하기" title="9095 - 1, 2, 3 더하기" /></p>
+
+<h2 id="문제-파악">문제 파악</h2>
+
+<p><a href="https://www.acmicpc.net/problem/9095" target="_blank">1, 2, 3 더하기 문제 링크</a></p>
+
+<p>1, 2, 3의 합으로 나타내는 방법에는 순서가 다른 것도 다른 방법으로 취급한다.<br />
+또한, 수는 총 1개 이상이므로, 자기 자신만 존재하는 것도 하나의 방법으로 취급해야 함을 유의한다.</p>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<p>입력된 정수가 커질수록 합으로 나타내는 경우의 수는 기하급수적으로 커진다.
+또한, 그 방법을 수식으로 표현할 방법조차 아주 복잡하거나 불가능하다.
+이때, 유용한 방법이 <strong>동적 계획법</strong>이다.</p>
+
+<p><a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95" target="_blank">동적 계획법(Dynamic Programming)</a>은 큰 문제를 작은 문제로 쪼개어, 작은 문제의 해답을 이용해 큰 문제를 해결하는 방법이다.
+이때, 작은 문제들의 해답으로 큰 문제의 해답을 구할 수 있는 반복 구조여야 적용이 가능하다.
+또한, <strong>작은 문제들의 해답을 미리 저장하고, 동일한 해답이 다시 필요한 경우 재활용</strong>함으로써, 속도를 최적화할 수 있다.</p>
+
+<p>주어진 문제가 동적 계획법을 이용할 수 있는지, 정수 4를 1, 2, 3의 합으로 나타내는 방법에 대한 예시를 분석해보자.</p>
+
+<ul>
+  <li>맨 앞에 수를 하나 두면, <strong>나머지 부분은 주어진 수에 앞에 둔 수를 빼고 동일한 방법을 적용</strong>해 구성할 수 있다.</li>
+  <li>맨 앞에 올 수 있는 수는 <strong>1, 2, 3의 3가지 수</strong>뿐이다.</li>
+</ul>
+
+<p>예시에 적용해보면, 다음과 같다.<br />
+맨 앞에 1이 있으면, 나머지 부분은 4에서 1을 뺀 3에 동일한 방법을 적용할 수 있다.<br />
+맨 앞에 3이 있으면, 나머지 부분은 4에서 3을 뺀 1에 동일한 방법을 적용할 수 있다.</p>
+
+<p>이는 <strong>동일한 문제가 작은 수에 대해 반복</strong>적인 것을 알 수 있다.
+주어진 수는 작은 수들의 문제로 쪼개지고, 그 작은 수들은 또 작은 수들의 문제로 쪼개지고, 결국은 최소에 해당하는 초기값까지 쪼개질 것이다.
+우리는 초기값을 쉽게 구할 수 있으므로, 거꾸로 작은 수부터 해답을 찾아가면, 최종적으로 주어진 수의 해답을 구할 수 있을 것이다.</p>
+
+<p>이때, 구했던 작은 문제의 해답이 다른 문제에서 필요할 때 다시 구하게 되면, 시간 낭비가 되므로 <strong>해답을 저장해두고 재활용</strong>하도록 한다.
+이를 통해 반복적으로 계산하던 방식에 비해 <strong>빠른 속도 향상</strong>을 이룰 수 있다.</p>
+
+<p>해답 저장을 위해서 <strong>해시 테이블</strong>인 <code class="highlighter-rouge">Dictionary</code>를 이용한다.
+<code class="highlighter-rouge">Dictionary</code>의 키로 구하려는 수를 이용하면, 해당 수(키)에 대한 즉각적인 값을 얻을 수 있으므로 아주 빠르게 얻을 수 있다.
+이에 비해 <code class="highlighter-rouge">List</code>의 인덱스를 구하려는 수로 이용하면, 사용하지 않는 공간이 많이 낭비될 수 있다.</p>
+
+<p>주어진 수를 <code class="highlighter-rouge">n</code>이라 하면, 합으로 나타내는 경우의 수 <code class="highlighter-rouge">count(n)</code>는 맨 앞에 각각 1, 2, 3을 놓았을 때, 나머지 부분의 경우의 수들의 합이라 할 수 있다.
+맨 앞에 1을 놓았을 때는 n에서 1을 뺀 나머지의 경우의 수이므로 <code class="highlighter-rouge">count(n - 1)</code>이고, 나머지 수에 대해서는 각각 <code class="highlighter-rouge">count(n - 2)</code>, <code class="highlighter-rouge">count(n - 3)</code>가 된다.</p>
+
+<p>이것은, <code class="highlighter-rouge">count(n) = count(n - 1) + count(n - 2) + count(n - 3), n &gt; 3</code>와 같이 일반화할 수 있다.</p>
+
+<p>위의 식에서 <code class="highlighter-rouge">n</code>은 3보다 커야, 주어진 수가 양수라는 조건에 맞게 해답을 구할 수 있다.
+<code class="highlighter-rouge">n &lt;= 3</code>인 1, 2, 3인 경우는 직접 구해서 미리 저장해 이용하도록 한다.</p>
+
+<p><code class="highlighter-rouge">n &lt;= 3</code>인 경우에 대해서, <code class="highlighter-rouge">count(1) = 1, count(2) = 2, count(3) = 4</code>와 같이 구할 수 있다.</p>
+
+<p>동적 계획법 문제는 반복 구조이므로 <a href="https://ko.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)" target="_blank">재귀 함수</a>를 통해 일반식을 쉽게 구현할 수 있다.
+이때, <strong>해답을 저장하는 처리와 이미 해답이 존재하는 경우 그대로 반환하는 처리를 잊지 말자</strong>.
+그렇지 않으면, 무한 재귀 호출이 되어 프로그램이 종료되는 것을 경험할 수 있다.</p>
+
+<h2 id="풀이-소스">풀이 소스</h2>
+
+<p>문제 풀이 환경: Python 3.7</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="n">ns</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">()))]</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">counts</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">count</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">count</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">Jekyll에 Disqus 댓글 서비스 연동하기</span>
+        </a>
+      
+    </div>
+  
+
+  <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+    this.page.url = 'https://jamesu.dev/posts/2020/01/07/baekjoon-problem-solving-9095/';
+    this.page.identifier = '/posts/2020/01/07/baekjoon-problem-solving-9095';
+  };
+
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jamesu-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>
