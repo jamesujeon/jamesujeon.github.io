@@ -8,22 +8,22 @@
   
   
 
-  <title>Codeforces 문제 풀이: 4A - Watermelon - Jamesu Devlog</title>
+  <title>백준 문제 풀이: 2193 - 이친수 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Codeforces 문제 풀이: 4A - Watermelon" />
+<meta property="og:title" content="백준 문제 풀이: 2193 - 이친수" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="Dev Blog by James Minsu Jeon" />
 <meta property="og:description" content="Dev Blog by James Minsu Jeon" />
-<link rel="canonical" href="https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/" />
-<meta property="og:url" content="https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/" />
+<link rel="canonical" href="https://jamesujeon.github.io/posts/2020/01/09/baekjoon-problem-solving-2193/" />
+<meta property="og:url" content="https://jamesujeon.github.io/posts/2020/01/09/baekjoon-problem-solving-2193/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2020-01-09T00:00:00+09:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/","dateModified":"2019-12-02T00:00:00+09:00","headline":"Codeforces 문제 풀이: 4A - Watermelon","datePublished":"2019-12-02T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/"},"@context":"http://schema.org"}</script>
+{"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesujeon.github.io/posts/2020/01/09/baekjoon-problem-solving-2193/","dateModified":"2020-01-09T00:00:00+09:00","headline":"백준 문제 풀이: 2193 - 이친수","datePublished":"2020-01-09T00:00:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesujeon.github.io/posts/2020/01/09/baekjoon-problem-solving-2193/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <h1 class="post-title">Codeforces 문제 풀이: 4A - Watermelon</h1>
+  <h1 class="post-title">백준 문제 풀이: 2193 - 이친수</h1>
 
   
 
@@ -153,16 +153,16 @@
         #problem-solving
       </a>
     
-      <a href="/tags/codeforces" class="tag-item">
-        #codeforces
+      <a href="/tags/baekjoon" class="tag-item">
+        #baekjoon
+      </a>
+    
+      <a href="/tags/dynamic-programming" class="tag-item">
+        #dynamic-programming
       </a>
     
       <a href="/tags/python" class="tag-item">
         #python
-      </a>
-    
-      <a href="/tags/kotlin" class="tag-item">
-        #kotlin
       </a>
     
   </div>
@@ -170,22 +170,36 @@
 
 
   <div class="post-time">
-    <time datetime="2019-12-02 00:00:00 +0900">2019.12.02</time>
+    <time datetime="2020-01-09 00:00:00 +0900">2020.01.09</time>
   </div>
 
-  <p><img src="assets/codeforces_4a_watermelon.png" alt="4A - Watermelon" title="4A - Watermelon" /></p>
+  <p><img src="assets/baekjoon_2193.png" alt="2193 - 이친수" title="2193 - 이친수" /></p>
 
 <h2 id="문제-파악">문제 파악</h2>
 
-<p><a href="http://codeforces.com/contest/4/problem/A" target="_blank">Watermelon 문제 링크</a></p>
+<p><a href="https://www.acmicpc.net/problem/2193" target="_blank">이친수 문제 링크</a></p>
 
-<p>1 이상 100 이하의 수박 무게가 주어졌을 때,<br />
-짝수 무게로만 두 부분으로 나누어질 수 있다면 “YES”를 출력하고, 불가하면 “NO”를 출력한다.</p>
+<p>이친수의 성질에 유의해 개수를 구하도록 한다.</p>
 
 <h2 id="문제-풀이">문제 풀이</h2>
 
-<p>짝수 무게로만 두 부분으로 나누기 위해 <strong>주어진 무게가 짝수</strong>여야 2로 나누어 떨어질 수 있다.<br />
-하지만, 무게가 2인 경우, 2로 나누면 1, 1이기 때문에 홀수가 되어버리므로 2를 제외해야 한다.</p>
+<p>이친수의 개수를 구하기 위해 모든 이진수에 대해 해당 성질을 만족하는지 검사를 하게 되면, 정말 많은 시간이 걸릴 수 있다.
+따라서, 다른 방법을 생각해내야 하는데, 몇 가지 예시를 분석해보니 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95" target="_blank">동적 계획법(Dynamic Programming)</a>을 적용할 수 있었다.</p>
+
+<p>주어진 입력이 5인 경우를 예로 들어 모든 경우를 찾아보면 다음과 같다.<br />
+<code class="highlighter-rouge">100000 100001 100010 100100 100101 101000 101001 101010</code></p>
+
+<p>이 중 <code class="highlighter-rouge">100000 100001 100010 100100 100101</code>은 입력이 4인 경우의 수와 같다.<br />
+그 이유는 앞에서 세번째 수가 0이라 했을 때(<code class="highlighter-rouge">100***</code>), 입력이 4인 경우의 수(<code class="highlighter-rouge">10***</code>)를 구하는 것과 같기 때문이다.</p>
+
+<p>비슷하게 나머지 <code class="highlighter-rouge">101000 101001 101010</code>은 입력이 3인 경우의 수와 같다.<br />
+그 이유는 앞에서 세번째 수가 1이라 했을 때(네번째 수는 0만 가능하므로, <code class="highlighter-rouge">1010**</code>), 입력이 3인 경우의 수(<code class="highlighter-rouge">10**</code>)를 구하는 것과 같기 때문이다.</p>
+
+<p>따라서, 입력 <code class="highlighter-rouge">n</code>에 대한 이친수의 개수는 다음과 같은 공식을 구할 수 있다.<br />
+<code class="highlighter-rouge">count(n) = count(n-1) + count(n-2)</code></p>
+
+<p>이렇게 재귀식이 구해지면, 동적 계획법으로 해결하기 적합하고, 그 구현 또한 쉬워진다.<br />
+<code class="highlighter-rouge">n</code>이 <code class="highlighter-rouge">0 또는 1</code>인 경우의 초기값을 구해놓고, <code class="highlighter-rouge">2</code>부터 <code class="highlighter-rouge">n</code>까지 증가시키며 이친수의 개수를 구하면 된다.</p>
 
 <h2 id="풀이-소스">풀이 소스</h2>
 
@@ -196,23 +210,15 @@
 3
 4
 5
-</pre></td><td class="code"><pre><span class="n">weight</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
-<span class="k">if</span> <span class="n">weight</span> <span class="o">%</span> <span class="mi">2</span> <span class="ow">is</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">weight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">2</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"YES"</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"NO"</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+6
+7
+</pre></td><td class="code"><pre><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
 
-<p>문제 풀이 환경: Kotlin 1.3.61 (2019.12.10 추가)</p>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+  <span class="n">counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
 
-<figure class="highlight"><pre><code class="language-kotlin" data-lang="kotlin"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="py">weight</span> <span class="p">=</span> <span class="nf">readLine</span><span class="p">()</span><span class="o">!!</span><span class="p">.</span><span class="nf">toInt</span><span class="p">()</span>
-    <span class="nf">println</span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="n">weight</span> <span class="p">%</span> <span class="m">2</span> <span class="p">==</span> <span class="m">0</span> <span class="p">&amp;&amp;</span> <span class="n">weight</span> <span class="p">!=</span> <span class="m">2</span><span class="p">)</span> <span class="s">"YES"</span> <span class="k">else</span> <span class="s">"NO"</span><span class="p">)</span>
-<span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 
@@ -220,15 +226,10 @@
   
     <div class="post-pagination">
       
-        <a href="/posts/2019/12/03/codeforces-problem-solving-118a-string-task/" class="left arrow">
-          <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">Codeforces 문제 풀이: 118A - String Task</span>
-        </a>
       
-      
-        <a href="/posts/2019/12/02/codeforces-problem-solving-1a-theatre-square/" class="right arrow">
+        <a href="/posts/2020/01/07/baekjoon-problem-solving-9095/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">Codeforces 문제 풀이: 1A - Theatre Square</span>
+          <span class="right arrow-title">백준 문제 풀이: 9095 - 1, 2, 3 더하기</span>
         </a>
       
     </div>
@@ -240,8 +241,8 @@
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
   var disqus_config = function () {
-    this.page.url = 'https://jamesu.dev/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/';
-    this.page.identifier = '/posts/2019/12/02/codeforces-problem-solving-4a-watermelon';
+    this.page.url = 'https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/';
+    this.page.identifier = '/posts/2020/01/09/baekjoon-problem-solving-2193';
   };
 
   (function() { // DON'T EDIT BELOW THIS LINE
