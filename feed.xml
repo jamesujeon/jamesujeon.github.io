@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-10T16:12:28+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 2156 - 포도주 시식</title><link href="https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156/" rel="alternate" type="text/html" title="백준 문제 풀이: 2156 - 포도주 시식" /><published>2020-01-10T00:00:00+09:00</published><updated>2020-01-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2156.png&quot; alt=&quot;2156 - 포도주 시식&quot; title=&quot;2156 - 포도주 시식&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-14T14:53:05+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 11727 - 2×n 타일링 2</title><link href="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/" rel="alternate" type="text/html" title="백준 문제 풀이: 11727 - 2×n 타일링 2" /><published>2020-01-14T00:00:00+09:00</published><updated>2020-01-14T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_11727.png&quot; alt=&quot;11727 - 2×n 타일링 2&quot; title=&quot;11727 - 2×n 타일링 2&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/11727&quot; target=&quot;_blank&quot;&gt;2×n 타일링 2 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2xn 직사각형을 채울 때, 2x1, 2x2 타일만 사용할 수 있으며, 2x1은 가로로 채울 수도, 세로로 채울 수도 있다.&lt;br /&gt;
+또한, 사용한 개수에 상관없이 채운 모양에 따라 경우의 수가 결정되는 점을 주의해야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 따라 반복되는 구조인 것을 확인할 수 있으므로, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95&quot; target=&quot;_blank&quot;&gt;동적 계획법(Dynamic Programming)&lt;/a&gt;을 사용하도록 한다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이 작을 때부터 차례대로 구해가며, 최종적으로 입력한 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 대한 방법의 수를 구할 수 있을 것이다.&lt;/p&gt;
+
+&lt;p&gt;일단, 필요한 초기값을 생각해보면, 1개의 타일로 채울 수 있는 최대의 너비는 2이므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이 1일 때와 2일 때의 값은 구해야 한다.
+이 경우, 방법의 수가 매우 적으므로 직접 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;구한 방법의 수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;counts&lt;/code&gt;에 담는다고 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[1] = 1, counts[2] = 3&lt;/code&gt;이 된다.&lt;/p&gt;
+
+&lt;p&gt;이제 임의의 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 대한 경우의 수, &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[n]&lt;/code&gt;을 생각해보자.&lt;br /&gt;
+다음과 같이 직사각형의 맨 앞부분에 최소의 타일만 사용해 채워보면, &lt;strong&gt;나머지는 부분에 대한 경우의 수&lt;/strong&gt;인 것을 알 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;따라서, 점화식 &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[n] = counts[n - 1] + counts[n - 2] * 2&lt;/code&gt;를 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 동적 계획법에서는 &lt;strong&gt;반복되는 규칙&lt;/strong&gt;을 찾아내는 눈을 기르는 게 중요한 것 같다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10007&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준 문제 풀이: 2156 - 포도주 시식</title><link href="https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156/" rel="alternate" type="text/html" title="백준 문제 풀이: 2156 - 포도주 시식" /><published>2020-01-10T00:00:00+09:00</published><updated>2020-01-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/10/baekjoon-problem-solving-2156/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2156.png&quot; alt=&quot;2156 - 포도주 시식&quot; title=&quot;2156 - 포도주 시식&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -743,61 +789,4 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Codeforces 문제 풀이: 58A - Chat room</title><link href="https://jamesujeon.github.io/posts/2019/12/10/codeforces-problem-solving-58a-chat-room/" rel="alternate" type="text/html" title="Codeforces 문제 풀이: 58A - Chat room" /><published>2019-12-10T00:00:00+09:00</published><updated>2019-12-10T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/10/codeforces-problem-solving-58a-chat-room</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/10/codeforces-problem-solving-58a-chat-room/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_58a_chat_room.png&quot; alt=&quot;58A - Chat room&quot; title=&quot;58A - Chat room&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/58/A&quot; target=&quot;_blank&quot;&gt;Chat room 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;입력한 문자열에 “hello” 문자열의 문자들이 분해되어 차례대로 존재하는지 판단하는 문제이다.&lt;br /&gt;
-각 문자 사이에는 다른 문자가 존재할 수 있으며, 단지 한 글자씩 차례대로 추출해 “hello” 문자열을 완성할 수 있으면 된다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어,&lt;br /&gt;
-“ahhellllloou” 문자열은 2번째 ‘h’, 4번째 ‘e’, 5~6번째 “ll”, 10번째 ‘o’까지 차례대로 존재하므로 “YES”를 출력한다.&lt;br /&gt;
-반면에, “hlelo” 문자열은 1번째 ‘h’, 3번째 ‘e’, 4번째 ‘l’까지 만족하지만, 그 이후로 다른 ‘l’이 없어 “NO”를 출력한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;이 문제는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;으로 해결할 수도 있지만,
-&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D&quot; target=&quot;_blank&quot;&gt;정규 표현식(정규식, Regular Expression, regex)&lt;/a&gt;을 이용하면 더 쉽게 해결할 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;탐욕-알고리즘&quot;&gt;탐욕 알고리즘&lt;/h3&gt;
-
-&lt;p&gt;탐욕 알고리즘을 사용한다면, 입력받은 문자열이 &lt;strong&gt;“hello” 문자열의 문자를 하나씩 차례대로 만족하는지&lt;/strong&gt;를 확인하면 된다.&lt;br /&gt;
-하나를 만족할 때마다 지역적으로 최적이기 때문에 최종적으로 ‘o’를 만족하면, 해당 문자열은 문제의 조건을 만족한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;정규-표현식&quot;&gt;정규 표현식&lt;/h3&gt;
-
-&lt;p&gt;정규 표현식(이하 정규식)은 문자열에 특정 패턴이 존재하는지 확인하거나 다른 문자열로 교체하는 등의 작업을 가능하게 해주는 형식 언어이다.&lt;br /&gt;
-추출하고자 하는 문자열의 패턴이 일정하다면, 언제든지 정규식을 이용해 해당 부분을 추출할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이 문제에서 판단하고자 하는 문자열은 일정한 패턴을 가지고 있다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;“hello” 문자열의 문자들은 &lt;strong&gt;차례대로 존재&lt;/strong&gt;해야 한다.&lt;/li&gt;
-  &lt;li&gt;“hello” 문자열의 &lt;strong&gt;각 문자 사이에는 어떤 문자도 존재&lt;/strong&gt;할 수 있다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이를 차례대로 정규식으로 표현하면 다음과 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hello&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;각 문자 사이에 &lt;code class=&quot;highlighter-rouge&quot;&gt;.*&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;최종적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;h.*e.*l.*l.*o&lt;/code&gt;와 같은 정규식이 탄생한다.&lt;br /&gt;
-이는 &lt;strong&gt;각 문자 ‘h’, ‘e’, ‘l’, ‘l’, ‘o’ 사이에 어떤 문자든 0자 이상이 존재&lt;/strong&gt;한다는 의미이다.&lt;/p&gt;
-
-&lt;p&gt;Python에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;re&lt;/code&gt; 모듈을 통해 위 정규식에 해당하는 부분 문자열을 검색해, 조건을 만족하는지 판단할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'YES'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'h.*e.*l.*l.*o'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'NO'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="regex" /><category term="python" /><summary type="html"></summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry></feed>
