@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-14T14:53:05+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 11727 - 2×n 타일링 2</title><link href="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/" rel="alternate" type="text/html" title="백준 문제 풀이: 11727 - 2×n 타일링 2" /><published>2020-01-14T00:00:00+09:00</published><updated>2020-01-14T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_11727.png&quot; alt=&quot;11727 - 2×n 타일링 2&quot; title=&quot;11727 - 2×n 타일링 2&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesujeon.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesujeon.github.io/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-01-16T17:13:41+09:00</updated><id>https://jamesujeon.github.io/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Xcode 11에서 스토리보드와 SceneDelegate 없이 Swift 프로젝트 시작하기</title><link href="https://jamesujeon.github.io/posts/2020/01/16/starting-swift-project-without-storyboard-and-scenedelegate-in-xcode-11/" rel="alternate" type="text/html" title="Xcode 11에서 스토리보드와 SceneDelegate 없이 Swift 프로젝트 시작하기" /><published>2020-01-16T00:00:00+09:00</published><updated>2020-01-16T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/16/starting-swift-project-without-storyboard-and-scenedelegate-in-xcode-11</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/16/starting-swift-project-without-storyboard-and-scenedelegate-in-xcode-11/">&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
+
+&lt;p&gt;뷰를 구성하는 방법은 Code, Storyboard, NIB(XIB) 등 외에 최근에 추가된 SwiftUI까지 다양한 방법이 존재한다.
+각 방법은 장단점이 존재해 어떤 것이 Best Practice라고 단정하기 어렵다.
+프로젝트 상황에 맞춰 장단점을 고려해 적절히 선택해야 한다.&lt;/p&gt;
+
+&lt;p&gt;여기서는 그 중에 &lt;strong&gt;Code 기반 프로젝트&lt;/strong&gt;를 시작하기 위해, Xcode에서 프로젝트를 생성하면 &lt;strong&gt;기본적으로 추가되는 스토리보드를 제거하는 방법&lt;/strong&gt;을 알려준다.&lt;/p&gt;
+
+&lt;p&gt;추가적으로 &lt;strong&gt;Xcode 11&lt;/strong&gt;에서 새 프로젝트를 생성한다면, 처음 보는 &lt;code class=&quot;highlighter-rouge&quot;&gt;SceneDelegate.swift&lt;/code&gt; 파일이 생겼을 것이다.
+이는 &lt;strong&gt;iOS 13&lt;/strong&gt;을 위해 새로 생긴 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIWindowSceneDelegate&lt;/code&gt; 프로토콜을 구현한 클래스로, &lt;strong&gt;Scene&lt;/strong&gt; 개념을 적용할 수 있게 해준다.
+만약, 이전 버전처럼 Scene 개념을 적용할 필요가 없다면 굳이 필요하지 않은 부분이므로, &lt;strong&gt;SceneDelegate를 제거하는 방법&lt;/strong&gt;까지 알아보도록 하자.&lt;/p&gt;
+
+&lt;p&gt;Scene 개념에 대해 더 자세히 알아보고 싶다면, 다음 링크들을 참고하길 바란다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/uikit/app_and_environment/managing_your_app_s_life_cycle&quot; target=&quot;_blank&quot;&gt;Managing Your App’s Life Cycle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.apple.com/documentation/uikit/app_and_environment/scenes&quot; target=&quot;_blank&quot;&gt;Scenes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;스토리보드-제거&quot;&gt;스토리보드 제거&lt;/h2&gt;
+
+&lt;p&gt;스토리보드를 제거하기 위해선 프로젝트가 생성되면서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main.storyboard&lt;/code&gt;와 연동된 부분을 끊으면 된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-프로젝트에서-main-스토리보드-설정을-제거한다-이때-프로젝트-설정을-이용하면-편리하다&quot;&gt;1. 프로젝트에서 Main 스토리보드 설정을 제거한다. 이때, 프로젝트 설정을 이용하면 편리하다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/1_1.png&quot; alt=&quot;Removing Storyboard Step 1-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_2.png&quot; alt=&quot;Removing Storyboard Step 1-2&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_3.png&quot; alt=&quot;Removing Storyboard Step 1-3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위와 같이 프로젝트 설정에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main Interface&lt;/code&gt; 항목의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main&lt;/code&gt; 값을 지우면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에도 반영된다.&lt;br /&gt;
+만약, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main storyboard file base name&lt;/code&gt; 항목이 남아있다면, 제거하도록 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-xcode-11의-경우-infoplist의-scene-관련-항목에서-storyboard-name-항목을-제거한다&quot;&gt;2. Xcode 11의 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;의 Scene 관련 항목에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Storyboard Name&lt;/code&gt; 항목을 제거한다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/2_1.png&quot; alt=&quot;Removing Storyboard Step 2-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/2_2.png&quot; alt=&quot;Removing Storyboard Step 2-2&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-mainstoryboard-파일을-삭제한다&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;Main.storyboard&lt;/code&gt; 파일을 삭제한다.&lt;/h3&gt;
+
+&lt;p&gt;해당 파일은 더 이상 사용하지 않으므로 삭제하도록 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-viewcontroller의-기본-뷰에-배경색을-입히고-실행시켜-잘-뜨는지-확인한다&quot;&gt;4. &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewController&lt;/code&gt;의 기본 뷰에 배경색을 입히고 실행시켜 잘 뜨는지 확인한다.&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;viewDidLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;viewDidLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;앱이 실행되면, 빨간색 배경이 보이는 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;scenedelegate-제거&quot;&gt;SceneDelegate 제거&lt;/h2&gt;
+
+&lt;p&gt;기존에 &lt;code class=&quot;highlighter-rouge&quot;&gt;SceneDelegate&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIWindow&lt;/code&gt;를 설정하는 부분을 예전처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;로 옮기고, Scene 관련 파일과 설정을 제거하면 된다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-appdelegate에서-scene-관련-함수-정의부를-제거한다&quot;&gt;1. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에서 Scene 관련 함수 정의부를 제거한다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/1_1.png&quot; alt=&quot;Removing SceneDelegate Step 1-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/1_2.png&quot; alt=&quot;Removing SceneDelegate Step 1-2&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-appdelegate에-uiwindow-설정-로직을-추가한다&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIWindow&lt;/code&gt; 설정 로직을 추가한다.&lt;/h3&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SceneDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIResponder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindowSceneDelegate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;scene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;scene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIScene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;willConnectTo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UISceneSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;connectionOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIScene&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;ConnectionOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;windowScene&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scene&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindowScene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;windowScene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;windowScene&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rootViewController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;makeKeyAndVisible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;3-infoplist에서-application-scene-manifest-항목을-통째로-제거한다&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Application Scene Manifest&lt;/code&gt; 항목을 통째로 제거한다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/3_1.png&quot; alt=&quot;Removing SceneDelegate Step 3-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/3_2.png&quot; alt=&quot;Removing SceneDelegate Step 3-2&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-앱을-실행시켜-잘-뜨는지-확인한다&quot;&gt;4. 앱을 실행시켜 잘 뜨는지 확인한다.&lt;/h3&gt;
+
+&lt;p&gt;앱이 잘 실행되면, 뿌듯한 미소를 짓는다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="swift" /><category term="xcode" /><category term="storyboard" /><category term="scene" /><summary type="html">개요</summary></entry><entry><title type="html">백준 문제 풀이: 11727 - 2×n 타일링 2</title><link href="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/" rel="alternate" type="text/html" title="백준 문제 풀이: 11727 - 2×n 타일링 2" /><published>2020-01-14T00:00:00+09:00</published><updated>2020-01-14T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2020/01/14/baekjoon-problem-solving-11727/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_11727.png&quot; alt=&quot;11727 - 2×n 타일링 2&quot; title=&quot;11727 - 2×n 타일링 2&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -743,50 +832,4 @@ docker ps -a&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 옵션에 따라 원하는 동작이 명확하고, 누군가는 서비스 파일을 인지하지 못할 수도 있기 때문이다.&lt;/p&gt;
 
 &lt;p&gt;취향에 따라 방법을 선택해 적용하도록 한다.&lt;br /&gt;
-참고로 서비스 파일을 작성한다면, OS마다 서비스 등록법이 상이할 수 있으니 유의해서 적용하길 바란다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="docker" /><category term="container" /><summary type="html">Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다. 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다. 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.</summary></entry><entry><title type="html">Codeforces 문제 풀이: 337A - Puzzles</title><link href="https://jamesujeon.github.io/posts/2019/12/19/codeforces-problem-solving-337a-puzzles/" rel="alternate" type="text/html" title="Codeforces 문제 풀이: 337A - Puzzles" /><published>2019-12-19T00:00:00+09:00</published><updated>2019-12-19T00:00:00+09:00</updated><id>https://jamesujeon.github.io/posts/2019/12/19/codeforces-problem-solving-337a-puzzles</id><content type="html" xml:base="https://jamesujeon.github.io/posts/2019/12/19/codeforces-problem-solving-337a-puzzles/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_337a_puzzles.png&quot; alt=&quot;337A - Puzzles&quot; title=&quot;337A - Puzzles&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/337/A&quot; target=&quot;_blank&quot;&gt;Puzzles 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;첫 줄에 학생 수와 상점에서 판매하는 직소 퍼즐의 수가 주어지고, 둘째 줄에 각 퍼즐의 조각 수가 주어진다.&lt;br /&gt;
-학생 수에 맞춰 다수의 직소 퍼즐을 구매할 때, &lt;strong&gt;퍼즐 간의 최대 조각 수 차이가 가장 작을 때의 조각 수 차이&lt;/strong&gt;를 구해야 한다.&lt;br /&gt;
-판매하는 퍼즐의 수는 학생 수보다 크거나 같으므로, 퍼즐 간의 최대 조각 수 차이는 여러 경우가 나올 수 있기 때문이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;의 접근 방식을 이용해 풀이할 수 있다.&lt;br /&gt;
-각 경우에서 최적해를 먼저 구하고, 구한 최적해들을 이용해 최종 최적해를 구한다.&lt;/p&gt;
-
-&lt;p&gt;무작위로 학생 수에 맞춰 퍼즐을 선택하는 것은 경우의 수가 너무 많고 효율이 떨어진다.&lt;br /&gt;
-퍼즐을 조각 수를 기준으로 정렬한다면, 최대 조각 수 차이가 가장 작게 되도록 퍼즐끼리 인접한 그룹을 형성할 수 있다.&lt;br /&gt;
-&lt;strong&gt;해당 그룹에서 최대 조각 수 차이를 구하고, 구한 최대 조각 수 차이들 중에 가장 작은 값이 정답이 된다.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;각 그룹은 이미 조각 수에 따라 정렬되어 있으므로, &lt;strong&gt;최대 조각 수 차이는 그룹의 끝과 처음의 값 차이&lt;/strong&gt;로 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어, 주어진 예시를 정렬 후에 각 경우에 따라 추적하면 다음과 같다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;5 7 10 10 12 22 : 정렬된 퍼즐 조각 수 목록
-5 7 10 10       : 최대 조각 수 차이 = 10 - 5 = 5
-  7 10 10 12    : 최대 조각 수 차이 = 12 - 7 = 5
-    10 10 12 22 : 최대 조각 수 차이 = 22 - 10 = 12&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;따라서, 정답에 해당하는 퍼즐 그룹은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5 7 10 10&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;7 10 10 12&lt;/code&gt;가 되고, 가장 작은 값은 &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;가 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry></feed>
+참고로 서비스 파일을 작성한다면, OS마다 서비스 등록법이 상이할 수 있으니 유의해서 적용하길 바란다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="docker" /><category term="container" /><summary type="html">Docker가 재시작되지 않고 항상 켜져있을 수 있다면, 컨테이너를 재시작할 필요는 없을 것이다. 하지만, Docker를 구동하고 있는 서버가 불의의 사고 또는 고의의 사고로 갑작스럽게 종료될 수 있는 가능성은 존재한다. 따라서, 서버가 재시작될 때 Docker도 재시작되고, 기존에 Docker가 유지하던 컨테이너 또한 재시작되도록 해야 한다.</summary></entry></feed>
