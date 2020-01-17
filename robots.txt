@@ -1,1 +1,4 @@
-Sitemap: https://jamesujeon.github.io/sitemap.xml
+User-agent: *
+Allow: /
+
+Sitemap: https://jamesu.dev/sitemap.xml
