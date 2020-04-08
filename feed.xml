@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-03T16:24:55+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">기본 상태바 스타일을 Dark로 만드는 방법</title><link href="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/" rel="alternate" type="text/html" title="기본 상태바 스타일을 Dark로 만드는 방법" /><published>2020-03-31T00:00:00+09:00</published><updated>2020-03-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark</id><content type="html" xml:base="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/">&lt;p&gt;요즘 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark Mode&lt;/code&gt;가 대세(?)라 그런지 많은 앱이 그것에 맞춰 디자인 되고 있다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-08T20:34:36+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 4673 - 셀프 넘버</title><link href="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/" rel="alternate" type="text/html" title="백준 문제 풀이: 4673 - 셀프 넘버" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_4673.png&quot; alt=&quot;4673 - 셀프 넘버&quot; title=&quot;4673 - 셀프 넘버&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/4673&quot; target=&quot;_blank&quot;&gt;셀프 넘버 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;생성자의 개수와 관계없이 생성자가 없는 숫자가 셀프 넘버이므로, 생성자의 존재 여부만 확인하면 된다.&lt;br /&gt;
+생성자의 존재 여부를 어떻게 해결할 것인지에 초점을 맞춘다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;여러 숫자에 대해 각 숫자가 생성자를 가지는지 아닌지 판단하는 것은 매우 많은 계산량을 필요로 하게 된다.&lt;br /&gt;
+그렇다면, 반대로 생각해보자.&lt;/p&gt;
+
+&lt;p&gt;특정 숫자를 생성자로 가지는 다음 숫자는 문제에서 정의한 &lt;code class=&quot;highlighter-rouge&quot;&gt;d(n)&lt;/code&gt; 함수를 통해 쉽게 구할 수 있을 것이다.&lt;br /&gt;
+또한, 반복적으로 해당 함수를 적용하면, 계속해서 해당 생성자를 가지는 숫자들을 구할 수 있다.&lt;br /&gt;
+&lt;strong&gt;셀프 넘버의 정의가 생성자가 없는 숫자이므로, 생성자를 가지는 숫자들은 셀프 넘버가 아닌 것이다&lt;/strong&gt;.&lt;br /&gt;
+위의 방법으로 셀프 넘버가 아닌 숫자들을 빠르고 쉽게 구할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그리고 이 문제처럼 범위가 주어진다면, 소수를 구할 때 체를 걸러내는 방식인 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4&quot; target=&quot;_blank&quot;&gt;에라토스테네스의 체(Sieve of Eratosthenes)&lt;/a&gt;의
+원리를 적용하기에 적합하다.&lt;br /&gt;
+주어진 범위에 대해 생성자로부터 &lt;strong&gt;셀프 넘버가 아닌 숫자들을 걸러낸다면, 결국에는 셀프 넘버만 남게 된다&lt;/strong&gt;.&lt;br /&gt;
+(에라토스테네스의 체로 소수를 구하는 방법은 &lt;a href=&quot;https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes&quot; target=&quot;_blank&quot;&gt;Codeforces 문제 풀이: 230B - T-primes&lt;/a&gt; 포스트에서 확인할 수 있다.)&lt;/p&gt;
+
+&lt;p&gt;위와 같은 원리로, 10001개 요소를 가지는 배열 &lt;code class=&quot;highlighter-rouge&quot;&gt;sn&lt;/code&gt;을 정의하고, 셀프 넘버만 남기도록 체를 거른다.&lt;br /&gt;
+그리고 다시 순회하며 셀프 넘버만 출력하면 된다.&lt;br /&gt;
+참고로 10001개 요소를 선언한 이유는 0을 제외한 숫자 맵핑을 쉽게 하기 위해서다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="sieve-of-eratosthenes" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">기본 상태바 스타일을 Dark로 만드는 방법</title><link href="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/" rel="alternate" type="text/html" title="기본 상태바 스타일을 Dark로 만드는 방법" /><published>2020-03-31T00:00:00+09:00</published><updated>2020-03-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark</id><content type="html" xml:base="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/">&lt;p&gt;요즘 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark Mode&lt;/code&gt;가 대세(?)라 그런지 많은 앱이 그것에 맞춰 디자인 되고 있다.&lt;br /&gt;
 하지만, 무조건 그 대세를 따르라는 법은 없다!&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Light Mode&lt;/code&gt;를 선호하는 사람을 위해 밝은(?) 디자인으로 된 앱을 개발한다고 하자.&lt;br /&gt;
@@ -704,79 +762,4 @@ comments: true
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;이 밖에도 Disqus는 댓글 서비스와 관련해서 다양한 옵션을 제공하므로, 홈페이지를 참고하길 바란다.&lt;br /&gt;
-또한, Disqus 관리자 사이트를 이용하면 댓글을 확인하고 관리할 수 있으므로 적극 활용하길 바란다. 👍&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github-pages" /><category term="jekyll" /><category term="disqus" /><summary type="html">별도의 댓글 서비스를 이용해야 하는 이유</summary></entry><entry><title type="html">Codeforces 문제 풀이: 230B - T-primes</title><link href="https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/" rel="alternate" type="text/html" title="Codeforces 문제 풀이: 230B - T-primes" /><published>2019-12-23T00:00:00+09:00</published><updated>2019-12-23T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes</id><content type="html" xml:base="https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/">&lt;p&gt;&lt;img src=&quot;assets/codeforces_230b_t-primes.png&quot; alt=&quot;230B - T-primes&quot; title=&quot;230B - T-primes&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://codeforces.com/problemset/problem/230/B&quot; target=&quot;_blank&quot;&gt;T-primes 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;정확히 3개의 소인수로 분해되는 숫자를 T-prime이라 정의한다.&lt;br /&gt;
-이때, 주어진 숫자들이 T-prime이면 “YES”를, 아니라면 “NO”를 출력한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;어떤 숫자 T-prime인지 판별하려면, 그 조건을 명세화해야 한다.&lt;/p&gt;
-
-&lt;p&gt;소인수가 3개가 되기 위해서, 1과 자기 자신을 제외한 숫자 1개는 &lt;strong&gt;제곱근&lt;/strong&gt;이 되어야 한다.&lt;br /&gt;
-또한, 그 제곱근이 소수여야 더 이상 소인수로 분해되지 않으므로, 3개의 소인수가 남을 수 있다.&lt;br /&gt;
-따라서, T-prime이 되기 위한 조건은 다음과 같다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;대상 수의 제곱근은 &lt;strong&gt;소수&lt;/strong&gt;여야 한다.&lt;/li&gt;
-  &lt;li&gt;대상 수의 제곱근을 &lt;strong&gt;정수화&lt;/strong&gt;하고 다시 제곱했을 때, 본래의 수와 동일해야 한다. (제곱근이 정수여야 한다.)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;이때, 제곱근이 소수인지 판별하는 로직이 필요하다.&lt;br /&gt;
-공간이 충분할 때, 효율적이고 빠른 방법으로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4&quot; target=&quot;_blank&quot;&gt;에라토스테네스의 체(Sieve of Eratosthenes)&lt;/a&gt;가 있다.&lt;/p&gt;
-
-&lt;p&gt;에라토스테네스의 체는 &lt;strong&gt;특정 범위의 수를 체로 걸러내듯이 소수가 아닌 수를 걸러 소수만 남겨내는 방법&lt;/strong&gt;이다.&lt;br /&gt;
-이때, 작은 수부터 차례대로 증가시키면서 소수인 경우, 범위 내 배수를 모두 소수에서 걸러내는 방식을 취한다. (배수는 분해가 된다는 뜻이므로, 소수에 해당하지 않는다.)&lt;br /&gt;
-특정 범위의 수 목록에 소수 여부를 미리 저장해두고, 원하는 수의 소수 여부만 확인하므로 매우 빠르게 판별할 수 있다.&lt;br /&gt;
-단순히 적은 횟수만 소수 판별을 한다면, 에라토스테네스의 체는 굳이 필요하지 않다.&lt;br /&gt;
-소수 판별을 많이 해야 할 때, 그때그때 소수를 판별한다면 시간이 오래 걸리므로, 소수 여부를 미리 계산하는 것이다.&lt;/p&gt;
-
-&lt;p&gt;에라토스테네스의 체를 구할 때, 연산을 최소화하기 위해 대상 수의 제곱근까지만 순회하면 모든 소수를 구할 수 있다.&lt;br /&gt;
-이 문제에서는 &lt;strong&gt;대상 수의 제곱근의 소수 여부&lt;/strong&gt;가 궁금하므로, &lt;strong&gt;소수 여부를 구하는 범위를 제곱근까지로 한정&lt;/strong&gt;지었다.&lt;/p&gt;
-
-&lt;p&gt;만약 대상 수까지의 소수 여부를 구한다고 하면, 다음과 같이 구할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000000000&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000000000000&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;YES&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;primes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;NO&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="codeforces" /><category term="python" /><summary type="html"></summary></entry></feed>
+또한, Disqus 관리자 사이트를 이용하면 댓글을 확인하고 관리할 수 있으므로 적극 활용하길 바란다. 👍&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github-pages" /><category term="jekyll" /><category term="disqus" /><summary type="html">별도의 댓글 서비스를 이용해야 하는 이유</summary></entry></feed>
