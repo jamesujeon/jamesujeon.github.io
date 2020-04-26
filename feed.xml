@@ -1,4 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-08T20:34:36+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 4673 - 셀프 넘버</title><link href="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/" rel="alternate" type="text/html" title="백준 문제 풀이: 4673 - 셀프 넘버" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_4673.png&quot; alt=&quot;4673 - 셀프 넘버&quot; title=&quot;4673 - 셀프 넘버&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-26T20:36:20+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/15649&quot; target=&quot;_blank&quot;&gt;N과 M (1) 문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;N까지의 자연수 중 중복 없이 M개를 고른 수열은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/순열&quot; target=&quot;_blank&quot;&gt;순열(Permutation)&lt;/a&gt;을 뜻한다.
+먼저 순열의 정의를 파악하고, 문제를 풀이하도록 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;사실 이 문제는 &lt;strong&gt;Python&lt;/strong&gt;을 사용한다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;itertools.permutations()&lt;/code&gt; 함수를 이용해 답을 바로 구할 수 있다.&lt;br /&gt;
+Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공하기 때문이다.&lt;br /&gt;
+하지만, 그것은 &lt;strong&gt;백트래킹&lt;/strong&gt;을 연습하고자 하는 이 문제의 의도와 다르므로 사용하지 않도록 한다.&lt;/p&gt;
+
+&lt;p&gt;위에서 언급한 &lt;a href=&quot;https://ko.wikipedia.org/wiki/퇴각검색&quot; target=&quot;_blank&quot;&gt;백트래킹(Backtracking, 퇴각검색)&lt;/a&gt;이란 무엇일까?&lt;br /&gt;
+백트래킹은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/깊이_우선_탐색&quot; target=&quot;_blank&quot;&gt;DFS(Depth-First Search, 깊이 우선 탐색)&lt;/a&gt;의 방식을 기반으로,
+&lt;strong&gt;불필요한 경우를 배제하며 원하는 해답에 도달할 때까지 탐색하는 전략&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; title=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 그림과 같이, DFS를 기반으로 두고 있기 때문에 &lt;a href=&quot;https://ko.wikipedia.org/wiki/스택&quot; target=&quot;_blank&quot;&gt;스택(Stack)&lt;/a&gt;을 이용해 퇴각을 하며
+다음 탐색을 진행하기 때문에 백트래킹(또는 퇴각검색)이라 불린다.&lt;/p&gt;
+
+&lt;p&gt;백트래킹은 기본적으로는 모든 경우의 수를 탐색한다는 &lt;a href=&quot;https://namu.wiki/w/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4&quot; target=&quot;_blank&quot;&gt;브루트 포스(Brute Force)&lt;/a&gt; 전략을 취하지만,
+처리 속도를 향상시키기 위한 &lt;strong&gt;가지치기(Pruning)&lt;/strong&gt;가 중요한 역할을 한다.&lt;br /&gt;
+나무에서 불필요한 가지를 제거하듯이 백트래킹에서 가지치기를 잘 할수록 불필요한 경우가 제거되어 처리 속도가 많이 향상된다.&lt;/p&gt;
+
+&lt;p&gt;다시 문제로 돌아와서, 이 문제는 &lt;strong&gt;숫자를 선택하는 경우의 수로 이루어진 트리&lt;/strong&gt;로 볼 수 있다.&lt;br /&gt;
+반복적으로 숫자를 선택해 M개까지 골라 수열을 완성하는 것이 목표이다.&lt;br /&gt;
+따라서, 백트래킹을 적용해 불필요한 경우를 배제한 모든 경우의 수를 고려할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;숫자를 선택할 때는 1부터 N까지의 자연수 중 선택해야 하므로, 차례대로 선택하는 경우의 수가 있을 것이다.&lt;br /&gt;
+이때, 반드시 &lt;strong&gt;해당 경우의 수를 스택에 추가(Push)하고, 동작(여기서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;f()&lt;/code&gt; 함수)이 끝난 후에는 다시 스택에서 빼내는 작업(Pop)이 필요하다&lt;/strong&gt;.&lt;br /&gt;
+그래야 정상적으로 이전의 상황으로 돌아올 수 있기 때문이다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;그렇게 선택을 반복했을 때, 그 선택한 경우의 수가 M이 되면 모두 고른 것이 되므로 해답이 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;하지만, 위와 같이 &lt;strong&gt;항상 1부터 N까지의 자연수를 모두 순회하면, 이미 선택한 숫자를 또 선택해가며 시간을 낭비하게 된다&lt;/strong&gt;.&lt;br /&gt;
+그래서 이미 선택한 숫자를 다시 선택하려 하면 배제하는 방식으로 &lt;strong&gt;가지치기&lt;/strong&gt;를 할 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;ps-함수-호출-스택-이용하기&quot;&gt;P.S. 함수 호출 스택 이용하기&lt;/h3&gt;
+
+&lt;p&gt;여기서는 DFS를 위한 스택으로 간단히 Python의 List를 이용했다.&lt;br /&gt;
+이와 다른 방식으로 다음과 같이 &lt;strong&gt;순수하게 함수만을 이용해서 구현할 수도 있다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([])&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이것이 가능한 이유는 &lt;strong&gt;함수의 호출 방식이 스택의 동작 방식과 일치&lt;/strong&gt;하기 때문이다.&lt;br /&gt;
+함수가 호출되면, 함수의 호출 스택에 함수를 위한 요소들이 차례대로 쌓이고(Push),&lt;br /&gt;
+함수가 종료되면, 함수의 호출 스택에서 해당 요소들이 제거(Pop)된다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 함수 호출 스택을 이용해 스택을 이용하는 다른 알고리즘에 적용해 보는 것도 도움이 될 것 같다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="backtracking" /><category term="dfs" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준 문제 풀이: 4673 - 셀프 넘버</title><link href="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/" rel="alternate" type="text/html" title="백준 문제 풀이: 4673 - 셀프 넘버" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_4673.png&quot; alt=&quot;4673 - 셀프 넘버&quot; title=&quot;4673 - 셀프 넘버&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -179,17 +306,17 @@
 
 &lt;h3 id=&quot;1-프로젝트에서-main-스토리보드-설정을-제거한다-이때-프로젝트-설정을-이용하면-편리하다&quot;&gt;1. 프로젝트에서 Main 스토리보드 설정을 제거한다. 이때, 프로젝트 설정을 이용하면 편리하다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/1_1.png&quot; alt=&quot;Removing Storyboard Step 1-1&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/1_2.png&quot; alt=&quot;Removing Storyboard Step 1-2&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/1_3.png&quot; alt=&quot;Removing Storyboard Step 1-3&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/1_1.png&quot; alt=&quot;Removing Storyboard Step 1-1&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_2.png&quot; alt=&quot;Removing Storyboard Step 1-2&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_3.png&quot; alt=&quot;Removing Storyboard Step 1-3&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;위와 같이 프로젝트 설정에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main Interface&lt;/code&gt; 항목의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main&lt;/code&gt; 값을 지우면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에도 반영된다.&lt;br /&gt;
 만약, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main storyboard file base name&lt;/code&gt; 항목이 남아있다면, 제거하도록 한다.&lt;/p&gt;
 
 &lt;h3 id=&quot;2-xcode-11의-경우-infoplist의-scene-관련-항목에서-storyboard-name-항목을-제거한다&quot;&gt;2. Xcode 11의 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;의 Scene 관련 항목에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Storyboard Name&lt;/code&gt; 항목을 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/2_1.png&quot; alt=&quot;Removing Storyboard Step 2-1&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/2_2.png&quot; alt=&quot;Removing Storyboard Step 2-2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/2_1.png&quot; alt=&quot;Removing Storyboard Step 2-1&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/2_2.png&quot; alt=&quot;Removing Storyboard Step 2-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3-mainstoryboard-파일을-삭제한다&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;Main.storyboard&lt;/code&gt; 파일을 삭제한다.&lt;/h3&gt;
 
@@ -214,8 +341,8 @@
 
 &lt;h3 id=&quot;1-appdelegate에서-scene-관련-함수-정의부를-제거한다&quot;&gt;1. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에서 Scene 관련 함수 정의부를 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/1_1.png&quot; alt=&quot;Removing SceneDelegate Step 1-1&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_scenedelegate/1_2.png&quot; alt=&quot;Removing SceneDelegate Step 1-2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/1_1.png&quot; alt=&quot;Removing SceneDelegate Step 1-1&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/1_2.png&quot; alt=&quot;Removing SceneDelegate Step 1-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;2-appdelegate에-uiwindow-설정-로직을-추가한다&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIWindow&lt;/code&gt; 설정 로직을 추가한다.&lt;/h3&gt;
 
@@ -238,8 +365,8 @@
 
 &lt;h3 id=&quot;3-infoplist에서-application-scene-manifest-항목을-통째로-제거한다&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Application Scene Manifest&lt;/code&gt; 항목을 통째로 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/3_1.png&quot; alt=&quot;Removing SceneDelegate Step 3-1&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_scenedelegate/3_2.png&quot; alt=&quot;Removing SceneDelegate Step 3-2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/3_1.png&quot; alt=&quot;Removing SceneDelegate Step 3-1&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/3_2.png&quot; alt=&quot;Removing SceneDelegate Step 3-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;4-앱을-실행시켜-잘-뜨는지-확인한다&quot;&gt;4. 앱을 실행시켜 잘 뜨는지 확인한다.&lt;/h3&gt;
 
@@ -528,238 +655,4 @@ World!
 
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Jekyll에 Disqus 댓글 서비스 연동하기</title><link href="https://jamesu.dev/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/" rel="alternate" type="text/html" title="Jekyll에 Disqus 댓글 서비스 연동하기" /><published>2020-01-03T00:00:00+09:00</published><updated>2020-01-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/01/03/adding-disqus-comment-service-to-jekyll</id><content type="html" xml:base="https://jamesu.dev/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/">&lt;h2 id=&quot;별도의-댓글-서비스를-이용해야-하는-이유&quot;&gt;별도의 댓글 서비스를 이용해야 하는 이유&lt;/h2&gt;
-
-&lt;p&gt;Jekyll을 통해 생성한 블로그는 &lt;strong&gt;정적으로 생성된 블로그&lt;/strong&gt;이다.&lt;br /&gt;
-이 말은 즉, 동적으로 데이터를 보관하며 사용자에게 보여줄 수 있는 블로그가 아니다.&lt;/p&gt;
-
-&lt;p&gt;댓글 서비스를 운영하기 위해서는 댓글이라는 데이터의 보관이 필요하고, 이는 Jekyll만 사용해서는 불가능하다.&lt;br /&gt;
-따라서 외부 플러그인을 통해 댓글 서비스를 이용하는 방법을 사용하도록 한다.&lt;br /&gt;
-여기서는 많은 GitHub Pages 블로그에서 사용하고 있는 Disqus 댓글 서비스를 연동하도록 한다.&lt;/p&gt;
-
-&lt;p&gt;Disqus에서 제공하는 댓글 서비스는 간단한 블로그를 위해서는 무료 정책으로 충분하다.&lt;br /&gt;
-혹시 다른 부가적인 기능이나 특징이 필요하다면, &lt;a href=&quot;https://disqus.com/pricing/&quot; target=&quot;_blank&quot;&gt;여기&lt;/a&gt;에서 가격 정책을 확인할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;disqus-가입-및-설정&quot;&gt;Disqus 가입 및 설정&lt;/h2&gt;
-
-&lt;p&gt;블로그는 이미 준비되어 있다고 가정하고, 일단 Disqus에 가입해서 블로그 정보를 설정해야 한다.&lt;br /&gt;
-&lt;a href=&quot;https://disqus.com/&quot; target=&quot;_blank&quot;&gt;Disqus&lt;/a&gt;에 접속해 이메일 또는 페이스북, 트위터, 구글 등의 계정을 통해 가입한다.&lt;/p&gt;
-
-&lt;p&gt;가입 후에 홈페이지에서 ‘GET STARTED’ &amp;gt; ‘I want to install Disqus on my site’ 순서로 버튼을 누른다.&lt;br /&gt;
-생성 화면에서 ‘Website Name’은 Disqus의 관리자 사이트로 이용되므로 블로그와 관련된 이름으로 작성한다.&lt;br /&gt;
-이때, 생성되는 URL은 Disqus에서 유일해야 하므로 유의하도록 한다.&lt;br /&gt;
-언어는 현재 한국어를 제공하지 않으므로 영어로 선택해 진행한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/1.png&quot; alt=&quot;Disqus Guide Step 1&quot; /&gt;
- &lt;/p&gt;
-
-&lt;p&gt;플랜은 ‘Basic’ 플랜의 ‘Subscribe Now’ 버튼을 눌러 무료 플랜을 선택한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/2.png&quot; alt=&quot;Disqus Guide Step 2&quot; /&gt;
- &lt;/p&gt;
-
-&lt;p&gt;플랫폼 선택 화면에서 ‘Jekyll’ 항목을 누른다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/3.png&quot; alt=&quot;Disqus Guide Step 3&quot; /&gt;
- &lt;/p&gt;
-
-&lt;p&gt;그러면 Jekyll에 댓글 서비스를 설정하는 방법이 나오는데, 아래에서 알아보도록 한다.&lt;br /&gt;
-여기서는 &lt;strong&gt;2번 항목의 ‘Universal Embed Code’ 링크&lt;/strong&gt;만 새 창에 띄워 놓고, ‘Configure’ 버튼을 누른다.&lt;br /&gt;
-해당 링크는 추후 댓글 서비스를 설정할 때 필요한 페이지로, &lt;strong&gt;설정한 사이트마다 다른 코드가 생성되므로 미리 띄워 놓는다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/4.png&quot; alt=&quot;Disqus Guide Step 4&quot; /&gt;
- &lt;/p&gt;
-
-&lt;p&gt;설정 화면에서 필요한 항목들을 작성하도록 한다.&lt;br /&gt;
-&lt;strong&gt;‘Website URL’ 항목이 실제 연동할 사이트 주소에 해당한다&lt;/strong&gt;.&lt;br /&gt;
-여기서 ‘Comment Policy’ 관련 항목들은 입력하지 않으면, 알아서 Disqus 정책에 따라 적용된다.&lt;br /&gt;
-‘Complete Setup’ 버튼을 누르면, Disqus에 사이트 설정이 완료된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/5.png&quot; alt=&quot;Disqus Guide Step 5&quot; /&gt;
- &lt;/p&gt;
-
-&lt;p&gt;사이트 설정이 완료된 후에는 언제든지 Admin 화면으로 접속해 사이트를 관리할 수 있다.&lt;br /&gt;
-생성 시에 설정한 것들 외에도 다양한 옵션이 있으니 살펴보는 것도 좋을 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/6.png&quot; alt=&quot;Disqus Guide Step 6&quot; /&gt;
-&lt;img src=&quot;assets/disqus_guide/7.png&quot; alt=&quot;Disqus Guide Step 7&quot; /&gt;
- &lt;/p&gt;
-
-&lt;h2 id=&quot;disqus-연동&quot;&gt;Disqus 연동&lt;/h2&gt;
-
-&lt;p&gt;앞서 띄워 놓은 ‘Universal Embed Code’ 링크 페이지를 열어 보면, 첫 1번 항목에 소스 코드가 있을 것이다.&lt;br /&gt;
-이 소스 코드가 &lt;strong&gt;Disqus 댓글 영역이 생기는 부분&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;cm&quot;&gt;/**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
-  &lt;span class=&quot;cm&quot;&gt;/*
-  var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-  };
-  */&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;만약, 해당 링크 페이지를 별도로 띄워 놓지 않았다면, 위 코드를 그대로 붙여 넣은 후, 15번째 줄에 &lt;code class=&quot;highlighter-rouge&quot;&gt;s.src&lt;/code&gt;에 대입하는 부분에 블로그에 해당하는 Disqus 관리자 사이트 URL을 입력하면 된다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;jamesu-blog&lt;/code&gt; 대신, 해당하는 &lt;strong&gt;관리자 사이트 URL&lt;/strong&gt;을 입력하도록 한다.&lt;/p&gt;
-
-&lt;p&gt;그리고 Disqus는 다음과 같은 추가 작업을 추천한다.&lt;br /&gt;
-(전체 내용은 &lt;a href=&quot;https://help.disqus.com/en/articles/1717137-use-configuration-variables-to-avoid-split-threads-and-missing-comments&quot; target=&quot;_blank&quot;&gt;이 문서&lt;/a&gt;를 참고한다.)&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This works well for some sites, however, this method of creating threads can lead to duplicate “split threads” for the same page of content, especially when your site accepts many different URLs for the same page of content.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;즉, 같은 컨텐츠이지만 접근하는 URL이 달라 서로 다른 쓰레드(댓글 그룹)가 생성될 수도 있다는 말이다.&lt;/p&gt;
-
-&lt;p&gt;예를 들어, 로컬 환경에서 띄운 블로그와 실제 배포된 블로그에 각각 접근했을 때, 서로 다른 쓰레드가 생성될 수 있다.&lt;br /&gt;
-로컬 환경은 URL이 &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost&lt;/code&gt;로 시작하고, 배포된 블로그는 &lt;code class=&quot;highlighter-rouge&quot;&gt;실제 도메인&lt;/code&gt;으로 시작하기 때문이다.&lt;br /&gt;
-서로 다른 쓰레드는 같은 컨텐츠임에도 불구하고, &lt;strong&gt;댓글의 불일치&lt;/strong&gt;를 발생시킬 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이런 현상을 방지하기 위해, 아래와 같이 주석을 해제하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;disqus_config&lt;/code&gt; 함수를 정의하도록 한다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;cm&quot;&gt;/**
-  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu.blog{{ page.url }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ page.id }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;this.page.url&lt;/code&gt; 변수에는 동일한 URL을 가리키도록, 도메인 주소와 &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ page.url }}&lt;/code&gt;을 이용한다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;this.page.identifier&lt;/code&gt; 변수에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;{{ page.id }}&lt;/code&gt;를 이용해 유일한 페이지 ID를 대입한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;댓글-영역을-꾸미고-싶다면&quot;&gt;댓글 영역을 꾸미고 싶다면&lt;/h3&gt;
-
-&lt;p&gt;위 코드에서 보이는 것처럼, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div id=&quot;disqus_thread&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt; 요소 내부에 댓글 영역이 생긴다.&lt;br /&gt;
-댓글 영역을 꾸미고 싶다면, 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;disqus_thread&lt;/code&gt; ID를 이용해 원하는 대로 꾸밀 수도 있다.&lt;br /&gt;
-(여기서는 댓글 영역에 회색 외곽선을 추가했다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/disqus_guide/8.png&quot; alt=&quot;Disqus Guide Step 8&quot; /&gt;
- &lt;/p&gt;
-
-&lt;h2 id=&quot;그-외-활용&quot;&gt;그 외 활용&lt;/h2&gt;
-
-&lt;p&gt;기본적인 댓글 기능은 위와 같이 설정해서 사용할 수 있다.&lt;br /&gt;
-만약, 포스트별로 댓글 기능의 사용 유무를 정하고 싶다면, &lt;a href=&quot;https://jekyllrb.com/docs/front-matter/&quot; target=&quot;_blank&quot;&gt;YAML Front Matter&lt;/a&gt;의 변수를 이용하면 된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;---
-layout: default
-comments: true
-# other options
----
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;comments&lt;/code&gt; 변수와 같이, 페이지 변수를 설정하고 그것에 따라 댓글 영역 코드를 넣을지 말지를 결정하면 된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;{% if page.comments %}
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;disqus_thread&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;cm&quot;&gt;/**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;disqus_config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu.blog{{ page.url }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;identifier&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ page.id }}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// DON'T EDIT BELOW THIS LINE&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://jamesu-blog.disqus.com/embed.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;data-timestamp&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;noscript&amp;gt;&lt;/span&gt;Please enable JavaScript to view the &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://disqus.com/?ref_noscript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;comments powered by Disqus.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&amp;lt;/noscript&amp;gt;&lt;/span&gt;
-{% endif %}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이 밖에도 Disqus는 댓글 서비스와 관련해서 다양한 옵션을 제공하므로, 홈페이지를 참고하길 바란다.&lt;br /&gt;
-또한, Disqus 관리자 사이트를 이용하면 댓글을 확인하고 관리할 수 있으므로 적극 활용하길 바란다. 👍&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github-pages" /><category term="jekyll" /><category term="disqus" /><summary type="html">별도의 댓글 서비스를 이용해야 하는 이유</summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry></feed>
