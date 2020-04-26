@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-26T20:36:20+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-04-26T20:49:43+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -31,7 +31,7 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 따라서, 백트래킹을 적용해 불필요한 경우를 배제한 모든 경우의 수를 고려할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;숫자를 선택할 때는 1부터 N까지의 자연수 중 선택해야 하므로, 차례대로 선택하는 경우의 수가 있을 것이다.&lt;br /&gt;
-이때, 반드시 &lt;strong&gt;해당 경우의 수를 스택에 추가(Push)하고, 동작(여기서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;f()&lt;/code&gt; 함수)이 끝난 후에는 다시 스택에서 빼내는 작업(Pop)이 필요하다&lt;/strong&gt;.&lt;br /&gt;
+이때, 반드시 &lt;strong&gt;해당 경우의 수를 스택에 추가(Push)하고, 동작(여기서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;f()&lt;/code&gt; 함수)이 끝난 후에는 다시 스택에서 빼내는 작업(Pop)이 필요하다&lt;/strong&gt;.
 그래야 정상적으로 이전의 상황으로 돌아올 수 있기 때문이다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
@@ -52,7 +52,7 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;h3 id=&quot;ps-함수-호출-스택-이용하기&quot;&gt;P.S. 함수 호출 스택 이용하기&lt;/h3&gt;
 
-&lt;p&gt;여기서는 DFS를 위한 스택으로 간단히 Python의 List를 이용했다.&lt;br /&gt;
+&lt;p&gt;여기서는 DFS를 위한 스택으로 Python의 List를 이용했다.&lt;br /&gt;
 이와 다른 방식으로 다음과 같이 &lt;strong&gt;순수하게 함수만을 이용해서 구현할 수도 있다&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
@@ -85,9 +85,10 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;p&gt;이것이 가능한 이유는 &lt;strong&gt;함수의 호출 방식이 스택의 동작 방식과 일치&lt;/strong&gt;하기 때문이다.&lt;br /&gt;
 함수가 호출되면, 함수의 호출 스택에 함수를 위한 요소들이 차례대로 쌓이고(Push),&lt;br /&gt;
-함수가 종료되면, 함수의 호출 스택에서 해당 요소들이 제거(Pop)된다.&lt;/p&gt;
+함수가 종료되면, 함수의 호출 스택에서 해당 요소들이 제거(Pop)된다.&lt;br /&gt;
+결국, 함수가 호출되기 전의 상태로 돌아가게 된다.&lt;/p&gt;
 
-&lt;p&gt;이처럼 함수 호출 스택을 이용해 스택을 이용하는 다른 알고리즘에 적용해 보는 것도 도움이 될 것 같다.&lt;/p&gt;
+&lt;p&gt;이처럼 함수 호출 스택을 사용해서 스택을 이용하는 다른 알고리즘에 적용해 보는 것도 도움이 될 것 같다.&lt;/p&gt;
 
 &lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
