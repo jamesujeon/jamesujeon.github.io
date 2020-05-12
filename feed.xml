@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-12T03:04:45+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-12T14:00:56+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 1: Today I Learned 기록 시작</title><link href="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/" rel="alternate" type="text/html" title="TIL 1: Today I Learned 기록 시작" /><published>2020-05-12T00:00:00+09:00</published><updated>2020-05-12T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;p&gt;매일 TIL을 작성해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 성장하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;til이란&quot;&gt;TIL이란?&lt;/h2&gt;
+
+&lt;p&gt;TIL은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Today I Learned&lt;/code&gt;의 약자로, &lt;strong&gt;오늘 배운 것&lt;/strong&gt;을 뜻하는 말이다.&lt;/p&gt;
+
+&lt;p&gt;블로그를 작성하는 개발자라면 많이 들어보기도 했을 것이고, GitHub에 잔디를 심기 위해 매일 TIL을 작성함으로써 일일 커밋을 실천하는 사람도 있을 것이다.
+또한, 까먹지 않기 위해 기록하고 정리하는 용도로 사용하는 사람도 있고, 꾸준함을 습관화하기 위해 작성하는 사람도 있을 것이다.&lt;/p&gt;
+
+&lt;p&gt;이처럼 TIL의 용도는 무궁무진하다.&lt;br /&gt;
+그렇다면, 나는 어떻게 사용할 것인가?&lt;/p&gt;
+
+&lt;h2 id=&quot;내-til의-목적&quot;&gt;내 TIL의 목적&lt;/h2&gt;
+
+&lt;p&gt;나의 경우, GitHub에 잔디를 심기 위해 이 블로그에 글을 꾸준히 올리고 싶었지만,
+잘못된 정보를 전달하지 않고 글의 완성도를 높이기 위해 조사를 더 하다보면, 글 하나를 작성하는 데에도 많은 시간이 소요된다.
+그렇게 긴 글을 작성하는 것도 아닌데 말이다. (글 솜씨가 부족한 것도 있다.)&lt;br /&gt;
+그 대신, 알고리즘 문제를 꾸준히 풀어 GitHub에 올리는 것으로 잔디 심기를 하고 있다.
+그래서 사실 나의 TIL은 일일 커밋을 통한 잔디 심기가 목적이 아니다.&lt;/p&gt;
+
+&lt;p&gt;일일 커밋도 좋지만, 그보다는 내 스스로의 성장을 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 싶다.&lt;br /&gt;
+그 주제가 무엇이 되든 상관 없다.
+배울 수 있는 것이라면, 개발 주제가 될 수도 있고, 어떤 생각이 될 수도 있고, 책에서 얻은 배움이 될 수도 있다.
+매일 글을 쓰면서 나도 모르게 늘어나는 글 솜씨도 배움이 될 수 있다. (간절)&lt;br /&gt;
+그렇게 매일 더 나아지는 내가 되길 바라며 TIL을 작성하고자 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;앞으로의-방향&quot;&gt;앞으로의 방향&lt;/h2&gt;
+
+&lt;p&gt;TIL을 시작하면, 가장 중요한 부분은 &lt;strong&gt;꾸준함&lt;/strong&gt;이라 생각된다.&lt;br /&gt;
+현재 블로그의 경우, CLI로 직접 배포하며 글을 올리고 있어 귀차니즘이 심하고,
+계속 언급한 글 솜씨의 부족으로 내용을 생각하고 정리하는 데 많은 시간이 소요된다. (변명 아닌 변명)&lt;br /&gt;
+그래서 TIL만큼은 기존의 글을 쓰듯이 매우 정성들여 쓰기 보다는 가볍더라도 &lt;strong&gt;기록하는 것에 초점을 맞추고자 한다&lt;/strong&gt;.
+(물론, 어느 정도 이해는 할 수 있도록 작성해야 한다. 술 먹고 작성할 때 조심 😅)&lt;/p&gt;
+
+&lt;p&gt;미래의 내가 실망하고 후회하지 않도록 꾸준히 작성해보자. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -620,85 +658,4 @@ World!
   &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준 문제 풀이: 9095 - 1, 2, 3 더하기</title><link href="https://jamesu.dev/posts/2020/01/07/baekjoon-problem-solving-9095/" rel="alternate" type="text/html" title="백준 문제 풀이: 9095 - 1, 2, 3 더하기" /><published>2020-01-07T00:00:00+09:00</published><updated>2020-01-07T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/01/07/baekjoon-problem-solving-9095</id><content type="html" xml:base="https://jamesu.dev/posts/2020/01/07/baekjoon-problem-solving-9095/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_9095.png&quot; alt=&quot;9095 - 1, 2, 3 더하기&quot; title=&quot;9095 - 1, 2, 3 더하기&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/9095&quot; target=&quot;_blank&quot;&gt;1, 2, 3 더하기 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;1, 2, 3의 합으로 나타내는 방법에는 순서가 다른 것도 다른 방법으로 취급한다.&lt;br /&gt;
-또한, 수는 총 1개 이상이므로, 자기 자신만 존재하는 것도 하나의 방법으로 취급해야 함을 유의한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;입력된 정수가 커질수록 합으로 나타내는 경우의 수는 기하급수적으로 커진다.
-또한, 그 방법을 수식으로 표현할 방법조차 아주 복잡하거나 불가능하다.
-이때, 유용한 방법이 &lt;strong&gt;동적 계획법&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95&quot; target=&quot;_blank&quot;&gt;동적 계획법(Dynamic Programming)&lt;/a&gt;은 큰 문제를 작은 문제로 쪼개어, 작은 문제의 해답을 이용해 큰 문제를 해결하는 방법이다.
-이때, 작은 문제들의 해답으로 큰 문제의 해답을 구할 수 있는 반복 구조여야 적용이 가능하다.
-또한, &lt;strong&gt;작은 문제들의 해답을 미리 저장하고, 동일한 해답이 다시 필요한 경우 재활용&lt;/strong&gt;함으로써, 속도를 최적화할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;주어진 문제가 동적 계획법을 이용할 수 있는지, 정수 4를 1, 2, 3의 합으로 나타내는 방법에 대한 예시를 분석해보자.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;맨 앞에 수를 하나 두면, &lt;strong&gt;나머지 부분은 주어진 수에 앞에 둔 수를 빼고 동일한 방법을 적용&lt;/strong&gt;해 구성할 수 있다.&lt;/li&gt;
-  &lt;li&gt;맨 앞에 올 수 있는 수는 &lt;strong&gt;1, 2, 3의 3가지 수&lt;/strong&gt;뿐이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;예시에 적용해보면, 다음과 같다.&lt;br /&gt;
-맨 앞에 1이 있으면, 나머지 부분은 4에서 1을 뺀 3에 동일한 방법을 적용할 수 있다.&lt;br /&gt;
-맨 앞에 3이 있으면, 나머지 부분은 4에서 3을 뺀 1에 동일한 방법을 적용할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이는 &lt;strong&gt;동일한 문제가 작은 수에 대해 반복&lt;/strong&gt;적인 것을 알 수 있다.
-주어진 수는 작은 수들의 문제로 쪼개지고, 그 작은 수들은 또 작은 수들의 문제로 쪼개지고, 결국은 최소에 해당하는 초기값까지 쪼개질 것이다.
-우리는 초기값을 쉽게 구할 수 있으므로, 거꾸로 작은 수부터 해답을 찾아가면, 최종적으로 주어진 수의 해답을 구할 수 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;이때, 구했던 작은 문제의 해답이 다른 문제에서 필요할 때 다시 구하게 되면, 시간 낭비가 되므로 &lt;strong&gt;해답을 저장해두고 재활용&lt;/strong&gt;하도록 한다.
-이를 통해 반복적으로 계산하던 방식에 비해 &lt;strong&gt;빠른 속도 향상&lt;/strong&gt;을 이룰 수 있다.&lt;/p&gt;
-
-&lt;p&gt;해답 저장을 위해서 &lt;strong&gt;해시 테이블&lt;/strong&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;를 이용한다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Dictionary&lt;/code&gt;의 키로 구하려는 수를 이용하면, 해당 수(키)에 대한 즉각적인 값을 얻을 수 있으므로 아주 빠르게 얻을 수 있다.
-이에 비해 &lt;code class=&quot;highlighter-rouge&quot;&gt;List&lt;/code&gt;의 인덱스를 구하려는 수로 이용하면, 사용하지 않는 공간이 많이 낭비될 수 있다.&lt;/p&gt;
-
-&lt;p&gt;주어진 수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이라 하면, 합으로 나타내는 경우의 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n)&lt;/code&gt;는 맨 앞에 각각 1, 2, 3을 놓았을 때, 나머지 부분의 경우의 수들의 합이라 할 수 있다.
-맨 앞에 1을 놓았을 때는 n에서 1을 뺀 나머지의 경우의 수이므로 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 1)&lt;/code&gt;이고, 나머지 수에 대해서는 각각 &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 2)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n - 3)&lt;/code&gt;가 된다.&lt;/p&gt;
-
-&lt;p&gt;이것은, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(n) = count(n - 1) + count(n - 2) + count(n - 3), n &amp;gt; 3&lt;/code&gt;와 같이 일반화할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;위의 식에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;은 3보다 커야, 주어진 수가 양수라는 조건에 맞게 해답을 구할 수 있다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;lt;= 3&lt;/code&gt;인 1, 2, 3인 경우는 직접 구해서 미리 저장해 이용하도록 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;n &amp;lt;= 3&lt;/code&gt;인 경우에 대해서, &lt;code class=&quot;highlighter-rouge&quot;&gt;count(1) = 1, count(2) = 2, count(3) = 4&lt;/code&gt;와 같이 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;동적 계획법 문제는 반복 구조이므로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%9E%AC%EA%B7%80_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)&quot; target=&quot;_blank&quot;&gt;재귀 함수&lt;/a&gt;를 통해 일반식을 쉽게 구현할 수 있다.
-이때, &lt;strong&gt;해답을 저장하는 처리와 이미 해답이 존재하는 경우 그대로 반환하는 처리를 잊지 말자&lt;/strong&gt;.
-그렇지 않으면, 무한 재귀 호출이 되어 프로그램이 종료되는 것을 경험할 수 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;ns&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry></feed>
