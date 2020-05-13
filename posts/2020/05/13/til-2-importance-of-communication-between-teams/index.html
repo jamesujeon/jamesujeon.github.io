@@ -8,22 +8,22 @@
   
   
 
-  <title>Xcode 11에서 Archive 버튼이 비활성화된 경우 - Jamesu Devlog</title>
+  <title>TIL 2: 팀 간 의사소통의 중요성 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Xcode 11에서 Archive 버튼이 비활성화된 경우" />
+<meta property="og:title" content="TIL 2: 팀 간 의사소통의 중요성" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="TL;DR" />
 <meta property="og:description" content="TL;DR" />
-<link rel="canonical" href="https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/" />
-<meta property="og:url" content="https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/" />
+<link rel="canonical" href="https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-03-25T00:00:00+09:00" />
+<meta property="article:published_time" content="2020-05-13T00:00:00+09:00" />
 <script type="application/ld+json">
-{"url":"https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/","dateModified":"2020-03-25T00:00:00+09:00","datePublished":"2020-03-25T00:00:00+09:00","headline":"Xcode 11에서 Archive 버튼이 비활성화된 경우","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/","dateModified":"2020-05-13T00:00:00+09:00","datePublished":"2020-05-13T00:00:00+09:00","headline":"TIL 2: 팀 간 의사소통의 중요성","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -124,8 +124,8 @@
     
       
 
-      <a href="/categories/mobile" class="category-item">
-        Mobile
+      <a href="/categories/etc" class="category-item">
+        Etc
       </a>
 
       
@@ -134,8 +134,8 @@
     
       
 
-      <a href="/categories/mobile/ios" class="category-item">
-        iOS
+      <a href="/categories/etc/til" class="category-item">
+        TIL
       </a>
 
       
@@ -144,7 +144,7 @@
 
 
 
-  <h1 class="post-title">Xcode 11에서 Archive 버튼이 비활성화된 경우</h1>
+  <h1 class="post-title">TIL 2: 팀 간 의사소통의 중요성</h1>
 
   
 
@@ -152,8 +152,8 @@
   
   <div class="tag-items">
     
-      <a href="/tags/xcode" class="tag-item">
-        #xcode
+      <a href="/tags/idea" class="tag-item">
+        #idea
       </a>
     
   </div>
@@ -161,41 +161,52 @@
 
 
   <div class="post-time">
-    <time datetime="2020-03-25 00:00:00 +0900">2020.03.25</time>
+    <time datetime="2020-05-13 00:00:00 +0900">2020.05.13</time>
   </div>
 
   <h2 id="tldr">TL;DR</h2>
 
-<p>시뮬레이터를 <code class="highlighter-rouge">Generic iOS Device</code>로 선택하면, <code class="highlighter-rouge">Archive</code> 버튼이 활성화된다.</p>
+<ul>
+  <li><strong>서로를 위한 배려</strong>를 통해 긍정적으로 의사소통을 진행하자.</li>
+</ul>
 
 <p><br /></p>
 
-<h2 id="archive-버튼이-비활성화된-경우"><code class="highlighter-rouge">Archive</code> 버튼이 비활성화된 경우</h2>
+<h2 id="당연하지만-쉽지-않은-의사소통">당연하지만 쉽지 않은 의사소통</h2>
 
-<p>편의상 실제 기기가 아닌 시뮬레이터를 이용해 개발을 하는 경우가 많을 것이라 생각된다.<br />
-그렇게 시뮬레이터를 이용하다가 빌드를 App Store Connect에 업로드 하고 싶을 때,
-다음과 같이 <code class="highlighter-rouge">Archive</code> 버튼이 비활성화되어 있어 업로드를 할 수 없는 상황에 직면할 때가 있다.</p>
+<p>다수의 팀으로 이루어진 회사에서 팀 간 의사소통은 당연하고 중요하지만 원하는 대로 이뤄지지 않는 경우가 많다.
+회식을 하면 종종 타 팀과의 의사소통에 대한 불만을 듣는다.
+겉으로 보기에 사이가 친하고 의사소통에 문제가 없어 보이는 멤버들 간에도 앙금이 쌓여 있어 불만을 토로 하는 것을 보면,
+그런 사이에서도 일적인 의사소통은 정말 힘들 수 있다는 생각이 든다.
+그래서 일 자체가 아닌 의사소통으로 인해 스트레스가 쌓이는 것을 보면 안타깝다는 생각도 든다.</p>
 
-<p><img src="assets/figure_1.png" alt="Figure 1" /></p>
+<p>나의 경우에는 위 사례에서의 멤버가 앙금이 쌓여 있는 대상과 의사소통을 할 때, 특별히 까다롭지도 답답하지도 어렵지도 않다는 느낌을 받았다.
+더불어 물론 의사소통에 의한 스트레스도 받고 있지 않다.
+오히려 나와 일하는 것이 좋다는 이야기도 들어, 그런 이야기를 들을 때마다 뿌듯함이 함께한다.</p>
 
-<p>이럴 땐 당황하지 말고, 시뮬레이터 부분을 클릭해 <code class="highlighter-rouge">Generic iOS Device</code>로 변경하자.<br />
-그러면 <code class="highlighter-rouge">Archive</code> 버튼이 예쁘게 활성화되어 있는 것을 볼 수 있다.</p>
+<h2 id="의사소통의-핵심">의사소통의 핵심?</h2>
 
-<p><img src="assets/figure_2.png" alt="Figure 2" /></p>
+<p>그렇다면, 나와 의사소통에 어려움을 겪고 있는 멤버와의 차이점은 무엇일까?<br />
+개인적으로 생각하기엔 좋은 의사소통의 핵심은 <strong>서로를 위한 배려</strong>라고 생각한다.</p>
+
+<p>이것도 어찌 보면 당연하지만 제대로 실천되고 있지 않아 어려움을 겪는 사람들이 많다고 생각한다.
+업무에 대한 이야기 함에 있어 상대방을 배려해 어느 정도 책임을 나눠 가지고(책임을 전가하지 않고),
+상대방을 배려해 어느 정도 의견을 수용하려 하고(항상 내가 옳다는 생각을 버리고),
+상대방을 배려해 어느 정도 서로의 역할을 이해하면(역할에 따라 앎의 정도가 다르다는 것을 이해하면),
+서로 간에 신뢰감도 쌓이고 업무적으로 더 친밀해진다는 것을 느낄 수 있다.
+그런 관계가 되고 나면, 팀 간 의사소통으로 인해 발생하는 스트레스도 없고 업무도 잘 처리되는 선순환이 이뤄지는 것을 확인할 수 있다.</p>
+
+<p>앞으로도 이런 마음가짐을 토대로 팀 간 의사소통에 대해 긍정적으로 생각하고 실천하도록 하자.<br />
+지금까지 나도 모르게 의사소통을 잘 해왔다는 생각에 마음이 매우 뿌듯한 하루였다. 🙂</p>
 
 
   
     <div class="post-pagination">
       
-        <a href="/posts/2020/03/31/how-to-make-default-status-bar-style-dark/" class="left arrow">
-          <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">기본 상태바 스타일을 Dark로 만드는 방법</span>
-        </a>
       
-      
-        <a href="/posts/2020/02/03/baekjoon-problem-solving-7568/" class="right arrow">
+        <a href="/posts/2020/05/12/til-1-starting-today-i-learned/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">백준 문제 풀이: 7568 - 덩치</span>
+          <span class="right arrow-title">TIL 1: Today I Learned 기록 시작</span>
         </a>
       
     </div>
@@ -207,8 +218,8 @@
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
   var disqus_config = function () {
-    this.page.url = 'https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/';
-    this.page.identifier = '/posts/2020/03/25/when-archive-disabled-in-xcode-11';
+    this.page.url = 'https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/';
+    this.page.identifier = '/posts/2020/05/13/til-2-importance-of-communication-between-teams';
   };
 
   (function() { // DON'T EDIT BELOW THIS LINE

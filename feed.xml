@@ -1,6 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-12T14:00:56+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 1: Today I Learned 기록 시작</title><link href="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/" rel="alternate" type="text/html" title="TIL 1: Today I Learned 기록 시작" /><published>2020-05-12T00:00:00+09:00</published><updated>2020-05-12T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-14T01:30:50+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 2: 팀 간 의사소통의 중요성</title><link href="https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/" rel="alternate" type="text/html" title="TIL 2: 팀 간 의사소통의 중요성" /><published>2020-05-13T00:00:00+09:00</published><updated>2020-05-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/13/til-2-importance-of-communication-between-teams/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
-&lt;p&gt;매일 TIL을 작성해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 성장하자.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;서로를 위한 배려&lt;/strong&gt;를 통해 긍정적으로 의사소통을 진행하자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;당연하지만-쉽지-않은-의사소통&quot;&gt;당연하지만 쉽지 않은 의사소통&lt;/h2&gt;
+
+&lt;p&gt;다수의 팀으로 이루어진 회사에서 팀 간 의사소통은 당연하고 중요하지만 원하는 대로 이뤄지지 않는 경우가 많다.
+회식을 하면 종종 타 팀과의 의사소통에 대한 불만을 듣는다.
+겉으로 보기에 사이가 친하고 의사소통에 문제가 없어 보이는 멤버들 간에도 앙금이 쌓여 있어 불만을 토로 하는 것을 보면,
+그런 사이에서도 일적인 의사소통은 정말 힘들 수 있다는 생각이 든다.
+그래서 일 자체가 아닌 의사소통으로 인해 스트레스가 쌓이는 것을 보면 안타깝다는 생각도 든다.&lt;/p&gt;
+
+&lt;p&gt;나의 경우에는 위 사례에서의 멤버가 앙금이 쌓여 있는 대상과 의사소통을 할 때, 특별히 까다롭지도 답답하지도 어렵지도 않다는 느낌을 받았다.
+더불어 물론 의사소통에 의한 스트레스도 받고 있지 않다.
+오히려 나와 일하는 것이 좋다는 이야기도 들어, 그런 이야기를 들을 때마다 뿌듯함이 함께한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;의사소통의-핵심&quot;&gt;의사소통의 핵심?&lt;/h2&gt;
+
+&lt;p&gt;그렇다면, 나와 의사소통에 어려움을 겪고 있는 멤버와의 차이점은 무엇일까?&lt;br /&gt;
+개인적으로 생각하기엔 좋은 의사소통의 핵심은 &lt;strong&gt;서로를 위한 배려&lt;/strong&gt;라고 생각한다.&lt;/p&gt;
+
+&lt;p&gt;이것도 어찌 보면 당연하지만 제대로 실천되고 있지 않아 어려움을 겪는 사람들이 많다고 생각한다.
+업무에 대한 이야기 함에 있어 상대방을 배려해 어느 정도 책임을 나눠 가지고(책임을 전가하지 않고),
+상대방을 배려해 어느 정도 의견을 수용하려 하고(항상 내가 옳다는 생각을 버리고),
+상대방을 배려해 어느 정도 서로의 역할을 이해하면(역할에 따라 앎의 정도가 다르다는 것을 이해하면),
+서로 간에 신뢰감도 쌓이고 업무적으로 더 친밀해진다는 것을 느낄 수 있다.
+그런 관계가 되고 나면, 팀 간 의사소통으로 인해 발생하는 스트레스도 없고 업무도 잘 처리되는 선순환이 이뤄지는 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;앞으로도 이런 마음가짐을 토대로 팀 간 의사소통에 대해 긍정적으로 생각하고 실천하도록 하자.&lt;br /&gt;
+지금까지 나도 모르게 의사소통을 잘 해왔다는 생각에 마음이 매우 뿌듯한 하루였다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 1: Today I Learned 기록 시작</title><link href="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/" rel="alternate" type="text/html" title="TIL 1: Today I Learned 기록 시작" /><published>2020-05-12T00:00:00+09:00</published><updated>2020-05-12T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;매일 TIL을 작성해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 성장하자.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -375,17 +410,17 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;h3 id=&quot;1-프로젝트에서-main-스토리보드-설정을-제거한다-이때-프로젝트-설정을-이용하면-편리하다&quot;&gt;1. 프로젝트에서 Main 스토리보드 설정을 제거한다. 이때, 프로젝트 설정을 이용하면 편리하다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/1_1.png&quot; alt=&quot;Removing Storyboard Step 1-1&quot; width=&quot;100%&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/1_2.png&quot; alt=&quot;Removing Storyboard Step 1-2&quot; width=&quot;100%&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/1_3.png&quot; alt=&quot;Removing Storyboard Step 1-3&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/1_1.png&quot; alt=&quot;Removing Storyboard Step 1-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_2.png&quot; alt=&quot;Removing Storyboard Step 1-2&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/1_3.png&quot; alt=&quot;Removing Storyboard Step 1-3&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;위와 같이 프로젝트 설정에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main Interface&lt;/code&gt; 항목의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main&lt;/code&gt; 값을 지우면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에도 반영된다.&lt;br /&gt;
 만약, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Main storyboard file base name&lt;/code&gt; 항목이 남아있다면, 제거하도록 한다.&lt;/p&gt;
 
 &lt;h3 id=&quot;2-xcode-11의-경우-infoplist의-scene-관련-항목에서-storyboard-name-항목을-제거한다&quot;&gt;2. Xcode 11의 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;의 Scene 관련 항목에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Storyboard Name&lt;/code&gt; 항목을 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/2_1.png&quot; alt=&quot;Removing Storyboard Step 2-1&quot; width=&quot;100%&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_storyboard/2_2.png&quot; alt=&quot;Removing Storyboard Step 2-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_storyboard/2_1.png&quot; alt=&quot;Removing Storyboard Step 2-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_storyboard/2_2.png&quot; alt=&quot;Removing Storyboard Step 2-2&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3-mainstoryboard-파일을-삭제한다&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;Main.storyboard&lt;/code&gt; 파일을 삭제한다.&lt;/h3&gt;
 
@@ -424,8 +459,8 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;h3 id=&quot;1-appdelegate에서-scene-관련-함수-정의부를-제거한다&quot;&gt;1. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에서 Scene 관련 함수 정의부를 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/1_1.png&quot; alt=&quot;Removing SceneDelegate Step 1-1&quot; width=&quot;100%&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_scenedelegate/1_2.png&quot; alt=&quot;Removing SceneDelegate Step 1-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/1_1.png&quot; alt=&quot;Removing SceneDelegate Step 1-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/1_2.png&quot; alt=&quot;Removing SceneDelegate Step 1-2&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;2-appdelegate에-uiwindow-설정-로직을-추가한다&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;AppDelegate&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIWindow&lt;/code&gt; 설정 로직을 추가한다.&lt;/h3&gt;
 
@@ -449,8 +484,8 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;h3 id=&quot;4-infoplist에서-application-scene-manifest-항목을-통째로-제거한다&quot;&gt;4. &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Application Scene Manifest&lt;/code&gt; 항목을 통째로 제거한다.&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/3_1.png&quot; alt=&quot;Removing SceneDelegate Step 3-1&quot; width=&quot;100%&quot; /&gt;
-&lt;img src=&quot;assets/figures/removing_scenedelegate/3_2.png&quot; alt=&quot;Removing SceneDelegate Step 3-2&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;assets/figures/removing_scenedelegate/3_1.png&quot; alt=&quot;Removing SceneDelegate Step 3-1&quot; /&gt;
+&lt;img src=&quot;assets/figures/removing_scenedelegate/3_2.png&quot; alt=&quot;Removing SceneDelegate Step 3-2&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;5-앱을-실행시켜-앞서-적용한-배경색이-잘-뜨는지-확인한다&quot;&gt;5. 앱을 실행시켜 앞서 적용한 배경색이 잘 뜨는지 확인한다.&lt;/h3&gt;
 
@@ -612,50 +647,4 @@ World!
   &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_amounts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준 문제 풀이: 2193 - 이친수</title><link href="https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/" rel="alternate" type="text/html" title="백준 문제 풀이: 2193 - 이친수" /><published>2020-01-09T00:00:00+09:00</published><updated>2020-01-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193</id><content type="html" xml:base="https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2193.png&quot; alt=&quot;2193 - 이친수&quot; title=&quot;2193 - 이친수&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/2193&quot; target=&quot;_blank&quot;&gt;이친수 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;이친수의 성질에 유의해 개수를 구하도록 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;이친수의 개수를 구하기 위해 모든 이진수에 대해 해당 성질을 만족하는지 검사를 하게 되면, 정말 많은 시간이 걸릴 수 있다.
-따라서, 다른 방법을 생각해내야 하는데, 몇 가지 예시를 분석해보니 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95&quot; target=&quot;_blank&quot;&gt;동적 계획법(Dynamic Programming)&lt;/a&gt;을 적용할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;주어진 입력이 5인 경우를 예로 들어 모든 경우를 찾아보면 다음과 같다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;100000 100001 100010 100100 100101 101000 101001 101010&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;이 중 &lt;code class=&quot;highlighter-rouge&quot;&gt;100000 100001 100010 100100 100101&lt;/code&gt;은 입력이 4인 경우의 수와 같다.&lt;br /&gt;
-그 이유는 앞에서 세번째 수가 0이라 했을 때(&lt;code class=&quot;highlighter-rouge&quot;&gt;100***&lt;/code&gt;), 입력이 4인 경우의 수(&lt;code class=&quot;highlighter-rouge&quot;&gt;10***&lt;/code&gt;)를 구하는 것과 같기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;비슷하게 나머지 &lt;code class=&quot;highlighter-rouge&quot;&gt;101000 101001 101010&lt;/code&gt;은 입력이 3인 경우의 수와 같다.&lt;br /&gt;
-그 이유는 앞에서 세번째 수가 1이라 했을 때(네번째 수는 0만 가능하므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;1010**&lt;/code&gt;), 입력이 3인 경우의 수(&lt;code class=&quot;highlighter-rouge&quot;&gt;10**&lt;/code&gt;)를 구하는 것과 같기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;따라서, 입력 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 대한 이친수의 개수는 다음과 같은 공식을 구할 수 있다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;count(n) = count(n-1) + count(n-2)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;이렇게 재귀식이 구해지면, 동적 계획법으로 해결하기 적합하고, 그 구현 또한 쉬워진다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;0 또는 1&lt;/code&gt;인 경우의 초기값을 구해놓고, &lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;부터 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;까지 증가시키며 이친수의 개수를 구하면 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry></feed>
