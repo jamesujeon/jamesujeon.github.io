@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-15T01:09:01+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 3: 안드로이드 테스트는 힘들어 (feat. 파편화)</title><link href="https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/" rel="alternate" type="text/html" title="TIL 3: 안드로이드 테스트는 힘들어 (feat. 파편화)" /><published>2020-05-14T00:00:00+09:00</published><updated>2020-05-14T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-16T17:39:03+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 4: MRC는 괴로워</title><link href="https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful/" rel="alternate" type="text/html" title="TIL 4: MRC는 괴로워" /><published>2020-05-15T00:00:00+09:00</published><updated>2020-05-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 매우 특별한 경우가 아니라면 쓰지말자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mrc란-&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;란? 🤔&lt;/h2&gt;
+
+&lt;p&gt;현재 사내에서 레거시 코드를 유지보수하고 있어서 그런지 겪고 있는 어려움이 있다.&lt;br /&gt;
+특히, 지금은 자동으로 메모리를 관리해주는 GC(Garbage Collection), ARC(Automatic Reference Counting)
+등의 환경이 당연하다시피 여겨지고 있기 때문에 더 와 닿는다.&lt;/p&gt;
+
+&lt;p&gt;바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC(Manual Reference Counting)&lt;/code&gt; 환경이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 iOS의 자동 메모리 관리 환경인 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;의 반대되는 개념이다.&lt;br /&gt;
+말그대로 &lt;strong&gt;개발자가 수동으로 메모리를 관리&lt;/strong&gt;해줘야 한다.
+C, C++ 등과 함께 코딩을 해 본 사람이라면, 뭔지 바로 알 것이다.
+개발자가 사용하기 위해 메모리에 공간을 할당했으면, 다 사용한 후에 직접 제거해줘야 한다.
+그래야 해당 공간을 재활용할 수 있기 때문이다.
+이것을 꼼꼼하게 하지 않고 놓치면, 메모리 누수 지옥이 시작되는 것이다.&lt;br /&gt;
+과거에는 성능 최적화를 위해 직접 메모리 관리를 하는 경우가 있었지만,
+현재는 세월이 많이 흘러 자동 메모리 관리 환경이 매우 잘 되어 있다.
+따라서 &lt;strong&gt;특별한 경우를 제외한 일반적인 경우에서는 굳이 직접 메모리 관리를 할 필요가 없다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;메모리-누수-지옥-&quot;&gt;메모리 누수 지옥 🔥&lt;/h2&gt;
+
+&lt;p&gt;현재 사내에서 내가 맡고 있는 앱 일부는 Objective-C(이하 Obj-C)를 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경에서 사용하고 있어 직접 메모리 관리를 해야 한다.
+수동 메모리 관리가 필요한 중요한 처리를 하지 않는 데도 말이다.&lt;/p&gt;
+
+&lt;p&gt;기존 앱들이 잘 되어 있었으면 괜찮지만, 메모리 누수가 다수 발견되어 해결하는 데 많은 고생을 하곤 했다.&lt;br /&gt;
+Obj-C도 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경을 사용하는 데 무리가 없는데, 굳이 메모리 누수를 만들어 내며 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;를 고수했는지 알 수가 없다.
+(물론, &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경도 메모리 누수 방지를 위한 처리가 필요하지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 더 꼼꼼하게 처리해야 한다.)&lt;br /&gt;
+실제로 생산성도 떨어지고 메모리 누수와 버그도 발생하기 쉬워 &lt;strong&gt;비효율적&lt;/strong&gt;이었다.
+(그래서 어떤 앱의 경우, 나에게 기회가 생겨 추후 유지보수를 위해 한 달의 시간을 투자해 Swift 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경으로 완전 포팅했다. 😂)&lt;/p&gt;
+
+&lt;h2 id=&quot;앞으로는-웬만하면-무조건-arc&quot;&gt;앞으로는 웬만하면 무조건 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;그렇게 기존처럼 오늘도 메모리 누수 지옥을 해결하기 위해 많은 노력을 했다. (아직 남아있을 수도 있겠지만 😤)&lt;br /&gt;
+앞으로 가능하면 새 프로젝트는 무조건 (정말 특별한 경우를 제외하곤) &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경으로 시작하려 한다.
+메모리 누수 지옥을 해결하는 노력을 다른 데 쓰면 앱의 퀄리티를 더 높일 수 있을 것 같다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 3: 안드로이드 테스트는 힘들어 (feat. 파편화)</title><link href="https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/" rel="alternate" type="text/html" title="TIL 3: 안드로이드 테스트는 힘들어 (feat. 파편화)" /><published>2020-05-14T00:00:00+09:00</published><updated>2020-05-14T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -578,50 +619,4 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 
 &lt;h3 id=&quot;5-앱을-실행시켜-앞서-적용한-배경색이-잘-뜨는지-확인한다&quot;&gt;5. 앱을 실행시켜 앞서 적용한 배경색이 잘 뜨는지 확인한다.&lt;/h3&gt;
 
-&lt;p&gt;앱이 실행되고 빨간색 배경이 보이면, 잘 적용된 것이다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="swift" /><category term="xcode" /><category term="storyboard" /><category term="scene" /><summary type="html">개요</summary></entry><entry><title type="html">백준 문제 풀이: 11727 - 2×n 타일링 2</title><link href="https://jamesu.dev/posts/2020/01/14/baekjoon-problem-solving-11727/" rel="alternate" type="text/html" title="백준 문제 풀이: 11727 - 2×n 타일링 2" /><published>2020-01-14T00:00:00+09:00</published><updated>2020-01-14T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/01/14/baekjoon-problem-solving-11727</id><content type="html" xml:base="https://jamesu.dev/posts/2020/01/14/baekjoon-problem-solving-11727/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_11727.png&quot; alt=&quot;11727 - 2×n 타일링 2&quot; title=&quot;11727 - 2×n 타일링 2&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/11727&quot; target=&quot;_blank&quot;&gt;2×n 타일링 2 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;2xn 직사각형을 채울 때, 2x1, 2x2 타일만 사용할 수 있으며, 2x1은 가로로 채울 수도, 세로로 채울 수도 있다.&lt;br /&gt;
-또한, 사용한 개수에 상관없이 채운 모양에 따라 경우의 수가 결정되는 점을 주의해야 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 따라 반복되는 구조인 것을 확인할 수 있으므로, &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95&quot; target=&quot;_blank&quot;&gt;동적 계획법(Dynamic Programming)&lt;/a&gt;을 사용하도록 한다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이 작을 때부터 차례대로 구해가며, 최종적으로 입력한 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 대한 방법의 수를 구할 수 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;일단, 필요한 초기값을 생각해보면, 1개의 타일로 채울 수 있는 최대의 너비는 2이므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;이 1일 때와 2일 때의 값은 구해야 한다.
-이 경우, 방법의 수가 매우 적으므로 직접 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;구한 방법의 수를 &lt;code class=&quot;highlighter-rouge&quot;&gt;counts&lt;/code&gt;에 담는다고 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[1] = 1, counts[2] = 3&lt;/code&gt;이 된다.&lt;/p&gt;
-
-&lt;p&gt;이제 임의의 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에 대한 경우의 수, &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[n]&lt;/code&gt;을 생각해보자.&lt;br /&gt;
-다음과 같이 직사각형의 맨 앞부분에 최소의 타일만 사용해 채워보면, &lt;strong&gt;나머지는 부분에 대한 경우의 수&lt;/strong&gt;인 것을 알 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;따라서, 점화식 &lt;code class=&quot;highlighter-rouge&quot;&gt;counts[n] = counts[n - 1] + counts[n - 2] * 2&lt;/code&gt;를 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이처럼 동적 계획법에서는 &lt;strong&gt;반복되는 규칙&lt;/strong&gt;을 찾아내는 눈을 기르는 게 중요한 것 같다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10007&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="dynamic-programming" /><category term="python" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;앱이 실행되고 빨간색 배경이 보이면, 잘 적용된 것이다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="swift" /><category term="xcode" /><category term="storyboard" /><category term="scene" /><summary type="html">개요</summary></entry></feed>

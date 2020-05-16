@@ -121,6 +121,10 @@
 <lastmod>2020-05-14T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful/</loc>
+<lastmod>2020-05-15T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://jamesu.dev/about</loc>
 </url>
 <url>
@@ -190,6 +194,9 @@
 <loc>https://jamesu.dev/categories/infra/</loc>
 </url>
 <url>
+<loc>https://jamesu.dev/tags/ios/</loc>
+</url>
+<url>
 <loc>https://jamesu.dev/categories/mobile/ios/</loc>
 </url>
 <url>
@@ -215,6 +222,9 @@
 </url>
 <url>
 <loc>https://jamesu.dev/posts/p3/</loc>
+</url>
+<url>
+<loc>https://jamesu.dev/posts/p4/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/tags/problem-solving/</loc>
