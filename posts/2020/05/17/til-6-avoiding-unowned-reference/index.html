@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>TIL 6: unowned 레퍼런스 피하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="TIL 6: unowned 레퍼런스 피하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-17T00:00:00+09:00" />
+<script type="application/ld+json">
+{"url":"https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/","dateModified":"2020-05-17T00:00:00+09:00","datePublished":"2020-05-17T00:00:00+09:00","headline":"TIL 6: unowned 레퍼런스 피하기","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/til" class="category-item">
+        TIL
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">TIL 6: unowned 레퍼런스 피하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/ios" class="tag-item">
+        #ios
+      </a>
+    
+      <a href="/tags/swift" class="tag-item">
+        #swift
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2020-05-17 00:00:00 +0900">2020.05.17</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">unowned</code> 레퍼런스는 피하고, 대신 <code class="highlighter-rouge">weak</code>을 사용하자.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="unowned-레퍼런스란-"><code class="highlighter-rouge">unowned</code> 레퍼런스란? 🤔</h2>
+
+<p>Swift로 ARC 환경에서 iOS 앱을 개발할 때, 정말 중요한 개념이 있다.<br />
+바로 <code class="highlighter-rouge">Strong Reference Cycle(강한 참조 순환)</code>이다.</p>
+
+<p>다른 것도 중요하지만, 이것을 모르고는 iOS 개발자라 할 수 없다.<br />
+그러므로, 다들 알 것이라 생각하고… 개념은 패스!</p>
+
+<p>ARC 환경에서 강한 참조 순환이 생겨 버리면, <strong>메모리에 할당된 대상을 해제할지 말지 판단을 하지 못 한다</strong>.
+계속 서로 참조하고 있어, 참조 카운트가 0이 될 수 없기 때문이다.
+이를 방지하기 위한 문법으로 <code class="highlighter-rouge">weak</code>과 <code class="highlighter-rouge">unowned</code> 참조가 있다.</p>
+
+<p><code class="highlighter-rouge">weak</code> 참조는 <strong>약한 참조</strong>라 부르고, <code class="highlighter-rouge">unowned</code> 참조는 <strong>미소유 참조</strong>라 부를 수 있다.<br />
+두 참조의 가장 중요한 특징은 <strong>참조 카운트를 증가시키지 않는 것</strong>이다.
+계속 참조하고 있어도 참조 카운트에 영향을 미치지 않기 때문에,
+다른 강한 참조가 사라져 메모리가 해제되는 데 지장이 없다.</p>
+
+<p>또한, <code class="highlighter-rouge">weak</code> 참조는 참조하는 대상의 메모리가 해제되면 자동으로 <code class="highlighter-rouge">nil</code>로 설정되지만,
+<code class="highlighter-rouge">unowned</code> 참조는 <code class="highlighter-rouge">nil</code>로 설정되지 않고 <strong>항상 값이 있다고 가정</strong>해 버린다.
+여기서 생명 주기를 잘못 생각해 이미 메모리 해제된 대상을 <code class="highlighter-rouge">unowned</code> 참조를 통해 접근했을 때,
+운이 없다면 앱이 그대로 사망할 수 있다. ☠️</p>
+
+<p>그래서 생명 주기가 확실한 경우에만 <code class="highlighter-rouge">unowned</code> 참조를 사용할 것을 <a href="https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html" target="_blank">Swift 공식 문서</a>에서도 강조한다.</p>
+
+<blockquote>
+  <p>Use an unowned reference only when you are sure that
+the reference always refers to an instance that has not been deallocated.</p>
+
+  <p>If you try to access the value of an unowned reference
+after that instance has been deallocated, <strong>you’ll get a runtime error</strong>.</p>
+</blockquote>
+
+<h2 id="안전하게-weak-레퍼런스로-통일하자-️">안전하게 <code class="highlighter-rouge">weak</code> 레퍼런스로 통일하자! 👷‍♂️</h2>
+
+<p><code class="highlighter-rouge">unowned</code> 참조를 언제 사용하면 좋을 지는 <a href="https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html" target="_blank">해당 문서</a>에 예시와 함께 잘 적혀 있다.
+<code class="highlighter-rouge">weak</code> 참조에 비해 Unwrapping을 하지 않아도 되고, 항상 값이 존재한다는 것을 표현할 수도 있다는 것 등등의 다양한 이점이 있지만,
+개인적으로는 사용하지 않는 것이 좋다고 생각한다.</p>
+
+<p>관계를 표현하다가 실수를 할 수도 있고, 요구사항이 바뀌어 수정을 할 때 놓치는 부분이 될 수도 있다.
+이런 저런 버그가 생겨 날 가능성이 더 크다고 생각한다.
+그런 것들을 감수하면서까지 굳이 <code class="highlighter-rouge">unowned</code> 참조를 쓸 필요는 없다고 생각한다.
+(정말 필요하다는 타당한 이유가 없다면 🙅‍♂️)</p>
+
+<p>단순하고 안전하게 <code class="highlighter-rouge">unowned</code> 참조를 지양하고, <code class="highlighter-rouge">weak</code> 참조를 사용하도록 하자.<br />
+개인적으로 <code class="highlighter-rouge">weak</code> 참조에 <code class="highlighter-rouge">guard</code> 구문을 사용하면, 왜 이렇게 마음이 편안한지 모르겠다. 😇</p>
+
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 5: Network Activity Indicator가 사라지다</span>
+        </a>
+      
+    </div>
+  
+
+  <div id="disqus_thread"></div>
+<script>
+  /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+  var disqus_config = function () {
+    this.page.url = 'https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/';
+    this.page.identifier = '/posts/2020/05/17/til-6-avoiding-unowned-reference';
+  };
+
+  (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jamesu-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  <!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 반응형 광고 -->
+<ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-3613903034488199"
+    data-ad-slot="6365003071"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

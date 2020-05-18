@@ -8,22 +8,22 @@
   
   
 
-  <title>Codeforces 문제 풀이: 118A - String Task - Jamesu Devlog</title>
+  <title>TIL 5: Network Activity Indicator가 사라지다 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Codeforces 문제 풀이: 118A - String Task" />
+<meta property="og:title" content="TIL 5: Network Activity Indicator가 사라지다" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
-<meta name="description" content="Dev Blog by James Minsu Jeon" />
-<meta property="og:description" content="Dev Blog by James Minsu Jeon" />
-<link rel="canonical" href="https://jamesu.dev/posts/2019/12/03/codeforces-problem-solving-118a-string-task/" />
-<meta property="og:url" content="https://jamesu.dev/posts/2019/12/03/codeforces-problem-solving-118a-string-task/" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-12-03T00:00:00+09:00" />
+<meta property="article:published_time" content="2020-05-16T00:00:00+09:00" />
 <script type="application/ld+json">
-{"url":"https://jamesu.dev/posts/2019/12/03/codeforces-problem-solving-118a-string-task/","dateModified":"2019-12-03T00:00:00+09:00","datePublished":"2019-12-03T00:00:00+09:00","headline":"Codeforces 문제 풀이: 118A - String Task","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2019/12/03/codeforces-problem-solving-118a-string-task/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/","dateModified":"2020-05-16T00:00:00+09:00","datePublished":"2020-05-16T00:00:00+09:00","headline":"TIL 5: Network Activity Indicator가 사라지다","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -134,8 +134,8 @@
     
       
 
-      <a href="/categories/etc/algorithm" class="category-item">
-        Algorithm
+      <a href="/categories/etc/til" class="category-item">
+        TIL
       </a>
 
       
@@ -144,7 +144,7 @@
 
 
 
-  <h1 class="post-title">Codeforces 문제 풀이: 118A - String Task</h1>
+  <h1 class="post-title">TIL 5: Network Activity Indicator가 사라지다</h1>
 
   
 
@@ -152,16 +152,12 @@
   
   <div class="tag-items">
     
-      <a href="/tags/problem-solving" class="tag-item">
-        #problem-solving
+      <a href="/tags/ios" class="tag-item">
+        #ios
       </a>
     
-      <a href="/tags/codeforces" class="tag-item">
-        #codeforces
-      </a>
-    
-      <a href="/tags/python" class="tag-item">
-        #python
+      <a href="/tags/ui" class="tag-item">
+        #ui
       </a>
     
   </div>
@@ -169,71 +165,74 @@
 
 
   <div class="post-time">
-    <time datetime="2019-12-03 00:00:00 +0900">2019.12.03</time>
+    <time datetime="2020-05-16 00:00:00 +0900">2020.05.16</time>
   </div>
 
-  <p><img src="assets/codeforces_118a_string_task.png" alt="118A - String Task" title="118A - String Task" /></p>
-
-<h2 id="문제-파악">문제 파악</h2>
-
-<p><a href="http://codeforces.com/problemset/problem/118/A" target="_blank">String Task 문제 링크</a></p>
-
-<p>입력받은 문자열에 다음 규칙들을 적용한다.</p>
+  <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>문자열의 모음(A, O, Y, E, U, I)을 모두 없앤다.</li>
-  <li>각 자음 앞에 점 문자(“.”)를 하나 추가한다.</li>
-  <li>모든 대문자는 소문자로 변환한다.</li>
+  <li>이제 <code class="highlighter-rouge">Network Activity Indicator</code>를 보여줄 필요가 없다.</li>
 </ul>
 
-<h2 id="문제-풀이">문제 풀이</h2>
+<p><br /></p>
 
-<p>원활한 처리를 위해 규칙을 순차적으로 적용하는 것이 아닌 효율적인 순서로 적용할 수 있다.</p>
+<h2 id="network-activity-indicator란-"><code class="highlighter-rouge">Network Activity Indicator</code>란? 🤔</h2>
 
-<p>모음을 없애기 전에 문자열을 소문자화 해서 대소문자 구분없이 모음을 제거할 수 있도록 한다.<br />
-문자열의 문자를 순회하면서 모음 배열에 속하지 않도록 필터링을 한다.<br />
-필터링된 문자열에 조인을 통해 점 문자를 삽입한다.<br />
-조인할 때 첫 글자 앞에는 점 문자가 삽입되지 않으므로, 마지막에 점 문자를 문자열 앞에 추가한다.<br />
-이때, 문자열이 존재하는 경우에만 점 문자를 추가하도록 한다.</p>
+<p>iOS 앱에서 네트워크 연결이 길어지는 경우, <code class="highlighter-rouge">Network Activity Indicator</code>라는 <strong>네트워크 연결중 표시를 위한 UI</strong>가 있다.</p>
 
-<h2 id="풀이-소스">풀이 소스</h2>
+<p><img src="assets/network_activity_indicator.png" alt="Network Activity Indicator" />
+<em>상태바 좌측에서 확인할 수 있다.</em></p>
 
-<p>문제 풀이 환경: Python 3.7</p>
+<p>이것을 본 사람도 있고 아닌 사람도 있을 것이다.
+왜냐하면, 화면 모양에 따라 보여지는 경우가 있고 아닌 경우도 있기 때문이다.
+또한, 앱 개발자가 이것을 보여지도록 처리했는지에 따라 앱을 사용하는 내내 볼 수도 있고 못 볼 수도 있다.
+이것은 순전히 개발자에게 달려있다.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre><span class="n">string</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<p>보여 줄 수 있는 화면이라면, 보여주는 것이 사용자를 위한 배려라 생각들지 않는가?<br />
+다음과 같이 애플의 <strong>Human Interface Guidelines(이하 HIG)</strong> 문서의
+<a href="https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/" target="_blank">Progress Indicators 내용</a>에 따르면,
+<code class="highlighter-rouge">Network Activity Indicator</code>는 네트워크 연결이 길어지는 경우에 보여주고,
+통신이 빠른 동작에는 보여주지 말라는 말이 있다.</p>
 
-<span class="n">vowels</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'o'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'i'</span><span class="p">]</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="s">"."</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">vowels</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
-<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-  <span class="n">result</span> <span class="o">=</span> <span class="s">'.'</span> <span class="o">+</span> <span class="n">result</span>
+<blockquote>
+  <p><strong>Show this indicator only for network operations lasting more than a few seconds.</strong><br />
+Don’t display the indicator for quick network operations
+because it’s likely to disappear before anyone notices its presence
+or realizes what it’s meant to communicate.</p>
+</blockquote>
 
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></figure>
+<p>앱을 만들 때마다 이것을 신경 쓰는 것은 매우 귀찮은 일이 될 수도 있다.</p>
+
+<h2 id="구현-할지-말지-더-이상-신경쓰지-않아도-된다-">구현 할지 말지 더 이상 신경쓰지 않아도 된다! 😏</h2>
+
+<p><a href="https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/" target="_blank">동일한 페이지</a>의 바로 윗 부분에
+<strong>“iOS 13 이상이나 edge-to-edge 디스플레이의 기기에서는 더 이상 해당 UI를 제공하지 않는다”</strong>는 내용도 있다.</p>
+
+<blockquote>
+  <p>The network activity indicator is deprecated in iOS 13 and on devices with edge-to-edge displays.</p>
+</blockquote>
+
+<p>대체하는 API가 나온 것이 아닌 완전한 <strong>Deprecated</strong>이다.
+앞으로 애플에서도 해당 UI에 대해 생각하지 않겠다는 것이다.
+그 대신 자주 사용하는 로딩중 표시를 위한 UI인 <code class="highlighter-rouge">Activity Indicator</code>를 사용하면 된다.</p>
+
+<p>사라질 기능이니 앞으로 새로 개발하거나 개선하는 앱에서는 굳이 <code class="highlighter-rouge">Network Activity Indicator</code>를 사용하지 않아도 된다.
+아주 미세한 짐 하나를 덜어낸 것 같다. 🙄</p>
 
 
 
   
     <div class="post-pagination">
       
-        <a href="/posts/2019/12/03/codeforces-problem-solving-158a-next-round/" class="left arrow">
+        <a href="/posts/2020/05/17/til-6-avoiding-unowned-reference/" class="left arrow">
           <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">Codeforces 문제 풀이: 158A - Next Round</span>
+          <span class="left arrow-title">TIL 6: unowned 레퍼런스 피하기</span>
         </a>
       
       
-        <a href="/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/" class="right arrow">
+        <a href="/posts/2020/05/15/til-4-mrc-is-painful/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">Codeforces 문제 풀이: 4A - Watermelon</span>
+          <span class="right arrow-title">TIL 4: MRC는 괴로워</span>
         </a>
       
     </div>
@@ -245,8 +244,8 @@
   *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
   *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
   var disqus_config = function () {
-    this.page.url = 'https://jamesu.dev/posts/2019/12/03/codeforces-problem-solving-118a-string-task/';
-    this.page.identifier = '/posts/2019/12/03/codeforces-problem-solving-118a-string-task';
+    this.page.url = 'https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/';
+    this.page.identifier = '/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated';
   };
 
   (function() { // DON'T EDIT BELOW THIS LINE
