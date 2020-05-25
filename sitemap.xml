@@ -133,6 +133,14 @@
 <lastmod>2020-05-17T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://jamesu.dev/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc/</loc>
+<lastmod>2020-05-18T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/</loc>
+<lastmod>2020-05-19T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://jamesu.dev/about</loc>
 </url>
 <url>
@@ -196,6 +204,9 @@
 <loc>https://jamesu.dev/tags/greedy-algorithm/</loc>
 </url>
 <url>
+<loc>https://jamesu.dev/tags/http/</loc>
+</url>
+<url>
 <loc>https://jamesu.dev/tags/idea/</loc>
 </url>
 <url>
@@ -218,6 +229,9 @@
 </url>
 <url>
 <loc>https://jamesu.dev/categories/mobile/</loc>
+</url>
+<url>
+<loc>https://jamesu.dev/tags/objective-c/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/categories/infra/os/</loc>

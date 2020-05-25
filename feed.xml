@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-19T01:05:01+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 6: unowned 레퍼런스 피하기</title><link href="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/" rel="alternate" type="text/html" title="TIL 6: unowned 레퍼런스 피하기" /><published>2020-05-17T00:00:00+09:00</published><updated>2020-05-17T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-26T01:12:04+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 8: HTTP 메시지로 다중 파일 업로드하기</title><link href="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/" rel="alternate" type="text/html" title="TIL 8: HTTP 메시지로 다중 파일 업로드하기" /><published>2020-05-19T00:00:00+09:00</published><updated>2020-05-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;동일한 파라미터&lt;/strong&gt;에 여러 번에 걸쳐 파일을 추가함으로써, &lt;strong&gt;다중 파일&lt;/strong&gt;을 업로드할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;동일한-파라미터냐-배열-형태의-파라미터냐-그것이-문제로다&quot;&gt;동일한 파라미터냐 배열 형태의 파라미터냐 그것이 문제로다.&lt;/h2&gt;
+
+&lt;p&gt;매번 단일 파일 업로드만 구현하다가 이번에 &lt;strong&gt;다중 파일 업로드&lt;/strong&gt;가 필요한 요구사항이 들어 왔다.&lt;br /&gt;
+앱에는 이미 오픈 소스 라이브러리를 사용하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;NSURLSessionTask&lt;/code&gt;를 이용한 네트워크 처리가 되어 있었다.
+그래서 기존 코드를 다 뒤집기 보다는 기존처럼 공식 프레임워크로 구현하려 했다.&lt;/p&gt;
+
+&lt;p&gt;직접 구현을 하게 되면, 파일 업로드를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;multipart/form-data&lt;/code&gt;의 Content Type으로 API를 호출해야 한다.
+그것을 위해 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지의 Request Body를 구성해야 했고, 경험한 적이 있어서 어렵지 않게 기본적인 Body를 구성할 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;처음에는 서버쪽에서 배열로 파일 목록을 받으니 특정한 패턴으로 파라미터를 구분해 파일을 담아야 하는줄 알았다.
+실제로 구글링을 할 때도 &lt;code class=&quot;highlighter-rouge&quot;&gt;files[0]&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;files[1]&lt;/code&gt; 등과 같이 구분해 담으라는 답변이 있었다.
+그럴듯해서 그대로 시도를 했으나 잘 안되어, 파라미터에 문제가 있지 않고 Body 구성에 실수가 있는줄 알고 그 부분만 계속 살펴 봤다.&lt;/p&gt;
+
+&lt;p&gt;결국 &lt;strong&gt;해결책은 매우 간단하게 동일한 파라미터에 차례대로 담으면 되는 것&lt;/strong&gt;이었다. 🙄&lt;br /&gt;
+파일이 아닌 다른 데이터도 서버에서 배열로 받는다면, 똑같이 동일한 파라미터에 데이터를 담으면 된다.&lt;/p&gt;
+
+&lt;p&gt;개인적으로 동일한 파라미터로 보내면, 순서를 어떻게 구분할까 싶었는데 그 원리는 생각보다 아주 단순해 보였다.
+위에서부터 차례대로 읽으면서 인덱스가 쌓이는 구조로 보인다.&lt;br /&gt;
+&lt;strong&gt;두 종류의 데이터를 같은 인덱스로 보내고 싶으면, 순서에 유의해서 데이터를 담아야 한다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;이렇게 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지를 구성하며 구현하는 것도 재미는 있지만, 역시 신뢰도 높은 오픈 소스 라이브러리가 사용하기에 편하다. 😌&lt;br /&gt;
+그래도 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지 구조를 모르고 오픈 소스 라이브러리를 사용하는 것과 알고 쓰는 것은 아주 다르니 꾸준히 공부해야겠다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><category term="http" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 7: MRC 속 ARC 조심하기</title><link href="https://jamesu.dev/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc/" rel="alternate" type="text/html" title="TIL 7: MRC 속 ARC 조심하기" /><published>2020-05-18T00:00:00+09:00</published><updated>2020-05-18T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;로 생성되는 객체를 조심하자.&lt;br /&gt;
+특히, &lt;strong&gt;객체 생성용 클래스 메소드&lt;/strong&gt;를 조심하자.&lt;br /&gt;
+(예: &lt;code class=&quot;highlighter-rouge&quot;&gt;[NSArray array]&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mrc-환경-내부의-arc&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경 내부의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;iOS 개발을 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경에서 해 본 사람이라면, 곳곳에 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;가 숨어 있다는 사실을 알 것이다.
+그래서 이것을 잘못 알고 사용하면, 잘못된 메모리 참조로 인해 앱 크래시가 발생할 수 있다.
+이것이 개발하고 테스트할 때 발견하지 못 하고, 출시한 후 사용자로부터 발견된다면…
+급하게 버그를 수정하고 다시 배포하느냐 정신이 없을 것이다. 😱&lt;/p&gt;
+
+&lt;p&gt;과거에 한창 Objective-C로 개발할 때는 숙지하고 있었는데 잠시 몇개월간 Swift의 세계에 있었다고,
+까먹고 있어서 개발 중에 크래시가 발생하곤 했다.
+다행히 기존에 문제가 있었던 메모리 누수 해결을 하면서 발견해서 상처를 잘 봉합했다.
+다음에 꼭 메모리 관련해서 글을 한 번 정리해야겠다.&lt;/p&gt;
+
+&lt;p&gt;간단히 말해서 통상적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경 속에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;로 사용하는 객체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;autorelease&lt;/code&gt; 메소드를 호출한 경우이다.
+보통 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;로 사용하길 원하는 부분은 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;autorelease&lt;/code&gt; 메소드를 호출하니 문제가 없을 것이다.
+그런데, 입문자라면 잘 모를 수 있는 것이 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt; 등과 같은 공식 프레임워크에 정의되어 있는 &lt;strong&gt;객체 생성용 클래스 메소드&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;init&lt;/code&gt; 메소드로 생성하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;[NSArray array]&lt;/code&gt; 메소드와 같은 클래스 메소드로 객체를 생성한 경험이 있을 것이다.
+이 경우에 &lt;strong&gt;해당 메소드로 생성한 객체는 이미 &lt;code class=&quot;highlighter-rouge&quot;&gt;autorelease&lt;/code&gt; 메소드를 호출한 객체이므로, 추가적으로 메모리 해제를 하면 안 된다&lt;/strong&gt;.
+다른 말로 &lt;code class=&quot;highlighter-rouge&quot;&gt;release&lt;/code&gt; 메소드를 호출하면 안 된다.
+이런 용도의 메소드는 &lt;strong&gt;클래스 이름을 본 딴 Prefix&lt;/strong&gt;를 가지므로, 여러 예시를 본다면 패턴에 익숙해질 것이다.&lt;/p&gt;
+
+&lt;p&gt;또한, &lt;strong&gt;직접 커스텀 클래스에 객체 생성용 클래스 메소드를 정의한다면, 공식 프레임워크와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 객체로 생성하길 권장한다&lt;/strong&gt;.
+그렇지 않으면, 혼동되어 더 많은 버그와 실수를 남길 것이다. ☠️&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 6: unowned 레퍼런스 피하기</title><link href="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/" rel="alternate" type="text/html" title="TIL 6: unowned 레퍼런스 피하기" /><published>2020-05-17T00:00:00+09:00</published><updated>2020-05-17T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 레퍼런스는 피하고, 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt;을 사용하자.&lt;/li&gt;
@@ -488,77 +549,4 @@ Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공�
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="sieve-of-eratosthenes" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">기본 상태바 스타일을 Dark로 만드는 방법</title><link href="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/" rel="alternate" type="text/html" title="기본 상태바 스타일을 Dark로 만드는 방법" /><published>2020-03-31T00:00:00+09:00</published><updated>2020-03-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark</id><content type="html" xml:base="https://jamesu.dev/posts/2020/03/31/how-to-make-default-status-bar-style-dark/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;User Interface Style&lt;/code&gt; 키에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light&lt;/code&gt; 값을 설정한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;특정 화면만 다르게 설정하고 싶다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;preferredStatusBarStyle&lt;/code&gt; 프로퍼티를 이용한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;인터페이스 스타일과 상태바 스타일은 반대의 값을 사용한다.&lt;br /&gt;
-(예: 인터페이스 스타일이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark&lt;/code&gt;이면, 상태바 스타일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light Content&lt;/code&gt;이다.)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;키보드 및 특정 뷰의 기본 배경색 등은 인터페이스 스타일을 따라간다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;기본-상태바-스타일-바꾸기&quot;&gt;기본 상태바 스타일 바꾸기&lt;/h2&gt;
-
-&lt;p&gt;요즘 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark Mode&lt;/code&gt;가 대세(?)라 그런지 많은 앱이 그것에 맞춰 디자인 되고 있다.&lt;br /&gt;
-하지만, 무조건 그 대세를 따르라는 법은 없다!&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Light Mode&lt;/code&gt;를 선호하는 사람을 위해 밝은(?) 디자인으로 된 앱을 개발한다고 하자.&lt;br /&gt;
-그렇게 밝은(?) 디자인의 앱을 개발하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark Mode&lt;/code&gt;에서 앱을 실행했는데,
-상단의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Status Bar&lt;/code&gt;가 하얀 글씨로 되어있기 때문에 잘 안 보이는 상황이 발생했다.&lt;/p&gt;
-
-&lt;p&gt;그러면, 다음과 같이 뷰 컨트롤러마다 &lt;code class=&quot;highlighter-rouge&quot;&gt;Status Bar Style&lt;/code&gt;을 지정해 줄 것인가?&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;preferredStatusBarStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIStatusBarStyle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;darkContent&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;viewDidLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;viewDidLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이는 매우 수고스러운 일이 될 것이다.&lt;/p&gt;
-
-&lt;p&gt;이러한 수고를 피하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Default Status Bar Style&lt;/code&gt;을 지정하고 싶다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Info.plist&lt;/code&gt; 파일에 들어가보자.&lt;br /&gt;
-그리고 아래와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;User Interface Style&lt;/code&gt; 키를 추가해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light&lt;/code&gt; 값을 설정하도록 하자.&lt;br /&gt;
-(실제 &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; 코드로는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIUserInterfaceStyle&lt;/code&gt; 키를 가진다.)&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;그러면 앱의 기본 인터페이스가 밝은(?) 스타일이 되면서, &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark Mode&lt;/code&gt;가 아닌 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light Mode&lt;/code&gt;로 설정된다.&lt;br /&gt;
-만약, 특정 뷰 컨트롤러만 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light Status Bar&lt;/code&gt;를 갖고 싶다면,
-첫 번째 코드에서 뷰 컨트롤러의 &lt;code class=&quot;highlighter-rouge&quot;&gt;preferredStatusBarStyle&lt;/code&gt; 프로퍼티가 &lt;code class=&quot;highlighter-rouge&quot;&gt;.darkContent&lt;/code&gt;가 아닌 &lt;code class=&quot;highlighter-rouge&quot;&gt;.lightContent&lt;/code&gt;를 반환하도록 작성하면 된다.&lt;br /&gt;
-인터페이스 스타일이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark&lt;/code&gt;일 때, 상태바의 스타일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light Content&lt;/code&gt;로 반대의 색을 가진다는 것에 주의하자.&lt;/p&gt;
-
-&lt;p&gt;참고로 &lt;code class=&quot;highlighter-rouge&quot;&gt;User Interface Style&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light&lt;/code&gt;로 설정하면, 키보드 및 특정 뷰의 기본 배경색 등이 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;Light&lt;/code&gt; 스타일이 된다.
-마찬가지로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark&lt;/code&gt;로 설정 시, 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dark&lt;/code&gt; 스타일로 고정된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="swift" /><category term="dark-mode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">Xcode 11에서 Archive 버튼이 비활성화된 경우</title><link href="https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/" rel="alternate" type="text/html" title="Xcode 11에서 Archive 버튼이 비활성화된 경우" /><published>2020-03-25T00:00:00+09:00</published><updated>2020-03-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11</id><content type="html" xml:base="https://jamesu.dev/posts/2020/03/25/when-archive-disabled-in-xcode-11/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;p&gt;시뮬레이터를 &lt;code class=&quot;highlighter-rouge&quot;&gt;Generic iOS Device&lt;/code&gt;로 선택하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Archive&lt;/code&gt; 버튼이 활성화된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;archive-버튼이-비활성화된-경우&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Archive&lt;/code&gt; 버튼이 비활성화된 경우&lt;/h2&gt;
-
-&lt;p&gt;편의상 실제 기기가 아닌 시뮬레이터를 이용해 개발을 하는 경우가 많을 것이라 생각된다.&lt;br /&gt;
-그렇게 시뮬레이터를 이용하다가 빌드를 App Store Connect에 업로드 하고 싶을 때,
-다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Archive&lt;/code&gt; 버튼이 비활성화되어 있어 업로드를 할 수 없는 상황에 직면할 때가 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이럴 땐 당황하지 말고, 시뮬레이터 부분을 클릭해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Generic iOS Device&lt;/code&gt;로 변경하자.&lt;br /&gt;
-그러면 &lt;code class=&quot;highlighter-rouge&quot;&gt;Archive&lt;/code&gt; 버튼이 예쁘게 활성화되어 있는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_2.png&quot; alt=&quot;Figure 2&quot; /&gt;&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="sieve-of-eratosthenes" /><category term="python" /><summary type="html"></summary></entry></feed>
