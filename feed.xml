@@ -1,4 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-05-26T01:12:04+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 8: HTTP 메시지로 다중 파일 업로드하기</title><link href="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/" rel="alternate" type="text/html" title="TIL 8: HTTP 메시지로 다중 파일 업로드하기" /><published>2020-05-19T00:00:00+09:00</published><updated>2020-05-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-01T01:05:12+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group</title><link href="https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/" rel="alternate" type="text/html" title="TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group" /><published>2020-05-22T00:00:00+09:00</published><updated>2020-05-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다중 비동기 처리가 완료되는 시점에 후속 처리를 하고 싶다면,&lt;br /&gt;
+간단히 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 시리즈를 활용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;모든-이미지-다운로드가-완료-됐을-때-로딩바-숨기기&quot;&gt;모든 이미지 다운로드가 완료 됐을 때, 로딩바 숨기기&lt;/h2&gt;
+
+&lt;p&gt;동적으로 화면에 이미지를 보여주기 위해 다운로드가 필요할 때가 있다.
+그때 많이 사용하는 방식은 각 이미지가 다운로드될 때마다 이미지 뷰에 표시하도록 해서
+로딩바가 표시되더라도 각 이미지 뷰에 표시하도록 하는 것이다.
+그런 처리는 일반적인 비동기 처리로 손쉽게 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 이번에 새로운 요구사항이 생겼다.
+모든 이미지가 다운로드될 때까지 중앙에 로딩바를 표시하고,
+모두 완료되고 나서 로딩바를 숨긴 후 다른 동작을 할 수 있도록 처리하는 것이다.
+이것을 위해서는 &lt;strong&gt;각 비동기 처리(이미지 다운로드)가 완료되는 시점을 알아야 한다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;iOS에서 비동기 처리를 위한 방법으로 크게 두 가지가 있다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Operation&lt;/code&gt; 시리즈와 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch&lt;/code&gt; 시리즈이다.
+이번에는 간단하게 모든 이미지 다운로드가 완료됐을 때 로딩바를 숨기면 되므로, 비교적 단순한 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch&lt;/code&gt; 시리즈를 이용했다.&lt;/p&gt;
+
+&lt;p&gt;그 중에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 시리즈를 이용하면, 각 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch&lt;/code&gt; 작업들을 &lt;strong&gt;그룹화&lt;/strong&gt;하고
+완료되는 시점에 &lt;code class=&quot;highlighter-rouge&quot;&gt;notify&lt;/code&gt; 함수에 정의한 동작을 수행하도록 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이것도 한 번 시간을 내어 글로 정리해야겠다.&lt;br /&gt;
+정말 정리할 글이 많다… 🤪&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><category term="gcd" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 10: 폰트를 적용했는데 뜬금없는 패딩이 들어가 있다면?</title><link href="https://jamesu.dev/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text/" rel="alternate" type="text/html" title="TIL 10: 폰트를 적용했는데 뜬금없는 패딩이 들어가 있다면?" /><published>2020-05-21T00:00:00+09:00</published><updated>2020-05-21T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;커스텀 폰트를 적용했을 때 글자에 자동으로 추가되는 상하 패딩을 없애려면,&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;includeFontPadding&lt;/code&gt; 속성을 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 설정한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;당황스러운-글자의-상하-패딩&quot;&gt;당황스러운 글자의 상하 패딩&lt;/h2&gt;
+
+&lt;p&gt;커스텀 폰트를 적용하면서 뜬금없는 상하 패딩이 생겨 당황스러웠다.
+디자인 요구사항을 만족시키려면 패딩 없이 높이가 딱 맞는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TextView&lt;/code&gt;가 필요했다.
+iOS 앱 개발 때와는 다른 당황스러움이었다. (iOS도 가끔 특이한 속성이 있다.)&lt;/p&gt;
+
+&lt;p&gt;구글링을 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;includeFontPadding&lt;/code&gt;라는 속성이 있다는 것을 알았고, 그것을 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt; 처리함으로써 해결했다.
+왜 기본값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;인지 모르겠다…
+물론 용도가 있겠지만, 오히려 선택적 옵션이어야 할 것 같은데 말이다. 🙄&lt;/p&gt;
+
+&lt;p&gt;알게 모르게 안드로이드에도 iOS만큼이나 다양한 속성이 있는 것 같다.&lt;br /&gt;
+구글이 없었다면, 매번 책을 엄청 뒤지고 있었겠지… 😱&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 9: 안드로이드 커스텀 스타일 적용하기</title><link href="https://jamesu.dev/posts/2020/05/20/til-9-applying-custom-style-in-android/" rel="alternate" type="text/html" title="TIL 9: 안드로이드 커스텀 스타일 적용하기" /><published>2020-05-20T00:00:00+09:00</published><updated>2020-05-20T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/20/til-9-applying-custom-style-in-android</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/20/til-9-applying-custom-style-in-android/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;테마에 일반적인 뷰 스타일을 설정&lt;/strong&gt;해 앱 전반에 공통적으로 스타일을 적용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;스타일-공통화&quot;&gt;스타일 공통화&lt;/h2&gt;
+
+&lt;p&gt;일반적으로 앱을 개발하면, 공통적으로 적용되는 스타일이 있을 것이다.
+예를 들면, 특정 앱에서 사용하는 버튼은 일반적으로 8dp의 cornerRadius를 가지고 회색 배경인 버튼일 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그런데 이렇게 자주 쓰이는 공통 버튼을 매번 스타일링 해주기에는 개발자에겐 귀차니즘이 너무 심하다.
+실수로 스타일링 구문을 한 줄이라도 빼먹으면, 상이한 디자인의 버튼이 나타날 수 있다.
+그래서 &lt;strong&gt;가급적이면 공통 스타일을 정의하고 재활용하는 것이 효율적&lt;/strong&gt;일 것이다.&lt;/p&gt;
+
+&lt;p&gt;이를 위해 다른 개발 환경에서 공통 스타일을 적용한다면,
+일반적으로 서브 클래스를 만들어 해당 클래스에 공통 스타일을 적용해놓고 쓸 것이다.
+안드로이드에서도 그 방법이 가능하지만, 더 간단한 방법이 있다.&lt;/p&gt;
+
+&lt;p&gt;바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;style&lt;/code&gt; 요소로 공통 스타일을 정의하고, &lt;strong&gt;기본적으로 적용한 테마에 해당 스타일을 사용하도록 설정&lt;/strong&gt;하는 것이다.
+예를 들어, 공통 버튼 스타일을 적용하고 싶으면, 테마의 &lt;code class=&quot;highlighter-rouge&quot;&gt;buttonStyle&lt;/code&gt; 아이템에 정의한 &lt;code class=&quot;highlighter-rouge&quot;&gt;style&lt;/code&gt; 요소를 설정하면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;App.Theme&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parent=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Theme.AppCompat.Light.DarkActionBar&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;item&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android:buttonStyle&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;@style/App.Widget.Button&lt;span class=&quot;nt&quot;&gt;&amp;lt;/item&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;App.Widget.Button&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;parent=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@android:style/Widget.Button&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;item&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android:background&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;@color/colorPrimary&lt;span class=&quot;nt&quot;&gt;&amp;lt;/item&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;item&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android:textColor&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;@android:color/white&lt;span class=&quot;nt&quot;&gt;&amp;lt;/item&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 코드와 같이 설정하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;App.Theme&lt;/code&gt; 테마의 버튼은 기본적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;App.Widget.Button&lt;/code&gt; 스타일을 갖는다.
+따라서, 앱의 기본 테마로 &lt;code class=&quot;highlighter-rouge&quot;&gt;App.Theme&lt;/code&gt; 테마를 적용하면, 추가적으로 변경하지 않는 한 모든 액티비티가 동일한 버튼 스타일을 갖는 것이다.&lt;/p&gt;
+
+&lt;p&gt;이 밖에도 다양한 뷰에 대해 공통 스타일을 적용할 수 있으므로 참으로 편리하다.
+물론, 스타일링뿐 아니라 다른 기능도 적용하고 싶으면 서브 클래스로 정의하는 것이 더 나을 수 있다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 8: HTTP 메시지로 다중 파일 업로드하기</title><link href="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/" rel="alternate" type="text/html" title="TIL 8: HTTP 메시지로 다중 파일 업로드하기" /><published>2020-05-19T00:00:00+09:00</published><updated>2020-05-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;동일한 파라미터&lt;/strong&gt;에 여러 번에 걸쳐 파일을 추가함으로써, &lt;strong&gt;다중 파일&lt;/strong&gt;을 업로드할 수 있다.&lt;/li&gt;
@@ -323,230 +409,4 @@ iOS 버전과의 &lt;strong&gt;동작의 일관성&lt;/strong&gt;을 당연하�
 그런 관계가 되고 나면, 팀 간 의사소통으로 인해 발생하는 스트레스도 없고 업무도 잘 처리되는 선순환이 이뤄지는 것을 확인할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;앞으로도 이런 마음가짐을 토대로 팀 간 의사소통에 대해 긍정적으로 생각하고 실천하도록 하자.&lt;br /&gt;
-지금까지 나도 모르게 의사소통을 잘 해왔다는 생각에 마음이 매우 뿌듯한 하루였다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 1: Today I Learned 기록 시작</title><link href="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/" rel="alternate" type="text/html" title="TIL 1: Today I Learned 기록 시작" /><published>2020-05-12T00:00:00+09:00</published><updated>2020-05-12T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/12/til-1-starting-today-i-learned/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;매일 TIL을 작성해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 성장하자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;til이란&quot;&gt;TIL이란?&lt;/h2&gt;
-
-&lt;p&gt;TIL은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Today I Learned&lt;/code&gt;의 약자로, &lt;strong&gt;오늘 배운 것&lt;/strong&gt;을 뜻하는 말이다.&lt;/p&gt;
-
-&lt;p&gt;블로그를 작성하는 개발자라면 많이 들어보기도 했을 것이고, GitHub에 잔디를 심기 위해 매일 TIL을 작성함으로써 일일 커밋을 실천하는 사람도 있을 것이다.
-또한, 까먹지 않기 위해 기록하고 정리하는 용도로 사용하는 사람도 있고, 꾸준함을 습관화하기 위해 작성하는 사람도 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;이처럼 TIL의 용도는 무궁무진하다.&lt;br /&gt;
-그렇다면, 나는 어떻게 사용할 것인가?&lt;/p&gt;
-
-&lt;h2 id=&quot;내-til의-목적&quot;&gt;내 TIL의 목적&lt;/h2&gt;
-
-&lt;p&gt;나의 경우, GitHub에 잔디를 심기 위해 이 블로그에 글을 꾸준히 올리고 싶었지만,
-잘못된 정보를 전달하지 않고 글의 완성도를 높이기 위해 조사를 더 하다보면, 글 하나를 작성하는 데에도 많은 시간이 소요된다.
-그렇게 긴 글을 작성하는 것도 아닌데 말이다. (글 솜씨가 부족한 것도 있다.)&lt;br /&gt;
-그 대신, 알고리즘 문제를 꾸준히 풀어 GitHub에 올리는 것으로 잔디 심기를 하고 있다.
-그래서 사실 나의 TIL은 일일 커밋을 통한 잔디 심기가 목적이 아니다.&lt;/p&gt;
-
-&lt;p&gt;일일 커밋도 좋지만, 그보다는 내 스스로의 성장을 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;일일 배움&lt;/code&gt;을 실천하고 싶다.&lt;br /&gt;
-그 주제가 무엇이 되든 상관 없다.
-배울 수 있는 것이라면, 개발 주제가 될 수도 있고, 어떤 생각이 될 수도 있고, 책에서 얻은 배움이 될 수도 있다.
-매일 글을 쓰면서 나도 모르게 늘어나는 글 솜씨도 배움이 될 수 있다. (간절)&lt;br /&gt;
-그렇게 매일 더 나아지는 내가 되길 바라며 TIL을 작성하고자 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;앞으로의-방향&quot;&gt;앞으로의 방향&lt;/h2&gt;
-
-&lt;p&gt;TIL을 시작하면, 가장 중요한 부분은 &lt;strong&gt;꾸준함&lt;/strong&gt;이라 생각된다.&lt;br /&gt;
-현재 블로그의 경우, CLI로 직접 배포하며 글을 올리고 있어 귀차니즘이 심하고,
-계속 언급한 글 솜씨의 부족으로 내용을 생각하고 정리하는 데 많은 시간이 소요된다. (변명 아닌 변명)&lt;br /&gt;
-그래서 TIL만큼은 기존의 글을 쓰듯이 매우 정성들여 쓰기 보다는 가볍더라도 &lt;strong&gt;기록하는 것에 초점을 맞추고자 한다&lt;/strong&gt;.
-(물론, 어느 정도 이해는 할 수 있도록 작성해야 한다. 술 먹고 작성할 때 조심 😅)&lt;/p&gt;
-
-&lt;p&gt;미래의 내가 실망하고 후회하지 않도록 꾸준히 작성해보자. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">백준 문제 풀이: 15649 - N과 M (1)</title><link href="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/" rel="alternate" type="text/html" title="백준 문제 풀이: 15649 - N과 M (1)" /><published>2020-04-13T00:00:00+09:00</published><updated>2020-04-13T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/13/baekjoon-problem-solving-15649/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_15649.png&quot; alt=&quot;15649 - N과 M (1)&quot; title=&quot;15649 - N과 M (1)&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/15649&quot; target=&quot;_blank&quot;&gt;N과 M (1) 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;N까지의 자연수 중 중복 없이 M개를 고른 수열은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/순열&quot; target=&quot;_blank&quot;&gt;순열(Permutation)&lt;/a&gt;을 뜻한다.
-먼저 순열의 정의를 파악하고, 문제를 풀이하도록 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;사실 이 문제는 &lt;strong&gt;Python&lt;/strong&gt;을 사용한다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;itertools.permutations()&lt;/code&gt; 함수를 이용해 답을 바로 구할 수 있다.&lt;br /&gt;
-Python에서 손쉽게 순열, 조합 등을 구할 수 있는 함수를 제공하기 때문이다.&lt;br /&gt;
-하지만, 그것은 &lt;strong&gt;백트래킹&lt;/strong&gt;을 연습하고자 하는 이 문제의 의도와 다르므로 사용하지 않도록 한다.&lt;/p&gt;
-
-&lt;p&gt;위에서 언급한 &lt;a href=&quot;https://ko.wikipedia.org/wiki/퇴각검색&quot; target=&quot;_blank&quot;&gt;백트래킹(Backtracking, 퇴각검색)&lt;/a&gt;이란 무엇일까?&lt;br /&gt;
-백트래킹은 &lt;a href=&quot;https://ko.wikipedia.org/wiki/깊이_우선_탐색&quot; target=&quot;_blank&quot;&gt;DFS(Depth-First Search, 깊이 우선 탐색)&lt;/a&gt;의 방식을 기반으로,
-&lt;strong&gt;불필요한 경우를 배제하며 원하는 해답에 도달할 때까지 탐색하는 전략&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; title=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 그림과 같이, DFS를 기반으로 두고 있기 때문에 &lt;a href=&quot;https://ko.wikipedia.org/wiki/스택&quot; target=&quot;_blank&quot;&gt;스택(Stack)&lt;/a&gt;을 이용해 퇴각을 하며
-다음 탐색을 진행하기 때문에 백트래킹(또는 퇴각검색)이라 불린다.&lt;/p&gt;
-
-&lt;p&gt;백트래킹은 기본적으로는 모든 경우의 수를 탐색한다는 &lt;a href=&quot;https://namu.wiki/w/%EB%B8%8C%EB%A3%A8%ED%8A%B8%20%ED%8F%AC%EC%8A%A4&quot; target=&quot;_blank&quot;&gt;브루트 포스(Brute Force)&lt;/a&gt; 전략을 취하지만,
-처리 속도를 향상시키기 위한 &lt;strong&gt;가지치기(Pruning)&lt;/strong&gt;가 중요한 역할을 한다.&lt;br /&gt;
-나무에서 불필요한 가지를 제거하듯이 백트래킹에서 가지치기를 잘 할수록 불필요한 경우가 제거되어 처리 속도가 많이 향상된다.&lt;/p&gt;
-
-&lt;p&gt;다시 문제로 돌아와서, 이 문제는 &lt;strong&gt;숫자를 선택하는 경우의 수로 이루어진 트리&lt;/strong&gt;로 볼 수 있다.&lt;br /&gt;
-반복적으로 숫자를 선택해 M개까지 골라 수열을 완성하는 것이 목표이다.&lt;br /&gt;
-따라서, 백트래킹을 적용해 불필요한 경우를 배제한 모든 경우의 수를 고려할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;숫자를 선택할 때는 1부터 N까지의 자연수 중 선택해야 하므로, 차례대로 선택하는 경우의 수가 있을 것이다.&lt;br /&gt;
-이때, 반드시 &lt;strong&gt;해당 경우의 수를 스택에 추가(Push)하고, 동작(여기서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;f()&lt;/code&gt; 함수)이 끝난 후에는 다시 스택에서 빼내는 작업(Pop)이 필요하다&lt;/strong&gt;.
-그래야 정상적으로 이전의 상황으로 돌아올 수 있기 때문이다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;그렇게 선택을 반복했을 때, 그 선택한 경우의 수가 M이 되면 모두 고른 것이 되므로 해답이 된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;하지만, 위와 같이 &lt;strong&gt;항상 1부터 N까지의 자연수를 모두 순회하면, 이미 선택한 숫자를 또 선택해가며 시간을 낭비하게 된다&lt;/strong&gt;.&lt;br /&gt;
-그래서 이미 선택한 숫자를 다시 선택하려 하면 배제하는 방식으로 &lt;strong&gt;가지치기&lt;/strong&gt;를 할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;ps-함수-호출-스택-이용하기&quot;&gt;P.S. 함수 호출 스택 이용하기&lt;/h3&gt;
-
-&lt;p&gt;여기서는 DFS를 위한 스택으로 Python의 List를 이용했다.&lt;br /&gt;
-이와 다른 방식으로 다음과 같이 &lt;strong&gt;순수하게 함수만을 이용해서 구현할 수도 있다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([])&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이것이 가능한 이유는 &lt;strong&gt;함수의 호출 방식이 스택의 동작 방식과 일치&lt;/strong&gt;하기 때문이다.&lt;br /&gt;
-함수가 호출되면, 함수의 호출 스택에 함수를 위한 요소들이 차례대로 쌓이고(Push),&lt;br /&gt;
-함수가 종료되면, 함수의 호출 스택에서 해당 요소들이 제거(Pop)된다.&lt;br /&gt;
-결국, 함수가 호출되기 전의 상태로 돌아가게 된다.&lt;/p&gt;
-
-&lt;p&gt;이처럼 함수 호출 스택을 사용해서 스택을 이용하는 다른 알고리즘에 적용해 보는 것도 도움이 될 것 같다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="backtracking" /><category term="dfs" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준 문제 풀이: 4673 - 셀프 넘버</title><link href="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/" rel="alternate" type="text/html" title="백준 문제 풀이: 4673 - 셀프 넘버" /><published>2020-04-05T00:00:00+09:00</published><updated>2020-04-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673</id><content type="html" xml:base="https://jamesu.dev/posts/2020/04/05/baekjoon-problem-solving-4673/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_4673.png&quot; alt=&quot;4673 - 셀프 넘버&quot; title=&quot;4673 - 셀프 넘버&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/4673&quot; target=&quot;_blank&quot;&gt;셀프 넘버 문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;생성자의 개수와 관계없이 생성자가 없는 숫자가 셀프 넘버이므로, 생성자의 존재 여부만 확인하면 된다.&lt;br /&gt;
-생성자의 존재 여부를 어떻게 해결할 것인지에 초점을 맞춘다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;여러 숫자에 대해 각 숫자가 생성자를 가지는지 아닌지 판단하는 것은 매우 많은 계산량을 필요로 하게 된다.&lt;br /&gt;
-그렇다면, 반대로 생각해보자.&lt;/p&gt;
-
-&lt;p&gt;특정 숫자를 생성자로 가지는 다음 숫자는 문제에서 정의한 &lt;code class=&quot;highlighter-rouge&quot;&gt;d(n)&lt;/code&gt; 함수를 통해 쉽게 구할 수 있을 것이다.&lt;br /&gt;
-또한, 반복적으로 해당 함수를 적용하면, 계속해서 해당 생성자를 가지는 숫자들을 구할 수 있다.&lt;br /&gt;
-&lt;strong&gt;셀프 넘버의 정의가 생성자가 없는 숫자이므로, 생성자를 가지는 숫자들은 셀프 넘버가 아닌 것이다&lt;/strong&gt;.&lt;br /&gt;
-위의 방법으로 셀프 넘버가 아닌 숫자들을 빠르고 쉽게 구할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;그리고 이 문제처럼 범위가 주어진다면, 소수를 구할 때 체를 걸러내는 방식인 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4&quot; target=&quot;_blank&quot;&gt;에라토스테네스의 체(Sieve of Eratosthenes)&lt;/a&gt;의
-원리를 적용하기에 적합하다.&lt;br /&gt;
-주어진 범위에 대해 생성자로부터 &lt;strong&gt;셀프 넘버가 아닌 숫자들을 걸러낸다면, 결국에는 셀프 넘버만 남게 된다&lt;/strong&gt;.&lt;br /&gt;
-(에라토스테네스의 체로 소수를 구하는 방법은 &lt;a href=&quot;https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes&quot; target=&quot;_blank&quot;&gt;Codeforces 문제 풀이: 230B - T-primes&lt;/a&gt; 포스트에서 확인할 수 있다.)&lt;/p&gt;
-
-&lt;p&gt;위와 같은 원리로, 10001개 요소를 가지는 배열 &lt;code class=&quot;highlighter-rouge&quot;&gt;sn&lt;/code&gt;을 정의하고, 셀프 넘버만 남기도록 체를 거른다.&lt;br /&gt;
-그리고 다시 순회하며 셀프 넘버만 출력하면 된다.&lt;br /&gt;
-참고로 10001개 요소를 선언한 이유는 0을 제외한 숫자 맵핑을 쉽게 하기 위해서다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3.7&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="sieve-of-eratosthenes" /><category term="python" /><summary type="html"></summary></entry></feed>
+지금까지 나도 모르게 의사소통을 잘 해왔다는 생각에 마음이 매우 뿌듯한 하루였다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry></feed>
