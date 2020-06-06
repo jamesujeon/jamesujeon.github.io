@@ -157,6 +157,10 @@
 <lastmod>2020-05-25T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/</loc>
+<lastmod>2020-05-27T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://jamesu.dev/about</loc>
 </url>
 <url>
@@ -170,6 +174,9 @@
 </url>
 <url>
 <loc>https://jamesu.dev/categories/etc/algorithm/</loc>
+</url>
+<url>
+<loc>https://jamesu.dev/tags/android-studio/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/tags/android/</loc>
@@ -232,10 +239,10 @@
 <loc>https://jamesu.dev/categories/infra/</loc>
 </url>
 <url>
-<loc>https://jamesu.dev/tags/ios/</loc>
+<loc>https://jamesu.dev/categories/mobile/ios/</loc>
 </url>
 <url>
-<loc>https://jamesu.dev/categories/mobile/ios/</loc>
+<loc>https://jamesu.dev/tags/ios/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/tags/jekyll/</loc>
