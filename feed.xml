@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-06T23:46:03+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자</title><link href="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/" rel="alternate" type="text/html" title="TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-07T01:31:35+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다…</title><link href="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/" rel="alternate" type="text/html" title="TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다..." /><published>2020-05-28T00:00:00+09:00</published><updated>2020-05-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;기본으로 제공되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;를 커스텀하기 위해 자바의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;을 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;뭔가-제약이-많은-기본-timepicker&quot;&gt;뭔가 제약이 많은 기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;앱 개발을 하다 보면 디자인 요구사항을 위해 뷰를 커스텀 할 일이 많아진다.&lt;br /&gt;
+그리고 다채로운 요구사항을 맞추다 보면, 커스텀하는 데 시간을 은근 빼았기곤 한다.&lt;/p&gt;
+
+&lt;p&gt;이번에 회사에서 디자인 개선을 진행할 때는 일부 UI에 대해서는 시스템에서 제공하는 기본 UI를 사용하기로 해서 일을 많이 덜었다.
+그래도 앱의 컨셉 컬러는 맞춰야 하니깐 기본 UI라도 그 컬러를 맞추고자 했다.&lt;/p&gt;
+
+&lt;p&gt;그렇게 작업한 UI 중 하나가 기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;를 &lt;strong&gt;Spinner 모드&lt;/strong&gt;로 포함되어 있는 선의 색깔만 바꾸면 되는 것이었다.
+당연히 5분도 안 걸릴 일이라 생각했고, 그것은 착오였다. ☠️&lt;/p&gt;
+
+&lt;p&gt;기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;의 Spinner 모드는 XML을 통한 레이아웃에서만 설정할 수 있었고, 나는 코드를 통한 설정이 필요했다.
+굳이 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt; 하나 때문에 불필요한 레이아웃 파일을 하나 더 늘리기는 싫었고 코드를 통해 설정하고자 했지만,
+관련 설정 메소드가 없었고 과거에 사용하던 특정한 Theme를 설정해야 Spinner 모드로 작동하는 것이었다.&lt;br /&gt;
+일단, 여기서 한 번 이리저리 헤맸었다.&lt;/p&gt;
+
+&lt;p&gt;두 번째로 스타일 설정을 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;에 포함되어 있는 선의 색깔을 쉽게 바꿀 수 있는줄 알았다.
+이것도 당연히 5분도 안 걸릴 일이라 생각했지만, 그것 또한 착오였다. ☠️&lt;/p&gt;
+
+&lt;p&gt;일반적인 방법으로 Sinner 모드인 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;의 선(엄밀히 말하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt; 내부의 &lt;code class=&quot;highlighter-rouge&quot;&gt;NumberPicker&lt;/code&gt;의 선)에 접근하는 것은 불가능했다.
+최후의 방법으로 자바의 API 중 하나인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;을 쓰게 되었다. 😂&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;을 쓰면 클래스 내부에 &lt;code class=&quot;highlighter-rouge&quot;&gt;private&lt;/code&gt;인 멤버들에도 접근할 수 있고, 조작도 가능하다.
+그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;의 내부 구조를 파악하고, 결국에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;NumberPicker&lt;/code&gt;의 선의 색깔을 변경할 수 있었다.
+웬만하면 쓸 일이 없는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;인데 이렇게 사용하니, 내가 까먹지 말라고 쓰게 해주는 것이구나 싶었다.&lt;/p&gt;
+
+&lt;p&gt;기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;의 Spinner 모드도, 그 색깔을 변경하는 것도 자주 쓸만한 기능인데 왜 이렇게 꽁꽁 감싸 놓았는지 답답했었다.
+그래도 ‘다 의도가 있겠지’라는 마음과 결국엔 해결했다는 것에 뿌듯함을 느낀다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="java" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자</title><link href="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/" rel="alternate" type="text/html" title="TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;안드로이드에서 아이콘을 추가할 때,
@@ -300,45 +335,4 @@ or realizes what it’s meant to communicate.&lt;/p&gt;
 그 대신 자주 사용하는 로딩중 표시를 위한 UI인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Activity Indicator&lt;/code&gt;를 사용하면 된다.&lt;/p&gt;
 
 &lt;p&gt;사라질 기능이니 앞으로 새로 개발하거나 개선하는 앱에서는 굳이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;를 사용하지 않아도 된다.
-아주 미세한 짐 하나를 덜어낸 것 같다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 4: MRC는 괴로워</title><link href="https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful/" rel="alternate" type="text/html" title="TIL 4: MRC는 괴로워" /><published>2020-05-15T00:00:00+09:00</published><updated>2020-05-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/15/til-4-mrc-is-painful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 매우 특별한 경우가 아니라면 쓰지말자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;mrc란-&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;란? 🤔&lt;/h2&gt;
-
-&lt;p&gt;현재 사내에서 레거시 코드를 유지보수하고 있어서 그런지 겪고 있는 어려움이 있다.&lt;br /&gt;
-특히, 지금은 자동으로 메모리를 관리해주는 GC(Garbage Collection), ARC(Automatic Reference Counting)
-등의 환경이 당연하다시피 여겨지고 있기 때문에 더 와 닿는다.&lt;/p&gt;
-
-&lt;p&gt;바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC(Manual Reference Counting)&lt;/code&gt; 환경이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 iOS의 자동 메모리 관리 환경인 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;의 반대되는 개념이다.&lt;br /&gt;
-말그대로 &lt;strong&gt;개발자가 수동으로 메모리를 관리&lt;/strong&gt;해줘야 한다.
-C, C++ 등과 함께 코딩을 해 본 사람이라면, 뭔지 바로 알 것이다.
-개발자가 사용하기 위해 메모리에 공간을 할당했으면, 다 사용한 후에 직접 제거해줘야 한다.
-그래야 해당 공간을 재활용할 수 있기 때문이다.
-이것을 꼼꼼하게 하지 않고 놓치면, 메모리 누수 지옥이 시작되는 것이다.&lt;br /&gt;
-과거에는 성능 최적화를 위해 직접 메모리 관리를 하는 경우가 있었지만,
-현재는 세월이 많이 흘러 자동 메모리 관리 환경이 매우 잘 되어 있다.
-따라서 &lt;strong&gt;특별한 경우를 제외한 일반적인 경우에서는 굳이 직접 메모리 관리를 할 필요가 없다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;메모리-누수-지옥-&quot;&gt;메모리 누수 지옥 🔥&lt;/h2&gt;
-
-&lt;p&gt;현재 사내에서 내가 맡고 있는 앱 일부는 Objective-C(이하 Obj-C)를 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt; 환경에서 사용하고 있어 직접 메모리 관리를 해야 한다.
-수동 메모리 관리가 필요한 중요한 처리를 하지 않는 데도 말이다.&lt;/p&gt;
-
-&lt;p&gt;기존 앱들이 잘 되어 있었으면 괜찮지만, 메모리 누수가 다수 발견되어 해결하는 데 많은 고생을 하곤 했다.&lt;br /&gt;
-Obj-C도 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경을 사용하는 데 무리가 없는데, 굳이 메모리 누수를 만들어 내며 &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;를 고수했는지 알 수가 없다.
-(물론, &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경도 메모리 누수 방지를 위한 처리가 필요하지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;MRC&lt;/code&gt;는 더 꼼꼼하게 처리해야 한다.)&lt;br /&gt;
-실제로 생산성도 떨어지고 메모리 누수와 버그도 발생하기 쉬워 &lt;strong&gt;비효율적&lt;/strong&gt;이었다.
-(그래서 어떤 앱의 경우, 나에게 기회가 생겨 추후 유지보수를 위해 한 달의 시간을 투자해 Swift 및 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경으로 완전 포팅했다. 😂)&lt;/p&gt;
-
-&lt;h2 id=&quot;앞으로는-웬만하면-무조건-arc&quot;&gt;앞으로는 웬만하면 무조건 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;그렇게 기존처럼 오늘도 메모리 누수 지옥을 해결하기 위해 많은 노력을 했다. (아직 남아있을 수도 있겠지만 😤)&lt;br /&gt;
-앞으로 가능하면 새 프로젝트는 무조건 (정말 특별한 경우를 제외하곤) &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 환경으로 시작하려 한다.
-메모리 누수 지옥을 해결하는 노력을 다른 데 쓰면 앱의 퀄리티를 더 높일 수 있을 것 같다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><summary type="html">TL;DR</summary></entry></feed>
+아주 미세한 짐 하나를 덜어낸 것 같다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
