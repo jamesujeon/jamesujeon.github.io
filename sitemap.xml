@@ -165,6 +165,10 @@
 <lastmod>2020-05-28T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/</loc>
+<lastmod>2020-05-31T00:00:00+09:00</lastmod>
+</url>
+<url>
 <loc>https://jamesu.dev/about</loc>
 </url>
 <url>
@@ -243,10 +247,10 @@
 <loc>https://jamesu.dev/categories/infra/</loc>
 </url>
 <url>
-<loc>https://jamesu.dev/categories/mobile/ios/</loc>
+<loc>https://jamesu.dev/tags/ios/</loc>
 </url>
 <url>
-<loc>https://jamesu.dev/tags/ios/</loc>
+<loc>https://jamesu.dev/categories/mobile/ios/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/tags/java/</loc>
@@ -310,6 +314,9 @@
 </url>
 <url>
 <loc>https://jamesu.dev/categories/etc/til/</loc>
+</url>
+<url>
+<loc>https://jamesu.dev/tags/tool/</loc>
 </url>
 <url>
 <loc>https://jamesu.dev/tags/ui/</loc>

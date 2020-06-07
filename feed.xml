@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-07T01:31:35+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다…</title><link href="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/" rel="alternate" type="text/html" title="TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다..." /><published>2020-05-28T00:00:00+09:00</published><updated>2020-05-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-08T00:34:49+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 15: Notion은 유용해</title><link href="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/" rel="alternate" type="text/html" title="TIL 15: Notion은 유용해" /><published>2020-05-31T00:00:00+09:00</published><updated>2020-05-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt; 툴은 개발자를 위한 &lt;strong&gt;메모 및 글 관리&lt;/strong&gt;에 유용하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;개발자를-위한-메모-및-글-관리-툴&quot;&gt;개발자를 위한 메모 및 글 관리 툴&lt;/h2&gt;
+
+&lt;p&gt;개발을 하다보면 Code Snippet, 유용한 링크, 메모 등을 빠르게 작성하고, 보관하고 싶을 것이다.&lt;br /&gt;
+&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt;을 사용하면, 그 욕구를 잘 해소할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이전에는 맥북에 내장되어 있는 메모 앱을 자주 사용하곤 했는데, 내용이 필요할 때마다 애플 계정 동기화 또는 로그인이 필요했다.
+그래서 어디서든 빠르게 접근할 수 있는 메모가 필요했고, 우연히 웹 툴인 Notion을 접하게 되었다.&lt;/p&gt;
+
+&lt;p&gt;이걸 왜 이제 알았는지 모르겠다.&lt;br /&gt;
+간단하고 편리하고 개발자가 쓰기 좋은 기능들도 꽤 있다.&lt;br /&gt;
+게다가 디자인이 내 취향이다. 😀&lt;/p&gt;
+
+&lt;p&gt;한 문단과 비슷한 블록이라는 단위로 작성 단위를 측정하고 있다.&lt;br /&gt;
+그것과 업로드 용량 등 여러 요소에 따라 요금제가 달라진다.&lt;br /&gt;
+기본적으로 무료로 제공되는 양도 괜찮기 때문에 일단 사용해보고 판단하길 바란다.&lt;/p&gt;
+
+&lt;p&gt;홍보대사는 아니지만, 이런 유용한 툴을 나만 알고 싶지 않아서 공유한다.&lt;br /&gt;
+그동안 모르고 있었다면, 나처럼 빠져들지도 모른다. 😍&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="tool" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다…</title><link href="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/" rel="alternate" type="text/html" title="TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다..." /><published>2020-05-28T00:00:00+09:00</published><updated>2020-05-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;기본으로 제공되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;를 커스텀하기 위해 자바의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;을 사용할 수 있다.&lt;/li&gt;
@@ -286,53 +311,4 @@ after that instance has been deallocated, &lt;strong&gt;you’ll get a runtime e
 (정말 필요하다는 타당한 이유가 없다면 🙅‍♂️)&lt;/p&gt;
 
 &lt;p&gt;단순하고 안전하게 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 지양하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조를 사용하도록 하자.&lt;br /&gt;
-개인적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조에 &lt;code class=&quot;highlighter-rouge&quot;&gt;guard&lt;/code&gt; 구문을 사용하면, 왜 이렇게 마음이 편안한지 모르겠다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 5: Network Activity Indicator가 사라지다</title><link href="https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/" rel="alternate" type="text/html" title="TIL 5: Network Activity Indicator가 사라지다" /><published>2020-05-16T00:00:00+09:00</published><updated>2020-05-16T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;이제 &lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;를 보여줄 필요가 없다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;network-activity-indicator란-&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;란? 🤔&lt;/h2&gt;
-
-&lt;p&gt;iOS 앱에서 네트워크 연결이 길어지는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;라는 &lt;strong&gt;네트워크 연결중 표시를 위한 UI&lt;/strong&gt;가 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/network_activity_indicator.png&quot; alt=&quot;Network Activity Indicator&quot; /&gt;
-&lt;em&gt;상태바 좌측에서 확인할 수 있다.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;이것을 본 사람도 있고 아닌 사람도 있을 것이다.
-왜냐하면, 화면 모양에 따라 보여지는 경우가 있고 아닌 경우도 있기 때문이다.
-또한, 앱 개발자가 이것을 보여지도록 처리했는지에 따라 앱을 사용하는 내내 볼 수도 있고 못 볼 수도 있다.
-이것은 순전히 개발자에게 달려있다.&lt;/p&gt;
-
-&lt;p&gt;보여 줄 수 있는 화면이라면, 보여주는 것이 사용자를 위한 배려라 생각들지 않는가?&lt;br /&gt;
-다음과 같이 애플의 &lt;strong&gt;Human Interface Guidelines(이하 HIG)&lt;/strong&gt; 문서의
-&lt;a href=&quot;https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/&quot; target=&quot;_blank&quot;&gt;Progress Indicators 내용&lt;/a&gt;에 따르면,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;는 네트워크 연결이 길어지는 경우에 보여주고,
-통신이 빠른 동작에는 보여주지 말라는 말이 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Show this indicator only for network operations lasting more than a few seconds.&lt;/strong&gt;&lt;br /&gt;
-Don’t display the indicator for quick network operations
-because it’s likely to disappear before anyone notices its presence
-or realizes what it’s meant to communicate.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;앱을 만들 때마다 이것을 신경 쓰는 것은 매우 귀찮은 일이 될 수도 있다.&lt;/p&gt;
-
-&lt;h2 id=&quot;구현-할지-말지-더-이상-신경쓰지-않아도-된다-&quot;&gt;구현 할지 말지 더 이상 신경쓰지 않아도 된다! 😏&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://developer.apple.com/design/human-interface-guidelines/ios/controls/progress-indicators/&quot; target=&quot;_blank&quot;&gt;동일한 페이지&lt;/a&gt;의 바로 윗 부분에
-&lt;strong&gt;“iOS 13 이상이나 edge-to-edge 디스플레이의 기기에서는 더 이상 해당 UI를 제공하지 않는다”&lt;/strong&gt;는 내용도 있다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The network activity indicator is deprecated in iOS 13 and on devices with edge-to-edge displays.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;대체하는 API가 나온 것이 아닌 완전한 &lt;strong&gt;Deprecated&lt;/strong&gt;이다.
-앞으로 애플에서도 해당 UI에 대해 생각하지 않겠다는 것이다.
-그 대신 자주 사용하는 로딩중 표시를 위한 UI인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Activity Indicator&lt;/code&gt;를 사용하면 된다.&lt;/p&gt;
-
-&lt;p&gt;사라질 기능이니 앞으로 새로 개발하거나 개선하는 앱에서는 굳이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Network Activity Indicator&lt;/code&gt;를 사용하지 않아도 된다.
-아주 미세한 짐 하나를 덜어낸 것 같다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
+개인적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조에 &lt;code class=&quot;highlighter-rouge&quot;&gt;guard&lt;/code&gt; 구문을 사용하면, 왜 이렇게 마음이 편안한지 모르겠다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry></feed>
