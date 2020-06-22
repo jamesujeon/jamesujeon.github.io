@@ -1,4 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-08T00:34:49+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 15: Notion은 유용해</title><link href="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/" rel="alternate" type="text/html" title="TIL 15: Notion은 유용해" /><published>2020-05-31T00:00:00+09:00</published><updated>2020-05-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-06-22T23:44:55+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 16: 레거시 시스템은 지옥</title><link href="https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell/" rel="alternate" type="text/html" title="TIL 16: 레거시 시스템은 지옥" /><published>2020-06-05T00:00:00+09:00</published><updated>2020-06-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;레거시 시스템은 가능하면 빨리 개선해서 지옥을 맞이하지 않도록 하자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;뉴저지-코볼cobol-사건으로-느껴지는-레거시-시스템의-폐해&quot;&gt;뉴저지 코볼(COBOL) 사건으로 느껴지는 레거시 시스템의 폐해&lt;/h2&gt;
+
+&lt;p&gt;노마드 코더는 즐겨보는 유튜버 중 한명으로 다양한 프로그래밍 관련 이야기를 해준다.&lt;br /&gt;
+가끔씩 재밌는 이슈도 이야기 해주는데, 이번에 들려준 이슈는 &lt;strong&gt;코볼(COBOL) 레거시 시스템에서 얻는 교훈&lt;/strong&gt;에 관한 것이었다.
+(&lt;a href=&quot;https://youtu.be/LJ9TXkh9Xhk&quot; target=&quot;_blank&quot;&gt;유튜브 영상 링크&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;간단히 요약하자면,
+미국 뉴저지 정부의 전산 시스템이 비교적 오래된 언어인 코볼로 이뤄져 있는 레거시 시스템인데, 개발자를 구할 수 없다는 것이다.
+이번 코로나19 사태로 전산 시스템에 유래 없이 많은 사용자가 몰리게 되었고,
+그것의 유지보수를 위해 코볼 개발자를 급하게 구하고 있지만 공급이 없어 애를 먹는 상황이다.&lt;/p&gt;
+
+&lt;p&gt;오래된 언어답게 요즘 자주 사용하는 언어에 비하면 생산성도 떨어지고, 여러모로 단점이 많다.
+이렇게 오랫동안 지속된 레거시 시스템은 진작에 시간을 두어 개편 작업을 해야 마땅한데 &lt;strong&gt;현업에서도 우선순위에서 밀리는 경우가 많다&lt;/strong&gt;.&lt;br /&gt;
+이처럼 뉴저지 코볼 사건은 레거시 시스템이 낳은 안타까운 결과물 중 하나이다.&lt;/p&gt;
+
+&lt;p&gt;비슷하게 (어디에나 존재할 수 있지만) 재직중인 회사에도 레거시 시스템이 존재한다.
+그것의 구조적 한계로 인해 일부 유용한 개선도 못하고 있는 것이 보인다.&lt;br /&gt;
+또한, 내가 맡고 있는 iOS 앱들도 불필요하게 Objective-C에 MRC 환경으로 되어 있다.
+이런 환경일수록 더 디테일하게 다뤄야 하는데 그러지 못해 버그와 메모리 누수가 산발한다.&lt;/p&gt;
+
+&lt;p&gt;뉴저지 코볼 사건처럼 나중에 후회하지 않으려면 &lt;strong&gt;일부 시간을 내서라도 구조, 환경 등의 개편을 진행해야 한다고 생각한다&lt;/strong&gt;.
+그렇게 하나의 앱은 한달의 시간을 어떻게든 내어 Objective-C에서 Swift로 포팅을 진행했고, 여러모로 만족하고 있다.&lt;/p&gt;
+
+&lt;p&gt;앞으로도 기회가 조금이라도 보이면, 기회를 만들어 기존 앱들의 포팅을 진행하거나 효율적인 구조로 개편하는 작업을 하고 싶다.
+야근은 자제하면서 말이다.. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 15: Notion은 유용해</title><link href="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/" rel="alternate" type="text/html" title="TIL 15: Notion은 유용해" /><published>2020-05-31T00:00:00+09:00</published><updated>2020-05-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt; 툴은 개발자를 위한 &lt;strong&gt;메모 및 글 관리&lt;/strong&gt;에 유용하다.&lt;/li&gt;
@@ -259,56 +291,4 @@ iOS 앱 개발 때와는 다른 당황스러움이었다. (iOS도 가끔 특이�
 이런 용도의 메소드는 &lt;strong&gt;클래스 이름을 본 딴 Prefix&lt;/strong&gt;를 가지므로, 여러 예시를 본다면 패턴에 익숙해질 것이다.&lt;/p&gt;
 
 &lt;p&gt;또한, &lt;strong&gt;직접 커스텀 클래스에 객체 생성용 클래스 메소드를 정의한다면, 공식 프레임워크와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARC&lt;/code&gt; 객체로 생성하길 권장한다&lt;/strong&gt;.
-그렇지 않으면, 혼동되어 더 많은 버그와 실수를 남길 것이다. ☠️&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 6: unowned 레퍼런스 피하기</title><link href="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/" rel="alternate" type="text/html" title="TIL 6: unowned 레퍼런스 피하기" /><published>2020-05-17T00:00:00+09:00</published><updated>2020-05-17T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/17/til-6-avoiding-unowned-reference/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 레퍼런스는 피하고, 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt;을 사용하자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;unowned-레퍼런스란-&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 레퍼런스란? 🤔&lt;/h2&gt;
-
-&lt;p&gt;Swift로 ARC 환경에서 iOS 앱을 개발할 때, 정말 중요한 개념이 있다.&lt;br /&gt;
-바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Strong Reference Cycle(강한 참조 순환)&lt;/code&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;다른 것도 중요하지만, 이것을 모르고는 iOS 개발자라 할 수 없다.&lt;br /&gt;
-그러므로, 다들 알 것이라 생각하고… 개념은 패스!&lt;/p&gt;
-
-&lt;p&gt;ARC 환경에서 강한 참조 순환이 생겨 버리면, &lt;strong&gt;메모리에 할당된 대상을 해제할지 말지 판단을 하지 못 한다&lt;/strong&gt;.
-계속 서로 참조하고 있어, 참조 카운트가 0이 될 수 없기 때문이다.
-이를 방지하기 위한 문법으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조가 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조는 &lt;strong&gt;약한 참조&lt;/strong&gt;라 부르고, &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조는 &lt;strong&gt;미소유 참조&lt;/strong&gt;라 부를 수 있다.&lt;br /&gt;
-두 참조의 가장 중요한 특징은 &lt;strong&gt;참조 카운트를 증가시키지 않는 것&lt;/strong&gt;이다.
-계속 참조하고 있어도 참조 카운트에 영향을 미치지 않기 때문에,
-다른 강한 참조가 사라져 메모리가 해제되는 데 지장이 없다.&lt;/p&gt;
-
-&lt;p&gt;또한, &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조는 참조하는 대상의 메모리가 해제되면 자동으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;로 설정되지만,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조는 &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;로 설정되지 않고 &lt;strong&gt;항상 값이 있다고 가정&lt;/strong&gt;해 버린다.
-여기서 생명 주기를 잘못 생각해 이미 메모리 해제된 대상을 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 통해 접근했을 때,
-운이 없다면 앱이 그대로 사망할 수 있다. ☠️&lt;/p&gt;
-
-&lt;p&gt;그래서 생명 주기가 확실한 경우에만 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 사용할 것을 &lt;a href=&quot;https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html&quot; target=&quot;_blank&quot;&gt;Swift 공식 문서&lt;/a&gt;에서도 강조한다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Use an unowned reference only when you are sure that
-the reference always refers to an instance that has not been deallocated.&lt;/p&gt;
-
-  &lt;p&gt;If you try to access the value of an unowned reference
-after that instance has been deallocated, &lt;strong&gt;you’ll get a runtime error&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;안전하게-weak-레퍼런스로-통일하자-️&quot;&gt;안전하게 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 레퍼런스로 통일하자! 👷‍♂️&lt;/h2&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 언제 사용하면 좋을 지는 &lt;a href=&quot;https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html&quot; target=&quot;_blank&quot;&gt;해당 문서&lt;/a&gt;에 예시와 함께 잘 적혀 있다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조에 비해 Unwrapping을 하지 않아도 되고, 항상 값이 존재한다는 것을 표현할 수도 있다는 것 등등의 다양한 이점이 있지만,
-개인적으로는 사용하지 않는 것이 좋다고 생각한다.&lt;/p&gt;
-
-&lt;p&gt;관계를 표현하다가 실수를 할 수도 있고, 요구사항이 바뀌어 수정을 할 때 놓치는 부분이 될 수도 있다.
-이런 저런 버그가 생겨 날 가능성이 더 크다고 생각한다.
-그런 것들을 감수하면서까지 굳이 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 쓸 필요는 없다고 생각한다.
-(정말 필요하다는 타당한 이유가 없다면 🙅‍♂️)&lt;/p&gt;
-
-&lt;p&gt;단순하고 안전하게 &lt;code class=&quot;highlighter-rouge&quot;&gt;unowned&lt;/code&gt; 참조를 지양하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조를 사용하도록 하자.&lt;br /&gt;
-개인적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 참조에 &lt;code class=&quot;highlighter-rouge&quot;&gt;guard&lt;/code&gt; 구문을 사용하면, 왜 이렇게 마음이 편안한지 모르겠다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry></feed>
+그렇지 않으면, 혼동되어 더 많은 버그와 실수를 남길 것이다. ☠️&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry></feed>
