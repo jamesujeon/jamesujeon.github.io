@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-07-01T22:05:20+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 17: 자잘한 안드로이드 UI 팁들</title><link href="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/" rel="alternate" type="text/html" title="TIL 17: 자잘한 안드로이드 UI 팁들" /><published>2020-06-09T00:00:00+09:00</published><updated>2020-06-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-07-20T00:17:22+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 18: 자잘한 안드로이드 UI 팁들 2</title><link href="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/" rel="alternate" type="text/html" title="TIL 18: 자잘한 안드로이드 UI 팁들 2" /><published>2020-06-15T00:00:00+09:00</published><updated>2020-06-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수로 전달한 인자에 따른 주의사항&lt;/li&gt;
+  &lt;li&gt;코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않는 경우&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 자식으로 스크롤 뷰 형태의 뷰가 있을 때, 이중 스크롤을 방지하고 싶은 경우&lt;/li&gt;
+  &lt;li&gt;클릭을 빠르게 두 번 했을 때, 이벤트가 두 번 발생하는 것을 방지하고 싶은 경우&lt;/li&gt;
+  &lt;li&gt;코드로 높이, 너비 등과 같은 값을 설정하는 경우&lt;/li&gt;
+  &lt;li&gt;뷰의 변환을 지속적으로 감지하고 싶은 경우&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt; 사용 시, 고정 높이가 적용되지 않는 경우&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;로 적용하는 경우 주의사항&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;자잘한-안드로이드-ui-팁들-2&quot;&gt;자잘한 안드로이드 UI 팁들 2&lt;/h2&gt;
+
+&lt;p&gt;유지보수를 하며 추가적으로 간단하게 정리했던 팁들이다.&lt;br /&gt;
+앞서 작성했던 팁들은 바로 이전 글에서 확인할 수 있다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-코드로-inflate-할-때-root-매개변수로-전달한-인자에-따른-동작-구분&quot;&gt;1. 코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수로 전달한 인자에 따른 동작 구분&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수에 부모 뷰를 전달하면, 부모 뷰에 &lt;code class=&quot;highlighter-rouge&quot;&gt;addView()&lt;/code&gt; 메소드를 호출해 자식으로 추가되는 효과가 난다.
+반대로, &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달하면 추가가 되지 않으므로 직접 추가를 해줘야 한다.&lt;/p&gt;
+
+&lt;p&gt;때에 따라 부모 뷰를 전달할 필요가 없기도 한다.&lt;br /&gt;
+그런데 두 경우에 반환한 뷰가 서로 달라 주의가 필요하다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;부모 뷰를 전달한 경우: &lt;strong&gt;부모 뷰&lt;/strong&gt;가 반환된다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달한 경우: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 된 뷰&lt;/strong&gt;가 반환된다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;2-코드로-inflate-할-때-margin이-적용되지-않는-경우&quot;&gt;2. 코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않는 경우&lt;/h3&gt;
+
+&lt;p&gt;분명히 &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; 레이아웃에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;을 적용했는데, &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 한 경우 실제로 적용되지 않는 것을 확인할 수 있다.
+이 또한 &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수에 부모 뷰를 전달했는지 안했는지에 따라 달라진다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;부모 뷰를 전달한 경우: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 정상적으로 적용&lt;/strong&gt;된다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달한 경우: &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않아 &lt;strong&gt;코드로 직접 적용해야 한다&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때 부모가 주어지면 &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;을 판단할 수 있으나, 없다면 판단할 수 없어 발생하는 문제인 것 같다.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-scrollview-자식으로-스크롤-뷰-형태의-뷰가-있을-때-이중-스크롤을-방지하고-싶은-경우&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 자식으로 스크롤 뷰 형태의 뷰가 있을 때, 이중 스크롤을 방지하고 싶은 경우&lt;/h3&gt;
+
+&lt;p&gt;스크롤 뷰 형태의 뷰라 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ListView&lt;/code&gt; 등 스크롤이 생길 수 있는 뷰를 말한다.
+해당 뷰를 이용해서 데이터를 표현했지만, 높이를 고정시키고 싶을 때가 있을 것이다.
+그런데 부모로 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt;를 그냥 사용하면, 고정 높이가 적용되지 않을 수가 있다.&lt;/p&gt;
+
+&lt;p&gt;부모에 해당하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 대신 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용&lt;/strong&gt;한다.&lt;br /&gt;
+자식으로 스크롤 뷰 형태의 뷰를 가지면, 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용하는 것이 속 편할 것 같다.&lt;br /&gt;
+아니면 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용하는 것도…&lt;/p&gt;
+
+&lt;h3 id=&quot;4-클릭을-빠르게-두-번-했을-때-이벤트가-두-번-발생하는-것을-방지하고-싶은-경우&quot;&gt;4. 클릭을 빠르게 두 번 했을 때, 이벤트가 두 번 발생하는 것을 방지하고 싶은 경우&lt;/h3&gt;
+
+&lt;p&gt;클릭 이벤트에서 마지막으로 클릭한 시간을 기록했다가 현재 시간과 비교해 간격을 줄 수 있다.&lt;/p&gt;
+
+&lt;p&gt;아래와 같은 코드를 클릭 이벤트에 넣어 구현이 가능하다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SystemClock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elapsedRealtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mLastClickTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mLastClickTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SystemClock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elapsedRealtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;하지만, 이것도 정말 빠르게 두 번 누르면 같은 현상이 발생한다…&lt;br /&gt;
+추가적으로 다른 조치가 필요할 것 같다.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-코드로-높이-너비-등과-같은-값을-설정하는-경우&quot;&gt;5. 코드로 높이, 너비 등과 같은 값을 설정하는 경우&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;코드로 해당 값들을 설정하는 메소드는 대부분 &lt;code class=&quot;highlighter-rouge&quot;&gt;px&lt;/code&gt; 값을 수치로 전달 받는다.&lt;/strong&gt;&lt;br /&gt;
+만약, 디자인을 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp&lt;/code&gt; 값 설정이 필요하다면, 반드시 변환해서 전달하도록 한다.&lt;/p&gt;
+
+&lt;p&gt;일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;dpToPx()&lt;/code&gt;와 같은 유틸 메소드를 만들어 사용하곤 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;6-뷰의-변환을-지속적으로-감지하고-싶은-경우&quot;&gt;6. 뷰의 변환을 지속적으로 감지하고 싶은 경우&lt;/h3&gt;
+
+&lt;p&gt;뷰의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewTreeObserver&lt;/code&gt;를 얻어 &lt;code class=&quot;highlighter-rouge&quot;&gt;OnGlobalLayoutListener&lt;/code&gt;를 설정하면 지속적 감지가 가능하다.
+하지만, 매우 자주 호출되므로 주의가 필요하다.&lt;/p&gt;
+
+&lt;p&gt;일회성 동작이라면, &lt;code class=&quot;highlighter-rouge&quot;&gt;GlobalLayout&lt;/code&gt; 이벤트에서 해당 리스너를 지우도록 한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;7-constraintlayout-사용-시-고정-높이가-적용되지-않는-경우&quot;&gt;7. &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt; 사용 시, 고정 높이가 적용되지 않는 경우&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;layout_constrainedHeight&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로 설정한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;8-ellipsize를-middle로-적용하는-경우-주의사항&quot;&gt;8. &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;로 적용하는 경우 주의사항&lt;/h3&gt;
+
+&lt;p&gt;줄 수를 2줄 이상으로 허용하는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;이면 경우에 따라 크래시가 발생할 수 있다.
+따라서 2줄 이상인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;end&lt;/code&gt;와 같은 다른 값을 사용해야 한다.&lt;/p&gt;
+
+&lt;p&gt;1줄인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하는 것에 문제가 없다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 17: 자잘한 안드로이드 UI 팁들</title><link href="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/" rel="alternate" type="text/html" title="TIL 17: 자잘한 안드로이드 UI 팁들" /><published>2020-06-09T00:00:00+09:00</published><updated>2020-06-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt; 항목들이 서로 잘리지 않게 하고 싶은 경우&lt;/li&gt;
@@ -318,33 +410,4 @@ iOS 앱 개발 때와는 다른 당황스러움이었다. (iOS도 가끔 특이�
 따라서, 앱의 기본 테마로 &lt;code class=&quot;highlighter-rouge&quot;&gt;App.Theme&lt;/code&gt; 테마를 적용하면, 추가적으로 변경하지 않는 한 모든 액티비티가 동일한 버튼 스타일을 갖는 것이다.&lt;/p&gt;
 
 &lt;p&gt;이 밖에도 다양한 뷰에 대해 공통 스타일을 적용할 수 있으므로 참으로 편리하다.
-물론, 스타일링뿐 아니라 다른 기능도 적용하고 싶으면 서브 클래스로 정의하는 것이 더 나을 수 있다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 8: HTTP 메시지로 다중 파일 업로드하기</title><link href="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/" rel="alternate" type="text/html" title="TIL 8: HTTP 메시지로 다중 파일 업로드하기" /><published>2020-05-19T00:00:00+09:00</published><updated>2020-05-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;동일한 파라미터&lt;/strong&gt;에 여러 번에 걸쳐 파일을 추가함으로써, &lt;strong&gt;다중 파일&lt;/strong&gt;을 업로드할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;동일한-파라미터냐-배열-형태의-파라미터냐-그것이-문제로다&quot;&gt;동일한 파라미터냐 배열 형태의 파라미터냐 그것이 문제로다.&lt;/h2&gt;
-
-&lt;p&gt;매번 단일 파일 업로드만 구현하다가 이번에 &lt;strong&gt;다중 파일 업로드&lt;/strong&gt;가 필요한 요구사항이 들어 왔다.&lt;br /&gt;
-앱에는 이미 오픈 소스 라이브러리를 사용하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;NSURLSessionTask&lt;/code&gt;를 이용한 네트워크 처리가 되어 있었다.
-그래서 기존 코드를 다 뒤집기 보다는 기존처럼 공식 프레임워크로 구현하려 했다.&lt;/p&gt;
-
-&lt;p&gt;직접 구현을 하게 되면, 파일 업로드를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;multipart/form-data&lt;/code&gt;의 Content Type으로 API를 호출해야 한다.
-그것을 위해 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지의 Request Body를 구성해야 했고, 경험한 적이 있어서 어렵지 않게 기본적인 Body를 구성할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;처음에는 서버쪽에서 배열로 파일 목록을 받으니 특정한 패턴으로 파라미터를 구분해 파일을 담아야 하는줄 알았다.
-실제로 구글링을 할 때도 &lt;code class=&quot;highlighter-rouge&quot;&gt;files[0]&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;files[1]&lt;/code&gt; 등과 같이 구분해 담으라는 답변이 있었다.
-그럴듯해서 그대로 시도를 했으나 잘 안되어, 파라미터에 문제가 있지 않고 Body 구성에 실수가 있는줄 알고 그 부분만 계속 살펴 봤다.&lt;/p&gt;
-
-&lt;p&gt;결국 &lt;strong&gt;해결책은 매우 간단하게 동일한 파라미터에 차례대로 담으면 되는 것&lt;/strong&gt;이었다. 🙄&lt;br /&gt;
-파일이 아닌 다른 데이터도 서버에서 배열로 받는다면, 똑같이 동일한 파라미터에 데이터를 담으면 된다.&lt;/p&gt;
-
-&lt;p&gt;개인적으로 동일한 파라미터로 보내면, 순서를 어떻게 구분할까 싶었는데 그 원리는 생각보다 아주 단순해 보였다.
-위에서부터 차례대로 읽으면서 인덱스가 쌓이는 구조로 보인다.&lt;br /&gt;
-&lt;strong&gt;두 종류의 데이터를 같은 인덱스로 보내고 싶으면, 순서에 유의해서 데이터를 담아야 한다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;이렇게 직접 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지를 구성하며 구현하는 것도 재미는 있지만, 역시 신뢰도 높은 오픈 소스 라이브러리가 사용하기에 편하다. 😌&lt;br /&gt;
-그래도 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTTP&lt;/code&gt; 메시지 구조를 모르고 오픈 소스 라이브러리를 사용하는 것과 알고 쓰는 것은 아주 다르니 꾸준히 공부해야겠다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><category term="http" /><summary type="html">TL;DR</summary></entry></feed>
+물론, 스타일링뿐 아니라 다른 기능도 적용하고 싶으면 서브 클래스로 정의하는 것이 더 나을 수 있다. 🙄&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
