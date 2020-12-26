@@ -1,0 +1,417 @@
+[
+  
+    {
+      "title"      : "TIL 19: Simple-Jekyll-Search 오픈 소스 기여",
+      "categories" : "Etc > TIL",
+      "tags"       : "oss, jekyll, javascript",
+      "date"       : "2020.12.26",
+      "urlString"  : "/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/",
+      "url"        : "/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/"
+    },
+  
+    {
+      "title"      : "TIL 18: 자잘한 안드로이드 UI 팁들 2",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, ui",
+      "date"       : "2020.06.15",
+      "urlString"  : "/posts/2020/06/15/til-18-some-android-ui-tips-2/",
+      "url"        : "/posts/2020/06/15/til-18-some-android-ui-tips-2/"
+    },
+  
+    {
+      "title"      : "TIL 17: 자잘한 안드로이드 UI 팁들",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, ui",
+      "date"       : "2020.06.09",
+      "urlString"  : "/posts/2020/06/09/til-17-some-android-ui-tips/",
+      "url"        : "/posts/2020/06/09/til-17-some-android-ui-tips/"
+    },
+  
+    {
+      "title"      : "TIL 16: 레거시 시스템은 지옥",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2020.06.05",
+      "urlString"  : "/posts/2020/06/05/til-16-legacy-system-is-hell/",
+      "url"        : "/posts/2020/06/05/til-16-legacy-system-is-hell/"
+    },
+  
+    {
+      "title"      : "TIL 15: Notion은 유용해",
+      "categories" : "Etc > TIL",
+      "tags"       : "tool",
+      "date"       : "2020.05.31",
+      "urlString"  : "/posts/2020/05/31/til-15-notion-is-useful/",
+      "url"        : "/posts/2020/05/31/til-15-notion-is-useful/"
+    },
+  
+    {
+      "title"      : "TIL 14: TimePicker 때문에 자바의 Reflection을 쓰게 되다...",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, java, ui",
+      "date"       : "2020.05.28",
+      "urlString"  : "/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/",
+      "url"        : "/posts/2020/05/28/til-14-long-time-no-see-reflection-of-java-for-time-picker/"
+    },
+  
+    {
+      "title"      : "TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, android-studio",
+      "date"       : "2020.05.27",
+      "urlString"  : "/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/",
+      "url"        : "/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/"
+    },
+  
+    {
+      "title"      : "TIL 12: iOS에 Auto Layout이 있다면, Android에는 ConstraintLayout이 있다!",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, ui",
+      "date"       : "2020.05.25",
+      "urlString"  : "/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout/",
+      "url"        : "/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout/"
+    },
+  
+    {
+      "title"      : "TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, objective-c, gcd",
+      "date"       : "2020.05.22",
+      "urlString"  : "/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/",
+      "url"        : "/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/"
+    },
+  
+    {
+      "title"      : "TIL 10: 폰트를 적용했는데 뜬금없는 패딩이 들어가 있다면?",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, ui",
+      "date"       : "2020.05.21",
+      "urlString"  : "/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text/",
+      "url"        : "/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text/"
+    },
+  
+    {
+      "title"      : "TIL 9: 안드로이드 커스텀 스타일 적용하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, ui",
+      "date"       : "2020.05.20",
+      "urlString"  : "/posts/2020/05/20/til-9-applying-custom-style-in-android/",
+      "url"        : "/posts/2020/05/20/til-9-applying-custom-style-in-android/"
+    },
+  
+    {
+      "title"      : "TIL 8: HTTP 메시지로 다중 파일 업로드하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, objective-c, http",
+      "date"       : "2020.05.19",
+      "urlString"  : "/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/",
+      "url"        : "/posts/2020/05/19/til-8-uploading-multiple-files-with-http-message/"
+    },
+  
+    {
+      "title"      : "TIL 7: MRC 속 ARC 조심하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, objective-c",
+      "date"       : "2020.05.18",
+      "urlString"  : "/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc/",
+      "url"        : "/posts/2020/05/18/til-7-be-careful-about-arc-in-mrc/"
+    },
+  
+    {
+      "title"      : "TIL 6: unowned 레퍼런스 피하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, swift",
+      "date"       : "2020.05.17",
+      "urlString"  : "/posts/2020/05/17/til-6-avoiding-unowned-reference/",
+      "url"        : "/posts/2020/05/17/til-6-avoiding-unowned-reference/"
+    },
+  
+    {
+      "title"      : "TIL 5: Network Activity Indicator가 사라지다",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, ui",
+      "date"       : "2020.05.16",
+      "urlString"  : "/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/",
+      "url"        : "/posts/2020/05/16/til-5-network-activity-indicator-is-deprecated/"
+    },
+  
+    {
+      "title"      : "TIL 4: MRC는 괴로워",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios",
+      "date"       : "2020.05.15",
+      "urlString"  : "/posts/2020/05/15/til-4-mrc-is-painful/",
+      "url"        : "/posts/2020/05/15/til-4-mrc-is-painful/"
+    },
+  
+    {
+      "title"      : "TIL 3: 안드로이드 테스트는 힘들어 (feat. 파편화)",
+      "categories" : "Etc > TIL",
+      "tags"       : "android, test",
+      "date"       : "2020.05.14",
+      "urlString"  : "/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/",
+      "url"        : "/posts/2020/05/14/til-3-android-testing-is-so-hard-feat-fragmentation/"
+    },
+  
+    {
+      "title"      : "TIL 2: 팀 간 의사소통의 중요성",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2020.05.13",
+      "urlString"  : "/posts/2020/05/13/til-2-importance-of-communication-between-teams/",
+      "url"        : "/posts/2020/05/13/til-2-importance-of-communication-between-teams/"
+    },
+  
+    {
+      "title"      : "TIL 1: Today I Learned 기록 시작",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2020.05.12",
+      "urlString"  : "/posts/2020/05/12/til-1-starting-today-i-learned/",
+      "url"        : "/posts/2020/05/12/til-1-starting-today-i-learned/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 15649 - N과 M (1)",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, backtracking, dfs, python",
+      "date"       : "2020.04.13",
+      "urlString"  : "/posts/2020/04/13/baekjoon-problem-solving-15649/",
+      "url"        : "/posts/2020/04/13/baekjoon-problem-solving-15649/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 4673 - 셀프 넘버",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, sieve-of-eratosthenes, python",
+      "date"       : "2020.04.05",
+      "urlString"  : "/posts/2020/04/05/baekjoon-problem-solving-4673/",
+      "url"        : "/posts/2020/04/05/baekjoon-problem-solving-4673/"
+    },
+  
+    {
+      "title"      : "기본 상태바 스타일을 Dark로 만드는 방법",
+      "categories" : "Mobile > iOS",
+      "tags"       : "ios, swift, ui, dark-mode",
+      "date"       : "2020.03.31",
+      "urlString"  : "/posts/2020/03/31/how-to-make-default-status-bar-style-dark/",
+      "url"        : "/posts/2020/03/31/how-to-make-default-status-bar-style-dark/"
+    },
+  
+    {
+      "title"      : "Xcode 11에서 Archive 버튼이 비활성화된 경우",
+      "categories" : "Mobile > iOS",
+      "tags"       : "ios, xcode",
+      "date"       : "2020.03.25",
+      "urlString"  : "/posts/2020/03/25/when-archive-disabled-in-xcode-11/",
+      "url"        : "/posts/2020/03/25/when-archive-disabled-in-xcode-11/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 7568 - 덩치",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, brute-force, python",
+      "date"       : "2020.02.03",
+      "urlString"  : "/posts/2020/02/03/baekjoon-problem-solving-7568/",
+      "url"        : "/posts/2020/02/03/baekjoon-problem-solving-7568/"
+    },
+  
+    {
+      "title"      : "Xcode 11에서 스토리보드와 SceneDelegate 없이 Swift 프로젝트 시작하기",
+      "categories" : "Mobile > iOS",
+      "tags"       : "ios, swift, xcode, storyboard, scene",
+      "date"       : "2020.01.16",
+      "urlString"  : "/posts/2020/01/16/starting-swift-project-without-storyboard-and-scenedelegate-in-xcode-11/",
+      "url"        : "/posts/2020/01/16/starting-swift-project-without-storyboard-and-scenedelegate-in-xcode-11/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 11727 - 2×n 타일링 2",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, dynamic-programming, python",
+      "date"       : "2020.01.14",
+      "urlString"  : "/posts/2020/01/14/baekjoon-problem-solving-11727/",
+      "url"        : "/posts/2020/01/14/baekjoon-problem-solving-11727/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 2156 - 포도주 시식",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, dynamic-programming, python",
+      "date"       : "2020.01.10",
+      "urlString"  : "/posts/2020/01/10/baekjoon-problem-solving-2156/",
+      "url"        : "/posts/2020/01/10/baekjoon-problem-solving-2156/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 2193 - 이친수",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, dynamic-programming, python",
+      "date"       : "2020.01.09",
+      "urlString"  : "/posts/2020/01/09/baekjoon-problem-solving-2193/",
+      "url"        : "/posts/2020/01/09/baekjoon-problem-solving-2193/"
+    },
+  
+    {
+      "title"      : "백준 문제 풀이: 9095 - 1, 2, 3 더하기",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, dynamic-programming, python",
+      "date"       : "2020.01.07",
+      "urlString"  : "/posts/2020/01/07/baekjoon-problem-solving-9095/",
+      "url"        : "/posts/2020/01/07/baekjoon-problem-solving-9095/"
+    },
+  
+    {
+      "title"      : "Jekyll에 Disqus 댓글 서비스 연동하기",
+      "categories" : "Etc > Blog",
+      "tags"       : "github-pages, jekyll, disqus",
+      "date"       : "2020.01.03",
+      "urlString"  : "/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/",
+      "url"        : "/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 230B - T-primes",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, sieve-of-eratosthenes, python",
+      "date"       : "2019.12.23",
+      "urlString"  : "/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/",
+      "url"        : "/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/"
+    },
+  
+    {
+      "title"      : "Linux 부팅 시, 서비스 자동으로 시작하기",
+      "categories" : "Infra > OS",
+      "tags"       : "linux, command",
+      "date"       : "2019.12.20",
+      "urlString"  : "/posts/2019/12/20/starting-service-automatically-on-boot-in-linux/",
+      "url"        : "/posts/2019/12/20/starting-service-automatically-on-boot-in-linux/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 4C - Registration system",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.20",
+      "urlString"  : "/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/",
+      "url"        : "/posts/2019/12/20/codeforces-problem-solving-4c-registration-system/"
+    },
+  
+    {
+      "title"      : "Docker 컨테이너 자동으로 시작하기",
+      "categories" : "Infra > Virtualization",
+      "tags"       : "docker, container",
+      "date"       : "2019.12.19",
+      "urlString"  : "/posts/2019/12/19/starting-container-automatically/",
+      "url"        : "/posts/2019/12/19/starting-container-automatically/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 337A - Puzzles",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, greedy-algorithm, python",
+      "date"       : "2019.12.19",
+      "urlString"  : "/posts/2019/12/19/codeforces-problem-solving-337a-puzzles/",
+      "url"        : "/posts/2019/12/19/codeforces-problem-solving-337a-puzzles/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 58A - Chat room",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, greedy-algorithm, regex, python",
+      "date"       : "2019.12.10",
+      "urlString"  : "/posts/2019/12/10/codeforces-problem-solving-58a-chat-room/",
+      "url"        : "/posts/2019/12/10/codeforces-problem-solving-58a-chat-room/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 263A - Beautiful Matrix",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.09",
+      "urlString"  : "/posts/2019/12/09/codeforces-problem-solving-263a-beautiful-matrix/",
+      "url"        : "/posts/2019/12/09/codeforces-problem-solving-263a-beautiful-matrix/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 158B - Taxi",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, greedy-algorithm, python",
+      "date"       : "2019.12.09",
+      "urlString"  : "/posts/2019/12/09/codeforces-problem-solving-158b-taxi/",
+      "url"        : "/posts/2019/12/09/codeforces-problem-solving-158b-taxi/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 50A - Domino piling",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.06",
+      "urlString"  : "/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/",
+      "url"        : "/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 231A - Team",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.05",
+      "urlString"  : "/posts/2019/12/05/codeforces-problem-solving-231a-team/",
+      "url"        : "/posts/2019/12/05/codeforces-problem-solving-231a-team/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 71A - Way Too Long Words",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.03",
+      "urlString"  : "/posts/2019/12/03/codeforces-problem-solving-71a-way-too-long-words/",
+      "url"        : "/posts/2019/12/03/codeforces-problem-solving-71a-way-too-long-words/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 158A - Next Round",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.03",
+      "urlString"  : "/posts/2019/12/03/codeforces-problem-solving-158a-next-round/",
+      "url"        : "/posts/2019/12/03/codeforces-problem-solving-158a-next-round/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 118A - String Task",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.03",
+      "urlString"  : "/posts/2019/12/03/codeforces-problem-solving-118a-string-task/",
+      "url"        : "/posts/2019/12/03/codeforces-problem-solving-118a-string-task/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 4A - Watermelon",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python, kotlin",
+      "date"       : "2019.12.02",
+      "urlString"  : "/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/",
+      "url"        : "/posts/2019/12/02/codeforces-problem-solving-4a-watermelon/"
+    },
+  
+    {
+      "title"      : "Codeforces 문제 풀이: 1A - Theatre Square",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, codeforces, python",
+      "date"       : "2019.12.02",
+      "urlString"  : "/posts/2019/12/02/codeforces-problem-solving-1a-theatre-square/",
+      "url"        : "/posts/2019/12/02/codeforces-problem-solving-1a-theatre-square/"
+    },
+  
+    {
+      "title"      : "Jekyll 환경설정 파일 이해하기",
+      "categories" : "Etc > Blog",
+      "tags"       : "github-pages, jekyll",
+      "date"       : "2019.11.28",
+      "urlString"  : "/posts/2019/11/28/understanding-jekyll-config-file/",
+      "url"        : "/posts/2019/11/28/understanding-jekyll-config-file/"
+    }
+  
+]

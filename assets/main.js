@@ -1,5 +1,7 @@
-importJavaScript('scrollToTop');
-importJavaScript('copyEmailToClipboard');
+importJavaScript('utils/extension-String');
+importJavaScript('utils/scroll-to-top');
+importJavaScript('utils/copy-email-to-clipboard');
+importJavaScript('simple-jekyll-search.min');
 
 $(document).ready(function() {
   setupScrollToTopButton();
