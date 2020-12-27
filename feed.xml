@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-12-27T04:31:52+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 19: Simple-Jekyll-Search 오픈 소스 기여</title><link href="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/" rel="alternate" type="text/html" title="TIL 19: Simple-Jekyll-Search 오픈 소스 기여" /><published>2020-12-26T00:00:00+09:00</published><updated>2020-12-26T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss</id><content type="html" xml:base="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2020-12-27T16:26:39+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 19: Simple-Jekyll-Search 오픈 소스 기여</title><link href="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/" rel="alternate" type="text/html" title="TIL 19: Simple-Jekyll-Search 오픈 소스 기여" /><published>2020-12-26T00:00:00+09:00</published><updated>2020-12-26T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss</id><content type="html" xml:base="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;이 블로그에 검색 기능을 넣고 싶어서
@@ -42,7 +42,14 @@
 
 &lt;p&gt;OSS들을 보다 보면 생각보다 작은 덩치도 많고, 그런 프로젝트는 진입 장벽도 높지 않으니 자주 시도해보는 것이 좋을 것 같다.
 이것이 쌓이면, 큰 프로젝트에 기여하는 것도 불가능한 일은 아닐 것 같다.&lt;br /&gt;
-기여한 OSS가 많아지면 그 뿌듯함도 점점 쌓여가지 않을까? 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="oss" /><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 18: 자잘한 안드로이드 UI 팁들 2</title><link href="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/" rel="alternate" type="text/html" title="TIL 18: 자잘한 안드로이드 UI 팁들 2" /><published>2020-06-15T00:00:00+09:00</published><updated>2020-06-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+기여한 OSS가 많아지면 그 뿌듯함도 점점 쌓여가지 않을까? 🙂&lt;/p&gt;
+
+&lt;h2 id=&quot;20201227-내용-추가&quot;&gt;2020.12.27 내용 추가&lt;/h2&gt;
+
+&lt;p&gt;해당 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/pull/162&quot; target=&quot;_blank&quot;&gt;PR&lt;/a&gt;의
+Merge가 받아들여졌다!&lt;br /&gt;
+매우 뿌듯하고, 해당 프로젝트를 더 발전시키고 싶은 욕심이 생긴다.&lt;br /&gt;
+불편했던 기능이 하나 있는데… 그것도 바꿔볼까? 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="oss" /><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 18: 자잘한 안드로이드 UI 팁들 2</title><link href="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/" rel="alternate" type="text/html" title="TIL 18: 자잘한 안드로이드 UI 팁들 2" /><published>2020-06-15T00:00:00+09:00</published><updated>2020-06-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수로 전달한 인자에 따른 주의사항&lt;/li&gt;
@@ -54,8 +61,6 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt; 사용 시, 고정 높이가 적용되지 않는 경우&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;로 적용하는 경우 주의사항&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;자잘한-안드로이드-ui-팁들-2&quot;&gt;자잘한 안드로이드 UI 팁들 2&lt;/h2&gt;
 
@@ -147,8 +152,6 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EditText&lt;/code&gt; 내부 스크롤을 활성화하고 싶은 경우&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;자잘한-안드로이드-ui-팁들&quot;&gt;자잘한 안드로이드 UI 팁들&lt;/h2&gt;
 
 &lt;p&gt;안드로이드 개발을 하면서 느끼는 점은 iOS 개발도 불편한 부분이 많았지만, 안드로이드는 더 심한 것처럼 느껴진다.
@@ -228,8 +231,6 @@
   &lt;li&gt;레거시 시스템은 가능하면 빨리 개선해서 지옥을 맞이하지 않도록 하자.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;뉴저지-코볼cobol-사건으로-느껴지는-레거시-시스템의-폐해&quot;&gt;뉴저지 코볼(COBOL) 사건으로 느껴지는 레거시 시스템의 폐해&lt;/h2&gt;
 
 &lt;p&gt;노마드 코더는 즐겨보는 유튜버 중 한명으로 다양한 프로그래밍 관련 이야기를 해준다.&lt;br /&gt;
@@ -260,8 +261,6 @@
   &lt;li&gt;&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt; 툴은 개발자를 위한 &lt;strong&gt;메모 및 글 관리&lt;/strong&gt;에 유용하다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;개발자를-위한-메모-및-글-관리-툴&quot;&gt;개발자를 위한 메모 및 글 관리 툴&lt;/h2&gt;
 
 &lt;p&gt;개발을 하다보면 Code Snippet, 유용한 링크, 메모 등을 빠르게 작성하고, 보관하고 싶을 것이다.&lt;br /&gt;
@@ -284,8 +283,6 @@
 &lt;ul&gt;
   &lt;li&gt;기본으로 제공되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;를 커스텀하기 위해 자바의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;을 사용할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;뭔가-제약이-많은-기본-timepicker&quot;&gt;뭔가 제약이 많은 기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;&lt;/h2&gt;
 
@@ -321,8 +318,6 @@
 Android Studio의 &lt;strong&gt;Image Asset Studio&lt;/strong&gt;를 이용하면 쉽게 &lt;strong&gt;여러 종류의 아이콘(적응형 및 레거시 아이콘 포함)&lt;/strong&gt;을 생성할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;적응형-및-레거시-아이콘-추가를-위한-image-asset-studio&quot;&gt;적응형 및 레거시 아이콘 추가를 위한 Image Asset Studio&lt;/h2&gt;
 
 &lt;p&gt;안드로이드 개발자라면 많은 사람들이 Android Studio를 사용할 것이다.&lt;br /&gt;
@@ -344,8 +339,6 @@ Android Studio는 안드로이드 개발자에게 정말 축복같은 IDE인 것
   &lt;li&gt;안드로이드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt;을 사용하면,&lt;br /&gt;
 iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt; 컨셉으로 레이아웃을 구성할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;ios-개발자에게-반가운-안드로이드의-constraintlayout&quot;&gt;iOS 개발자에게 반가운 안드로이드의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt;&lt;/h2&gt;
 
@@ -375,8 +368,6 @@ iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt; 
 간단히 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 시리즈를 활용할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;모든-이미지-다운로드가-완료-됐을-때-로딩바-숨기기&quot;&gt;모든 이미지 다운로드가 완료 됐을 때, 로딩바 숨기기&lt;/h2&gt;
 
 &lt;p&gt;동적으로 화면에 이미지를 보여주기 위해 다운로드가 필요할 때가 있다.
@@ -403,8 +394,6 @@ iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt; 
   &lt;li&gt;커스텀 폰트를 적용했을 때 글자에 자동으로 추가되는 상하 패딩을 없애려면,&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;includeFontPadding&lt;/code&gt; 속성을 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 설정한다.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;당황스러운-글자의-상하-패딩&quot;&gt;당황스러운 글자의 상하 패딩&lt;/h2&gt;
 
