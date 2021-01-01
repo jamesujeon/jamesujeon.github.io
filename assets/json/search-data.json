@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 20: 2020년 회고",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2021.01.01",
+      "urlString"  : "/posts/2021/01/01/til-20-2020-retrospective/",
+      "url"        : "/posts/2021/01/01/til-20-2020-retrospective/"
+    },
+  
+    {
       "title"      : "TIL 19: Simple-Jekyll-Search 오픈 소스 기여",
       "categories" : "Etc > TIL",
       "tags"       : "oss, jekyll, javascript",
