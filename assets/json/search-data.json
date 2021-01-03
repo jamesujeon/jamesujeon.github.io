@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "Jekyll에 검색 페이지 추가하기",
+      "categories" : "Etc > Blog",
+      "tags"       : "jekyll, javascript",
+      "date"       : "2021.01.03",
+      "urlString"  : "/posts/2021/01/03/adding-search-page-on-jekyll/",
+      "url"        : "/posts/2021/01/03/adding-search-page-on-jekyll/"
+    },
+  
+    {
       "title"      : "TIL 20: 2020년 회고",
       "categories" : "Etc > TIL",
       "tags"       : "idea",

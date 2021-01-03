@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Jekyll에 검색 페이지 추가하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Jekyll에 검색 페이지 추가하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-03T00:00:00+09:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/","@type":"BlogPosting","headline":"Jekyll에 검색 페이지 추가하기","dateModified":"2021-01-03T00:00:00+09:00","datePublished":"2021-01-03T00:00:00+09:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/blog" class="category-item">
+        Blog
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Jekyll에 검색 페이지 추가하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/jekyll" class="tag-item">
+        #jekyll
+      </a>
+    
+      <a href="/tags/javascript" class="tag-item">
+        #javascript
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-01-03 00:00:00 +0900">2021.01.03</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>검색 기능으로 <a href="https://github.com/christian-fei/Simple-Jekyll-Search" target="_blank">Simple-Jekyll-Search</a>
+라이브러리를 사용하면, Jekyll에 간단한 검색 기능을 추가할 수 있다.</li>
+</ul>
+
+<h2 id="개요">개요</h2>
+
+<p>블로그에 글을 올리다 보니 간혹 내가 필요한 정보를 찾고 싶을 때 찾을 수 없는 치명적인 문제가 있었다.
+그래서 검색 기능의 필요성을 절실히 느꼈고, 어떻게 구현하면 좋을지 컨셉을 고민했다.
+현재 블로그의 형태 특성상 검색창이 항상 보이는 것보다 <strong>검색 기능에만 집중할 수 있는 검색 페이지</strong>를 구현해야겠다는 결론에 도달했다.</p>
+
+<p>이제 방법을 생각해야 하는데, 정적 사이트 특성상 데이터를 위한 별도의 서버를 가지고 있지 않기 때문에
+일반적인 서비스의 구현하고 다른 방식의 관점으로 접근해야 했다.
+검색할 데이터를 미리 준비하고, 해당 데이터에서 원하는 항목을 검색한 후 보여줘야겠다고 생각했다.</p>
+
+<p>마침 <a href="https://github.com/christian-fei/Simple-Jekyll-Search" target="_blank">Simple-Jekyll-Search</a>라는
+말그대로 심플한 컨셉의 Jekyll 검색 기능을 위한 오픈 소스 라이브러리가 있었다.
+내가 생각했던 것처럼 JSON 파일 형식으로 미리 데이터를 준비하고, 해당 파일로부터 원하는 항목을 검색해 정보로 조립하는 것이었다.
+작성일 기준 1.1K 개의 별을 가지고 있을 만큼 신뢰성이 어느 정도 있었기 때문에 바로 사용하기로 했다.</p>
+
+<h2 id="simple-jekyll-search-연동하기">Simple-Jekyll-Search 연동하기</h2>
+
+<p>나는 여러가지 방법 중에 직접 필요한 부분만 블로그에 넣는 방식으로 연동을 진행했다.
+결국에는 Jekyll의 빌드 과정과 JavaScript의 로직을 통해 검색 기능이 구현되는 것이기 때문에 관련한 것만 잘 연동한다면,
+최소한의 파일만 사용해서 원하는대로 동작 구현이 가능하다.</p>
+
+<p>연동에 앞서 오픈 소스 라이브러리를 사용할 때 가장 이해하기 쉬운 방법이
+<a href="https://github.com/christian-fei/Simple-Jekyll-Search/tree/master/example" target="_blank">예제</a>와
+<a href="https://github.com/christian-fei/Simple-Jekyll-Search/wiki" target="_blank">가이드</a>를 보는 것이라 생각한다.
+연동 과정이 이해가 가지 않는 경우, 앞의 링크를 참고해 실제 코드와 가이드를 보면서 동작 방식을 이해한다면 더 수월하게 연동을 할 수 있을 것이다.</p>
+
+<h3 id="1-필요한-파일-넣기">1. 필요한 파일 넣기</h3>
+
+<p>원하는 기능에 따라 필요한 파일은 다를 수 있지만, 기본적으로 다음과 같은 파일만 있으면 된다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">simple-jekyll-search.min.js</code> 또는 <code class="highlighter-rouge">simple-jekyll-search.js</code>
+(<a href="https://github.com/christian-fei/Simple-Jekyll-Search/tree/master/example/js" target="_blank">링크</a>)</li>
+  <li><code class="highlighter-rouge">search.json</code>
+(<a href="https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/search.json" target="_blank">링크</a>)</li>
+</ul>
+
+<p>JavaScript 파일은 검색 데이터로부터 <strong>검색 기능</strong>을 사용하기 위한 라이브러리 파일이고,
+JSON 파일은 검색 대상이 되는 <strong>검색 데이터</strong>를 준비하기 위한 파일이다.</p>
+
+<p><code class="highlighter-rouge">*.min.js</code> 파일은 <code class="highlighter-rouge">*.js</code> 파일의 압축 버전이라 보면 된다.<br />
+동일한 로직으로 구현되어 있기 때문에 어느 쪽을 사용해도 무관하다.
+만약 커스터마이징을 하고 싶은 경우, <code class="highlighter-rouge">*.min.js</code> 파일을 수정하는 것은 매우 난감하기 때문에
+<code class="highlighter-rouge">*.js</code> 파일을 사용하는 것을 추천한다.</p>
+
+<p><code class="highlighter-rouge">simple_search_filter.rb</code>와 같은 플러그인은 왜 추가하지 않는지 의문이 있을 수 있다.
+해당 코드를 보면 함수 몇가지를 정의해 놓았는데, 해당 함수를 사용하지 않으며 필수적으로 필요하지도 않기 때문에 첨부하지 않았다.</p>
+
+<h3 id="2-검색-데이터-준비">2. 검색 데이터 준비</h3>
+
+<p>Jekyll로 만든 블로그는 정적 사이트이기 때문에 검색을 하기 위해 미리 생성된 데이터가 필요하다.
+(물론, 별도의 서버를 가지고 있거나 데이터를 준비하는 곳이 있다면 상관 없다.)
+이를 위해 예제 프로젝트에 있는 <strong><code class="highlighter-rouge">search.json</code> 파일</strong>이 필요하다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre>---
+layout: none
+---
+[
+  {% for post in site.posts %}
+    {
+      "title"    : "{{ post.title | escape }}",
+      "category" : "{{ post.category }}",
+      "tags"     : "{{ post.tags | join: ', ' }}",
+      "url"      : "{{ site.baseurl }}{{ post.url }}",
+      "date"     : "{{ post.date }}"
+    } {% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>해당 파일을 보면 위와 같이 되어 있는데, <strong>Jekyll의 Liquid 문법으로 JSON 데이터를 생성</strong>하는 것을 볼 수 있다.
+전체 포스트를 순회하며 제목, 카테고리, 태그, URL, 날짜 등을 객체로 구성해 배열로 만든다.
+따라서 Jekyll로 사이트를 생성할 때 검색 데이터가 JSON 배열로 준비된다.</p>
+
+<p>검색 대상이 되길 원하는 항목이 더 있다면, JSON과 Liquid 문법에 맞춰 추가하면 검색 대상에 포함된다.<br />
+참고로 현재 구현된 검색 페이지에 사용되는 JSON 파일은 다음과 같다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>---
+layout: none
+---
+[
+  {% for post in site.posts %}
+    {
+      "title"      : {{ post.title | jsonify }},
+      "categories" : "{{ post.categories | join: ' &gt; ' }}",
+      "tags"       : "{{ post.tags | join: ', ' }}",
+      "date"       : "{{ post.date | date: '%Y.%m.%d' }}",
+      "urlString"  : "{{ post.url }}",
+      "url"        : "{{ post.url | prepend: site.baseurl }}"
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>이처럼 검색되길 원하는 문자열로 구성해 데이터를 준비할 수 있도록 한다.<br />
+(<code class="highlighter-rouge">urlString</code>의 경우, 추후 사용되는 목적이 있어 추가로 넣었다.)</p>
+
+<h3 id="3-검색-부분-레이아웃-구성">3. 검색 부분 레이아웃 구성</h3>
+
+<p>검색 기능을 위해 일반적으로 <strong>검색어 입력</strong>을 위한 입력 부분과 <strong>검색 결과</strong>를 보여주기 위한 출력 부분이 필요하다.
+<a href="https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/_layouts/default.html" target="_blank">예제 프로젝트</a>에서는
+<code class="highlighter-rouge">search-demo-container</code> ID의 <code class="highlighter-rouge">div</code> 요소 안에 <code class="highlighter-rouge">search-input</code> ID의 <code class="highlighter-rouge">input</code> 요소를 입력 부분으로,
+<code class="highlighter-rouge">results-container</code> ID의 <code class="highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
+
+<p>일반적으로 그것과 동일하게 사용하면 된다.<br />
+참고로 현재 구현된 검색 페이지에 사용되는 레이아웃은 꾸미는 것을 가미해 다음과 같이 작성했다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"common-header search"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"search"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fas fa-search fa-fw"</span><span class="nt">&gt;&lt;/i&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"search-input"</span> 
+      <span class="na">type=</span><span class="s">"search"</span> 
+      <span class="na">tabindex=</span><span class="s">"1"</span> 
+      <span class="na">spellcheck=</span><span class="s">"false"</span> 
+      <span class="na">placeholder=</span><span class="s">"Search"</span>
+    <span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"search-results"</span><span class="nt">&gt;&lt;/ul&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>예제 프로젝트와 비슷하게 <code class="highlighter-rouge">search-input</code> ID의 <code class="highlighter-rouge">input</code> 요소를 입력 부분으로,
+<code class="highlighter-rouge">search-results</code> ID의 <code class="highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
+
+<h3 id="4-검색-기능-연동">4. 검색 기능 연동</h3>
+
+<p><a href="https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/_layouts/default.html" target="_blank">예제 프로젝트</a>의
+하단 부분을 보면, 다음과 같이 JavaScript 코드가 작성되어 있는 것을 볼 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"{{ site.baseurl }}/js/simple-jekyll-search.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">simpleJekyllSearch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleJekyllSearch</span><span class="p">({</span>
+    <span class="na">searchInput</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">search-input</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">resultsContainer</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">results-container</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">json</span><span class="p">:</span> <span class="dl">'</span><span class="s1">{{ site.baseurl }}/search.json</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">searchResultTemplate</span><span class="p">:</span> <span class="dl">'</span><span class="s1">&lt;li&gt;&lt;a href="{url}?query={query}" title="{desc}"&gt;{title}&lt;/a&gt;&lt;/li&gt;</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">noResultsText</span><span class="p">:</span> <span class="dl">'</span><span class="s1">No results found</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">limit</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="na">fuzzy</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="na">exclude</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Welcome</span><span class="dl">'</span><span class="p">]</span>
+  <span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><code class="highlighter-rouge">simple-jekyll-search.min.js</code> 파일을 불러와 사용하고 있으며, 해당 파일을 어디에 두었냐에 따라 경로는 변경될 수 있다.
+또한, 편의를 위해 전체 JavaScript 파일을 불러오는 곳에서 해당 파일을 불러와도 된다.</p>
+
+<p>검색 기능을 연동하기 위해 <strong><code class="highlighter-rouge">SimpleJekyllSearch</code> 객체를 생성해 <code class="highlighter-rouge">window.simpleJekyllSearch</code>에 할당</strong>해야 한다.
+그 이후부터는 전달한 옵션에 따라 검색 기능이 작동하게 된다.</p>
+
+<p>여기서 가장 중요한 부분은 필수 옵션을 정확히 세팅해야 한다는 것이다.<br />
+헷갈리는 것이 있다면, <a href="https://github.com/christian-fei/Simple-Jekyll-Search/wiki" target="_blank">가이드</a>를 참고해
+세팅하길 바란다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">searchInput</code>: 입력 부분에 해당하는 요소</li>
+  <li><code class="highlighter-rouge">resultsContainer</code>: 출력 부분에 해당하는 요소</li>
+  <li><code class="highlighter-rouge">json</code>: 검색 대상이 되는 검색 데이터가 있는 JSON 파일</li>
+  <li><code class="highlighter-rouge">searchResultTemplate</code>: 검색된 항목이 출력 부분에 표시되는 레이아웃.<br />
+<code class="highlighter-rouge">{}</code> 안에 JSON 객체의 Key를 입력해 검색된 데이터를 맵핑한다.</li>
+</ul>
+
+<p>참고로 현재 구현된 검색 페이지에 사용되는 JavaScript 코드는 다음과 같다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+</pre></td><td class="code"><pre><span class="nt">&lt;script&gt;</span>
+  <span class="kd">const</span> <span class="nx">pointColor</span> <span class="o">=</span> <span class="nx">getComputedStyle</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">).</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="dl">'</span><span class="s1">--point-color</span><span class="dl">'</span><span class="p">);</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">simpleJekyllSearch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SimpleJekyllSearch</span><span class="p">({</span>
+    <span class="na">searchInput</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">search-input</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">resultsContainer</span><span class="p">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">search-results</span><span class="dl">'</span><span class="p">),</span>
+    <span class="na">json</span><span class="p">:</span> <span class="dl">'</span><span class="s1">{{ site.baseurl }}/assets/json/search-data.json</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">searchResultTemplate</span><span class="p">:</span> <span class="s2">`
+      &lt;li&gt;
+        &lt;div&gt;
+          &lt;i class="fas fa-folder fa-fw"&gt;&lt;/i&gt;
+          &lt;a href="{url}"&gt;{categories}&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;i class="fas fa-book fa-fw"&gt;&lt;/i&gt;
+          &lt;a href="{url}"&gt;{title}&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;i class="fas fa-tags fa-fw"&gt;&lt;/i&gt;
+          &lt;a href="{url}"&gt;{tags}&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;i class="fas fa-calendar-alt fa-fw"&gt;&lt;/i&gt;
+          &lt;a href="{url}"&gt;{date}&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;i class="fas fa-link fa-fw"&gt;&lt;/i&gt;
+          &lt;a href="{url}" style="font-size: 1rem;"&gt;{urlString}&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/li&gt;
+    `</span><span class="p">,</span>
+    <span class="na">templateMiddleware</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">template</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">prop</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">url</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kd">const</span> <span class="nx">queries</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">search-input</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span>
+        <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">s</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+        <span class="p">},</span> <span class="p">[]);</span>
+
+      <span class="kd">const</span> <span class="nx">lowerCaseValue</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+      <span class="kd">let</span> <span class="nx">ranges</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">query</span> <span class="k">of</span> <span class="nx">queries</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">((</span><span class="nx">index</span> <span class="o">=</span> <span class="nx">lowerCaseValue</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">index</span><span class="p">))</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">ranges</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">index</span><span class="p">,</span> <span class="nx">index</span> <span class="o">+</span> <span class="nx">query</span><span class="p">.</span><span class="nx">length</span><span class="p">]);</span>
+          <span class="nx">index</span> <span class="o">+=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">queries</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">ranges</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">value</span>
+      <span class="p">}</span>
+
+      <span class="nx">ranges</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">||</span> <span class="nx">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+      <span class="nx">ranges</span> <span class="o">=</span> <span class="nx">ranges</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">a</span><span class="p">[</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">last</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+          <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">last</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+          <span class="nx">a</span><span class="p">[</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">b</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">a</span><span class="p">;</span>
+      <span class="p">},</span> <span class="p">[]);</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ranges</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ranges</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">7</span><span class="p">;</span>
+        <span class="nx">ranges</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">range</span> <span class="k">of</span> <span class="nx">ranges</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;b&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="nx">range</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">insert</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;/b&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="nx">range</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="na">noResultsText</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+    <span class="na">limit</span><span class="p">:</span> <span class="mi">100</span>
+  <span class="p">});</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">simpleJekyllSearch</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">search-input</span><span class="dl">'</span><span class="p">).</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>기본적인 것은 예제 프로젝트와 동일하지만, <code class="highlighter-rouge">searchResultTemplate</code> 옵션이 복잡해지고, <code class="highlighter-rouge">templateMiddleware</code> 옵션이 추가되었다.</p>
+
+<p><code class="highlighter-rouge">searchResultTemplate</code> 옵션은 검색 결과에 아이콘을 추가해 꾸미기 위해 복잡해졌고,
+<code class="highlighter-rouge">templateMiddleware</code> 옵션은 <code class="highlighter-rouge">searchResultTemplate</code>에 검색된 데이터가 맵핑되기 전에 수행할 변환 작업을 위해 사용되었다.</p>
+
+<p><code class="highlighter-rouge">templateMiddleware</code> 옵션에 사용되는 함수의 로직이 굉장히 복잡해 보이는데,
+그 목적은 <strong>검색어에 해당하는 부분을 강조 표시하기 위한 용도</strong>이다.
+더불어 실제 검색 대상이 되는 항목(제목, 카테고리, 태그 등)만 강조 표시를 하도록 로직을 추가했다.
+그 결과는 다음과 같다.</p>
+
+<p><img src="assets/figure_1.png" alt="검색 페이지 구현 결과" /></p>
+
+<h3 id="5-검색-페이지-추가">5. 검색 페이지 추가</h3>
+
+<p>마지막으로 구성한 레이아웃과 구현한 JavaScript 코드를 원하는 곳에 넣고 페이지로 추가하면 된다.
+이것은 예제 프로젝트에는 없는 부분으로, 다른 페이지를 구성하던 방식과 동일하게 페이지를 추가할 수 있다.</p>
+
+<p>현재 구현된 검색 페이지는 <code class="highlighter-rouge">search.html</code> 파일에 HTML 레이아웃과 JavaScript 코드를 모두 넣고, <code class="highlighter-rouge">_layouts</code> 디렉터리에 포함시켰다.
+그리고 <code class="highlighter-rouge">_pages</code> 디렉터리에 <code class="highlighter-rouge">search.md</code> 파일을 만들어 <code class="highlighter-rouge">layout</code>으로 <code class="highlighter-rouge">search</code>를 작성했다.</p>
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">search</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Search</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/search</span>
+<span class="nn">---</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>이제 해당 레이아웃은 검색 페이지로 생성될 것이다.
+나머지 할 작업은 (Search 메뉴처럼) 원하는 곳에 해당 URL을 연결해 진입하도록 하면 된다.</p>
+
+<h2 id="후기">후기</h2>
+
+<p><strong>Simple</strong>-Jekyll-Search라는 이름에 걸맞게 정말 <strong>간단한</strong> 검색 기능만 제공하는 라이브러리라 원하는 동작을 구현하는데 어려움이 많았다.
+그래도 나름 적정선에 스스로 합의(?)를 해서 검색 기능 구현이 마무리된 것 같다.
+그리고 기능 구현을 하면서 <a href="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/" target="_blank">해당 라이브러리의 버그를 찾아 MR도 시도</a>해봤고, 실제 받아들여지기까지 하여 재밌는 경험이었다.</p>
+
+<p>결론적으로 원하는 글을 찾는 데는 문제 없는 수준이 된 것 같아 꽤나 만족스럽지만, 공대 감성의 디자인을 한 것은 어쩔 수 없는 것 같다. 🤔</p>
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2021/01/01/til-20-2020-retrospective/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 20: 2020년 회고</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/';
+      this.page.identifier = '/posts/2021/01/03/adding-search-page-on-jekyll';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>
