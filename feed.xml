@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-03T19:24:53+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">Jekyll에 검색 페이지 추가하기</title><link href="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/" rel="alternate" type="text/html" title="Jekyll에 검색 페이지 추가하기" /><published>2021-01-03T00:00:00+09:00</published><updated>2021-01-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-09T18:11:08+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</title><link href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" rel="alternate" type="text/html" title="TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선" /><published>2021-01-09T00:00:00+09:00</published><updated>2021-01-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;기존 커스텀 네비게이션 컨트롤러가 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 유사하도록 개선을 진행했다.&lt;/li&gt;
+  &lt;li&gt;아직 만족스럽지 않아 개선이 더 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;기존-커스텀-네비게이션-컨트롤러의-문제점&quot;&gt;기존 커스텀 네비게이션 컨트롤러의 문제점&lt;/h2&gt;
+
+&lt;p&gt;요구사항에 따라 개발을 하다 보면, &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 컨테이너 뷰 컨트롤러만으로는 만족스럽게 결과물이 나오지 않는 경우가 있다.
+또한, UI나 애니메이션 등을 완전히 커스텀하고 싶을 때도 기존 라이브러리로는 한계가 있을 수 있다.
+&lt;strong&gt;결국에는 직접 커스텀 컨테이너 뷰 컨트롤러를 만드는 것이 오히려 마음이 편하다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;그렇게 해서 직접 만들어서 사용하던 커스텀 네비게이션 컨트롤러가 있었는데,
+현재 사용하는 데는 문제점이 없었지만 미래에 발생할 수 있는 문제점이 존재했다.
+그것은 바로 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 동작이 완전히 일치하지 않는다는 점&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;물론, 현재 사용하는 것에 문제점이 없었다는 말은 특정 동작만 사용했기 때문인데,
+이것은 추후 유지보수를 진행할 때 찾기 어려운 버그가 생길 수 있다.
+그렇게 개선의 필요성을 느끼게 됐고, 커스텀 컨테이너 뷰 컨트롤러를 위한 분석을 진행했다.&lt;/p&gt;
+
+&lt;h2 id=&quot;개선-방향&quot;&gt;개선 방향&lt;/h2&gt;
+
+&lt;p&gt;기존에 반영한 생명 주기는 많이 사용하고 있는 뷰 컨트롤러의 기본적인 Root 뷰 생명 주기이다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewWillAppear&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidAppear&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewWillDisappear&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidDisappear&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;해당 메소드들을 자식 뷰 컨트롤러가 추가 또는 제거되는 시점에 따라 호출하도록 구현했었다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 실제로 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 네비게이션 컨트롤러와 호출되는 순서가 일치하지 않았기에 동일한 순서가 되도록 수정을 진행했다.
+애니메이션이 포함되어 있는 경우 시점을 잘 지정해 구현해야 했다.
+시점이 어긋나면, 자식 뷰 컨트롤러의 생명 주기를 구현할 때 예상치 못한 순서로 동작할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그리고 뷰 컨트롤러는 기본적으로 부모-자식 관계를 설정해서 활용할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;parent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;children&lt;/code&gt; 프로퍼티가 존재했는데,
+나는 별도로 부모를 나타내는 프로퍼티와 &lt;code class=&quot;highlighter-rouge&quot;&gt;viewControllers&lt;/code&gt; 프로퍼티를 정의해 사용하고 있었다.
+이것을 &lt;code class=&quot;highlighter-rouge&quot;&gt;addChild&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;removeFromParent&lt;/code&gt; 메소드를 호출해 &lt;code class=&quot;highlighter-rouge&quot;&gt;parent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;children&lt;/code&gt; 프로퍼티를 활용하도록 수정했다.&lt;/p&gt;
+
+&lt;p&gt;또한, Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 맞추기 위한 작업을 추가로 진행했다.
+아무래도 iOS 개발자는 기본으로 제공하는 생명 주기에 익숙할 터이니 그것의 생명 주기에 맞추는 게 적합하다고 생각했다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 Apple Developer 문서에서
+&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiviewcontroller/1621387-beginappearancetransition&quot; target=&quot;_blank&quot;&gt;뷰 생명 주기 메소드를 직접 호출하지 말라&lt;/a&gt;고 하고 있어,
+해당 메소드들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;beginAppearanceTransition&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;endAppearanceTransition&lt;/code&gt;를 호출하도록 수정했다.&lt;/p&gt;
+
+&lt;p&gt;아직 커스텀 컨테이너 뷰 컨트롤러에 대한 분석이 다 된 것 같지 않아 만족스럽지 않다.&lt;br /&gt;
+더 분석해보고 적용한 뒤 글을 정리해 포스팅 해봐야겠다. 🕵🏻&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">Jekyll에 검색 페이지 추가하기</title><link href="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/" rel="alternate" type="text/html" title="Jekyll에 검색 페이지 추가하기" /><published>2021-01-03T00:00:00+09:00</published><updated>2021-01-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;검색 기능으로 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search&quot; target=&quot;_blank&quot;&gt;Simple-Jekyll-Search&lt;/a&gt;
@@ -914,32 +965,4 @@ Android Studio는 앱 개발을 위한 많은 편리한 기능을 제공한다.&
 레거시까지 고려해 아름답게 여러 아이콘이 생성되어 한방에 해결할 수 있었다.&lt;/p&gt;
 
 &lt;p&gt;더 궁금한 것이 있다면, &lt;a href=&quot;https://developer.android.com/studio/write/image-asset-studio#access&quot; target=&quot;_blank&quot;&gt;공식 안드로이드 개발자 문서&lt;/a&gt;에 잘 설명되어 있다.&lt;br /&gt;
-Android Studio는 안드로이드 개발자에게 정말 축복같은 IDE인 것 같다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="android-studio" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 12: iOS에 Auto Layout이 있다면, Android에는 ConstraintLayout이 있다!</title><link href="https://jamesu.dev/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout/" rel="alternate" type="text/html" title="TIL 12: iOS에 Auto Layout이 있다면, Android에는 ConstraintLayout이 있다!" /><published>2020-05-25T00:00:00+09:00</published><updated>2020-05-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;안드로이드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt;을 사용하면,&lt;br /&gt;
-iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt; 컨셉으로 레이아웃을 구성할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ios-개발자에게-반가운-안드로이드의-constraintlayout&quot;&gt;iOS 개발자에게 반가운 안드로이드의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt;&lt;/h2&gt;
-
-&lt;p&gt;iOS 개발자라면 스토리보드를 사용하든 코드로 작성하든 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt;을 이용해 뷰를 구성한 경험이 있을 것이다.
-&lt;strong&gt;제약 조건(Constraint)&lt;/strong&gt;을 이렇게 저렇게 (잘) 걸어두면, &lt;strong&gt;화면의 변화에 따라 뷰가 자동으로 배치되고 크기가 변하게 할 수 있다&lt;/strong&gt;.
-물론, 잘 설정한다는 가정이 필요하다.
-잘못 설정하면 레이아웃이 엄청 깨지는 것을 경험할 수 있으므로, 제약 조건에 대한 이해가 확실해야 한다.&lt;/p&gt;
-
-&lt;p&gt;아무튼 익숙해진다면, 아주 편리하게 뷰를 배치할 수 있을 것이다.
-현재 회사에서 스토리보드를 사용하지 않고, 코드로만 뷰를 작성하는 프로젝트를 많이 하고 있기 때문에 정말 유용하게 사용하고 있다.
-(&lt;del&gt;기존 레거시 코드는 좌표와 크기를 일일이 계산하면서 뷰를 작성해 유지보수가 지옥이다.&lt;/del&gt; 😇 &lt;del&gt;특히, 테이블 뷰 셀&lt;/del&gt;… ☠️)&lt;/p&gt;
-
-&lt;p&gt;그러다 안드로이드 프로젝트를 진행하고 있는데, 옛날에 사용하던 &lt;code class=&quot;highlighter-rouge&quot;&gt;RelativeLayout&lt;/code&gt;은 뭔가 되게 어설프다.
-원하는 레이아웃을 깔끔하게 구성하기 어려웠다.
-그러던 중에 우연히 &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt;을 알게 되었다.&lt;/p&gt;
-
-&lt;p&gt;이름을 보자마자 익숙한 단어가 보였다.
-&lt;strong&gt;Constraint&lt;/strong&gt;라는 단어가 이름에 붙은 것부터 &lt;strong&gt;제약 조건을 이용해 레이아웃을 구성&lt;/strong&gt;한다는 것을 유추할 수 있다.
-그리고 직접 사용해보니 iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt;가 매우 유사했다!
-아주 반가웠고, 그 컨셉에 빠르게 적응할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;현재는 안드로이드 프로젝트에서도 유용하게 잘 사용하고 있다.&lt;br /&gt;
-역시 익숙한 것이 좋은 것이여. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
+Android Studio는 안드로이드 개발자에게 정말 축복같은 IDE인 것 같다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="android-studio" /><summary type="html">TL;DR</summary></entry></feed>

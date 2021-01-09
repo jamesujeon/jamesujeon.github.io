@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-01-09T00:00:00+09:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/","@type":"BlogPosting","headline":"TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선","dateModified":"2021-01-09T00:00:00+09:00","datePublished":"2021-01-09T00:00:00+09:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/til" class="category-item">
+        TIL
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/ios" class="tag-item">
+        #ios
+      </a>
+    
+      <a href="/tags/ui" class="tag-item">
+        #ui
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-01-09 00:00:00 +0900">2021.01.09</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>기존 커스텀 네비게이션 컨트롤러가 <code class="highlighter-rouge">UINavigationController</code>와 유사하도록 개선을 진행했다.</li>
+  <li>아직 만족스럽지 않아 개선이 더 필요하다.</li>
+</ul>
+
+<h2 id="기존-커스텀-네비게이션-컨트롤러의-문제점">기존 커스텀 네비게이션 컨트롤러의 문제점</h2>
+
+<p>요구사항에 따라 개발을 하다 보면, <code class="highlighter-rouge">UIKit</code>에서 제공하는 컨테이너 뷰 컨트롤러만으로는 만족스럽게 결과물이 나오지 않는 경우가 있다.
+또한, UI나 애니메이션 등을 완전히 커스텀하고 싶을 때도 기존 라이브러리로는 한계가 있을 수 있다.
+<strong>결국에는 직접 커스텀 컨테이너 뷰 컨트롤러를 만드는 것이 오히려 마음이 편하다</strong>.</p>
+
+<p>그렇게 해서 직접 만들어서 사용하던 커스텀 네비게이션 컨트롤러가 있었는데,
+현재 사용하는 데는 문제점이 없었지만 미래에 발생할 수 있는 문제점이 존재했다.
+그것은 바로 <strong><code class="highlighter-rouge">UINavigationController</code>와 동작이 완전히 일치하지 않는다는 점</strong>이다.</p>
+
+<p>물론, 현재 사용하는 것에 문제점이 없었다는 말은 특정 동작만 사용했기 때문인데,
+이것은 추후 유지보수를 진행할 때 찾기 어려운 버그가 생길 수 있다.
+그렇게 개선의 필요성을 느끼게 됐고, 커스텀 컨테이너 뷰 컨트롤러를 위한 분석을 진행했다.</p>
+
+<h2 id="개선-방향">개선 방향</h2>
+
+<p>기존에 반영한 생명 주기는 많이 사용하고 있는 뷰 컨트롤러의 기본적인 Root 뷰 생명 주기이다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">viewDidLoad</code></li>
+  <li><code class="highlighter-rouge">viewWillAppear</code></li>
+  <li><code class="highlighter-rouge">viewDidAppear</code></li>
+  <li><code class="highlighter-rouge">viewWillDisappear</code></li>
+  <li><code class="highlighter-rouge">viewDidDisappear</code></li>
+</ul>
+
+<p>해당 메소드들을 자식 뷰 컨트롤러가 추가 또는 제거되는 시점에 따라 호출하도록 구현했었다.</p>
+
+<p>하지만, 실제로 <code class="highlighter-rouge">UIKit</code>에서 제공하는 네비게이션 컨트롤러와 호출되는 순서가 일치하지 않았기에 동일한 순서가 되도록 수정을 진행했다.
+애니메이션이 포함되어 있는 경우 시점을 잘 지정해 구현해야 했다.
+시점이 어긋나면, 자식 뷰 컨트롤러의 생명 주기를 구현할 때 예상치 못한 순서로 동작할 수 있다.</p>
+
+<p>그리고 뷰 컨트롤러는 기본적으로 부모-자식 관계를 설정해서 활용할 수 있는 <code class="highlighter-rouge">parent</code>, <code class="highlighter-rouge">children</code> 프로퍼티가 존재했는데,
+나는 별도로 부모를 나타내는 프로퍼티와 <code class="highlighter-rouge">viewControllers</code> 프로퍼티를 정의해 사용하고 있었다.
+이것을 <code class="highlighter-rouge">addChild</code>, <code class="highlighter-rouge">removeFromParent</code> 메소드를 호출해 <code class="highlighter-rouge">parent</code>, <code class="highlighter-rouge">children</code> 프로퍼티를 활용하도록 수정했다.</p>
+
+<p>또한, Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 <code class="highlighter-rouge">UINavigationController</code>와 맞추기 위한 작업을 추가로 진행했다.
+아무래도 iOS 개발자는 기본으로 제공하는 생명 주기에 익숙할 터이니 그것의 생명 주기에 맞추는 게 적합하다고 생각했다.</p>
+
+<p>마지막으로 Apple Developer 문서에서
+<a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621387-beginappearancetransition" target="_blank">뷰 생명 주기 메소드를 직접 호출하지 말라</a>고 하고 있어,
+해당 메소드들을 <code class="highlighter-rouge">beginAppearanceTransition</code>와 <code class="highlighter-rouge">endAppearanceTransition</code>를 호출하도록 수정했다.</p>
+
+<p>아직 커스텀 컨테이너 뷰 컨트롤러에 대한 분석이 다 된 것 같지 않아 만족스럽지 않다.<br />
+더 분석해보고 적용한 뒤 글을 정리해 포스팅 해봐야겠다. 🕵🏻</p>
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2021/01/03/adding-search-page-on-jekyll/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">Jekyll에 검색 페이지 추가하기</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/';
+      this.page.identifier = '/posts/2021/01/09/til-21-improving-custom-container-view-controller';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>
