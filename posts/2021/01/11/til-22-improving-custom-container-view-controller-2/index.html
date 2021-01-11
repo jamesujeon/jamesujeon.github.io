@@ -8,22 +8,22 @@
   
   
 
-  <title>TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group - Jamesu Devlog</title>
+  <title>TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group" />
+<meta property="og:title" content="TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="description" content="TL;DR" />
 <meta property="og:description" content="TL;DR" />
-<link rel="canonical" href="https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/" />
-<meta property="og:url" content="https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/" />
 <meta property="og:site_name" content="Jamesu Devlog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-05-22T00:00:00+09:00" />
+<meta property="article:published_time" content="2021-01-11T00:00:00+09:00" />
 <script type="application/ld+json">
-{"url":"https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/","dateModified":"2020-05-22T00:00:00+09:00","datePublished":"2020-05-22T00:00:00+09:00","headline":"TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
+{"url":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/","dateModified":"2021-01-11T00:00:00+09:00","datePublished":"2021-01-11T00:00:00+09:00","headline":"TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -151,7 +151,7 @@
 
 
 
-  <h1 class="post-title">TIL 11: 다중 비동기 완료 처리를 위한 dispatch_group</h1>
+  <h1 class="post-title">TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2</h1>
 
   
 
@@ -163,12 +163,8 @@
         #ios
       </a>
     
-      <a href="/tags/objective-c" class="tag-item">
-        #objective-c
-      </a>
-    
-      <a href="/tags/gcd" class="tag-item">
-        #gcd
+      <a href="/tags/ui" class="tag-item">
+        #ui
       </a>
     
   </div>
@@ -176,51 +172,54 @@
 
 
   <div class="post-time">
-    <time datetime="2020-05-22 00:00:00 +0900">2020.05.22</time>
+    <time datetime="2021-01-11 00:00:00 +0900">2021.01.11</time>
   </div>
 
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>다중 비동기 처리가 완료되는 시점에 후속 처리를 하고 싶다면,<br />
-간단히 <code class="highlighter-rouge">dispatch_group</code> 시리즈를 활용할 수 있다.</li>
+  <li>커스텀 탭바 컨트롤러를 <code class="highlighter-rouge">UITabBarController</code>와 유사하도록 구현했다.</li>
+  <li><code class="highlighter-rouge">UITabBarController</code>와 <code class="highlighter-rouge">UINavigationController</code>의 자식 뷰 컨트롤러 관리 방식의 차이를 이해해야 한다.</li>
 </ul>
 
-<h2 id="모든-이미지-다운로드가-완료-됐을-때-로딩바-숨기기">모든 이미지 다운로드가 완료 됐을 때, 로딩바 숨기기</h2>
+<h2 id="탭바-컨트롤러-vs-네비게이션-컨트롤러">탭바 컨트롤러 vs. 네비게이션 컨트롤러</h2>
 
-<p>동적으로 화면에 이미지를 보여주기 위해 다운로드가 필요할 때가 있다.
-그때 많이 사용하는 방식은 각 이미지가 다운로드될 때마다 이미지 뷰에 표시하도록 해서
-로딩바가 표시되더라도 각 이미지 뷰에 표시하도록 하는 것이다.
-그런 처리는 일반적인 비동기 처리로 손쉽게 할 수 있다.</p>
+<p>이번에도 역시나 요구사항에 맞추기 위해 커스텀 탭바 컨트롤러를 만들기로 했다.<br />
+<a href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" target="_blank">이전</a>과 마찬가지로
+Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 신경 쓰며 <code class="highlighter-rouge">UITabBarController</code>의 리버스 엔지니어링을 시도했다.
+헷갈리는 동작도 있었지만, 일부 동작의 경우 커스텀 탭바 컨트롤러와 다를 수 밖에 없기에 인지하고 다른 식으로 구현했다.</p>
 
-<p>하지만, 이번에 새로운 요구사항이 생겼다.
-모든 이미지가 다운로드될 때까지 중앙에 로딩바를 표시하고,
-모두 완료되고 나서 로딩바를 숨긴 후 다른 동작을 할 수 있도록 처리하는 것이다.
-이것을 위해서는 <strong>각 비동기 처리(이미지 다운로드)가 완료되는 시점을 알아야 한다</strong>.</p>
+<p><code class="highlighter-rouge">UITabBarController</code>는 <code class="highlighter-rouge">UINavigationController</code>와 달리 미리 다수의 자식 뷰 컨트롤러를 추가해 놓는다.
+그래서 자식 뷰 컨트롤러 목록을 세팅한 후에는 <code class="highlighter-rouge">addChild</code>, <code class="highlighter-rouge">removeFromParent</code> 메소드를 호출할 일이 없었다.</p>
 
-<p>iOS에서 비동기 처리를 위한 방법으로 크게 두 가지가 있다.
-<code class="highlighter-rouge">Operation</code> 시리즈와 <code class="highlighter-rouge">dispatch</code> 시리즈이다.
-이번에는 간단하게 모든 이미지 다운로드가 완료됐을 때 로딩바를 숨기면 되므로, 비교적 단순한 <code class="highlighter-rouge">dispatch</code> 시리즈를 이용했다.</p>
+<p>또한, Root 뷰 생명 주기가 <code class="highlighter-rouge">UINavigationController</code>와는 좀 다른 순서로 호출되었다.
+역시나 직접 리버스 엔지니어링을 하길 잘한 것 같다.
+예상만으로 구현했다면 뒤늦게 발견해서 고생하며 뒤집었을지도 모른다. 😞</p>
 
-<p>그 중에서 <code class="highlighter-rouge">dispatch_group</code> 시리즈를 이용하면, 각 <code class="highlighter-rouge">dispatch</code> 작업들을 <strong>그룹화</strong>하고
-완료되는 시점에 <code class="highlighter-rouge">notify</code> 함수에 정의한 동작을 수행하도록 할 수 있다.</p>
+<p><code class="highlighter-rouge">UITabBarController</code>와 <code class="highlighter-rouge">UINavigationController</code>의 차이를 계속 비교하며 커스텀 탭바 컨트롤러를 구현했다.
+일단 메뉴가 변동되는 경우는 거의 없기 때문에 가장 필요한 부분에 한해서 구현을 진행했다.
+필요하면 그때 계속 개선하면 되지 않을까..?</p>
 
-<p>이것도 한 번 시간을 내어 글로 정리해야겠다.<br />
-정말 정리할 글이 많다… 🤪</p>
+<h2 id="다음은-스플릿-뷰-컨트롤러">다음은.. 스플릿 뷰 컨트롤러..?</h2>
+
+<p>커스텀 컨테이너 뷰 컨트롤러를 하나하나 구현하고 사용해보니 잘 동작할 때 아주 뿌듯하다.
+뭔가 일반적인 뷰를 구현한 것과는 달리 좀 더 유용한 것을 만든 기분이 든다.</p>
+
+<p>또 다른 컨테이너 뷰 컨트롤러로 스플릿 뷰 컨트롤러가 있다.
+아이패드에서 자주 사용하는 컨트롤러인데, 아직 사내에서는 쓸 일이 없다…
+언젠가 커스텀 스플릿 뷰 컨트롤러를 만들 기회도 생기지 않을까?</p>
+
+<p>그 밖에도 자식 뷰 컨트롤러를 담는 것이라면, 모두 컨테이너 뷰 컨트롤러가 될 수 있다.
+이번에 좀 더 공부해서 <strong>커스텀 컨테이너 뷰 컨트롤러</strong>를 구현하기 위한 분석을 많이 해보고 글로 정리해 봐야겠다. 🔥</p>
 
 
   
     <div class="post-pagination">
       
-        <a href="/posts/2020/05/25/til-12-android-constraint-layout-similar-to-ios-auto-layout/" class="left arrow">
-          <i class="fas fa-chevron-left fa-fw"></i>
-          <span class="left arrow-title">TIL 12: iOS에 Auto Layout이 있다면, Android에는 ConstraintLayout이 있다!</span>
-        </a>
       
-      
-        <a href="/posts/2020/05/21/til-10-when-there-are-unexpected-paddings-for-font-in-text/" class="right arrow">
+        <a href="/posts/2021/01/09/til-21-improving-custom-container-view-controller/" class="right arrow">
           <i class="fas fa-chevron-right fa-fw"></i>
-          <span class="right arrow-title">TIL 10: 폰트를 적용했는데 뜬금없는 패딩이 들어가 있다면?</span>
+          <span class="right arrow-title">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</span>
         </a>
       
     </div>
@@ -233,8 +232,8 @@
     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
     var disqus_config = function () {
-      this.page.url = 'https://jamesu.dev/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks/';
-      this.page.identifier = '/posts/2020/05/22/til-11-dispatch-group-for-multiple-asynchronous-tasks';
+      this.page.url = 'https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/';
+      this.page.identifier = '/posts/2021/01/11/til-22-improving-custom-container-view-controller-2';
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE

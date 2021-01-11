@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-09T18:11:08+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</title><link href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" rel="alternate" type="text/html" title="TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선" /><published>2021-01-09T00:00:00+09:00</published><updated>2021-01-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-12T00:04:24+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2</title><link href="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/" rel="alternate" type="text/html" title="TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2" /><published>2021-01-11T00:00:00+09:00</published><updated>2021-01-11T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;커스텀 탭바 컨트롤러를 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 유사하도록 구현했다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;의 자식 뷰 컨트롤러 관리 방식의 차이를 이해해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;탭바-컨트롤러-vs-네비게이션-컨트롤러&quot;&gt;탭바 컨트롤러 vs. 네비게이션 컨트롤러&lt;/h2&gt;
+
+&lt;p&gt;이번에도 역시나 요구사항에 맞추기 위해 커스텀 탭바 컨트롤러를 만들기로 했다.&lt;br /&gt;
+&lt;a href=&quot;https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/&quot; target=&quot;_blank&quot;&gt;이전&lt;/a&gt;과 마찬가지로
+Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 신경 쓰며 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;의 리버스 엔지니어링을 시도했다.
+헷갈리는 동작도 있었지만, 일부 동작의 경우 커스텀 탭바 컨트롤러와 다를 수 밖에 없기에 인지하고 다른 식으로 구현했다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 달리 미리 다수의 자식 뷰 컨트롤러를 추가해 놓는다.
+그래서 자식 뷰 컨트롤러 목록을 세팅한 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;addChild&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;removeFromParent&lt;/code&gt; 메소드를 호출할 일이 없었다.&lt;/p&gt;
+
+&lt;p&gt;또한, Root 뷰 생명 주기가 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와는 좀 다른 순서로 호출되었다.
+역시나 직접 리버스 엔지니어링을 하길 잘한 것 같다.
+예상만으로 구현했다면 뒤늦게 발견해서 고생하며 뒤집었을지도 모른다. 😞&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;의 차이를 계속 비교하며 커스텀 탭바 컨트롤러를 구현했다.
+일단 메뉴가 변동되는 경우는 거의 없기 때문에 가장 필요한 부분에 한해서 구현을 진행했다.
+필요하면 그때 계속 개선하면 되지 않을까..?&lt;/p&gt;
+
+&lt;h2 id=&quot;다음은-스플릿-뷰-컨트롤러&quot;&gt;다음은.. 스플릿 뷰 컨트롤러..?&lt;/h2&gt;
+
+&lt;p&gt;커스텀 컨테이너 뷰 컨트롤러를 하나하나 구현하고 사용해보니 잘 동작할 때 아주 뿌듯하다.
+뭔가 일반적인 뷰를 구현한 것과는 달리 좀 더 유용한 것을 만든 기분이 든다.&lt;/p&gt;
+
+&lt;p&gt;또 다른 컨테이너 뷰 컨트롤러로 스플릿 뷰 컨트롤러가 있다.
+아이패드에서 자주 사용하는 컨트롤러인데, 아직 사내에서는 쓸 일이 없다…
+언젠가 커스텀 스플릿 뷰 컨트롤러를 만들 기회도 생기지 않을까?&lt;/p&gt;
+
+&lt;p&gt;그 밖에도 자식 뷰 컨트롤러를 담는 것이라면, 모두 컨테이너 뷰 컨트롤러가 될 수 있다.
+이번에 좀 더 공부해서 &lt;strong&gt;커스텀 컨테이너 뷰 컨트롤러&lt;/strong&gt;를 구현하기 위한 분석을 많이 해보고 글로 정리해 봐야겠다. 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</title><link href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" rel="alternate" type="text/html" title="TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선" /><published>2021-01-09T00:00:00+09:00</published><updated>2021-01-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;기존 커스텀 네비게이션 컨트롤러가 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 유사하도록 개선을 진행했다.&lt;/li&gt;
@@ -943,26 +978,4 @@ Merge가 받아들여졌다!&lt;br /&gt;
 웬만하면 쓸 일이 없는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Reflection&lt;/code&gt;인데 이렇게 사용하니, 내가 까먹지 말라고 쓰게 해주는 것이구나 싶었다.&lt;/p&gt;
 
 &lt;p&gt;기본 &lt;code class=&quot;highlighter-rouge&quot;&gt;TimePicker&lt;/code&gt;의 Spinner 모드도, 그 색깔을 변경하는 것도 자주 쓸만한 기능인데 왜 이렇게 꽁꽁 감싸 놓았는지 답답했었다.
-그래도 ‘다 의도가 있겠지’라는 마음과 결국엔 해결했다는 것에 뿌듯함을 느낀다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="java" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자</title><link href="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/" rel="alternate" type="text/html" title="TIL 13: 안드로이드에서는 Image Asset Studio를 이용해 아이콘을 추가하자" /><published>2020-05-27T00:00:00+09:00</published><updated>2020-05-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/27/til-13-use-image-asset-studio-to-add-app-icon/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;안드로이드에서 아이콘을 추가할 때,
-Android Studio의 &lt;strong&gt;Image Asset Studio&lt;/strong&gt;를 이용하면 쉽게 &lt;strong&gt;여러 종류의 아이콘(적응형 및 레거시 아이콘 포함)&lt;/strong&gt;을 생성할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;적응형-및-레거시-아이콘-추가를-위한-image-asset-studio&quot;&gt;적응형 및 레거시 아이콘 추가를 위한 Image Asset Studio&lt;/h2&gt;
-
-&lt;p&gt;안드로이드 개발자라면 많은 사람들이 Android Studio를 사용할 것이다.&lt;br /&gt;
-Android Studio는 앱 개발을 위한 많은 편리한 기능을 제공한다.&lt;/p&gt;
-
-&lt;p&gt;그 중 하나가 앱 개발을 위한 Asset을 손쉽게 추가하고 관리할 수 있도록 지원해준다는 것이다.
-특히, 아이콘의 경우, &lt;strong&gt;안드로이드 OS 버전에 따라 사용하는 아이콘 모양이 상이&lt;/strong&gt;하기 때문에
-직접 파편화에 대응해 Asset을 준비한다면 정말 손이 많이 가는 일이 될 수 밖에 없다.&lt;/p&gt;
-
-&lt;p&gt;이번에 회사에서 기존 앱의 전면 디자인 개선 작업을 하면서 앱 아이콘 또한 변경의 대상이었기 때문에 교체가 필요했다.
-기존에 존재하던 앱 아이콘은 하나의 이미지로 여러 아이콘을 커버하도록 대충 되어 있었다.
-그래서 싹 지우고, Android Studio에서 제공하는 &lt;strong&gt;Image Asset Studio&lt;/strong&gt;를 이용해 아이콘을 추가했더니
-레거시까지 고려해 아름답게 여러 아이콘이 생성되어 한방에 해결할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;더 궁금한 것이 있다면, &lt;a href=&quot;https://developer.android.com/studio/write/image-asset-studio#access&quot; target=&quot;_blank&quot;&gt;공식 안드로이드 개발자 문서&lt;/a&gt;에 잘 설명되어 있다.&lt;br /&gt;
-Android Studio는 안드로이드 개발자에게 정말 축복같은 IDE인 것 같다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="android-studio" /><summary type="html">TL;DR</summary></entry></feed>
+그래도 ‘다 의도가 있겠지’라는 마음과 결국엔 해결했다는 것에 뿌듯함을 느낀다. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="java" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
