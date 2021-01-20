@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 23: CocoaPods로 인한 Warning 제거",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, xcode",
+      "date"       : "2021.01.18",
+      "urlString"  : "/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/",
+      "url"        : "/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/"
+    },
+  
+    {
       "title"      : "TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2",
       "categories" : "Etc > TIL",
       "tags"       : "ios, ui",
