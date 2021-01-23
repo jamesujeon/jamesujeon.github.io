@@ -1,4 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-20T21:59:08+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 23: CocoaPods로 인한 Warning 제거</title><link href="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/" rel="alternate" type="text/html" title="TIL 23: CocoaPods로 인한 Warning 제거" /><published>2021-01-18T00:00:00+09:00</published><updated>2021-01-18T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-23T20:08:13+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 25: HTML 태그가 포함된 텍스트 변환하기</title><link href="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/" rel="alternate" type="text/html" title="TIL 25: HTML 태그가 포함된 텍스트 변환하기" /><published>2021-01-22T00:00:00+09:00</published><updated>2021-01-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HTML 태그가 포함된 텍스트는 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 일반 텍스트로 변환할 수 있다.&lt;/li&gt;
+  &lt;li&gt;텍스트 변환 후에는 적용되었던 텍스트 스타일이 초기화되므로 재설정 해줘야 한다.&lt;/li&gt;
+  &lt;li&gt;요구사항에 따라 깔끔하게 텍스트 스타일을 유지하며 변환하는 것이 힘들 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;불편한-ios의-html-텍스트-변환&quot;&gt;불편한 iOS의 HTML 텍스트 변환&lt;/h2&gt;
+
+&lt;p&gt;이번에 사내 앱 프로젝트에서 HTML 태그가 포함된 텍스트를 변환해 텍스트 스타일을 적용하는 요구사항이 생겼다.
+그래서 바로 리서치를 해보니, 안드로이드에서 간단히 &lt;code class=&quot;highlighter-rouge&quot;&gt;Html&lt;/code&gt; 클래스를 이용하는 것처럼,
+iOS에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 간단히 처리할 수 있나 했더니 오산이었다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 변환하면, 기존에 적용되었던 폰트 등의 &lt;strong&gt;텍스트 스타일이 모두 초기화&lt;/strong&gt;되는 것이었다.
+요구사항에서 언급된 HTML 태그로는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;i&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt; 등과 같은 볼드, 이탤릭, 밑줄 처리를 하는 텍스트 스타일이었다.
+그래서 텍스트 변환 후에 일일이 각 텍스트 스타일이 적용된 부분을 찾아 폰트를 변경하는 처리를 해야 했는데,
+생각만큼 쉽게 모든 스타일이 적용되지 않았다.&lt;/p&gt;
+
+&lt;p&gt;또 다른 방법으로는 &lt;strong&gt;기존 HTML 태그가 포함된 텍스트를 원하는 폰트, 글자 색깔, 글자 크기 등의 값을 설정할 수 있는 태그로 감싸고, 그것을 변환&lt;/strong&gt;하는 것이었다.
+만약, 각 텍스트 스타일마다 폰트를 다르게 적용하는 처리가 필요하다면 더 복잡할 수 있다.
+다행히 현재 프로젝트에서는 애플 시스템 폰트를 기본으로 사용하고 있기 때문에 문제가 없었다.&lt;/p&gt;
+
+&lt;p&gt;우여곡절 끝에 요구사항을 구현할 가닥이 어느 정도 보였지만, 아직 실험할 것이 남았다.
+그래도 잘 마무리 될 것 같은 생각에 안도감이 들었다.
+많이 쓸만한 기능이라 iOS에서 잘 준비되어 있었을 것 같았는데 생각보다 구현이 불편해 많이 당황스러웠다.
+이런 이슈를 경험할 기회가 생겨서 다행인 것 같다. 😂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="html" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 24: 무한 스크롤을 위한 페이징 API 설계</title><link href="https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll/" rel="alternate" type="text/html" title="TIL 24: 무한 스크롤을 위한 페이징 API 설계" /><published>2021-01-20T00:00:00+09:00</published><updated>2021-01-20T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;무한 스크롤은 페이지 번호를 이용한 고전적인 페이징 기법과 달리 &lt;strong&gt;무한하게 스크롤을 내리는 UX&lt;/strong&gt;에 적합하다.&lt;/li&gt;
+  &lt;li&gt;무한 스크롤 페이징 API 설계 시, &lt;strong&gt;정렬 조건&lt;/strong&gt;을 함께 서버에 전달해야 한다.&lt;/li&gt;
+  &lt;li&gt;누락되는 항목까지 고려한다면, 더 복잡해질 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;무한-스크롤infinite-scroll이란&quot;&gt;무한 스크롤(Infinite scroll)이란?&lt;/h2&gt;
+
+&lt;p&gt;일반적으로 웹사이트의 게시판에서 쉽게 접할 수 있는 페이징 기법은 “1, 2, 3, …“과 같이 목록의 하단에
+페이지 번호가 있고 한 페이지에 특정 갯수가 목록에 보여지는 방식일 것이다.&lt;/p&gt;
+
+&lt;p&gt;이와 달리 &lt;strong&gt;무한 스크롤(Infinite scroll)&lt;/strong&gt;이라 불리는 페이징 기법은 페이지 번호가 따로 없고,
+아래로 스크롤하다가 끝에 도달하면 다음 페이지의 목록을 현재 목록에 추가하여 목록을 연장하는 방식이다.
+그래서 마치 무한하게 스크롤을 내릴 수 있다하여 무한 스크롤이라 불린다.&lt;/p&gt;
+
+&lt;p&gt;페이지 번호를 사용하는 페이징 기법을 사용할 지, 무한 스크롤을 사용할 지는 기획에 따라 다르며,
+컨텐츠의 종류에 따라 적절한 UX를 선택해야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;사내-페이징-api의-문제점&quot;&gt;사내 페이징 API의 문제점&lt;/h2&gt;
+
+&lt;p&gt;이번에 신규 모바일 프로젝트를 진행하며, 대량의 목록을 조회할 수도 있는 화면에서 페이징 기법을 사용할 필요가 있었다.
+기존의 웹 솔루션을 앱으로 만드는 것이라 서버 팀에서는 웹 API를 그대로 활용하여 모바일 API로 전달해주었으나,
+여러가지 문제가 많아 수정을 계속 요청하는 상태였다.&lt;/p&gt;
+
+&lt;p&gt;기존 웹 솔루션에서는 게시판처럼 고전적인 페이징 기법을 사용하고 있었고,
+모바일 프로젝트의 화면에서는 무한 스크롤을 기획으로 요구했기 때문에 해당 API를 그대로 사용할 수 없었다.
+더군다나 서버 팀의 일정이 바쁜 탓에 설계를 할 시간이 없었고, 가장 적절한 무한 스크롤 기법을 찾기 위해 리서치를 진행했다.&lt;/p&gt;
+
+&lt;h2 id=&quot;무한-스크롤-페이징-api-설계-시-정렬-조건에-유의하자&quot;&gt;무한 스크롤 페이징 API 설계 시, 정렬 조건에 유의하자&lt;/h2&gt;
+
+&lt;p&gt;리서치된 내용을 조합하여 최선을 찾으려 노력했으며, 페이징 API 호출 시 어떤 정보를 서버에 넘길 지가 관건이었다.&lt;/p&gt;
+
+&lt;p&gt;일반적으로는 생성된 날짜를 기준으로 정렬하기 때문에 기준이 되는 항목의 생성된 날짜를 넘기는 식으로 구현이 가능하지만,
+해당 프로젝트에는 &lt;strong&gt;정렬 기준이 다소 달랐기 때문에&lt;/strong&gt; 다르게 적용할 필요가 있었다.&lt;/p&gt;
+
+&lt;p&gt;해당 프로젝트의 정렬 기준은 화면마다 다를 수 있어 넘겨야 하는 정보가 그때그때 달랐으며,
+페이징 도중에도 언제든지 다음 페이지 항목의 순서가 (데이터로써) 상단으로 땡겨질 수 있기 때문에
+누락되는 항목까지 고려해야 할 필요가 있었다.&lt;/p&gt;
+
+&lt;p&gt;결국 어찌저찌 설계를 완료해 서버 팀에 넘겼으나 제대로 적용될 지는 두고 봐야 한다.
+예전에는 단순히 주어진 대로 누락될 수 있는 가능성을 무시하고 고전적인 페이징 기법을 사용해 개발했지만,
+이번에는 제대로 개발하고자 시도를 해보았다.
+추후 좀 더 다듬어 Best Practice가 되도록 만들어야겠다. 👨🏻‍🔧&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ui" /><category term="api" /><category term="rest" /><category term="pagination" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 23: CocoaPods로 인한 Warning 제거</title><link href="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/" rel="alternate" type="text/html" title="TIL 23: CocoaPods로 인한 Warning 제거" /><published>2021-01-18T00:00:00+09:00</published><updated>2021-01-18T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;CocoaPods로 외부 라이브러리 설치 후 생기는 Warning은 &lt;code class=&quot;highlighter-rouge&quot;&gt;post_install&lt;/code&gt; 훅으로 쉽게 제거할 수 있다.&lt;/li&gt;
@@ -929,57 +999,4 @@ Merge가 받아들여졌다!&lt;br /&gt;
         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 16: 레거시 시스템은 지옥</title><link href="https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell/" rel="alternate" type="text/html" title="TIL 16: 레거시 시스템은 지옥" /><published>2020-06-05T00:00:00+09:00</published><updated>2020-06-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/05/til-16-legacy-system-is-hell/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;레거시 시스템은 가능하면 빨리 개선해서 지옥을 맞이하지 않도록 하자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;뉴저지-코볼cobol-사건으로-느껴지는-레거시-시스템의-폐해&quot;&gt;뉴저지 코볼(COBOL) 사건으로 느껴지는 레거시 시스템의 폐해&lt;/h2&gt;
-
-&lt;p&gt;노마드 코더는 즐겨보는 유튜버 중 한명으로 다양한 프로그래밍 관련 이야기를 해준다.&lt;br /&gt;
-가끔씩 재밌는 이슈도 이야기 해주는데, 이번에 들려준 이슈는 &lt;strong&gt;코볼(COBOL) 레거시 시스템에서 얻는 교훈&lt;/strong&gt;에 관한 것이었다.
-(&lt;a href=&quot;https://youtu.be/LJ9TXkh9Xhk&quot; target=&quot;_blank&quot;&gt;유튜브 영상 링크&lt;/a&gt;)&lt;/p&gt;
-
-&lt;p&gt;간단히 요약하자면,
-미국 뉴저지 정부의 전산 시스템이 비교적 오래된 언어인 코볼로 이뤄져 있는 레거시 시스템인데, 개발자를 구할 수 없다는 것이다.
-이번 코로나19 사태로 전산 시스템에 유래 없이 많은 사용자가 몰리게 되었고,
-그것의 유지보수를 위해 코볼 개발자를 급하게 구하고 있지만 공급이 없어 애를 먹는 상황이다.&lt;/p&gt;
-
-&lt;p&gt;오래된 언어답게 요즘 자주 사용하는 언어에 비하면 생산성도 떨어지고, 여러모로 단점이 많다.
-이렇게 오랫동안 지속된 레거시 시스템은 진작에 시간을 두어 개편 작업을 해야 마땅한데 &lt;strong&gt;현업에서도 우선순위에서 밀리는 경우가 많다&lt;/strong&gt;.&lt;br /&gt;
-이처럼 뉴저지 코볼 사건은 레거시 시스템이 낳은 안타까운 결과물 중 하나이다.&lt;/p&gt;
-
-&lt;p&gt;비슷하게 (어디에나 존재할 수 있지만) 재직중인 회사에도 레거시 시스템이 존재한다.
-그것의 구조적 한계로 인해 일부 유용한 개선도 못하고 있는 것이 보인다.&lt;br /&gt;
-또한, 내가 맡고 있는 iOS 앱들도 불필요하게 Objective-C에 MRC 환경으로 되어 있다.
-이런 환경일수록 더 디테일하게 다뤄야 하는데 그러지 못해 버그와 메모리 누수가 산발한다.&lt;/p&gt;
-
-&lt;p&gt;뉴저지 코볼 사건처럼 나중에 후회하지 않으려면 &lt;strong&gt;일부 시간을 내서라도 구조, 환경 등의 개편을 진행해야 한다고 생각한다&lt;/strong&gt;.
-그렇게 하나의 앱은 한달의 시간을 어떻게든 내어 Objective-C에서 Swift로 포팅을 진행했고, 여러모로 만족하고 있다.&lt;/p&gt;
-
-&lt;p&gt;앞으로도 기회가 조금이라도 보이면, 기회를 만들어 기존 앱들의 포팅을 진행하거나 효율적인 구조로 개편하는 작업을 하고 싶다.
-야근은 자제하면서 말이다.. 😇&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 15: Notion은 유용해</title><link href="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/" rel="alternate" type="text/html" title="TIL 15: Notion은 유용해" /><published>2020-05-31T00:00:00+09:00</published><updated>2020-05-31T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful</id><content type="html" xml:base="https://jamesu.dev/posts/2020/05/31/til-15-notion-is-useful/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt; 툴은 개발자를 위한 &lt;strong&gt;메모 및 글 관리&lt;/strong&gt;에 유용하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;개발자를-위한-메모-및-글-관리-툴&quot;&gt;개발자를 위한 메모 및 글 관리 툴&lt;/h2&gt;
-
-&lt;p&gt;개발을 하다보면 Code Snippet, 유용한 링크, 메모 등을 빠르게 작성하고, 보관하고 싶을 것이다.&lt;br /&gt;
-&lt;a href=&quot;https://www.notion.so&quot; target=&quot;_blank&quot;&gt;Notion&lt;/a&gt;을 사용하면, 그 욕구를 잘 해소할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이전에는 맥북에 내장되어 있는 메모 앱을 자주 사용하곤 했는데, 내용이 필요할 때마다 애플 계정 동기화 또는 로그인이 필요했다.
-그래서 어디서든 빠르게 접근할 수 있는 메모가 필요했고, 우연히 웹 툴인 Notion을 접하게 되었다.&lt;/p&gt;
-
-&lt;p&gt;이걸 왜 이제 알았는지 모르겠다.&lt;br /&gt;
-간단하고 편리하고 개발자가 쓰기 좋은 기능들도 꽤 있다.&lt;br /&gt;
-게다가 디자인이 내 취향이다. 😀&lt;/p&gt;
-
-&lt;p&gt;한 문단과 비슷한 블록이라는 단위로 작성 단위를 측정하고 있다.&lt;br /&gt;
-그것과 업로드 용량 등 여러 요소에 따라 요금제가 달라진다.&lt;br /&gt;
-기본적으로 무료로 제공되는 양도 괜찮기 때문에 일단 사용해보고 판단하길 바란다.&lt;/p&gt;
-
-&lt;p&gt;홍보대사는 아니지만, 이런 유용한 툴을 나만 알고 싶지 않아서 공유한다.&lt;br /&gt;
-그동안 모르고 있었다면, 나처럼 빠져들지도 모른다. 😍&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="tool" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
