@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-23T20:08:13+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 25: HTML 태그가 포함된 텍스트 변환하기</title><link href="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/" rel="alternate" type="text/html" title="TIL 25: HTML 태그가 포함된 텍스트 변환하기" /><published>2021-01-22T00:00:00+09:00</published><updated>2021-01-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-31T20:25:58+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 26: Xcode 파일 Header Comment 통일</title><link href="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/" rel="alternate" type="text/html" title="TIL 26: Xcode 파일 Header Comment 통일" /><published>2021-01-28T00:00:00+09:00</published><updated>2021-01-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Xcode는 파일 Header Comment 포맷을 정의하는 방법을 제공한다.&lt;/li&gt;
+  &lt;li&gt;파일 Header Comment 포맷을 통일해 프로젝트의 일관성을 유지하자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;파일-header-comment의-일관성을-유지하자&quot;&gt;파일 Header Comment의 일관성을 유지하자&lt;/h2&gt;
+
+&lt;p&gt;언제나 Naming을 열심히 고민하는 개발자들에게 &lt;strong&gt;일관성&lt;/strong&gt; 유지는 중요한 마음가짐이자 규칙이다.&lt;br /&gt;
+파일을 생성할 때마다 상단에 추가되는 Header Comment도 그것의 예외가 될 수 없다.&lt;/p&gt;
+
+&lt;p&gt;기본적으로 Xcode에서 제공하는 파일 Header Comment 포맷에는 파일명, 프로젝트명, Copyright, 작성자 등이 포함된다.
+일반적으로 저것으로 충분할 것으로 보이지만, 사내에서 여러 개발자가 파일을 생성하다보면 일관성이 깨지는 상황이 발생할 수 있다.
+그것은 특히 작성자의 아이디가 알 수 없는 이름으로 되어 있거나 파일명을 수시로 바꾸는 경우다.&lt;/p&gt;
+
+&lt;p&gt;개발 환경을 설정할 때 임의의 애플 아이디로 로그인 해서 개발을 시작하거나 사내에서 쓰지 않는 자신만의 아이디를 쓰는 등과 같이
+직접 확인하지 않으면 일관성이 깨지고 중구난방이 될 수 있다.
+또한, 파일명이 이상해 리팩토링을 통해 고치거나 하면, Header Comment도 같이 바꾸는 게 정석이지만 빼먹고 변경하지 않는 일이 허다하다.
+후자의 경우는 코드 리뷰나 개발자 스스로가 신경써서 관리해야 하겠지만, 전자의 경우는 사내 파일 Header Comment 규칙을 바꾸는 것도 한 방법이 될 수 있다.&lt;/p&gt;
+
+&lt;p&gt;협업을 하다 보면 하나의 파일을 여러 개발자가 건드리는 경우가 많으므로, 굳이 작성자를 명시할 필요가 없다.
+또한, 커밋 내역을 통해 누가 무엇을 어떻게 수정했는지 파악할 수 있다.
+따라서 작성자를 파일 Header Comment에 포함시킬 필요가 없었고, 일관성을 유지하기 좋은 방향으로 포맷을 수정할 필요가 생겼다.&lt;/p&gt;
+
+&lt;p&gt;다행히 Xcode에 파일 Header Comment 포맷을 변경할 수 있는 방법이 다양하게 존재했고,
+사내 프로젝트를 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;xcshareddata&lt;/code&gt;에 보관하는 방식으로 다른 개발자에게도 동일한 규칙을 적용시킬 수 있었다.
+&lt;a href=&quot;https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0&quot; target=&quot;_blank&quot;&gt;이 곳&lt;/a&gt;에서
+포맷에 적용할 수 있는 다양한 매크로를 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;어찌보면 사소한 일이지만, 이 사소한 일이 다양한 인적 실수를 방지하고, 퀄리티를 높이는 등 좋은 장점이 있다고 생각한다.
+얼른 다른 프로젝트에도 적용해야겠다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 25: HTML 태그가 포함된 텍스트 변환하기</title><link href="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/" rel="alternate" type="text/html" title="TIL 25: HTML 태그가 포함된 텍스트 변환하기" /><published>2021-01-22T00:00:00+09:00</published><updated>2021-01-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;HTML 태그가 포함된 텍스트는 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 일반 텍스트로 변환할 수 있다.&lt;/li&gt;
@@ -913,90 +944,4 @@ Merge가 받아들여졌다!&lt;br /&gt;
 &lt;p&gt;줄 수를 2줄 이상으로 허용하는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;이면 경우에 따라 크래시가 발생할 수 있다.
 따라서 2줄 이상인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;end&lt;/code&gt;와 같은 다른 값을 사용해야 한다.&lt;/p&gt;
 
-&lt;p&gt;1줄인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하는 것에 문제가 없다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 17: 자잘한 안드로이드 UI 팁들</title><link href="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/" rel="alternate" type="text/html" title="TIL 17: 자잘한 안드로이드 UI 팁들" /><published>2020-06-09T00:00:00+09:00</published><updated>2020-06-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/09/til-17-some-android-ui-tips/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt; 항목들이 서로 잘리지 않게 하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;DrawerLayout&lt;/code&gt;로 사이드 화면을 열었을 때, 뒤의 컨텐츠 부분이 클릭되는 경우&lt;/li&gt;
-  &lt;li&gt;버튼의 그림자를 제거하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;이미지를 너비는 꽉 채우되, 비율에 따라 높이를 동적으로 설정하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ViewPager&lt;/code&gt;를 빠르게 스크롤 할 때, 흰 배경이 보이는 경우&lt;/li&gt;
-  &lt;li&gt;상태바 높이를 얻고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Bottom Sheet Dialog&lt;/code&gt;의 드래그 동작을 막고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EditText&lt;/code&gt; 내부 스크롤을 활성화하고 싶은 경우&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;자잘한-안드로이드-ui-팁들&quot;&gt;자잘한 안드로이드 UI 팁들&lt;/h2&gt;
-
-&lt;p&gt;안드로이드 개발을 하면서 느끼는 점은 iOS 개발도 불편한 부분이 많았지만, 안드로이드는 더 심한 것처럼 느껴진다.
-정말 쉽게 처리될 것 같은 부분도 직접 해보면 편법인지 아닌지도 모르겠는 편법같은 처리를 해야 되는 부분도 있고 해서 참으로 힘들다.
-그래서 이런 자잘한 처리들을 모아 라이브러리를 만들어 두고두고 쓰면 좋을 것 같다는 생각이 들었다.
-언제 만들지는 모르지만…&lt;/p&gt;
-
-&lt;h3 id=&quot;1-recyclerview-항목들이-서로-잘리지-않게-하고-싶은-경우&quot;&gt;1. &lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt; 항목들이 서로 잘리지 않게 하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;clipChildren&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;로 설정한다.&lt;br /&gt;
-그러면, 자식들이 서로 자르지 않는다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-drawerlayout로-사이드-화면을-열었을-때-뒤의-컨텐츠-부분이-클릭되는-경우&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;DrawerLayout&lt;/code&gt;로 사이드 화면을 열었을 때, 뒤의 컨텐츠 부분이 클릭되는 경우&lt;/h3&gt;
-
-&lt;p&gt;사이드 화면의 레이아웃에 &lt;code class=&quot;highlighter-rouge&quot;&gt;clickable&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;focusable&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로 설정한다.&lt;br /&gt;
-사이드 화면이 클릭 가능하게 함으로써 막는다.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-버튼의-그림자를-제거하고-싶은-경우&quot;&gt;3. 버튼의 그림자를 제거하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;stateListAnimator&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;@null&lt;/code&gt;로 설정한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;4-이미지를-너비는-꽉-채우되-비율에-따라-높이를-동적으로-설정하고-싶은-경우&quot;&gt;4. 이미지를 너비는 꽉 채우되, 비율에 따라 높이를 동적으로 설정하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;adjustViewBounds&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로, 너비를 &lt;code class=&quot;highlighter-rouge&quot;&gt;match_parent&lt;/code&gt;로 설정한다.&lt;br /&gt;
-반대의 경우는 너비와 높이를 바꿔 생각하면 된다.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-viewpager를-빠르게-스크롤-할-때-흰-배경이-보이는-경우&quot;&gt;5. &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewPager&lt;/code&gt;를 빠르게 스크롤 할 때, 흰 배경이 보이는 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ViewPager&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;offscreenPageLimit&lt;/code&gt;를 적절하게 설정해 페이지를 미리 로딩하도록 한다.&lt;br /&gt;
-복잡한 뷰일수록 수치를 낮게 설정해야 과부하가 걸리지 않는다.&lt;/p&gt;
-
-&lt;h3 id=&quot;6-상태바-높이를-얻고-싶은-경우&quot;&gt;6. 상태바 높이를 얻고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;상태바 높이에 해당하는 리소스를 찾아내 구할 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getStatusBarHeight&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Context&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;Resources&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getResources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getIdentifier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-        &lt;span class=&quot;s&quot;&gt;&quot;status_bar_height&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dimen&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;android&quot;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resourceId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getDimensionPixelSize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resourceId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;7-bottom-sheet-dialog의-드래그-동작을-막고-싶은-경우&quot;&gt;7. &lt;code class=&quot;highlighter-rouge&quot;&gt;Bottom Sheet Dialog&lt;/code&gt;의 드래그 동작을 막고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;BottomSheetBehavior&lt;/code&gt;에 다음과 같은 콜백을 추가한다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addBottomSheetCallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BottomSheetBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;BottomSheetCallback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onStateChanged&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bottomSheet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newState&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BottomSheetBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;STATE_DRAGGING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;behavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;BottomSheetBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;STATE_EXPANDED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onSlide&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@NonNull&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bottomSheet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slideOffset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;8-edittext-내부-스크롤을-활성화하고-싶은-경우&quot;&gt;8. &lt;code class=&quot;highlighter-rouge&quot;&gt;EditText&lt;/code&gt; 내부 스크롤을 활성화하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;다음과 같은 터치 리스너를 추가한다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;editText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOnTouchListener&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;editText&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasFocus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestDisallowInterceptTouchEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MotionEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ACTION_MASK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MotionEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ACTION_SCROLL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestDisallowInterceptTouchEvent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;p&gt;1줄인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하는 것에 문제가 없다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
