@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 27: Closure에서의 메모리 누수 제거하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, swift",
+      "date"       : "2021.02.05",
+      "urlString"  : "/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/",
+      "url"        : "/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/"
+    },
+  
+    {
       "title"      : "TIL 26: Xcode 파일 Header Comment 통일",
       "categories" : "Etc > TIL",
       "tags"       : "ios, xcode",
@@ -210,7 +219,7 @@
     {
       "title"      : "TIL 4: MRC는 괴로워",
       "categories" : "Etc > TIL",
-      "tags"       : "ios",
+      "tags"       : "ios, objective-c",
       "date"       : "2020.05.15",
       "urlString"  : "/posts/2020/05/15/til-4-mrc-is-painful/",
       "url"        : "/posts/2020/05/15/til-4-mrc-is-painful/"

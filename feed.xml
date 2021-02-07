@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-01-31T20:25:58+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 26: Xcode 파일 Header Comment 통일</title><link href="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/" rel="alternate" type="text/html" title="TIL 26: Xcode 파일 Header Comment 통일" /><published>2021-01-28T00:00:00+09:00</published><updated>2021-01-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-07T22:56:44+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 27: Closure에서의 메모리 누수 제거하기</title><link href="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/" rel="alternate" type="text/html" title="TIL 27: Closure에서의 메모리 누수 제거하기" /><published>2021-02-05T00:00:00+09:00</published><updated>2021-02-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Retain Cycle이 아닌 &lt;strong&gt;불필요한 메모리 점유&lt;/strong&gt;도 일종의 메모리 누수라고 생각한다.&lt;/li&gt;
+  &lt;li&gt;Closure에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 할 때는 타이밍에 주의하자.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;숨겨져-있는-메모리-누수&quot;&gt;숨겨져 있는 메모리 누수&lt;/h2&gt;
+
+&lt;p&gt;Xcode는 현재 화면에서의 메모리 누수를 확인할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug Memory Graph&lt;/code&gt; 기능을 제공한다.
+이를 통해 메모리에 할당된 데이터 간의 그래프를 볼 수 있고, 그 관계를 통해 누가 누구와 연결되었는지 알 수 있다.
+그리고 Retain Cycle이 발생한 경우, 바로 표시해주어 한눈에 그것을 알 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만, Retain Cycle 표시가 없다고 안심할 수 있는 것은 아니다.&lt;br /&gt;
+실제 메모리가 할당된 목록을 보면, 현재 화면에서 존재하면 안 되는 데이터가 남아있는 것이 확인될 수도 있다.
+논리적으로 해당 데이터가 남아 있으면 안 되지만 목록에 나타난다면,
+&lt;strong&gt;그것은 Retain Cycle은 아니지만 앱이 실행되는 내내 메모리를 점유하고 있기에 불필요한 메모리 점유로 간주한다&lt;/strong&gt;.
+그래서 나는 이것도 또 하나의 메모리 누수라고 생각한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;closure-사용할-때-주의하기&quot;&gt;Closure 사용할 때 주의하기&lt;/h2&gt;
+
+&lt;p&gt;사내 프로젝트에서도 그 숨겨진 메모리 누수가 발견되었는데, 원인을 찾기 매우 어려웠다.
+그래도 Xcode의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug Memory Graph&lt;/code&gt; 기능을 통해 연결 관계를 추적하다보니 Closure를 사용하는 부분이 의심이 됐다.
+그리고 몇가지 실험을 통해 Closure에서 객체를 붙잡고 있어 메모리 누수가 발생한 것을 알 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;개인적으로 Swift에서 Closure를 사용할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;의 프로퍼티나 메소드를 사용하는 경우, 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 하는 습관이 몸에 배어 있다.
+그래서 별 탈이 없이 사용한 줄 알았는데 함정이 있었다.&lt;/p&gt;
+
+&lt;p&gt;기존 코드는 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak self&lt;/code&gt; 캡처를 했었다.&lt;br /&gt;
+(개인적으로 사용한 코드이기 때문에 Closure 부분만 집중하면 된다.)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asyncAfter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;refreshData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;하지만, 나는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;라는 개념에 대해 대략적으로만 알고 사용했었고, 그 결과 메모리 누수로 이어졌던 것이다.
+저렇게 캡처를 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;addAction&lt;/code&gt; 메소드를 호출해 Closure를 정의하는 시점에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처되지 않고,
+그 안의 &lt;code class=&quot;highlighter-rouge&quot;&gt;asyncAfter&lt;/code&gt; 메소드를 호출할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak self&lt;/code&gt; 캡처를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;가 사용되기 때문에 결국에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;strong&lt;/code&gt; 캡처가 된 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;는 Closure를 &lt;strong&gt;정의하는 시점에 캡처&lt;/strong&gt;를 하는 것이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 하고 싶다면, 정의 시점에 캡처를 해야 한다.
+따라서, 다음과 같이 수정을 하면 Closure에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 붙잡는 현상이 사라진다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asyncAfter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;refreshData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;정말 간단한 해결책이지만, Swift 언어에 대한 기본기가 부족해 발생했던 문제점이었다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 고생을 했으니 앞으로는 까먹지 않고 숨겨진 메모리 누수를 막을 수 있을 것 같다.&lt;br /&gt;
+다시 한번 느끼지만, &lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 26: Xcode 파일 Header Comment 통일</title><link href="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/" rel="alternate" type="text/html" title="TIL 26: Xcode 파일 Header Comment 통일" /><published>2021-01-28T00:00:00+09:00</published><updated>2021-01-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Xcode는 파일 Header Comment 포맷을 정의하는 방법을 제공한다.&lt;/li&gt;
@@ -854,94 +908,4 @@ CI/CD를 적용하면 이런 과정이 자동화되므로,
 &lt;p&gt;해당 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/pull/162&quot; target=&quot;_blank&quot;&gt;PR&lt;/a&gt;의
 Merge가 받아들여졌다!&lt;br /&gt;
 매우 뿌듯하고, 해당 프로젝트를 더 발전시키고 싶은 욕심이 생긴다.&lt;br /&gt;
-불편했던 기능이 하나 있는데… 그것도 바꿔볼까? 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="oss" /><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 18: 자잘한 안드로이드 UI 팁들 2</title><link href="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/" rel="alternate" type="text/html" title="TIL 18: 자잘한 안드로이드 UI 팁들 2" /><published>2020-06-15T00:00:00+09:00</published><updated>2020-06-15T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2</id><content type="html" xml:base="https://jamesu.dev/posts/2020/06/15/til-18-some-android-ui-tips-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수로 전달한 인자에 따른 주의사항&lt;/li&gt;
-  &lt;li&gt;코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않는 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 자식으로 스크롤 뷰 형태의 뷰가 있을 때, 이중 스크롤을 방지하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;클릭을 빠르게 두 번 했을 때, 이벤트가 두 번 발생하는 것을 방지하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;코드로 높이, 너비 등과 같은 값을 설정하는 경우&lt;/li&gt;
-  &lt;li&gt;뷰의 변환을 지속적으로 감지하고 싶은 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt; 사용 시, 고정 높이가 적용되지 않는 경우&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;로 적용하는 경우 주의사항&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;자잘한-안드로이드-ui-팁들-2&quot;&gt;자잘한 안드로이드 UI 팁들 2&lt;/h2&gt;
-
-&lt;p&gt;유지보수를 하며 추가적으로 간단하게 정리했던 팁들이다.&lt;br /&gt;
-앞서 작성했던 팁들은 바로 이전 글에서 확인할 수 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;1-코드로-inflate-할-때-root-매개변수로-전달한-인자에-따른-동작-구분&quot;&gt;1. 코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수로 전달한 인자에 따른 동작 구분&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수에 부모 뷰를 전달하면, 부모 뷰에 &lt;code class=&quot;highlighter-rouge&quot;&gt;addView()&lt;/code&gt; 메소드를 호출해 자식으로 추가되는 효과가 난다.
-반대로, &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달하면 추가가 되지 않으므로 직접 추가를 해줘야 한다.&lt;/p&gt;
-
-&lt;p&gt;때에 따라 부모 뷰를 전달할 필요가 없기도 한다.&lt;br /&gt;
-그런데 두 경우에 반환한 뷰가 서로 달라 주의가 필요하다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;부모 뷰를 전달한 경우: &lt;strong&gt;부모 뷰&lt;/strong&gt;가 반환된다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달한 경우: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 된 뷰&lt;/strong&gt;가 반환된다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;2-코드로-inflate-할-때-margin이-적용되지-않는-경우&quot;&gt;2. 코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않는 경우&lt;/h3&gt;
-
-&lt;p&gt;분명히 &lt;code class=&quot;highlighter-rouge&quot;&gt;XML&lt;/code&gt; 레이아웃에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;을 적용했는데, &lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 한 경우 실제로 적용되지 않는 것을 확인할 수 있다.
-이 또한 &lt;code class=&quot;highlighter-rouge&quot;&gt;root&lt;/code&gt; 매개변수에 부모 뷰를 전달했는지 안했는지에 따라 달라진다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;부모 뷰를 전달한 경우: &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 정상적으로 적용&lt;/strong&gt;된다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;을 전달한 경우: &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;이 적용되지 않아 &lt;strong&gt;코드로 직접 적용해야 한다&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inflate&lt;/code&gt; 할 때 부모가 주어지면 &lt;code class=&quot;highlighter-rouge&quot;&gt;margin&lt;/code&gt;을 판단할 수 있으나, 없다면 판단할 수 없어 발생하는 문제인 것 같다.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-scrollview-자식으로-스크롤-뷰-형태의-뷰가-있을-때-이중-스크롤을-방지하고-싶은-경우&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 자식으로 스크롤 뷰 형태의 뷰가 있을 때, 이중 스크롤을 방지하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;스크롤 뷰 형태의 뷰라 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;RecyclerView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ListView&lt;/code&gt; 등 스크롤이 생길 수 있는 뷰를 말한다.
-해당 뷰를 이용해서 데이터를 표현했지만, 높이를 고정시키고 싶을 때가 있을 것이다.
-그런데 부모로 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt;를 그냥 사용하면, 고정 높이가 적용되지 않을 수가 있다.&lt;/p&gt;
-
-&lt;p&gt;부모에 해당하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 대신 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용&lt;/strong&gt;한다.&lt;br /&gt;
-자식으로 스크롤 뷰 형태의 뷰를 가지면, 그냥 &lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용하는 것이 속 편할 것 같다.&lt;br /&gt;
-아니면 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;ScrollView&lt;/code&gt; 대신 &lt;code class=&quot;highlighter-rouge&quot;&gt;NestedScrollView&lt;/code&gt;를 사용하는 것도…&lt;/p&gt;
-
-&lt;h3 id=&quot;4-클릭을-빠르게-두-번-했을-때-이벤트가-두-번-발생하는-것을-방지하고-싶은-경우&quot;&gt;4. 클릭을 빠르게 두 번 했을 때, 이벤트가 두 번 발생하는 것을 방지하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;클릭 이벤트에서 마지막으로 클릭한 시간을 기록했다가 현재 시간과 비교해 간격을 줄 수 있다.&lt;/p&gt;
-
-&lt;p&gt;아래와 같은 코드를 클릭 이벤트에 넣어 구현이 가능하다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;SystemClock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elapsedRealtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mLastClickTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;mLastClickTime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SystemClock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;elapsedRealtime&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;하지만, 이것도 정말 빠르게 두 번 누르면 같은 현상이 발생한다…&lt;br /&gt;
-추가적으로 다른 조치가 필요할 것 같다.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-코드로-높이-너비-등과-같은-값을-설정하는-경우&quot;&gt;5. 코드로 높이, 너비 등과 같은 값을 설정하는 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;코드로 해당 값들을 설정하는 메소드는 대부분 &lt;code class=&quot;highlighter-rouge&quot;&gt;px&lt;/code&gt; 값을 수치로 전달 받는다.&lt;/strong&gt;&lt;br /&gt;
-만약, 디자인을 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;dp&lt;/code&gt; 값 설정이 필요하다면, 반드시 변환해서 전달하도록 한다.&lt;/p&gt;
-
-&lt;p&gt;일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;dpToPx()&lt;/code&gt;와 같은 유틸 메소드를 만들어 사용하곤 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;6-뷰의-변환을-지속적으로-감지하고-싶은-경우&quot;&gt;6. 뷰의 변환을 지속적으로 감지하고 싶은 경우&lt;/h3&gt;
-
-&lt;p&gt;뷰의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewTreeObserver&lt;/code&gt;를 얻어 &lt;code class=&quot;highlighter-rouge&quot;&gt;OnGlobalLayoutListener&lt;/code&gt;를 설정하면 지속적 감지가 가능하다.
-하지만, 매우 자주 호출되므로 주의가 필요하다.&lt;/p&gt;
-
-&lt;p&gt;일회성 동작이라면, &lt;code class=&quot;highlighter-rouge&quot;&gt;GlobalLayout&lt;/code&gt; 이벤트에서 해당 리스너를 지우도록 한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;7-constraintlayout-사용-시-고정-높이가-적용되지-않는-경우&quot;&gt;7. &lt;code class=&quot;highlighter-rouge&quot;&gt;ConstraintLayout&lt;/code&gt; 사용 시, 고정 높이가 적용되지 않는 경우&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;layout_constrainedHeight&lt;/code&gt;을 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;로 설정한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;8-ellipsize를-middle로-적용하는-경우-주의사항&quot;&gt;8. &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;로 적용하는 경우 주의사항&lt;/h3&gt;
-
-&lt;p&gt;줄 수를 2줄 이상으로 허용하는 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;ellipsize&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt;이면 경우에 따라 크래시가 발생할 수 있다.
-따라서 2줄 이상인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하지 않고, &lt;code class=&quot;highlighter-rouge&quot;&gt;end&lt;/code&gt;와 같은 다른 값을 사용해야 한다.&lt;/p&gt;
-
-&lt;p&gt;1줄인 경우에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;middle&lt;/code&gt; 값을 사용하는 것에 문제가 없다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="android" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>
+불편했던 기능이 하나 있는데… 그것도 바꿔볼까? 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="oss" /><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry></feed>
