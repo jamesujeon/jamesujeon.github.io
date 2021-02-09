@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기",
+      "categories" : "Etc > Blog",
+      "tags"       : "github",
+      "date"       : "2021.02.09",
+      "urlString"  : "/posts/2021/02/09/showing-github-contributions-graph/",
+      "url"        : "/posts/2021/02/09/showing-github-contributions-graph/"
+    },
+  
+    {
       "title"      : "TIL 27: Closure에서의 메모리 누수 제거하기",
       "categories" : "Etc > TIL",
       "tags"       : "ios, swift",
@@ -345,7 +354,7 @@
     {
       "title"      : "Jekyll에 Disqus 댓글 서비스 연동하기",
       "categories" : "Etc > Blog",
-      "tags"       : "github-pages, jekyll, disqus",
+      "tags"       : "jekyll, disqus",
       "date"       : "2020.01.03",
       "urlString"  : "/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/",
       "url"        : "/posts/2020/01/03/adding-disqus-comment-service-to-jekyll/"
@@ -489,7 +498,7 @@
     {
       "title"      : "Jekyll 환경설정 파일 이해하기",
       "categories" : "Etc > Blog",
-      "tags"       : "github-pages, jekyll",
+      "tags"       : "jekyll",
       "date"       : "2019.11.28",
       "urlString"  : "/posts/2019/11/28/understanding-jekyll-config-file/",
       "url"        : "/posts/2019/11/28/understanding-jekyll-config-file/"

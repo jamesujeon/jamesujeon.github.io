@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-09T00:00:00+09:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/","@type":"BlogPosting","headline":"GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기","dateModified":"2021-02-09T00:00:00+09:00","datePublished":"2021-02-09T00:00:00+09:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/blog" class="category-item">
+        Blog
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/github" class="tag-item">
+        #github
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-02-09 00:00:00 +0900">2021.02.09</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">&lt;img src="https://ghchart.rshah.org/jamesujeon"/&gt;</code> 한줄로 나의 <strong>잔디</strong>를 표현할 수 있다.</li>
+  <li><code class="highlighter-rouge">&lt;img src="https://ghchart.rshah.org/219138/jamesujeon"/&gt;</code>와 같이 <strong>기준 색</strong>을 지정할 수도 있다.</li>
+</ul>
+
+<h2 id="github-contributions-graph">GitHub Contributions Graph</h2>
+
+<p><img src="assets/figure_1.png" alt="Figure 1" /></p>
+
+<p>GitHub를 사용하는 사람이라면 누구나 한번쯤 위와 같은 <strong>GitHub Contributions Graph</strong>를 본 적이 있을 것이다.
+그리고 많은 개발자가 이 초록색 네모(일명 잔디)를 채우기 위해 하루하루 코딩을 한다.
+이렇게 채운 네모는 코딩을 더 열심히 하게 자극을 주는 동기부여가 된다.</p>
+
+<p>GitHub Contributions Graph를 많이 채웠으면 그것을 누군가에게 자랑을 하고 싶기도 하고,
+스스로 보며 뿌듯함을 느끼고 싶기도 할 것이다.
+그러기 위해 블로그에 그 그래프를 연동하기도 하는데, 최근에 괜찮은 오픈 소스를 발견해 그것을 이용해
+<a href="https://jamesu.dev/about" target="_blank">About</a> 페이지를 꾸몄다.</p>
+
+<h2 id="github-chart-api-연동">Github Chart API 연동</h2>
+
+<p>그래프를 보여주기 위해 사용한 오픈 소스는 <a href="https://github.com/akerl/githubchart" target="_blank">Github Chart API</a>라
+불리는 <strong>그래프 이미지 생성 API</strong>이다.</p>
+
+<p>Github Chart API는 GitHub 계정으로부터 Contributions 데이터를 불러와 이미지 파일을 생성하고 호스팅을 통해 이미지 파일을 제공해준다.
+이미지 파일은 SVG이기 때문에 화면 크기에 맞춰 적절하게 보여질 수 있으며, 원하는 기준 색을 지정해 네모(일명 잔디)의 색을 바꿀 수 있다.</p>
+
+<p>사용법은 정말 간단하다.<br />
+다음 코드와 같이 <code class="highlighter-rouge">img</code> 요소의 이미지 파일 경로로
+<strong>호스팅 사이트(https://ghchart.rshah.org) 뒤에 GitHub 계정명을 덧붙인 경로</strong>를 전달하면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://ghchart.rshah.org/jamesujeon"</span><span class="nt">/&gt;</span></code></pre></figure>
+
+<p>앞서 얘기한 것처럼 <strong>기준 색</strong>을 지정하고 싶다면,
+다음 코드와 같이 <strong>GitHub 계정명 앞에 16진수 색상 코드</strong>를 덧붙이면 된다.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"https://ghchart.rshah.org/219138/jamesujeon"</span><span class="nt">/&gt;</span></code></pre></figure>
+
+<p>위 코드를 적용한 <a href="https://jamesu.dev/about" target="_blank">About</a> 페이지의 이미지는 다음과 같다.</p>
+
+<p><img src="assets/figure_2.png" alt="Figure 2" /></p>
+
+<p>해당 이미지는 현재의 GitHub 데이터를 기준으로 하기 때문에 최신 이미지가 유지될 수 있다.
+물론, 이미지 파일이 캐싱되어 이전 상태의 이미지가 보일 수 있으니 그런 경우 캐시를 제거하고 확인해 봐야 한다.</p>
+
+<p>Github Chart API에서 생성하는 이미지 파일은 <a href="https://github.com/akerl/githubchart" target="_blank">GithubChart</a>라 하는
+다른 오픈 소스로부터 생성된 것이다.
+만약, 이미지 파일을 생성하는 로직이 궁금하거나 해당 루비 라이브러리를 직접 연동하고 싶은 경우, GithubChart를 참고하면 도움이 될 것이다.</p>
+
+<p>얼른 한줄의 코드를 통해 자신의 GitHub Contributions Graph를 뽐내도록 하자! 😎</p>
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 27: Closure에서의 메모리 누수 제거하기</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/';
+      this.page.identifier = '/posts/2021/02/09/showing-github-contributions-graph';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

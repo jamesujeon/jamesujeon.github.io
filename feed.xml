@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-07T22:56:44+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 27: Closure에서의 메모리 누수 제거하기</title><link href="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/" rel="alternate" type="text/html" title="TIL 27: Closure에서의 메모리 누수 제거하기" /><published>2021-02-05T00:00:00+09:00</published><updated>2021-02-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-09T19:57:43+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기</title><link href="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" rel="alternate" type="text/html" title="GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기" /><published>2021-02-09T00:00:00+09:00</published><updated>2021-02-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;https://ghchart.rshah.org/jamesujeon&quot;/&amp;gt;&lt;/code&gt; 한줄로 나의 &lt;strong&gt;잔디&lt;/strong&gt;를 표현할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;https://ghchart.rshah.org/219138/jamesujeon&quot;/&amp;gt;&lt;/code&gt;와 같이 &lt;strong&gt;기준 색&lt;/strong&gt;을 지정할 수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;github-contributions-graph&quot;&gt;GitHub Contributions Graph&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub를 사용하는 사람이라면 누구나 한번쯤 위와 같은 &lt;strong&gt;GitHub Contributions Graph&lt;/strong&gt;를 본 적이 있을 것이다.
+그리고 많은 개발자가 이 초록색 네모(일명 잔디)를 채우기 위해 하루하루 코딩을 한다.
+이렇게 채운 네모는 코딩을 더 열심히 하게 자극을 주는 동기부여가 된다.&lt;/p&gt;
+
+&lt;p&gt;GitHub Contributions Graph를 많이 채웠으면 그것을 누군가에게 자랑을 하고 싶기도 하고,
+스스로 보며 뿌듯함을 느끼고 싶기도 할 것이다.
+그러기 위해 블로그에 그 그래프를 연동하기도 하는데, 최근에 괜찮은 오픈 소스를 발견해 그것을 이용해
+&lt;a href=&quot;https://jamesu.dev/about&quot; target=&quot;_blank&quot;&gt;About&lt;/a&gt; 페이지를 꾸몄다.&lt;/p&gt;
+
+&lt;h2 id=&quot;github-chart-api-연동&quot;&gt;Github Chart API 연동&lt;/h2&gt;
+
+&lt;p&gt;그래프를 보여주기 위해 사용한 오픈 소스는 &lt;a href=&quot;https://github.com/akerl/githubchart&quot; target=&quot;_blank&quot;&gt;Github Chart API&lt;/a&gt;라
+불리는 &lt;strong&gt;그래프 이미지 생성 API&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;Github Chart API는 GitHub 계정으로부터 Contributions 데이터를 불러와 이미지 파일을 생성하고 호스팅을 통해 이미지 파일을 제공해준다.
+이미지 파일은 SVG이기 때문에 화면 크기에 맞춰 적절하게 보여질 수 있으며, 원하는 기준 색을 지정해 네모(일명 잔디)의 색을 바꿀 수 있다.&lt;/p&gt;
+
+&lt;p&gt;사용법은 정말 간단하다.&lt;br /&gt;
+다음 코드와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;img&lt;/code&gt; 요소의 이미지 파일 경로로
+&lt;strong&gt;호스팅 사이트(https://ghchart.rshah.org) 뒤에 GitHub 계정명을 덧붙인 경로&lt;/strong&gt;를 전달하면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://ghchart.rshah.org/jamesujeon&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;앞서 얘기한 것처럼 &lt;strong&gt;기준 색&lt;/strong&gt;을 지정하고 싶다면,
+다음 코드와 같이 &lt;strong&gt;GitHub 계정명 앞에 16진수 색상 코드&lt;/strong&gt;를 덧붙이면 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://ghchart.rshah.org/219138/jamesujeon&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위 코드를 적용한 &lt;a href=&quot;https://jamesu.dev/about&quot; target=&quot;_blank&quot;&gt;About&lt;/a&gt; 페이지의 이미지는 다음과 같다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/figure_2.png&quot; alt=&quot;Figure 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;해당 이미지는 현재의 GitHub 데이터를 기준으로 하기 때문에 최신 이미지가 유지될 수 있다.
+물론, 이미지 파일이 캐싱되어 이전 상태의 이미지가 보일 수 있으니 그런 경우 캐시를 제거하고 확인해 봐야 한다.&lt;/p&gt;
+
+&lt;p&gt;Github Chart API에서 생성하는 이미지 파일은 &lt;a href=&quot;https://github.com/akerl/githubchart&quot; target=&quot;_blank&quot;&gt;GithubChart&lt;/a&gt;라 하는
+다른 오픈 소스로부터 생성된 것이다.
+만약, 이미지 파일을 생성하는 로직이 궁금하거나 해당 루비 라이브러리를 직접 연동하고 싶은 경우, GithubChart를 참고하면 도움이 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;얼른 한줄의 코드를 통해 자신의 GitHub Contributions Graph를 뽐내도록 하자! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 27: Closure에서의 메모리 누수 제거하기</title><link href="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/" rel="alternate" type="text/html" title="TIL 27: Closure에서의 메모리 누수 제거하기" /><published>2021-02-05T00:00:00+09:00</published><updated>2021-02-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Retain Cycle이 아닌 &lt;strong&gt;불필요한 메모리 점유&lt;/strong&gt;도 일종의 메모리 누수라고 생각한다.&lt;/li&gt;
@@ -857,55 +907,4 @@ CI/CD를 적용하면 이런 과정이 자동화되므로,
 올해는 트렌드도 적용해가며 iOS 개발의 깊이를 더해가고 싶다.&lt;/p&gt;
 
 &lt;p&gt;올해의 가장 큰 목표는 &lt;strong&gt;깊이가 깊은 iOS 개발자&lt;/strong&gt;가 되는 것이다.&lt;br /&gt;
-그 깊이의 기준은 정할 수 없지만, 스스로 열심히 했다고 생각이 들 정도로 노력을 해보자. 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 19: Simple-Jekyll-Search 오픈 소스 기여</title><link href="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/" rel="alternate" type="text/html" title="TIL 19: Simple-Jekyll-Search 오픈 소스 기여" /><published>2020-12-26T00:00:00+09:00</published><updated>2020-12-26T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss</id><content type="html" xml:base="https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;이 블로그에 검색 기능을 넣고 싶어서
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search&quot; target=&quot;_blank&quot;&gt;Simple-Jekyll-Search&lt;/a&gt;
-라이브러리를 적용하려 했다.&lt;/li&gt;
-  &lt;li&gt;버그를 발견해 수정해서 Simple-Jekyll-Search 라이브러리에
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/pull/162&quot; target=&quot;_blank&quot;&gt;PR&lt;/a&gt;을 보냈다.&lt;/li&gt;
-  &lt;li&gt;Merge되면 좋겠다.&lt;/li&gt;
-  &lt;li&gt;오픈 소스 분석은 은근 재밌다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;버그-발견-수정-도전-그리고-pr&quot;&gt;버그 발견, 수정 도전, 그리고 PR&lt;/h2&gt;
-
-&lt;p&gt;이 블로그를 만들고 사용하면서 가장 큰 문제 중 하나는 원하는 글을 검색할 수 없다는 것이었다.&lt;br /&gt;
-그래서 검색 기능을 넣고자 알아보던 중에
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search&quot; target=&quot;_blank&quot;&gt;Simple-Jekyll-Search&lt;/a&gt;를
-알게 되었고, 그것이 내가 원하는 검색 기능에 어느 정도 부합하다는 생각이 들어 적용 하기로 마음 먹었다.&lt;br /&gt;
-그리고 이 라이브러리의 예제 수준으로만 검색 기능을 적용하기에는 원하는 퀄리티가 나오지 않아 커스터마이징 작업도 진행하기로 했다.&lt;/p&gt;
-
-&lt;p&gt;그렇게 작업을 진행하던 중에 &lt;code class=&quot;highlighter-rouge&quot;&gt;exclude&lt;/code&gt; 옵션을 적용해보다가 전혀 작동하지 않는 현상을 발견했다.&lt;br /&gt;
-그것을 보고 갑자기 삘(?)을 받아 처음에는 의도치 않았지만, 해당 라이브러리의 소스를 분석하기 시작했다.&lt;/p&gt;
-
-&lt;p&gt;해당 소스의 주 언어는 JavaScript였고, 많이 사용해 본 경험이 없어 낯설었지만 재밌겠다는 생각에 분석을 진행했다.&lt;br /&gt;
-검색해가며 소스 분석을 하다 보니 아주 치명적인 버그를 발견할 수 있었다.&lt;br /&gt;
-검색 기능 관련 객체를 생성하는 코드에서 전달한 &lt;code class=&quot;highlighter-rouge&quot;&gt;exclude&lt;/code&gt; 옵션을 세팅하지 않는 것이었다.&lt;/p&gt;
-
-&lt;p&gt;다행히 소스의 덩치가 크지 않아 분석하는 것이 크게 어렵지 않았고,
-버그를 수정해서 Simple-Jekyll-Search 라이브러리에
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/pull/162&quot; target=&quot;_blank&quot;&gt;Pull Request(PR)&lt;/a&gt;을 보냈다.&lt;br /&gt;
-최근까지도 Merge된 흔적이 있는 것을 보니 활동하고 있는 프로젝트라 생각이 들었다.&lt;br /&gt;
-부디 나의 PR을 받아 들여 Merge되면 좋을 것 같다. 🥺&lt;/p&gt;
-
-&lt;h2 id=&quot;오픈-소스-기여&quot;&gt;오픈 소스 기여&lt;/h2&gt;
-
-&lt;p&gt;Open Source Software(이하 OSS)에 기여하는 것은 항상 어려운 일이라고만 생각이 들었는데, 생각보다 쉬운 일이었다.
-물론, 시작은 쉽지만 Merge 되는 것은 어려울 수 있다.&lt;br /&gt;
-시작이 반이라는 말처럼 일단 시작하는 것에 큰 의의를 두려고 한다.&lt;/p&gt;
-
-&lt;p&gt;또한, 나와 다른 사고와 스타일을 가진 개발자의 코드를 보니 신기하고 재밌었다.&lt;br /&gt;
-내 코드도 GitHub을 통해 공개되기도 하니 코드 퀄리티에 더 신경 써야겠다는 생각이 재차 들었다.&lt;/p&gt;
-
-&lt;p&gt;OSS들을 보다 보면 생각보다 작은 덩치도 많고, 그런 프로젝트는 진입 장벽도 높지 않으니 자주 시도해보는 것이 좋을 것 같다.
-이것이 쌓이면, 큰 프로젝트에 기여하는 것도 불가능한 일은 아닐 것 같다.&lt;br /&gt;
-기여한 OSS가 많아지면 그 뿌듯함도 점점 쌓여가지 않을까? 🙂&lt;/p&gt;
-
-&lt;h2 id=&quot;20201227-내용-추가&quot;&gt;2020.12.27 내용 추가&lt;/h2&gt;
-
-&lt;p&gt;해당 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/pull/162&quot; target=&quot;_blank&quot;&gt;PR&lt;/a&gt;의
-Merge가 받아들여졌다!&lt;br /&gt;
-매우 뿌듯하고, 해당 프로젝트를 더 발전시키고 싶은 욕심이 생긴다.&lt;br /&gt;
-불편했던 기능이 하나 있는데… 그것도 바꿔볼까? 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="oss" /><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry></feed>
+그 깊이의 기준은 정할 수 없지만, 스스로 열심히 했다고 생각이 들 정도로 노력을 해보자. 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry></feed>
