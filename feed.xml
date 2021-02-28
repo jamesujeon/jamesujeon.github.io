@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-09T19:57:43+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기</title><link href="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" rel="alternate" type="text/html" title="GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기" /><published>2021-02-09T00:00:00+09:00</published><updated>2021-02-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-28T21:42:05+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 28: PDFView의 페이지 커스텀하기</title><link href="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/" rel="alternate" type="text/html" title="TIL 28: PDFView의 페이지 커스텀하기" /><published>2021-02-19T00:00:00+09:00</published><updated>2021-02-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;의 페이지를 커스텀하려면, &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt; Notification을 이용하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pdfview-환경설정의-한계&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt; 환경설정의 한계&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;를 사용하면, &lt;strong&gt;PDF 뷰어&lt;/strong&gt;를 손쉽게 만들 수 있다.&lt;br /&gt;
+웬만한 요구사항은 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;에서 제공하는 환경설정으로 충분히 깔끔하고 편한 PDF 뷰어를 구현할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 현실은 항상 그렇게 녹록지 않다.&lt;br /&gt;
+디자이너의 요구사항에 따라 &lt;strong&gt;PDF 뷰어의 각 PDF 페이지 상하단에 배경과 구분할 수 있는 구분선을 넣어달라는 것&lt;/strong&gt;이었다.
+디자인 요구사항 자체가 그렇게 어려운 것은 아니라 쉽게 해결될 것 같았지만,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;에서 단순하게 제공하는 것만으로는 각 페이지에 구분선을 넣을 수 없었다.&lt;/p&gt;
+
+&lt;p&gt;그래서 하루 동안 많은 삽질을 했고, 결국엔 해냈다.&lt;br /&gt;
+생각보다 많은 시간(하루 초과)이 들지 않아 다행이었다.&lt;/p&gt;
+
+&lt;h2 id=&quot;pdfview의-페이지-커스텀하기&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;의 페이지 커스텀하기&lt;/h2&gt;
+
+&lt;p&gt;구글링도 해보고 &lt;a href=&quot;https://developer.apple.com/documentation/pdfkit/pdfview&quot; target=&quot;_blank&quot;&gt;공식 문서&lt;/a&gt;의
+이것 저것을 파헤치다가 Notification 중에 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt;가 눈에 들어왔다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt;는 말그대로 현재 페이지가 변할 때마다 송신하는 Notification인데,
+해당 타이밍 때마다 페이지 뷰에 조작을 가하는 것이 가장 적절한 타이밍이라 생각했다.&lt;/p&gt;
+
+&lt;p&gt;또한, 해당 Notification을 이용해 페이지 뷰의 메모리를 확인하면서
+페이지 뷰를 새로 생성하거나 재활용하면서 PDF를 보여준다는 것을 파악했다.&lt;/p&gt;
+
+&lt;p&gt;그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt; Notification이 수신될 때마다 페이지 뷰를 찾아내 구분선을 추가하도록 다음과 같이 처리했다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kt&quot;&gt;NotificationCenter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addObserver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;forName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;PDFViewPageChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;scrollView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;scrollView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;PDFPageView&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subviews&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forEach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pdfPageView&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;borderView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CubeColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;border&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;pdfPageView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;borderView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;borderView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;snp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;makeConstraints&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;equalToSuperview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;borderView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CubeColor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;border&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;pdfPageView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addSubview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;borderView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;borderView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;snp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;makeConstraints&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;equalToSuperview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;equalTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;커스텀 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;를 생성할 때, 위와 같은 동작을 &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt; Notification에 등록해주면 된다.
+페이지 뷰가 깊숙한 자식으로 들어가 있고, &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFPageView&lt;/code&gt; 클래스에 접근하지 못하게 되어 있어 &lt;strong&gt;클래스 이름을 이용해 필터링&lt;/strong&gt; 했다.
+그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter { $0.subviews.isEmpty }&lt;/code&gt; 처리를 통해 &lt;strong&gt;구분선이 존재하지 않는 경우에만 구분선을 추가&lt;/strong&gt;하도록 했다.
+그래서 불필요하거나 과하지 않게 적절한 타이밍에 구분선을 페이지에 추가할 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;시간이 지날수록 코드로 커스터마이징하는 실력이 늘어나는 것이 체감되어 기쁘다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기</title><link href="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" rel="alternate" type="text/html" title="GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기" /><published>2021-02-09T00:00:00+09:00</published><updated>2021-02-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;https://ghchart.rshah.org/jamesujeon&quot;/&amp;gt;&lt;/code&gt; 한줄로 나의 &lt;strong&gt;잔디&lt;/strong&gt;를 표현할 수 있다.&lt;/li&gt;
@@ -770,141 +834,4 @@ layout: none
 그래도 나름 적정선에 스스로 합의(?)를 해서 검색 기능 구현이 마무리된 것 같다.
 그리고 기능 구현을 하면서 &lt;a href=&quot;https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/&quot; target=&quot;_blank&quot;&gt;해당 라이브러리의 버그를 찾아 MR도 시도&lt;/a&gt;해봤고, 실제 받아들여지기까지 하여 재밌는 경험이었다.&lt;/p&gt;
 
-&lt;p&gt;결론적으로 원하는 글을 찾는 데는 문제 없는 수준이 된 것 같아 꽤나 만족스럽지만, 공대 감성의 디자인을 한 것은 어쩔 수 없는 것 같다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 20: 2020년 회고</title><link href="https://jamesu.dev/posts/2021/01/01/til-20-2020-retrospective/" rel="alternate" type="text/html" title="TIL 20: 2020년 회고" /><published>2021-01-01T00:00:00+09:00</published><updated>2021-01-01T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/01/til-20-2020-retrospective</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/01/til-20-2020-retrospective/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;GitHub 연속 일일 커밋은 나름 성공적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;232&lt;/code&gt;일째 진행중이다.&lt;/li&gt;
-  &lt;li&gt;TIL은 &lt;code class=&quot;highlighter-rouge&quot;&gt;개발 일기&lt;/code&gt;로 생각하고 많이 분발해 작성하자.&lt;/li&gt;
-  &lt;li&gt;작년의 프로젝트는 모두 만족스럽고 재밌었다.
-    &lt;ul&gt;
-      &lt;li&gt;Objective-C to Swift 포팅&lt;/li&gt;
-      &lt;li&gt;iOS/Android 앱 디자인 리뉴얼&lt;/li&gt;
-      &lt;li&gt;사내 iOS 공통 라이브러리 개발&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;올해의 프로젝트에 iOS 개발 트렌드를 반영하자.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;iOS 디자인 패턴: &lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;CI/CD&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;iOS에 집중해 &lt;code class=&quot;highlighter-rouge&quot;&gt;깊이가 깊은 iOS 개발자&lt;/code&gt;가 되자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;today-i-committed&quot;&gt;Today I Committed&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/github_2020_contributions.png&quot; alt=&quot;GitHub 2020 Contributions&quot; width=&quot;100%&quot; /&gt;
-&lt;em&gt;GitHub Contributions in 2020&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;GitHub를 사용하면서 개인적인 성취감을 위해 일일 커밋을 4월 초부터 시작했다.
-그러다 4월 11일에 한 번 구멍이 생기고, 5월 13일에 한 번 더 구멍이 생기면서…
-2020년의 연속 일일 커밋은 아쉽게 &lt;strong&gt;232일째&lt;/strong&gt;로 끝이 났다.&lt;/p&gt;
-
-&lt;p&gt;일일 커밋은 하루 한 줄이라도 코드를 작성하면서 그 감을 잃지 않고 꾸준함을 유지하려는 목적으로 시작했다.
-약속이 있는 날, 바쁜 날 등처럼 일일 커밋을 하기 힘든 날에도 계속 신경써서 연속 일일 커밋을 유지한 나에게 작은 칭찬을 하고 싶다.&lt;/p&gt;
-
-&lt;p&gt;이제는 일일 커밋이 매일 떠오를 정도로 습관이 몸에 배어 2021년에도 실수하지만 않으면 연속 일일 커밋을 할 수 있을 것 같다.
-2021년에는 4월 11일, 5월 13일과 같은 구멍이 발생하지 않도록 조심하며, 꾸준히 신기록을 갱신하고 싶다.&lt;br /&gt;
-2021년의 Contributions에는 초록색으로 가득차길 바라며, 오늘도 나는 커밋 잔디를 심는다… 🌱&lt;/p&gt;
-
-&lt;h2 id=&quot;today-i-learned-but&quot;&gt;Today I Learned, but…&lt;/h2&gt;
-
-&lt;p&gt;5월에는 &lt;strong&gt;TIL&lt;/strong&gt;에 관심이 생기면서 TIL을 일일 커밋 겸 작성하려고 했으나… 매일 글을 쓰는 게 나에게는 너무 어려웠다.
-&lt;strong&gt;일일 배움&lt;/strong&gt;이라는 마음가짐으로 TIL을 시작했기에 무엇이라도 배운 것이 있을 때 그것에 대해 작성했고, 생각보다 소재 고갈이 잦았다.
-(물론, 배운 것이 있었지만 글로 안 쓴 것도 많다… 🤔)&lt;/p&gt;
-
-&lt;p&gt;TIL 작성은 &lt;strong&gt;6월 이후부터 12월이 되기 전까지는 전무&lt;/strong&gt;했고, 일일 커밋은 주로 원래 하던 문제 풀이를 통해 진행했다.
-아무래도 글쓰기가 익숙하지 않아서 그런지 (많이 어렵지 않은) 문제 풀이가 글쓰기보다는 쉬웠다.
-글을 고치는 게 잦아서 글쓰기에 많은 시간이 들어가고, 새로운 문장을 생각해내는 것도 어려웠다.&lt;/p&gt;
-
-&lt;p&gt;사실 내 TIL의 원래 취지는 &lt;strong&gt;기록&lt;/strong&gt;하는 것에 초점이 맞춰 있는 &lt;strong&gt;개발 일기&lt;/strong&gt;에 가깝다.
-그 초점에 맞추지 않고 TIL을 작성하다 보니 배가 산으로 간 것 같다.
-“정성 가득 길게 글을 쓰는 것보다는 무엇을 배웠는 지를 기록하는 것이 목표이므로 앞으로는 그 부담을 덜고 작성했으면 좋겠다.”
-라고 2021년의 나에게 말하고 싶다. 🙄&lt;/p&gt;
-
-&lt;h2 id=&quot;today-i-worked&quot;&gt;Today I Worked&lt;/h2&gt;
-
-&lt;p&gt;재작년에는 서버와 웹 프론트엔드 유지보수가 주 업무였다면, 작년은 모바일 업무에 집중할 수 있었던 해였다.
-모바일 개발자로 입사했기에 모바일 업무에 집중하는 것이 맞지만 어찌저찌 다른 업무를 맡았어서 모바일 업무만 하고 싶다고 강력 어필 했었다.
-결과적으로 4분기에 서버를 잠시 했었지만, 모바일에 집중 할 수 있어 좋았다.&lt;/p&gt;
-
-&lt;p&gt;작년의 대표적인 모바일 성과로는 &lt;strong&gt;Objective-C to Swift 포팅, iOS/Android 앱 디자인 리뉴얼, 사내 iOS 공통 라이브러리 개발&lt;/strong&gt;이 있다.
-Swift 포팅은 자진해서 진행했던 프로젝트이고, 앱 디자인 리뉴얼은 전면 개편이라 내부 구조도 바꿔가며 손이 많이 갔다.
-마지막으로 사내 iOS 공통 라이브러리 개발은 자주 쓰는 뷰나 기능 등을 모아 라이브러리로 만드는 작업으로 현재 진행형이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;objective-c-to-swift-포팅&quot;&gt;Objective-C to Swift 포팅&lt;/h3&gt;
-
-&lt;p&gt;사내에 Objective-C로 되어 있는 앱들이 있어 유지보수가 매우 힘들었고, 그리하여 효율화를 위해 자진해서 Swift 포팅 프로젝트를 추진했다.
-앱 하나에 대해서만 진행했으며, 기존 앱에 요구사항이 덜 적용된 부분도 있어 전체적으로 품질 향상의 효과도 있었다.
-디자인 개선도 같이 진행해서 Swift 포팅을 하며 새로 만드는 것이 오히려 더 수월했다.
-야근을 많이 해서 힘들었지만, &lt;strong&gt;두 언어의 차이를 느끼며 여러가지를 비교할 기회가 되어 아주 만족스러웠던 프로젝트였다&lt;/strong&gt;. 🙂&lt;/p&gt;
-
-&lt;h3 id=&quot;iosandroid-앱-디자인-리뉴얼&quot;&gt;iOS/Android 앱 디자인 리뉴얼&lt;/h3&gt;
-
-&lt;p&gt;디자인 리뉴얼은 앱 하나의 디자인 전체를 개편하는 작업이라 거의 모든 소스를 건드려야 했다.
-그 과정에서 내부 구조도 많이 개선시키면서 두 플랫폼의 요구사항이 맞지 않는 것을 맞춰가는 작업까지 진행했다.
-iOS와 안드로이드 모두를 맡다 보니 힘들었지만,
-&lt;strong&gt;내부 구조를 분석하면서 어떻게 하면 효율적으로 구조화 할 수 있을지 두 플랫폼 모두에 대해 고민 할 수 있어 큰 경험이 됐다&lt;/strong&gt;.
-그래도 앞으로는 주 업무는 iOS만 하고 싶다. 🤔&lt;/p&gt;
-
-&lt;h3 id=&quot;사내-ios-공통-라이브러리-개발&quot;&gt;사내 iOS 공통 라이브러리 개발&lt;/h3&gt;
-
-&lt;p&gt;사내 iOS 공통 라이브러리 개발은 새 앱을 개발하거나 기존 앱을 개선할 때 효율적으로 프로젝트를 진행하고자 추진한 프로젝트다.
-앞으로 만들 새 앱에 대한 일관성 있는 디자인과 기능을 적용하고자 디자인 팀과 빈번하게 의사소통하며 요구사항을 정리했다.
-커스터마이징도 가능하게 만들면서 공통적인 부분만 추출해 구현하고자 노력했다.
-&lt;strong&gt;앱을 만드는 관점과 달리 라이브러리를 만드는 관점에서 구현을 하다보니 두 관점이 많이 다르다는 것을 느낄 수 있었다&lt;/strong&gt;. 🙂&lt;/p&gt;
-
-&lt;h2 id=&quot;tomorrow-i-will-learn&quot;&gt;Tomorrow I will Learn&lt;/h2&gt;
-
-&lt;p&gt;여러 개발 분야의 트렌드는 모두 빠르게 바뀌고 발전하고 있다.
-모바일 개발 트렌드 또한 새로운 것이 생겨나고 기존 것이 발전하고 있는데,
-트렌드를 계속 접하고는 있으나 지금까지 제대로 프로젝트에 반영한 적은 없다.&lt;/p&gt;
-
-&lt;p&gt;최근에 공부하던 모바일 개발 트렌드 중 특히 iOS 개발 트렌드는 &lt;strong&gt;RxSwift, iOS 디자인 패턴, CI/CD&lt;/strong&gt; 등이 있다.
-나열한 목록들이 현재 가장 관심이 많고 적용하고 싶은 개발 트렌드에 해당한다.&lt;/p&gt;
-
-&lt;h3 id=&quot;rxswift&quot;&gt;RxSwift&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/ReactiveX/RxSwift&quot; target=&quot;_blank&quot;&gt;RxSwift&lt;/a&gt;는 비동기 및 이벤트 기반 프로그래밍을 지향하는
-&lt;a href=&quot;http://reactivex.io/&quot; target=&quot;_blank&quot;&gt;ReactiveX&lt;/a&gt; 프로젝트의 Swift 버전이다.&lt;br /&gt;
-ReactiveX 컨셉으로 프로그래밍을 하면 가독성, 안정성, 효율성 등과 같은
-다양한 이점을 얻을 수 있어 개인적으로 가장 적용하고 싶은 트렌드이다.
-RxSwift를 틈틈이 공부하고 있어,
-&lt;strong&gt;추후 사내 iOS 공통 라이브러리에 Rx 버전을 구현하는 것과 실제 프로젝트에 적용하는 것을 생각하고 있다&lt;/strong&gt;.
-굉장히 재밌는 프로그래밍이 될 것 같아 기대가 된다. 🔥&lt;/p&gt;
-
-&lt;h3 id=&quot;ios-디자인-패턴&quot;&gt;iOS 디자인 패턴&lt;/h3&gt;
-
-&lt;p&gt;iOS 디자인 패턴 또는 iOS 아키텍쳐라고도 불리는 이것은 앱의 코드 구성을 의미한다.
-iOS의 기본은 MVC로 되어 있고,
-이는 비효율적인 코드 구성을 낳기 때문에 사람들은 새로운 구성을 개발해 내었다.&lt;/p&gt;
-
-&lt;p&gt;MVVM, MVP, VIPER, RIBs, ReactorKit 등과 같이 다양한 디자인 패턴이 있지만,
-이 중에서 나는 RxSwift와 함께 자주 언급되는 패턴인 &lt;strong&gt;MVVM&lt;/strong&gt;을 프로젝트에 적용하고 싶다.
-안드로이드에서도 RxJava, RxKotlin과 함께 자주 사용되는 패턴인 만큼 기본이 되는 패턴이라 생각한다.
-일단, &lt;strong&gt;MVVM을 실제 프로젝트에 적용 해보는 방향으로 하고 나머지 패턴은 개인적으로 공부하며 고민해봐야겠다&lt;/strong&gt;. 🤔&lt;/p&gt;
-
-&lt;h3 id=&quot;cicd&quot;&gt;CI/CD&lt;/h3&gt;
-
-&lt;p&gt;CI/CD는 Continuous Integration(지속적 통합)을 뜻하는 CI와
-Continuous Delivery(지속적 제공) 또는 Continuous Deployment(지속적 배포)를 뜻하는 CD를 합쳐 부르는 말이다.
-이 프로세스는 서버와 웹 프론트엔드 개발에서는 자주 사용하는 프로세스로 모바일 개발에서도 적용한 사례가 꽤 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;현재 사내 앱 배포는 모든 과정을 사람이 수동으로 진행하고 있어 여러모로 비효율적일 수 있다.
-CI/CD를 적용하면 이런 과정이 자동화되므로,
-수동 배포 과정에서 발생하는 실수도 방지하고, 배포 과정에 크게 신경을 쓸 필요 없이 그 결과에 대해서만 대응하면 된다.
-주 업무가 되는 것에 일을 집중할 수 있으므로 생산성 향상이 기대될 수 있다.&lt;/p&gt;
-
-&lt;p&gt;사내 앱 배포에 CI/CD를 적용하는 것이 적합한 것인가에 대해서는 더 고민할 필요가 있긴 하다.
-앞으로 개발자가 더 많아지고, 유닛 테스트가 잘 작성되어진다면, 그 효율성은 체감할 수 있는 수준이 될 것 같다.
-&lt;strong&gt;기회가 된다면, &lt;a href=&quot;https://fastlane.tools/&quot; target=&quot;_blank&quot;&gt;Fastlane&lt;/a&gt;을 iOS와 안드로이드 모두에 적용해 프로세스를 개선하고 싶다&lt;/strong&gt;. 🤔&lt;/p&gt;
-
-&lt;h2 id=&quot;tomorrow-i-will-become&quot;&gt;Tomorrow I will Become&lt;/h2&gt;
-
-&lt;p&gt;2021년 올해는 개인적으로 많은 성장을 바라는 해이다.&lt;br /&gt;
-작년에는 모바일 개발에 집중할 수 있었지만, 트렌드를 적용 못하고 사내 앱 개편에만 신경을 썼었다.&lt;br /&gt;
-올해는 트렌드도 적용해가며 iOS 개발의 깊이를 더해가고 싶다.&lt;/p&gt;
-
-&lt;p&gt;올해의 가장 큰 목표는 &lt;strong&gt;깊이가 깊은 iOS 개발자&lt;/strong&gt;가 되는 것이다.&lt;br /&gt;
-그 깊이의 기준은 정할 수 없지만, 스스로 열심히 했다고 생각이 들 정도로 노력을 해보자. 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;p&gt;결론적으로 원하는 글을 찾는 데는 문제 없는 수준이 된 것 같아 꽤나 만족스럽지만, 공대 감성의 디자인을 한 것은 어쩔 수 없는 것 같다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry></feed>
