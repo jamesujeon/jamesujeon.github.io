@@ -1,6 +1,33 @@
 [
   
     {
+      "title"      : "프로그래머스 문제 풀이: 42840 - 모의고사",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, programmers, brute-force, python",
+      "date"       : "2021.02.25",
+      "urlString"  : "/posts/2021/02/25/programmers-problem-solving-42840/",
+      "url"        : "/posts/2021/02/25/programmers-problem-solving-42840/"
+    },
+  
+    {
+      "title"      : "프로그래머스 문제 풀이: 42748 - K번째수",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, programmers, sort, python",
+      "date"       : "2021.02.24",
+      "urlString"  : "/posts/2021/02/24/programmers-problem-solving-42748/",
+      "url"        : "/posts/2021/02/24/programmers-problem-solving-42748/"
+    },
+  
+    {
+      "title"      : "프로그래머스 문제 풀이: 72410 - 신규 아이디 추천",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, programmers, regex, python",
+      "date"       : "2021.02.22",
+      "urlString"  : "/posts/2021/02/22/programmers-problem-solving-72410/",
+      "url"        : "/posts/2021/02/22/programmers-problem-solving-72410/"
+    },
+  
+    {
       "title"      : "TIL 28: PDFView의 페이지 커스텀하기",
       "categories" : "Etc > TIL",
       "tags"       : "ios, ui",

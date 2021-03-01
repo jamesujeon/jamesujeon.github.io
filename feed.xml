@@ -1,4 +1,163 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-02-28T21:42:05+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 28: PDFView의 페이지 커스텀하기</title><link href="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/" rel="alternate" type="text/html" title="TIL 28: PDFView의 페이지 커스텀하기" /><published>2021-02-19T00:00:00+09:00</published><updated>2021-02-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-01T22:15:30+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">프로그래머스 문제 풀이: 42840 - 모의고사</title><link href="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42840 - 모의고사" /><published>2021-02-25T00:00:00+09:00</published><updated>2021-02-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42840.png&quot; alt=&quot;42840 - 모의고사&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42840&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;3명의 수포자가 답을 찍는 패턴을 이용하는 것이 핵심이다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;각 수포자의 답을 찍는 패턴을 일반화 하는 것이 까다로우므로, 반복되는 부분을 패턴으로 취급하면 된다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1번 수포자: 1, 2, 3, 4, 5, …&lt;/li&gt;
+  &lt;li&gt;2번 수포자: 2, 1, 2, 3, 2, 4, 2, 5, …&lt;/li&gt;
+  &lt;li&gt;3번 수포자: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, …&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위 패턴을 바탕으로 정답 배열을 순회하며 정답 여부를 모아 점수를 계산할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;이때, 패턴을 원형 큐와 같이 이용하고자 &lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt; 연산을 통해 패턴 값에 접근해야 한다.&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;marks&lt;/code&gt;를 수포자 3명의 패턴 배열 목록이라 하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;를 수포자 인덱스라 했을 때,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;marks[j][i % len(marks[j])]&lt;/code&gt;와 같이 원형 큐처럼 이용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 가장 높은 점수를 받은 수포자만 걸러 정렬한 뒤 반환해야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;max_score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="brute-force" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42748 - K번째수</title><link href="https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42748 - K번째수" /><published>2021-02-24T00:00:00+09:00</published><updated>2021-02-24T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42748.png&quot; alt=&quot;42748 - K번째수&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42748&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;주어진 단계별 로직을 적용해 변환을 하면 된다.&lt;br /&gt;
+별도로 예외 처리에 대한 언급이 없으니 정상적인 입력만 들어온다고 생각할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;commands&lt;/code&gt; 배열을 순회하며, 각 명령(&lt;code class=&quot;highlighter-rouge&quot;&gt;cmd&lt;/code&gt;)에 대해 다음과 같이 단계별 로직을 적용해 변환할 수 있다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cmd[0]&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;이고 &lt;code class=&quot;highlighter-rouge&quot;&gt;cmd[1]&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;이므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;array[cmd[0] - 1:cmd[1]]&lt;/code&gt;를 통해 배열을 자른다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sorted&lt;/code&gt; 함수를 통해 배열을 오름차순으로 정렬한다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cmd[2]&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;이므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;[cmd[2] - 1]&lt;/code&gt;와 같이 배열의 요소를 꺼낸다.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;최종적으로 꺼낸 요소를 모아 배열화 해서 반환하도록 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="sort" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">프로그래머스 문제 풀이: 72410 - 신규 아이디 추천</title><link href="https://jamesu.dev/posts/2021/02/22/programmers-problem-solving-72410/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 72410 - 신규 아이디 추천" /><published>2021-02-22T00:00:00+09:00</published><updated>2021-02-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/22/programmers-problem-solving-72410</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/22/programmers-problem-solving-72410/">&lt;p&gt;&lt;img src=&quot;assets/programmers_72410.png&quot; alt=&quot;72410 - 신규 아이디 추천&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/72410&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;주어진 조건에 따라 단계별로 변환 과정을 거치면 된다.&lt;br /&gt;
+조건의 구체적인 사항을 놓치지 않도록 주의한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;문제에서 단순히 변환 조건만 명시하지 않고, 친절하게 단계별로 어떻게 변환하는 지를 알려주고 있으므로
+차례대로 따라 가면서 변환을 거치면 해결할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;단계별 변환 조건을 보면 몇몇 단계에서는 까다로워 보일 수 있는 조건들이 있는데,
+이는 &lt;a href=&quot;https://ko.wikipedia.org/wiki/%EC%A0%95%EA%B7%9C_%ED%91%9C%ED%98%84%EC%8B%9D&quot; target=&quot;_blank&quot;&gt;정규 표현식(정규식, Regular Expression, regex)&lt;/a&gt;을 이용하면 쉽게 해결할 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2단계: &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt; 문자를 이용해 반대 조건에 해당하는 문자를 빈 문자열로 치환한다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;re.sub(r'[^a-z0-9-_.]', '', new_id)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;3단계: &lt;code class=&quot;highlighter-rouge&quot;&gt;{2,}&lt;/code&gt;를 이용해 2번 이상 반복되는 것을 찾아내어 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; 문자로 치환한다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;re.sub(r'[.]{2,}', '.', new_id)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;4단계: &lt;code class=&quot;highlighter-rouge&quot;&gt;^&lt;/code&gt; 문자로 처음 위치를, &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; 문자로 끝 위치의 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; 문자를 찾아내어 빈 문자열로 치환한다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;re.sub(r'^[.]|[.]$', '', new_id)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;6단계: &lt;code class=&quot;highlighter-rouge&quot;&gt;[:15]&lt;/code&gt;를 이용해 16자 미만의 문자만 추출해내고, &lt;code class=&quot;highlighter-rouge&quot;&gt;$&lt;/code&gt; 문자로 끝 위치의 &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; 문자를 찾아내어 빈 문자열로 치환한다.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;re.sub(r'[.]$', '', new_id[:15])&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이렇게 하면, 정규식을 이용해 간단히 변환을 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;추가적으로 5단계에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;new_id&lt;/code&gt;가 빈 문자열이라면, 6단계를 무시하고 7단계로 넘어가도 되므로 분기를 해도 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'[^a-z0-9-_.]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'[.]{2,}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'^[.]|[.]$'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;r'[.]$'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ljust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'aaa'&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_id&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="regex" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 28: PDFView의 페이지 커스텀하기</title><link href="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/" rel="alternate" type="text/html" title="TIL 28: PDFView의 페이지 커스텀하기" /><published>2021-02-19T00:00:00+09:00</published><updated>2021-02-19T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/19/til-28-customizing-page-of-PDFView/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PDFView&lt;/code&gt;의 페이지를 커스텀하려면, &lt;code class=&quot;highlighter-rouge&quot;&gt;PDFViewPageChanged&lt;/code&gt; Notification을 이용하는 것이 좋다.&lt;/li&gt;
@@ -304,534 +463,4 @@ Warning이 치명적인 버그를 낳을 수도 있지만, 뭔가 잘못 코딩�
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;노란색 Warning들이 깔끔하게 사라진 것을 보고 아주 만족했다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2</title><link href="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/" rel="alternate" type="text/html" title="TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2" /><published>2021-01-11T00:00:00+09:00</published><updated>2021-01-11T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;커스텀 탭바 컨트롤러를 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 유사하도록 구현했다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;의 자식 뷰 컨트롤러 관리 방식의 차이를 이해해야 한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;탭바-컨트롤러-vs-네비게이션-컨트롤러&quot;&gt;탭바 컨트롤러 vs. 네비게이션 컨트롤러&lt;/h2&gt;
-
-&lt;p&gt;이번에도 역시나 요구사항에 맞추기 위해 커스텀 탭바 컨트롤러를 만들기로 했다.&lt;br /&gt;
-&lt;a href=&quot;https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/&quot; target=&quot;_blank&quot;&gt;이전&lt;/a&gt;과 마찬가지로
-Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 신경 쓰며 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;의 리버스 엔지니어링을 시도했다.
-헷갈리는 동작도 있었지만, 일부 동작의 경우 커스텀 탭바 컨트롤러와 다를 수 밖에 없기에 인지하고 다른 식으로 구현했다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 달리 미리 다수의 자식 뷰 컨트롤러를 추가해 놓는다.
-그래서 자식 뷰 컨트롤러 목록을 세팅한 후에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;addChild&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;removeFromParent&lt;/code&gt; 메소드를 호출할 일이 없었다.&lt;/p&gt;
-
-&lt;p&gt;또한, Root 뷰 생명 주기가 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와는 좀 다른 순서로 호출되었다.
-역시나 직접 리버스 엔지니어링을 하길 잘한 것 같다.
-예상만으로 구현했다면 뒤늦게 발견해서 고생하며 뒤집었을지도 모른다. 😞&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UITabBarController&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;의 차이를 계속 비교하며 커스텀 탭바 컨트롤러를 구현했다.
-일단 메뉴가 변동되는 경우는 거의 없기 때문에 가장 필요한 부분에 한해서 구현을 진행했다.
-필요하면 그때 계속 개선하면 되지 않을까..?&lt;/p&gt;
-
-&lt;h2 id=&quot;다음은-스플릿-뷰-컨트롤러&quot;&gt;다음은.. 스플릿 뷰 컨트롤러..?&lt;/h2&gt;
-
-&lt;p&gt;커스텀 컨테이너 뷰 컨트롤러를 하나하나 구현하고 사용해보니 잘 동작할 때 아주 뿌듯하다.
-뭔가 일반적인 뷰를 구현한 것과는 달리 좀 더 유용한 것을 만든 기분이 든다.&lt;/p&gt;
-
-&lt;p&gt;또 다른 컨테이너 뷰 컨트롤러로 스플릿 뷰 컨트롤러가 있다.
-아이패드에서 자주 사용하는 컨트롤러인데, 아직 사내에서는 쓸 일이 없다…
-언젠가 커스텀 스플릿 뷰 컨트롤러를 만들 기회도 생기지 않을까?&lt;/p&gt;
-
-&lt;p&gt;그 밖에도 자식 뷰 컨트롤러를 담는 것이라면, 모두 컨테이너 뷰 컨트롤러가 될 수 있다.
-이번에 좀 더 공부해서 &lt;strong&gt;커스텀 컨테이너 뷰 컨트롤러&lt;/strong&gt;를 구현하기 위한 분석을 많이 해보고 글로 정리해 봐야겠다. 🔥&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선</title><link href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" rel="alternate" type="text/html" title="TIL 21: 커스텀 컨테이너 뷰 컨트롤러 개선" /><published>2021-01-09T00:00:00+09:00</published><updated>2021-01-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;기존 커스텀 네비게이션 컨트롤러가 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 유사하도록 개선을 진행했다.&lt;/li&gt;
-  &lt;li&gt;아직 만족스럽지 않아 개선이 더 필요하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;기존-커스텀-네비게이션-컨트롤러의-문제점&quot;&gt;기존 커스텀 네비게이션 컨트롤러의 문제점&lt;/h2&gt;
-
-&lt;p&gt;요구사항에 따라 개발을 하다 보면, &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 컨테이너 뷰 컨트롤러만으로는 만족스럽게 결과물이 나오지 않는 경우가 있다.
-또한, UI나 애니메이션 등을 완전히 커스텀하고 싶을 때도 기존 라이브러리로는 한계가 있을 수 있다.
-&lt;strong&gt;결국에는 직접 커스텀 컨테이너 뷰 컨트롤러를 만드는 것이 오히려 마음이 편하다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;그렇게 해서 직접 만들어서 사용하던 커스텀 네비게이션 컨트롤러가 있었는데,
-현재 사용하는 데는 문제점이 없었지만 미래에 발생할 수 있는 문제점이 존재했다.
-그것은 바로 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 동작이 완전히 일치하지 않는다는 점&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;물론, 현재 사용하는 것에 문제점이 없었다는 말은 특정 동작만 사용했기 때문인데,
-이것은 추후 유지보수를 진행할 때 찾기 어려운 버그가 생길 수 있다.
-그렇게 개선의 필요성을 느끼게 됐고, 커스텀 컨테이너 뷰 컨트롤러를 위한 분석을 진행했다.&lt;/p&gt;
-
-&lt;h2 id=&quot;개선-방향&quot;&gt;개선 방향&lt;/h2&gt;
-
-&lt;p&gt;기존에 반영한 생명 주기는 많이 사용하고 있는 뷰 컨트롤러의 기본적인 Root 뷰 생명 주기이다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidLoad&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewWillAppear&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidAppear&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewWillDisappear&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;viewDidDisappear&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;해당 메소드들을 자식 뷰 컨트롤러가 추가 또는 제거되는 시점에 따라 호출하도록 구현했었다.&lt;/p&gt;
-
-&lt;p&gt;하지만, 실제로 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 네비게이션 컨트롤러와 호출되는 순서가 일치하지 않았기에 동일한 순서가 되도록 수정을 진행했다.
-애니메이션이 포함되어 있는 경우 시점을 잘 지정해 구현해야 했다.
-시점이 어긋나면, 자식 뷰 컨트롤러의 생명 주기를 구현할 때 예상치 못한 순서로 동작할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;그리고 뷰 컨트롤러는 기본적으로 부모-자식 관계를 설정해서 활용할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;parent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;children&lt;/code&gt; 프로퍼티가 존재했는데,
-나는 별도로 부모를 나타내는 프로퍼티와 &lt;code class=&quot;highlighter-rouge&quot;&gt;viewControllers&lt;/code&gt; 프로퍼티를 정의해 사용하고 있었다.
-이것을 &lt;code class=&quot;highlighter-rouge&quot;&gt;addChild&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;removeFromParent&lt;/code&gt; 메소드를 호출해 &lt;code class=&quot;highlighter-rouge&quot;&gt;parent&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;children&lt;/code&gt; 프로퍼티를 활용하도록 수정했다.&lt;/p&gt;
-
-&lt;p&gt;또한, Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;와 맞추기 위한 작업을 추가로 진행했다.
-아무래도 iOS 개발자는 기본으로 제공하는 생명 주기에 익숙할 터이니 그것의 생명 주기에 맞추는 게 적합하다고 생각했다.&lt;/p&gt;
-
-&lt;p&gt;마지막으로 Apple Developer 문서에서
-&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uiviewcontroller/1621387-beginappearancetransition&quot; target=&quot;_blank&quot;&gt;뷰 생명 주기 메소드를 직접 호출하지 말라&lt;/a&gt;고 하고 있어,
-해당 메소드들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;beginAppearanceTransition&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;endAppearanceTransition&lt;/code&gt;를 호출하도록 수정했다.&lt;/p&gt;
-
-&lt;p&gt;아직 커스텀 컨테이너 뷰 컨트롤러에 대한 분석이 다 된 것 같지 않아 만족스럽지 않다.&lt;br /&gt;
-더 분석해보고 적용한 뒤 글을 정리해 포스팅 해봐야겠다. 🕵🏻&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">Jekyll에 검색 페이지 추가하기</title><link href="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/" rel="alternate" type="text/html" title="Jekyll에 검색 페이지 추가하기" /><published>2021-01-03T00:00:00+09:00</published><updated>2021-01-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;검색 기능으로 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search&quot; target=&quot;_blank&quot;&gt;Simple-Jekyll-Search&lt;/a&gt;
-라이브러리를 사용하면, Jekyll에 간단한 검색 기능을 추가할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;개요&quot;&gt;개요&lt;/h2&gt;
-
-&lt;p&gt;블로그에 글을 올리다 보니 간혹 내가 필요한 정보를 찾고 싶을 때 찾을 수 없는 치명적인 문제가 있었다.
-그래서 검색 기능의 필요성을 절실히 느꼈고, 어떻게 구현하면 좋을지 컨셉을 고민했다.
-현재 블로그의 형태 특성상 검색창이 항상 보이는 것보다 &lt;strong&gt;검색 기능에만 집중할 수 있는 검색 페이지&lt;/strong&gt;를 구현해야겠다는 결론에 도달했다.&lt;/p&gt;
-
-&lt;p&gt;이제 방법을 생각해야 하는데, 정적 사이트 특성상 데이터를 위한 별도의 서버를 가지고 있지 않기 때문에
-일반적인 서비스의 구현하고 다른 방식의 관점으로 접근해야 했다.
-검색할 데이터를 미리 준비하고, 해당 데이터에서 원하는 항목을 검색한 후 보여줘야겠다고 생각했다.&lt;/p&gt;
-
-&lt;p&gt;마침 &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search&quot; target=&quot;_blank&quot;&gt;Simple-Jekyll-Search&lt;/a&gt;라는
-말그대로 심플한 컨셉의 Jekyll 검색 기능을 위한 오픈 소스 라이브러리가 있었다.
-내가 생각했던 것처럼 JSON 파일 형식으로 미리 데이터를 준비하고, 해당 파일로부터 원하는 항목을 검색해 정보로 조립하는 것이었다.
-작성일 기준 1.1K 개의 별을 가지고 있을 만큼 신뢰성이 어느 정도 있었기 때문에 바로 사용하기로 했다.&lt;/p&gt;
-
-&lt;h2 id=&quot;simple-jekyll-search-연동하기&quot;&gt;Simple-Jekyll-Search 연동하기&lt;/h2&gt;
-
-&lt;p&gt;나는 여러가지 방법 중에 직접 필요한 부분만 블로그에 넣는 방식으로 연동을 진행했다.
-결국에는 Jekyll의 빌드 과정과 JavaScript의 로직을 통해 검색 기능이 구현되는 것이기 때문에 관련한 것만 잘 연동한다면,
-최소한의 파일만 사용해서 원하는대로 동작 구현이 가능하다.&lt;/p&gt;
-
-&lt;p&gt;연동에 앞서 오픈 소스 라이브러리를 사용할 때 가장 이해하기 쉬운 방법이
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/tree/master/example&quot; target=&quot;_blank&quot;&gt;예제&lt;/a&gt;와
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/wiki&quot; target=&quot;_blank&quot;&gt;가이드&lt;/a&gt;를 보는 것이라 생각한다.
-연동 과정이 이해가 가지 않는 경우, 앞의 링크를 참고해 실제 코드와 가이드를 보면서 동작 방식을 이해한다면 더 수월하게 연동을 할 수 있을 것이다.&lt;/p&gt;
-
-&lt;h3 id=&quot;1-필요한-파일-넣기&quot;&gt;1. 필요한 파일 넣기&lt;/h3&gt;
-
-&lt;p&gt;원하는 기능에 따라 필요한 파일은 다를 수 있지만, 기본적으로 다음과 같은 파일만 있으면 된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;simple-jekyll-search.min.js&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;simple-jekyll-search.js&lt;/code&gt;
-(&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/tree/master/example/js&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search.json&lt;/code&gt;
-(&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/search.json&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;JavaScript 파일은 검색 데이터로부터 &lt;strong&gt;검색 기능&lt;/strong&gt;을 사용하기 위한 라이브러리 파일이고,
-JSON 파일은 검색 대상이 되는 &lt;strong&gt;검색 데이터&lt;/strong&gt;를 준비하기 위한 파일이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;*.min.js&lt;/code&gt; 파일은 &lt;code class=&quot;highlighter-rouge&quot;&gt;*.js&lt;/code&gt; 파일의 압축 버전이라 보면 된다.&lt;br /&gt;
-동일한 로직으로 구현되어 있기 때문에 어느 쪽을 사용해도 무관하다.
-만약 커스터마이징을 하고 싶은 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;*.min.js&lt;/code&gt; 파일을 수정하는 것은 매우 난감하기 때문에
-&lt;code class=&quot;highlighter-rouge&quot;&gt;*.js&lt;/code&gt; 파일을 사용하는 것을 추천한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;simple_search_filter.rb&lt;/code&gt;와 같은 플러그인은 왜 추가하지 않는지 의문이 있을 수 있다.
-해당 코드를 보면 함수 몇가지를 정의해 놓았는데, 해당 함수를 사용하지 않으며 필수적으로 필요하지도 않기 때문에 첨부하지 않았다.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-검색-데이터-준비&quot;&gt;2. 검색 데이터 준비&lt;/h3&gt;
-
-&lt;p&gt;Jekyll로 만든 블로그는 정적 사이트이기 때문에 검색을 하기 위해 미리 생성된 데이터가 필요하다.
-(물론, 별도의 서버를 가지고 있거나 데이터를 준비하는 곳이 있다면 상관 없다.)
-이를 위해 예제 프로젝트에 있는 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;search.json&lt;/code&gt; 파일&lt;/strong&gt;이 필요하다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;---
-layout: none
----
-[
-  {% for post in site.posts %}
-    {
-      &quot;title&quot;    : &quot;{{ post.title | escape }}&quot;,
-      &quot;category&quot; : &quot;{{ post.category }}&quot;,
-      &quot;tags&quot;     : &quot;{{ post.tags | join: ', ' }}&quot;,
-      &quot;url&quot;      : &quot;{{ site.baseurl }}{{ post.url }}&quot;,
-      &quot;date&quot;     : &quot;{{ post.date }}&quot;
-    } {% unless forloop.last %},{% endunless %}
-  {% endfor %}
-]
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;해당 파일을 보면 위와 같이 되어 있는데, &lt;strong&gt;Jekyll의 Liquid 문법으로 JSON 데이터를 생성&lt;/strong&gt;하는 것을 볼 수 있다.
-전체 포스트를 순회하며 제목, 카테고리, 태그, URL, 날짜 등을 객체로 구성해 배열로 만든다.
-따라서 Jekyll로 사이트를 생성할 때 검색 데이터가 JSON 배열로 준비된다.&lt;/p&gt;
-
-&lt;p&gt;검색 대상이 되길 원하는 항목이 더 있다면, JSON과 Liquid 문법에 맞춰 추가하면 검색 대상에 포함된다.&lt;br /&gt;
-참고로 현재 구현된 검색 페이지에 사용되는 JSON 파일은 다음과 같다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;---
-layout: none
----
-[
-  {% for post in site.posts %}
-    {
-      &quot;title&quot;      : {{ post.title | jsonify }},
-      &quot;categories&quot; : &quot;{{ post.categories | join: ' &amp;gt; ' }}&quot;,
-      &quot;tags&quot;       : &quot;{{ post.tags | join: ', ' }}&quot;,
-      &quot;date&quot;       : &quot;{{ post.date | date: '%Y.%m.%d' }}&quot;,
-      &quot;urlString&quot;  : &quot;{{ post.url }}&quot;,
-      &quot;url&quot;        : &quot;{{ post.url | prepend: site.baseurl }}&quot;
-    }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-]
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이처럼 검색되길 원하는 문자열로 구성해 데이터를 준비할 수 있도록 한다.&lt;br /&gt;
-(&lt;code class=&quot;highlighter-rouge&quot;&gt;urlString&lt;/code&gt;의 경우, 추후 사용되는 목적이 있어 추가로 넣었다.)&lt;/p&gt;
-
-&lt;h3 id=&quot;3-검색-부분-레이아웃-구성&quot;&gt;3. 검색 부분 레이아웃 구성&lt;/h3&gt;
-
-&lt;p&gt;검색 기능을 위해 일반적으로 &lt;strong&gt;검색어 입력&lt;/strong&gt;을 위한 입력 부분과 &lt;strong&gt;검색 결과&lt;/strong&gt;를 보여주기 위한 출력 부분이 필요하다.
-&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/_layouts/default.html&quot; target=&quot;_blank&quot;&gt;예제 프로젝트&lt;/a&gt;에서는
-&lt;code class=&quot;highlighter-rouge&quot;&gt;search-demo-container&lt;/code&gt; ID의 &lt;code class=&quot;highlighter-rouge&quot;&gt;div&lt;/code&gt; 요소 안에 &lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt; ID의 &lt;code class=&quot;highlighter-rouge&quot;&gt;input&lt;/code&gt; 요소를 입력 부분으로,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;results-container&lt;/code&gt; ID의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&lt;/code&gt; 요소를 출력 부분으로 사용하고 있다.&lt;/p&gt;
-
-&lt;p&gt;일반적으로 그것과 동일하게 사용하면 된다.&lt;br /&gt;
-참고로 현재 구현된 검색 페이지에 사용되는 레이아웃은 꾸미는 것을 가미해 다음과 같이 작성했다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;common-header search&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;search&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;fas fa-search fa-fw&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;search-input&quot;&lt;/span&gt; 
-      &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;search&quot;&lt;/span&gt; 
-      &lt;span class=&quot;na&quot;&gt;tabindex=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt; 
-      &lt;span class=&quot;na&quot;&gt;spellcheck=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;false&quot;&lt;/span&gt; 
-      &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Search&quot;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;search-results&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;예제 프로젝트와 비슷하게 &lt;code class=&quot;highlighter-rouge&quot;&gt;search-input&lt;/code&gt; ID의 &lt;code class=&quot;highlighter-rouge&quot;&gt;input&lt;/code&gt; 요소를 입력 부분으로,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;search-results&lt;/code&gt; ID의 &lt;code class=&quot;highlighter-rouge&quot;&gt;ul&lt;/code&gt; 요소를 출력 부분으로 사용하고 있다.&lt;/p&gt;
-
-&lt;h3 id=&quot;4-검색-기능-연동&quot;&gt;4. 검색 기능 연동&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/_layouts/default.html&quot; target=&quot;_blank&quot;&gt;예제 프로젝트&lt;/a&gt;의
-하단 부분을 보면, 다음과 같이 JavaScript 코드가 작성되어 있는 것을 볼 수 있다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{{ site.baseurl }}/js/simple-jekyll-search.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;simpleJekyllSearch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SimpleJekyllSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;searchInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;search-input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;resultsContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;results-container&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ site.baseurl }}/search.json&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;searchResultTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;li&amp;gt;&amp;lt;a href=&quot;{url}?query={query}&quot; title=&quot;{desc}&quot;&amp;gt;{title}&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;noResultsText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;No results found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;fuzzy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Welcome&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;simple-jekyll-search.min.js&lt;/code&gt; 파일을 불러와 사용하고 있으며, 해당 파일을 어디에 두었냐에 따라 경로는 변경될 수 있다.
-또한, 편의를 위해 전체 JavaScript 파일을 불러오는 곳에서 해당 파일을 불러와도 된다.&lt;/p&gt;
-
-&lt;p&gt;검색 기능을 연동하기 위해 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;SimpleJekyllSearch&lt;/code&gt; 객체를 생성해 &lt;code class=&quot;highlighter-rouge&quot;&gt;window.simpleJekyllSearch&lt;/code&gt;에 할당&lt;/strong&gt;해야 한다.
-그 이후부터는 전달한 옵션에 따라 검색 기능이 작동하게 된다.&lt;/p&gt;
-
-&lt;p&gt;여기서 가장 중요한 부분은 필수 옵션을 정확히 세팅해야 한다는 것이다.&lt;br /&gt;
-헷갈리는 것이 있다면, &lt;a href=&quot;https://github.com/christian-fei/Simple-Jekyll-Search/wiki&quot; target=&quot;_blank&quot;&gt;가이드&lt;/a&gt;를 참고해
-세팅하길 바란다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchInput&lt;/code&gt;: 입력 부분에 해당하는 요소&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;resultsContainer&lt;/code&gt;: 출력 부분에 해당하는 요소&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt;: 검색 대상이 되는 검색 데이터가 있는 JSON 파일&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchResultTemplate&lt;/code&gt;: 검색된 항목이 출력 부분에 표시되는 레이아웃.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; 안에 JSON 객체의 Key를 입력해 검색된 데이터를 맵핑한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;참고로 현재 구현된 검색 페이지에 사용되는 JavaScript 코드는 다음과 같다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pointColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getComputedStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getPropertyValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;--point-color&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;simpleJekyllSearch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SimpleJekyllSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;searchInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;search-input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;resultsContainer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;search-results&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;{{ site.baseurl }}/assets/json/search-data.json&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;searchResultTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`
-      &amp;lt;li&amp;gt;
-        &amp;lt;div&amp;gt;
-          &amp;lt;i class=&quot;fas fa-folder fa-fw&quot;&amp;gt;&amp;lt;/i&amp;gt;
-          &amp;lt;a href=&quot;{url}&quot;&amp;gt;{categories}&amp;lt;/a&amp;gt;
-        &amp;lt;/div&amp;gt;
-        &amp;lt;div&amp;gt;
-          &amp;lt;i class=&quot;fas fa-book fa-fw&quot;&amp;gt;&amp;lt;/i&amp;gt;
-          &amp;lt;a href=&quot;{url}&quot;&amp;gt;{title}&amp;lt;/a&amp;gt;
-        &amp;lt;/div&amp;gt;
-        &amp;lt;div&amp;gt;
-          &amp;lt;i class=&quot;fas fa-tags fa-fw&quot;&amp;gt;&amp;lt;/i&amp;gt;
-          &amp;lt;a href=&quot;{url}&quot;&amp;gt;{tags}&amp;lt;/a&amp;gt;
-        &amp;lt;/div&amp;gt;
-        &amp;lt;div&amp;gt;
-          &amp;lt;i class=&quot;fas fa-calendar-alt fa-fw&quot;&amp;gt;&amp;lt;/i&amp;gt;
-          &amp;lt;a href=&quot;{url}&quot;&amp;gt;{date}&amp;lt;/a&amp;gt;
-        &amp;lt;/div&amp;gt;
-        &amp;lt;div&amp;gt;
-          &amp;lt;i class=&quot;fas fa-link fa-fw&quot;&amp;gt;&amp;lt;/i&amp;gt;
-          &amp;lt;a href=&quot;{url}&quot; style=&quot;font-size: 1rem;&quot;&amp;gt;{urlString}&amp;lt;/a&amp;gt;
-        &amp;lt;/div&amp;gt;
-      &amp;lt;/li&amp;gt;
-    `&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;templateMiddleware&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-      &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;queries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;search-input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]);&lt;/span&gt;
-
-      &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lowerCaseValue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toLowerCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lowerCaseValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-          &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;queries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-      &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]);&lt;/span&gt;
-
-      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;b&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;lt;/b&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;noResultsText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;simpleJekyllSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;search-input&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;기본적인 것은 예제 프로젝트와 동일하지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;searchResultTemplate&lt;/code&gt; 옵션이 복잡해지고, &lt;code class=&quot;highlighter-rouge&quot;&gt;templateMiddleware&lt;/code&gt; 옵션이 추가되었다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;searchResultTemplate&lt;/code&gt; 옵션은 검색 결과에 아이콘을 추가해 꾸미기 위해 복잡해졌고,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;templateMiddleware&lt;/code&gt; 옵션은 &lt;code class=&quot;highlighter-rouge&quot;&gt;searchResultTemplate&lt;/code&gt;에 검색된 데이터가 맵핑되기 전에 수행할 변환 작업을 위해 사용되었다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;templateMiddleware&lt;/code&gt; 옵션에 사용되는 함수의 로직이 굉장히 복잡해 보이는데,
-그 목적은 &lt;strong&gt;검색어에 해당하는 부분을 강조 표시하기 위한 용도&lt;/strong&gt;이다.
-더불어 실제 검색 대상이 되는 항목(제목, 카테고리, 태그 등)만 강조 표시를 하도록 로직을 추가했다.
-그 결과는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;검색 페이지 구현 결과&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;5-검색-페이지-추가&quot;&gt;5. 검색 페이지 추가&lt;/h3&gt;
-
-&lt;p&gt;마지막으로 구성한 레이아웃과 구현한 JavaScript 코드를 원하는 곳에 넣고 페이지로 추가하면 된다.
-이것은 예제 프로젝트에는 없는 부분으로, 다른 페이지를 구성하던 방식과 동일하게 페이지를 추가할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;현재 구현된 검색 페이지는 &lt;code class=&quot;highlighter-rouge&quot;&gt;search.html&lt;/code&gt; 파일에 HTML 레이아웃과 JavaScript 코드를 모두 넣고, &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; 디렉터리에 포함시켰다.
-그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;_pages&lt;/code&gt; 디렉터리에 &lt;code class=&quot;highlighter-rouge&quot;&gt;search.md&lt;/code&gt; 파일을 만들어 &lt;code class=&quot;highlighter-rouge&quot;&gt;layout&lt;/code&gt;으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;search&lt;/code&gt;를 작성했다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;search&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Search&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;permalink&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/search&lt;/span&gt;
-&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;이제 해당 레이아웃은 검색 페이지로 생성될 것이다.
-나머지 할 작업은 (Search 메뉴처럼) 원하는 곳에 해당 URL을 연결해 진입하도록 하면 된다.&lt;/p&gt;
-
-&lt;h2 id=&quot;후기&quot;&gt;후기&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Simple&lt;/strong&gt;-Jekyll-Search라는 이름에 걸맞게 정말 &lt;strong&gt;간단한&lt;/strong&gt; 검색 기능만 제공하는 라이브러리라 원하는 동작을 구현하는데 어려움이 많았다.
-그래도 나름 적정선에 스스로 합의(?)를 해서 검색 기능 구현이 마무리된 것 같다.
-그리고 기능 구현을 하면서 &lt;a href=&quot;https://jamesu.dev/posts/2020/12/26/til-19-contribution-for-simple-jekyll-search-oss/&quot; target=&quot;_blank&quot;&gt;해당 라이브러리의 버그를 찾아 MR도 시도&lt;/a&gt;해봤고, 실제 받아들여지기까지 하여 재밌는 경험이었다.&lt;/p&gt;
-
-&lt;p&gt;결론적으로 원하는 글을 찾는 데는 문제 없는 수준이 된 것 같아 꽤나 만족스럽지만, 공대 감성의 디자인을 한 것은 어쩔 수 없는 것 같다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="jekyll" /><category term="javascript" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;p&gt;노란색 Warning들이 깔끔하게 사라진 것을 보고 아주 만족했다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
