@@ -1,4 +1,104 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-01T22:15:30+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">프로그래머스 문제 풀이: 42840 - 모의고사</title><link href="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42840 - 모의고사" /><published>2021-02-25T00:00:00+09:00</published><updated>2021-02-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42840.png&quot; alt=&quot;42840 - 모의고사&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-06T20:48:23+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">프로그래머스 문제 풀이: 42862 - 체육복</title><link href="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42862 - 체육복" /><published>2021-03-03T00:00:00+09:00</published><updated>2021-03-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42862.png&quot; alt=&quot;42862 - 체육복&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42862&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;체육복을 도난당한 학생들이 얼마나 많은 체육복을 빌릴 수 있는지를 구해야 한다.&lt;/li&gt;
+  &lt;li&gt;체육복은 주변 학생으로부터 빌릴 수 있는 것이 핵심으로 보인다.&lt;/li&gt;
+  &lt;li&gt;제한사항에 의한 예외 케이스에 주의한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;체육복을 도난당한 학생들을 기준으로 &lt;strong&gt;차례대로 각 학생이 빌릴 수 있는 경우를 구한다면&lt;/strong&gt;,
+최종적으로 최대한 많은 학생이 체육복을 빌릴 수 있게 된다.
+이처럼 부분 최적해(각 학생이 빌릴 수 있는 경우)를 구하면,
+전체 최적해를 구할 수 있으므로 &lt;a href=&quot;https://en.wikipedia.org/wiki/Greedy_algorithm&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;을 이용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;부분 최적해를 구하기 앞서 제한사항을 보면, 다음과 같은 문구가 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;여벌 체육복을 가져온 학생이 체육복을 도난당했을 수 있습니다. 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 말은 어떤 학생이 도난당한 학생에 속할 수도, 여벌의 체육복을 가진 학생에 속할 수도 있다는 것이다.
+따라서 이것을 먼저 필터링해 &lt;strong&gt;체육복을 빌려야만 하는 학생과 여벌의 체육복을 빌려줄 수 있는 학생&lt;/strong&gt;을 다시 구한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이제 체육복을 도난당한 학생들을 정렬을 통해 줄지어 서게 하고 체육복을 빌리게 하면,
+앞에서부터 최대한 체육복을 빌리려고 할 것이다.
+&lt;strong&gt;빌린 후에는 해당 학생을 도난당한 학생 목록에서 제거하고, 빌려준 학생을 여벌 체육복을 가진 학생 목록에서도 제거해야 한다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;최종적으로 전체 학생 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에서 체육복을 빌리지 못한 학생 수(도난당한 학생 목록에 남은 학생 수) &lt;code class=&quot;highlighter-rouge&quot;&gt;len(lost)&lt;/code&gt;를 빼면 된다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 29: Xcode의 ‘No Scheme’ 버그 해결</title><link href="https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/" rel="alternate" type="text/html" title="TIL 29: Xcode의 'No Scheme' 버그 해결" /><published>2021-03-02T00:00:00+09:00</published><updated>2021-03-02T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata/&amp;lt;유저&amp;gt;.xcuserdatad&lt;/code&gt;&lt;br /&gt;
+또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata&lt;/code&gt; 삭제&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;xcode의-no-scheme-버그-해결&quot;&gt;Xcode의 ‘No Scheme’ 버그 해결&lt;/h2&gt;
+
+&lt;p&gt;Xcode를 쓰다보면 자잘한 버그가 발견되곤 하는데, 한창 집중하다가 그런 버그가 발생하면 집중력이 흩트러진다.
+이번에도 엄청 집중하며 개발을 하고 있었는데, &lt;strong&gt;‘No Scheme’ 버그&lt;/strong&gt;가 발생해 빌드조차 못하는 상황이 되버렸다.&lt;/p&gt;
+
+&lt;p&gt;잘 사용하던 Scheme이 갑자기 모두 사라지며, ‘No Scheme’이라 표시되는데 해결책은 매우 간단했다.
+&lt;strong&gt;프로젝트 파일 내부의 유저 데이터 관련 디렉터리를 지워 초기화&lt;/strong&gt;하는 것이다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata/&amp;lt;유저&amp;gt;.xcuserdatad&lt;/code&gt;&lt;br /&gt;
+또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata&lt;/code&gt; 삭제&lt;/li&gt;
+  &lt;li&gt;Xcode 재실행&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Xcode 재실행 시, Scheme이 다시 설정되므로 기존과 같이 사용할 수 있다.&lt;br /&gt;
+물론, 유저 데이터 중 필요한 파일이 있다면 잘 백업해서 복구하는 절차가 필요하다.&lt;/p&gt;
+
+&lt;p&gt;이렇게 Xcode의 자잘한 버그 중 하나로부터 탈출! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42840 - 모의고사</title><link href="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42840 - 모의고사" /><published>2021-02-25T00:00:00+09:00</published><updated>2021-02-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42840.png&quot; alt=&quot;42840 - 모의고사&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -382,85 +482,4 @@ iOS에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&
 &lt;p&gt;우여곡절 끝에 요구사항을 구현할 가닥이 어느 정도 보였지만, 아직 실험할 것이 남았다.
 그래도 잘 마무리 될 것 같은 생각에 안도감이 들었다.
 많이 쓸만한 기능이라 iOS에서 잘 준비되어 있었을 것 같았는데 생각보다 구현이 불편해 많이 당황스러웠다.
-이런 이슈를 경험할 기회가 생겨서 다행인 것 같다. 😂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="html" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 24: 무한 스크롤을 위한 페이징 API 설계</title><link href="https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll/" rel="alternate" type="text/html" title="TIL 24: 무한 스크롤을 위한 페이징 API 설계" /><published>2021-01-20T00:00:00+09:00</published><updated>2021-01-20T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/20/til-24-defining-pagination-api-for-infinite-scroll/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;무한 스크롤은 페이지 번호를 이용한 고전적인 페이징 기법과 달리 &lt;strong&gt;무한하게 스크롤을 내리는 UX&lt;/strong&gt;에 적합하다.&lt;/li&gt;
-  &lt;li&gt;무한 스크롤 페이징 API 설계 시, &lt;strong&gt;정렬 조건&lt;/strong&gt;을 함께 서버에 전달해야 한다.&lt;/li&gt;
-  &lt;li&gt;누락되는 항목까지 고려한다면, 더 복잡해질 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;무한-스크롤infinite-scroll이란&quot;&gt;무한 스크롤(Infinite scroll)이란?&lt;/h2&gt;
-
-&lt;p&gt;일반적으로 웹사이트의 게시판에서 쉽게 접할 수 있는 페이징 기법은 “1, 2, 3, …“과 같이 목록의 하단에
-페이지 번호가 있고 한 페이지에 특정 갯수가 목록에 보여지는 방식일 것이다.&lt;/p&gt;
-
-&lt;p&gt;이와 달리 &lt;strong&gt;무한 스크롤(Infinite scroll)&lt;/strong&gt;이라 불리는 페이징 기법은 페이지 번호가 따로 없고,
-아래로 스크롤하다가 끝에 도달하면 다음 페이지의 목록을 현재 목록에 추가하여 목록을 연장하는 방식이다.
-그래서 마치 무한하게 스크롤을 내릴 수 있다하여 무한 스크롤이라 불린다.&lt;/p&gt;
-
-&lt;p&gt;페이지 번호를 사용하는 페이징 기법을 사용할 지, 무한 스크롤을 사용할 지는 기획에 따라 다르며,
-컨텐츠의 종류에 따라 적절한 UX를 선택해야 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;사내-페이징-api의-문제점&quot;&gt;사내 페이징 API의 문제점&lt;/h2&gt;
-
-&lt;p&gt;이번에 신규 모바일 프로젝트를 진행하며, 대량의 목록을 조회할 수도 있는 화면에서 페이징 기법을 사용할 필요가 있었다.
-기존의 웹 솔루션을 앱으로 만드는 것이라 서버 팀에서는 웹 API를 그대로 활용하여 모바일 API로 전달해주었으나,
-여러가지 문제가 많아 수정을 계속 요청하는 상태였다.&lt;/p&gt;
-
-&lt;p&gt;기존 웹 솔루션에서는 게시판처럼 고전적인 페이징 기법을 사용하고 있었고,
-모바일 프로젝트의 화면에서는 무한 스크롤을 기획으로 요구했기 때문에 해당 API를 그대로 사용할 수 없었다.
-더군다나 서버 팀의 일정이 바쁜 탓에 설계를 할 시간이 없었고, 가장 적절한 무한 스크롤 기법을 찾기 위해 리서치를 진행했다.&lt;/p&gt;
-
-&lt;h2 id=&quot;무한-스크롤-페이징-api-설계-시-정렬-조건에-유의하자&quot;&gt;무한 스크롤 페이징 API 설계 시, 정렬 조건에 유의하자&lt;/h2&gt;
-
-&lt;p&gt;리서치된 내용을 조합하여 최선을 찾으려 노력했으며, 페이징 API 호출 시 어떤 정보를 서버에 넘길 지가 관건이었다.&lt;/p&gt;
-
-&lt;p&gt;일반적으로는 생성된 날짜를 기준으로 정렬하기 때문에 기준이 되는 항목의 생성된 날짜를 넘기는 식으로 구현이 가능하지만,
-해당 프로젝트에는 &lt;strong&gt;정렬 기준이 다소 달랐기 때문에&lt;/strong&gt; 다르게 적용할 필요가 있었다.&lt;/p&gt;
-
-&lt;p&gt;해당 프로젝트의 정렬 기준은 화면마다 다를 수 있어 넘겨야 하는 정보가 그때그때 달랐으며,
-페이징 도중에도 언제든지 다음 페이지 항목의 순서가 (데이터로써) 상단으로 땡겨질 수 있기 때문에
-누락되는 항목까지 고려해야 할 필요가 있었다.&lt;/p&gt;
-
-&lt;p&gt;결국 어찌저찌 설계를 완료해 서버 팀에 넘겼으나 제대로 적용될 지는 두고 봐야 한다.
-예전에는 단순히 주어진 대로 누락될 수 있는 가능성을 무시하고 고전적인 페이징 기법을 사용해 개발했지만,
-이번에는 제대로 개발하고자 시도를 해보았다.
-추후 좀 더 다듬어 Best Practice가 되도록 만들어야겠다. 👨🏻‍🔧&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ui" /><category term="api" /><category term="rest" /><category term="pagination" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 23: CocoaPods로 인한 Warning 제거</title><link href="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/" rel="alternate" type="text/html" title="TIL 23: CocoaPods로 인한 Warning 제거" /><published>2021-01-18T00:00:00+09:00</published><updated>2021-01-18T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CocoaPods로 외부 라이브러리 설치 후 생기는 Warning은 &lt;code class=&quot;highlighter-rouge&quot;&gt;post_install&lt;/code&gt; 훅으로 쉽게 제거할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;신경-쓰이는-warning-제거하기&quot;&gt;신경 쓰이는 Warning 제거하기&lt;/h2&gt;
-
-&lt;p&gt;개인적으로 Xcode에 노란색 Warning이 보이면 굉장히 거슬려서 가능하면 모두 제거하려고 하는 편이다.
-어떤 종류의 Warning이라도 검색을 통해 기필코 제거하려 한다.
-Warning이 치명적인 버그를 낳을 수도 있지만, 뭔가 잘못 코딩한 것 같은 느낌을 들게 하기 때문이다.&lt;/p&gt;
-
-&lt;p&gt;사내에서 외부 라이브러리 연동으로 CocoaPods를 주로 사용하는데,
-언제부턴가 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt;로 외부 라이브러리를 설치하고 난 후에 Xcode에 몇몇 Warning이 뜨기 시작했다.&lt;/p&gt;
-
-&lt;p&gt;치명적인 Warning은 아니기 때문에 Xcode에서 제공하는 설정 값 갱신 기능을 사용하면 쉽게 제거할 수 있다.
-하지만, 다른 개발자가 프로젝트를 이어 받아 진행할 수도 있고, 외부 라이브러리 설치 시마다 거슬릴 수 있으므로
-설정 값 갱신조차 필요하지 않도록 하고 싶었다.&lt;/p&gt;
-
-&lt;h2 id=&quot;post_install-hook&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;post_install&lt;/code&gt; Hook&lt;/h2&gt;
-
-&lt;p&gt;CocoaPods에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;post_install&lt;/code&gt;
-&lt;a href=&quot;https://guides.cocoapods.org/syntax/podfile.html#post_install&quot; target=&quot;_blank&quot;&gt;훅&lt;/a&gt;이 존재하는데,
-이를 이용하면 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod&lt;/code&gt; 설치 후 수행할 처리&lt;/strong&gt;를 정의할 수 있다.
-앞서 발생한 Warning은 외부 라이브러리에 특정 설정 값이 적절하지 않게 세팅되어 발생한 것으로 해당 값을
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod&lt;/code&gt; 설치 후 적절하게 세팅하도록 처리하면 된다.&lt;/p&gt;
-
-&lt;p&gt;다음과 같은 훅을 추가해 설치된 외부 라이브러리의 &lt;code class=&quot;highlighter-rouge&quot;&gt;CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED&lt;/code&gt;와
-&lt;code class=&quot;highlighter-rouge&quot;&gt;CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER&lt;/code&gt; 값이 적절하게 세팅되도록 했다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;post_install&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;installer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pods_project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_configurations&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'YES'&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;build_settings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'NO'&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;노란색 Warning들이 깔끔하게 사라진 것을 보고 아주 만족했다. 🙂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
+이런 이슈를 경험할 기회가 생겨서 다행인 것 같다. 😂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="html" /><summary type="html">TL;DR</summary></entry></feed>

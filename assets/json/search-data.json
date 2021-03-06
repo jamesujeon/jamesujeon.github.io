@@ -1,6 +1,24 @@
 [
   
     {
+      "title"      : "프로그래머스 문제 풀이: 42862 - 체육복",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, programmers, greedy-algorithm, python",
+      "date"       : "2021.03.03",
+      "urlString"  : "/posts/2021/03/03/programmers-problem-solving-42862/",
+      "url"        : "/posts/2021/03/03/programmers-problem-solving-42862/"
+    },
+  
+    {
+      "title"      : "TIL 29: Xcode의 'No Scheme' 버그 해결",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, xcode",
+      "date"       : "2021.03.02",
+      "urlString"  : "/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/",
+      "url"        : "/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/"
+    },
+  
+    {
       "title"      : "프로그래머스 문제 풀이: 42840 - 모의고사",
       "categories" : "Etc > Algorithm",
       "tags"       : "problem-solving, programmers, brute-force, python",
