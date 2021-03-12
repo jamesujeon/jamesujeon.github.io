@@ -1,4 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-06T20:48:23+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">프로그래머스 문제 풀이: 42862 - 체육복</title><link href="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42862 - 체육복" /><published>2021-03-03T00:00:00+09:00</published><updated>2021-03-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42862.png&quot; alt=&quot;42862 - 체육복&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-12T18:47:07+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용하면, 콜백 지옥에서 벗어나 새로운 방식으로 비즈니스 로직을 구현할 수 있다.&lt;/li&gt;
+  &lt;li&gt;얼른 맛보자 😋&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reactivex&quot;&gt;ReactiveX&lt;/h2&gt;
+
+&lt;p&gt;Observer 패턴, Iterator 패턴, 함수형 프로그래밍의 집합체로 정의된 &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;는
+&lt;strong&gt;흐름에 따른 비동기 프로그래밍&lt;/strong&gt; 방식을 지원해주는 유용한 API다.
+자세한 설명은 &lt;a href=&quot;http://reactivex.io/&quot; target=&quot;_blank&quot;&gt;공식 홈페이지&lt;/a&gt;에
+문서가 잘 되어 있으니 어떤 느낌인지 알아가는 데 도움이 될 것이다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;흐름&lt;/strong&gt;과 &lt;strong&gt;비동기&lt;/strong&gt;, 그리고 &lt;strong&gt;함수형&lt;/strong&gt;을 이용함으로써, 프로그래밍 방식이 매우 달라진다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;흐름&lt;/code&gt;을 통해 여러 처리를 하나의 흐름으로 합쳐 동기적으로 동작하게 하거나,
+다수의 흐름을 병렬적으로 수행하고 하나의 흐름으로 결과를 내거나,
+중간에 에러를 발생시켜 흐름을 끊어버리는 등과 같이 다양한 조작으로 원하는 로직을 자연스럽게 처리할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;비동기&lt;/code&gt;를 기반으로 하기 때문에 각 흐름의 입력과 출력에만 집중해 로직을 구현할 수 있다.
+항상 처리를 기다릴 필요 없이 흐름의 출력을 바탕으로 원하는 로직으로 조립해 사용하면 된다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;함수형&lt;/code&gt; 프로그래밍이 기본이므로, 내부에서 상태를 조작하는 것보다는 입력과 출력에 집중해 비즈니스 로직을 구현할 수 있다.
+그로 인해 상태가 꼬이는 실수를 하거나 로직이 복잡해지는 등의 문제를 방지할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이러한 장점을 느껴보고자 &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;의 Swift 버전인 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 공부해서 사내 프로젝트에 일부 도입을 시도해봤고,
+성공적으로 적용되어 만족감을 느꼈다.&lt;/p&gt;
+
+&lt;h2 id=&quot;콜백-지옥에서-벗어나자&quot;&gt;콜백 지옥에서 벗어나자&lt;/h2&gt;
+
+&lt;p&gt;일단, &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 네트워크 처리 부분에 먼저 도입했다.&lt;br /&gt;
+기존에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; 오픈 소스 라이브러리를 사용해 사내 라이브러리에 맞게 커스텀한 부분을
+&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 이용해 Wrapping하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Rx&lt;/code&gt; 버전을 추가로 구현했다.&lt;/p&gt;
+
+&lt;p&gt;네트워크 처리를 구현하면서 자주 사용하던 방식은 성공, 실패, 완료 등의 콜백 Closure를 전달한 방식이다.
+이는 다수의 네트워크 처리나 로직이 연쇄될 경우 &lt;strong&gt;콜백 지옥&lt;/strong&gt;을 야기할 수 있다.
+중괄호 Depth가 계속 생기는 것이다.
+콜백 지옥을 느껴보면, 코드의 품질이 낮아보이고 어떻게든 개선하고 싶은 욕구가 생길 것이다.&lt;/p&gt;
+
+&lt;p&gt;이 부분을 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용해 처리해보니,
+항상 매개변수로 전달하던 콜백 Closure는 사라지고,
+응답 흐름에 대해서 다른 흐름을 추가로 연쇄하거나 응답을 변형하는 등과 같이 원하는 로직을 자연스럽게 처리할 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;그리고 다수의 네트워크 처리를 병렬로 수행해 그 결과에 따른 처리가 편해지고,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;DisposeBag&lt;/code&gt;을 활용하니 효율적으로 리소스를 관리할 수 있었다.&lt;/p&gt;
+
+&lt;p&gt;이제 맛보기 단계인데 정말 맛있어서 얼른 다른 부분에도 적용하고 싶은 욕심이 생긴다.&lt;br /&gt;
+다른 오픈 소스 라이브러리와의 조합(특히, &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;과 연동된 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxCocoa&lt;/code&gt;)도 좋아서 차근차근 도입할 예정이다.
+최종적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt; 디자인 패턴을 사내 프로젝트에 적용할 예정이다.&lt;/p&gt;
+
+&lt;p&gt;아직도 재밌는 일이 많이 남아있어 프로그래밍을 놓을 수 없는 것 같다. 👨🏻‍💻&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><category term="reactive-x" /><category term="rxswift" /><summary type="html">TL;DR</summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42862 - 체육복</title><link href="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42862 - 체육복" /><published>2021-03-03T00:00:00+09:00</published><updated>2021-03-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42862.png&quot; alt=&quot;42862 - 체육복&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -456,30 +507,4 @@
 포맷에 적용할 수 있는 다양한 매크로를 확인할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;어찌보면 사소한 일이지만, 이 사소한 일이 다양한 인적 실수를 방지하고, 퀄리티를 높이는 등 좋은 장점이 있다고 생각한다.
-얼른 다른 프로젝트에도 적용해야겠다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 25: HTML 태그가 포함된 텍스트 변환하기</title><link href="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/" rel="alternate" type="text/html" title="TIL 25: HTML 태그가 포함된 텍스트 변환하기" /><published>2021-01-22T00:00:00+09:00</published><updated>2021-01-22T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HTML 태그가 포함된 텍스트는 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 일반 텍스트로 변환할 수 있다.&lt;/li&gt;
-  &lt;li&gt;텍스트 변환 후에는 적용되었던 텍스트 스타일이 초기화되므로 재설정 해줘야 한다.&lt;/li&gt;
-  &lt;li&gt;요구사항에 따라 깔끔하게 텍스트 스타일을 유지하며 변환하는 것이 힘들 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;불편한-ios의-html-텍스트-변환&quot;&gt;불편한 iOS의 HTML 텍스트 변환&lt;/h2&gt;
-
-&lt;p&gt;이번에 사내 앱 프로젝트에서 HTML 태그가 포함된 텍스트를 변환해 텍스트 스타일을 적용하는 요구사항이 생겼다.
-그래서 바로 리서치를 해보니, 안드로이드에서 간단히 &lt;code class=&quot;highlighter-rouge&quot;&gt;Html&lt;/code&gt; 클래스를 이용하는 것처럼,
-iOS에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 간단히 처리할 수 있나 했더니 오산이었다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;NSAttributedString&lt;/code&gt; 클래스를 이용해 변환하면, 기존에 적용되었던 폰트 등의 &lt;strong&gt;텍스트 스타일이 모두 초기화&lt;/strong&gt;되는 것이었다.
-요구사항에서 언급된 HTML 태그로는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;b&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;i&amp;gt;&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;u&amp;gt;&lt;/code&gt; 등과 같은 볼드, 이탤릭, 밑줄 처리를 하는 텍스트 스타일이었다.
-그래서 텍스트 변환 후에 일일이 각 텍스트 스타일이 적용된 부분을 찾아 폰트를 변경하는 처리를 해야 했는데,
-생각만큼 쉽게 모든 스타일이 적용되지 않았다.&lt;/p&gt;
-
-&lt;p&gt;또 다른 방법으로는 &lt;strong&gt;기존 HTML 태그가 포함된 텍스트를 원하는 폰트, 글자 색깔, 글자 크기 등의 값을 설정할 수 있는 태그로 감싸고, 그것을 변환&lt;/strong&gt;하는 것이었다.
-만약, 각 텍스트 스타일마다 폰트를 다르게 적용하는 처리가 필요하다면 더 복잡할 수 있다.
-다행히 현재 프로젝트에서는 애플 시스템 폰트를 기본으로 사용하고 있기 때문에 문제가 없었다.&lt;/p&gt;
-
-&lt;p&gt;우여곡절 끝에 요구사항을 구현할 가닥이 어느 정도 보였지만, 아직 실험할 것이 남았다.
-그래도 잘 마무리 될 것 같은 생각에 안도감이 들었다.
-많이 쓸만한 기능이라 iOS에서 잘 준비되어 있었을 것 같았는데 생각보다 구현이 불편해 많이 당황스러웠다.
-이런 이슈를 경험할 기회가 생겨서 다행인 것 같다. 😂&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="html" /><summary type="html">TL;DR</summary></entry></feed>
+얼른 다른 프로젝트에도 적용해야겠다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
