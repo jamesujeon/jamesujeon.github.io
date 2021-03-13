@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, objective-c",
+      "date"       : "2021.03.09",
+      "urlString"  : "/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/",
+      "url"        : "/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/"
+    },
+  
+    {
       "title"      : "TIL 30: RxSwift 맛보기",
       "categories" : "Etc > TIL",
       "tags"       : "ios, swift, reactive-x, rxswift",

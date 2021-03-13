@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-12T18:47:07+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-13T23:48:52+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</title><link href="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" rel="alternate" type="text/html" title="TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!" /><published>2021-03-09T00:00:00+09:00</published><updated>2021-03-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부 요소를 접근할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드의 지역 변수에 외부 요소를 대입하고 사용하자.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 사용한 변수는 &lt;strong&gt;약한 참조&lt;/strong&gt;이기 때문에 언제든 &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 가능성이 있다는 것에 주의하자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;block-프로그래밍&quot;&gt;Block 프로그래밍&lt;/h2&gt;
+
+&lt;p&gt;Objective-C는 Swift의 Closure가 등장하기 이전에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;이란 것을 지원했다.
+Closure와 유사하게 &lt;strong&gt;로직을 보관할 수 있는 함수 자료형&lt;/strong&gt;이라 생각하면 된다.
+그래서 유사한 특징을 가지기도 하는데, 그 중 하나가
+&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부의 요소를 접근할 시에 강한 참조를 가진다는 점&lt;/strong&gt;이다.&lt;/p&gt;
+
+&lt;p&gt;이는 Closure에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용함으로써 발생할 수 있는 점하고 유사하다.
+Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;를 사용해서 약한 참조로 캡처해 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그렇다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;에서는 어떻게 약한 참조로 사용할 수 있을까?&lt;/p&gt;
+
+&lt;h2 id=&quot;메모리-누수-해결&quot;&gt;메모리 누수 해결&lt;/h2&gt;
+
+&lt;p&gt;사내 프로젝트 유지보수 중에 숨겨져 있는 버그 하나를 발견했다.&lt;br /&gt;
+정상적으로 메모리 해제가 된다면, 자연스럽게 &lt;code class=&quot;highlighter-rouge&quot;&gt;dealloc&lt;/code&gt; 메소드가 호출되면서 특정 로직이 수행되어야 했는데
+그렇지 못해서 비정상적인 동작을 하고 있었다.
+이 버그가 특정 상황에서만 발생했기 때문에 더욱 발견하기 어려웠다.&lt;/p&gt;
+
+&lt;p&gt;결론은 특정 비즈니스 로직에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하는데, 그 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 자연스럽게 접근하고 있는 것이었다.
+그로 인해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;에 대한 강한 참조를 가지고, 메모리에 &lt;strong&gt;좀비&lt;/strong&gt;로 남아 있어 메모리 해제가 되지 못한 것이다.&lt;/p&gt;
+
+&lt;p&gt;해결책은 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 정의하기 전에 내부에서 사용할 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드로 지역 변수에 보관하고 그것을 사용하는 것&lt;/strong&gt;이다.
+예를 들어, &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용해야 한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;와 같은 변수에 대입해 놓고 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;를 쓰는 것이다.
+물론 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt; 사용 시, &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 수 있다는 것에 주의해야 한다&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하고 있는 코드를 전부 확인해서 기존에 숨겨져 있던 잠재적 버그까지 모두 수정했다.
+더 이상 메모리 누수로 골머리를 앓지 않기 위해서…&lt;/p&gt;
+
+&lt;p&gt;예전에는 Objective-C를 사용할 기회가 많이 없었는데,
+여기서는 사내 프로젝트 중 일부가 그 언어로 되어 있어 유지보수를 통해 이런저런 일을 많이 겪을 수 있다.
+점점 더 Objective-C와 친해지고 있는 것 같다.&lt;/p&gt;
+
+&lt;p&gt;하지만 나는 Swift와 더 친하게 지낼 것이다. 🙄&lt;/p&gt;
+
+&lt;p&gt;참고로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용하면, 콜백 지옥에서 벗어나 새로운 방식으로 비즈니스 로직을 구현할 수 있다.&lt;/li&gt;
@@ -476,35 +518,4 @@
 &lt;p&gt;정말 간단한 해결책이지만, Swift 언어에 대한 기본기가 부족해 발생했던 문제점이었다.&lt;/p&gt;
 
 &lt;p&gt;이렇게 고생을 했으니 앞으로는 까먹지 않고 숨겨진 메모리 누수를 막을 수 있을 것 같다.&lt;br /&gt;
-다시 한번 느끼지만, &lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 26: Xcode 파일 Header Comment 통일</title><link href="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/" rel="alternate" type="text/html" title="TIL 26: Xcode 파일 Header Comment 통일" /><published>2021-01-28T00:00:00+09:00</published><updated>2021-01-28T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent</id><content type="html" xml:base="https://jamesu.dev/posts/2021/01/28/til-26-making-xcode-file-header-comment-consistent/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Xcode는 파일 Header Comment 포맷을 정의하는 방법을 제공한다.&lt;/li&gt;
-  &lt;li&gt;파일 Header Comment 포맷을 통일해 프로젝트의 일관성을 유지하자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;파일-header-comment의-일관성을-유지하자&quot;&gt;파일 Header Comment의 일관성을 유지하자&lt;/h2&gt;
-
-&lt;p&gt;언제나 Naming을 열심히 고민하는 개발자들에게 &lt;strong&gt;일관성&lt;/strong&gt; 유지는 중요한 마음가짐이자 규칙이다.&lt;br /&gt;
-파일을 생성할 때마다 상단에 추가되는 Header Comment도 그것의 예외가 될 수 없다.&lt;/p&gt;
-
-&lt;p&gt;기본적으로 Xcode에서 제공하는 파일 Header Comment 포맷에는 파일명, 프로젝트명, Copyright, 작성자 등이 포함된다.
-일반적으로 저것으로 충분할 것으로 보이지만, 사내에서 여러 개발자가 파일을 생성하다보면 일관성이 깨지는 상황이 발생할 수 있다.
-그것은 특히 작성자의 아이디가 알 수 없는 이름으로 되어 있거나 파일명을 수시로 바꾸는 경우다.&lt;/p&gt;
-
-&lt;p&gt;개발 환경을 설정할 때 임의의 애플 아이디로 로그인 해서 개발을 시작하거나 사내에서 쓰지 않는 자신만의 아이디를 쓰는 등과 같이
-직접 확인하지 않으면 일관성이 깨지고 중구난방이 될 수 있다.
-또한, 파일명이 이상해 리팩토링을 통해 고치거나 하면, Header Comment도 같이 바꾸는 게 정석이지만 빼먹고 변경하지 않는 일이 허다하다.
-후자의 경우는 코드 리뷰나 개발자 스스로가 신경써서 관리해야 하겠지만, 전자의 경우는 사내 파일 Header Comment 규칙을 바꾸는 것도 한 방법이 될 수 있다.&lt;/p&gt;
-
-&lt;p&gt;협업을 하다 보면 하나의 파일을 여러 개발자가 건드리는 경우가 많으므로, 굳이 작성자를 명시할 필요가 없다.
-또한, 커밋 내역을 통해 누가 무엇을 어떻게 수정했는지 파악할 수 있다.
-따라서 작성자를 파일 Header Comment에 포함시킬 필요가 없었고, 일관성을 유지하기 좋은 방향으로 포맷을 수정할 필요가 생겼다.&lt;/p&gt;
-
-&lt;p&gt;다행히 Xcode에 파일 Header Comment 포맷을 변경할 수 있는 방법이 다양하게 존재했고,
-사내 프로젝트를 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;xcshareddata&lt;/code&gt;에 보관하는 방식으로 다른 개발자에게도 동일한 규칙을 적용시킬 수 있었다.
-&lt;a href=&quot;https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0&quot; target=&quot;_blank&quot;&gt;이 곳&lt;/a&gt;에서
-포맷에 적용할 수 있는 다양한 매크로를 확인할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;어찌보면 사소한 일이지만, 이 사소한 일이 다양한 인적 실수를 방지하고, 퀄리티를 높이는 등 좋은 장점이 있다고 생각한다.
-얼른 다른 프로젝트에도 적용해야겠다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
+다시 한번 느끼지만, &lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry></feed>
