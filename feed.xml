@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-13T23:48:52+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</title><link href="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" rel="alternate" type="text/html" title="TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!" /><published>2021-03-09T00:00:00+09:00</published><updated>2021-03-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-03-14T23:13:25+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 32: 중복으로 Delegate 사용하기</title><link href="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/" rel="alternate" type="text/html" title="TIL 32: 중복으로 Delegate 사용하기" /><published>2021-03-11T00:00:00+09:00</published><updated>2021-03-11T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;내부 로직은 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당한다.&lt;/li&gt;
+  &lt;li&gt;외부 로직은 프록시와 포워딩을 통해 이벤트와 연동되도록 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;일반적인-방법으로-delegate를-사용할-때의-문제점&quot;&gt;일반적인 방법으로 Delegate를 사용할 때의 문제점&lt;/h2&gt;
+
+&lt;p&gt;커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해 사용할 때가 있다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.&lt;/p&gt;
+
+&lt;p&gt;예를 들어, 커스텀 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
+경우에 따라 입력 방지를 처리하고 싶을 때 Notification으로 처리를 할 수 없고,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 구현해 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
+해당 클래스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 외부에서 구현해 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입하게 되면
+기존에 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 대입했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.&lt;/p&gt;
+
+&lt;p&gt;커스텀 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
+그렇다면, &lt;strong&gt;내부 로직도 수행되면서 적절하게 외부 로직도 수행되게 하는 방법은 없을까&lt;/strong&gt;?&lt;/p&gt;
+
+&lt;h2 id=&quot;delegate-포워딩하기&quot;&gt;Delegate 포워딩하기&lt;/h2&gt;
+
+&lt;p&gt;구글링을 열심히 하다보니 &lt;a href=&quot;https://stackoverflow.com/questions/43679859/shouldchangetext-not-called-for-uitextfield-when-using-hardware-keyboard&quot; target=&quot;_blank&quot;&gt;원하던 답&lt;/a&gt;을 찾게 되었다.&lt;br /&gt;
+내부 로직은 원래대로 &lt;strong&gt;스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당&lt;/strong&gt;하고,
+외부 로직은 &lt;strong&gt;프록시와 포워딩&lt;/strong&gt;을 통해 추가적으로 수행하게 만들 수 있다.&lt;/p&gt;
+
+&lt;p&gt;위 답변을 보면, 다음과 같이 커스텀 클래스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITextFieldDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Keep track of the text field's real delegate&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITextFieldDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newValue&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;외부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에 접근할 때는 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;가 아닌 내부 전용 프로퍼티인 &lt;code class=&quot;highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;에 접근하게 된다.
+이러고 생성자에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;super.delegate = self&lt;/code&gt;와 같은 코드를 통해 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;만 접근하도록 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;그리고 다음과 같이 포워딩을 함으로써 특정 이벤트가 발생했을 때 외부에서만 정의한 로직이 있는 경우 수행할 수 있도록 해준다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forwardingTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;realDelegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;forwardingTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Selector&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;realDelegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aSelector&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;특정 이벤트에 대해 내부 로직을 수행하면서 추가적으로 외부 로직이 호출되기 원한다면,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;를 통해 외부 로직도 호출해줘야 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// This only allows numbers to be typed into the text field.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Of course this can be changed to do whatever validation you need in this custom text field&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;textField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;textField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITextField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shouldChangeCharactersIn&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacementString&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rangeOfCharacter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CharacterSet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decimalDigits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inverted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Not a number - fail&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// The string is valid, now let the real delegate decide&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;textField(_:shouldChangeCharactersIn:replacementString:)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;textField&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;textField&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;shouldChangeCharactersIn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;replacementString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;위와 같은 방식은 Objective-C에서도 문법만 달라지고 로직은 동일하게 적용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;커스텀 UI를 만들면 만들수록 새로 알아가는 개념들이 많아지고 있어 재밌고 뿌듯한 기분이 든다. 🤓&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수</title><link href="https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수" /><published>2021-03-10T00:00:00+09:00</published><updated>2021-03-10T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42576.png&quot; alt=&quot;42576 - 완주하지 못한 선수&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42576&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;동명이인이 있을 수 있다는 것에 주의해 문제를 풀어야 한다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt;의 길이가 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt;의 길이보다 1이 작으므로,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하며 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; 함수로 한명씩 제거하면 최종적으로 1명이 남게 된다.
+그 1명이 완주하지 못한 선수가 된다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 이렇게 풀면 배열의 길이가 아주 큰 경우,
+&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하는 것과 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 제거하기 위해 순회하는 것을 합쳐
+오랜 시간이 걸리므로, 최악의 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt;의 시간복잡도가 될 수 있다.&lt;/p&gt;
+
+&lt;p&gt;따라서, &lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열과 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열을 &lt;strong&gt;이름을 키로 가지고 인원을 값으로 가지는 Dictionary&lt;/strong&gt;로 변형해
+인원을 감소시키는 방식으로 순회한다면, 시간복잡도가 &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;으로 줄어들 수 있다.&lt;/p&gt;
+
+&lt;p&gt;Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;collections&lt;/code&gt; 모듈의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 클래스를 사용한다면,
+&lt;strong&gt;요소를 키로 가지고 빈도수를 값으로 가지는 Dictionary&lt;/strong&gt;로 쉽게 변형시킬 수 있다.
+그리고 두 &lt;code class=&quot;highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 객체의 &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 연산을 통해 차집합 효과를 낼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;최종적으로 빈도수가 1인 하나의 요소만 남게 되고, 해당 요소가 선수의 이름에 해당하므로 완주하지 못한 선수를 손쉽게 구할 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;collections&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;participant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;participant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</title><link href="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" rel="alternate" type="text/html" title="TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!" /><published>2021-03-09T00:00:00+09:00</published><updated>2021-03-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부 요소를 접근할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드의 지역 변수에 외부 요소를 대입하고 사용하자.&lt;/li&gt;
@@ -414,108 +537,4 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter { $0.subviews.isEmpty }&lt;/code&gt; 처리를 통해 &lt;strong&gt;구분선이 존재하지 않는 경우에만 구분선을 추가&lt;/strong&gt;하도록 했다.
 그래서 불필요하거나 과하지 않게 적절한 타이밍에 구분선을 페이지에 추가할 수 있었다.&lt;/p&gt;
 
-&lt;p&gt;시간이 지날수록 코드로 커스터마이징하는 실력이 늘어나는 것이 체감되어 기쁘다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기</title><link href="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/" rel="alternate" type="text/html" title="GitHub 커밋 그래프(GitHub Contributions Graph) 보여주기" /><published>2021-02-09T00:00:00+09:00</published><updated>2021-02-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/09/showing-github-contributions-graph/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;https://ghchart.rshah.org/jamesujeon&quot;/&amp;gt;&lt;/code&gt; 한줄로 나의 &lt;strong&gt;잔디&lt;/strong&gt;를 표현할 수 있다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;img src=&quot;https://ghchart.rshah.org/219138/jamesujeon&quot;/&amp;gt;&lt;/code&gt;와 같이 &lt;strong&gt;기준 색&lt;/strong&gt;을 지정할 수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;github-contributions-graph&quot;&gt;GitHub Contributions Graph&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;GitHub를 사용하는 사람이라면 누구나 한번쯤 위와 같은 &lt;strong&gt;GitHub Contributions Graph&lt;/strong&gt;를 본 적이 있을 것이다.
-그리고 많은 개발자가 이 초록색 네모(일명 잔디)를 채우기 위해 하루하루 코딩을 한다.
-이렇게 채운 네모는 코딩을 더 열심히 하게 자극을 주는 동기부여가 된다.&lt;/p&gt;
-
-&lt;p&gt;GitHub Contributions Graph를 많이 채웠으면 그것을 누군가에게 자랑을 하고 싶기도 하고,
-스스로 보며 뿌듯함을 느끼고 싶기도 할 것이다.
-그러기 위해 블로그에 그 그래프를 연동하기도 하는데, 최근에 괜찮은 오픈 소스를 발견해 그것을 이용해
-&lt;a href=&quot;https://jamesu.dev/about&quot; target=&quot;_blank&quot;&gt;About&lt;/a&gt; 페이지를 꾸몄다.&lt;/p&gt;
-
-&lt;h2 id=&quot;github-chart-api-연동&quot;&gt;Github Chart API 연동&lt;/h2&gt;
-
-&lt;p&gt;그래프를 보여주기 위해 사용한 오픈 소스는 &lt;a href=&quot;https://github.com/akerl/githubchart&quot; target=&quot;_blank&quot;&gt;Github Chart API&lt;/a&gt;라
-불리는 &lt;strong&gt;그래프 이미지 생성 API&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;Github Chart API는 GitHub 계정으로부터 Contributions 데이터를 불러와 이미지 파일을 생성하고 호스팅을 통해 이미지 파일을 제공해준다.
-이미지 파일은 SVG이기 때문에 화면 크기에 맞춰 적절하게 보여질 수 있으며, 원하는 기준 색을 지정해 네모(일명 잔디)의 색을 바꿀 수 있다.&lt;/p&gt;
-
-&lt;p&gt;사용법은 정말 간단하다.&lt;br /&gt;
-다음 코드와 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;img&lt;/code&gt; 요소의 이미지 파일 경로로
-&lt;strong&gt;호스팅 사이트(https://ghchart.rshah.org) 뒤에 GitHub 계정명을 덧붙인 경로&lt;/strong&gt;를 전달하면 된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://ghchart.rshah.org/jamesujeon&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;앞서 얘기한 것처럼 &lt;strong&gt;기준 색&lt;/strong&gt;을 지정하고 싶다면,
-다음 코드와 같이 &lt;strong&gt;GitHub 계정명 앞에 16진수 색상 코드&lt;/strong&gt;를 덧붙이면 된다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;img&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://ghchart.rshah.org/219138/jamesujeon&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;위 코드를 적용한 &lt;a href=&quot;https://jamesu.dev/about&quot; target=&quot;_blank&quot;&gt;About&lt;/a&gt; 페이지의 이미지는 다음과 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/figure_2.png&quot; alt=&quot;Figure 2&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;해당 이미지는 현재의 GitHub 데이터를 기준으로 하기 때문에 최신 이미지가 유지될 수 있다.
-물론, 이미지 파일이 캐싱되어 이전 상태의 이미지가 보일 수 있으니 그런 경우 캐시를 제거하고 확인해 봐야 한다.&lt;/p&gt;
-
-&lt;p&gt;Github Chart API에서 생성하는 이미지 파일은 &lt;a href=&quot;https://github.com/akerl/githubchart&quot; target=&quot;_blank&quot;&gt;GithubChart&lt;/a&gt;라 하는
-다른 오픈 소스로부터 생성된 것이다.
-만약, 이미지 파일을 생성하는 로직이 궁금하거나 해당 루비 라이브러리를 직접 연동하고 싶은 경우, GithubChart를 참고하면 도움이 될 것이다.&lt;/p&gt;
-
-&lt;p&gt;얼른 한줄의 코드를 통해 자신의 GitHub Contributions Graph를 뽐내도록 하자! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="github" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 27: Closure에서의 메모리 누수 제거하기</title><link href="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/" rel="alternate" type="text/html" title="TIL 27: Closure에서의 메모리 누수 제거하기" /><published>2021-02-05T00:00:00+09:00</published><updated>2021-02-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/05/til-27-removing-memory-leaks-in-closure/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Retain Cycle이 아닌 &lt;strong&gt;불필요한 메모리 점유&lt;/strong&gt;도 일종의 메모리 누수라고 생각한다.&lt;/li&gt;
-  &lt;li&gt;Closure에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 할 때는 타이밍에 주의하자.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;숨겨져-있는-메모리-누수&quot;&gt;숨겨져 있는 메모리 누수&lt;/h2&gt;
-
-&lt;p&gt;Xcode는 현재 화면에서의 메모리 누수를 확인할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug Memory Graph&lt;/code&gt; 기능을 제공한다.
-이를 통해 메모리에 할당된 데이터 간의 그래프를 볼 수 있고, 그 관계를 통해 누가 누구와 연결되었는지 알 수 있다.
-그리고 Retain Cycle이 발생한 경우, 바로 표시해주어 한눈에 그것을 알 수 있다.&lt;/p&gt;
-
-&lt;p&gt;하지만, Retain Cycle 표시가 없다고 안심할 수 있는 것은 아니다.&lt;br /&gt;
-실제 메모리가 할당된 목록을 보면, 현재 화면에서 존재하면 안 되는 데이터가 남아있는 것이 확인될 수도 있다.
-논리적으로 해당 데이터가 남아 있으면 안 되지만 목록에 나타난다면,
-&lt;strong&gt;그것은 Retain Cycle은 아니지만 앱이 실행되는 내내 메모리를 점유하고 있기에 불필요한 메모리 점유로 간주한다&lt;/strong&gt;.
-그래서 나는 이것도 또 하나의 메모리 누수라고 생각한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;closure-사용할-때-주의하기&quot;&gt;Closure 사용할 때 주의하기&lt;/h2&gt;
-
-&lt;p&gt;사내 프로젝트에서도 그 숨겨진 메모리 누수가 발견되었는데, 원인을 찾기 매우 어려웠다.
-그래도 Xcode의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Debug Memory Graph&lt;/code&gt; 기능을 통해 연결 관계를 추적하다보니 Closure를 사용하는 부분이 의심이 됐다.
-그리고 몇가지 실험을 통해 Closure에서 객체를 붙잡고 있어 메모리 누수가 발생한 것을 알 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;개인적으로 Swift에서 Closure를 사용할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;의 프로퍼티나 메소드를 사용하는 경우, 항상 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 하는 습관이 몸에 배어 있다.
-그래서 별 탈이 없이 사용한 줄 알았는데 함정이 있었다.&lt;/p&gt;
-
-&lt;p&gt;기존 코드는 다음과 같이 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak self&lt;/code&gt; 캡처를 했었다.&lt;br /&gt;
-(개인적으로 사용한 코드이기 때문에 Closure 부분만 집중하면 된다.)&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asyncAfter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;refreshData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;하지만, 나는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;라는 개념에 대해 대략적으로만 알고 사용했었고, 그 결과 메모리 누수로 이어졌던 것이다.
-저렇게 캡처를 하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;addAction&lt;/code&gt; 메소드를 호출해 Closure를 정의하는 시점에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;가 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처되지 않고,
-그 안의 &lt;code class=&quot;highlighter-rouge&quot;&gt;asyncAfter&lt;/code&gt; 메소드를 호출할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak self&lt;/code&gt; 캡처를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;가 사용되기 때문에 결국에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;strong&lt;/code&gt; 캡처가 된 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;는 Closure를 &lt;strong&gt;정의하는 시점에 캡처&lt;/strong&gt;를 하는 것이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;weak&lt;/code&gt; 캡처를 하고 싶다면, 정의 시점에 캡처를 해야 한다.
-따라서, 다음과 같이 수정을 하면 Closure에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 붙잡는 현상이 사라진다.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;valueChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;DispatchQueue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asyncAfter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;deadline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;refreshData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;정말 간단한 해결책이지만, Swift 언어에 대한 기본기가 부족해 발생했던 문제점이었다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 고생을 했으니 앞으로는 까먹지 않고 숨겨진 메모리 누수를 막을 수 있을 것 같다.&lt;br /&gt;
-다시 한번 느끼지만, &lt;strong&gt;기본기&lt;/strong&gt;는 항상 중요하다. 🤔&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;p&gt;시간이 지날수록 코드로 커스터마이징하는 실력이 늘어나는 것이 체감되어 기쁘다. 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry></feed>

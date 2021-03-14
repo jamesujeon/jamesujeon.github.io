@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>TIL 32: 중복으로 Delegate 사용하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="TIL 32: 중복으로 Delegate 사용하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-11T00:00:00+09:00" />
+<script type="application/ld+json">
+{"url":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/","dateModified":"2021-03-11T00:00:00+09:00","datePublished":"2021-03-11T00:00:00+09:00","headline":"TIL 32: 중복으로 Delegate 사용하기","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/til" class="category-item">
+        TIL
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">TIL 32: 중복으로 Delegate 사용하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/ios" class="tag-item">
+        #ios
+      </a>
+    
+      <a href="/tags/swift" class="tag-item">
+        #swift
+      </a>
+    
+      <a href="/tags/objective-c" class="tag-item">
+        #objective-c
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-03-11 00:00:00 +0900">2021.03.11</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>내부 로직은 스스로(<code class="highlighter-rouge">self</code>)를 부모의 <code class="highlighter-rouge">delegate</code> 프로퍼티에 할당한다.</li>
+  <li>외부 로직은 프록시와 포워딩을 통해 이벤트와 연동되도록 한다.</li>
+</ul>
+
+<h2 id="일반적인-방법으로-delegate를-사용할-때의-문제점">일반적인 방법으로 Delegate를 사용할 때의 문제점</h2>
+
+<p>커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(<code class="highlighter-rouge">self</code>)를 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입해 사용할 때가 있다.
+<code class="highlighter-rouge">UIKit</code>에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.</p>
+
+<p>예를 들어, 커스텀 <code class="highlighter-rouge">UITextField</code> 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
+경우에 따라 입력 방지를 처리하고 싶을 때 Notification으로 처리를 할 수 없고,
+<code class="highlighter-rouge">UITextFieldDelegate</code>를 구현해 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입해야 한다.</p>
+
+<p><code class="highlighter-rouge">delegate</code> 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
+해당 클래스의 <code class="highlighter-rouge">UITextFieldDelegate</code>를 외부에서 구현해 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입하게 되면
+기존에 스스로(<code class="highlighter-rouge">self</code>)를 대입했던 <code class="highlighter-rouge">delegate</code>는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.</p>
+
+<p>커스텀 <code class="highlighter-rouge">UITextField</code> 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
+그렇다면, <strong>내부 로직도 수행되면서 적절하게 외부 로직도 수행되게 하는 방법은 없을까</strong>?</p>
+
+<h2 id="delegate-포워딩하기">Delegate 포워딩하기</h2>
+
+<p>구글링을 열심히 하다보니 <a href="https://stackoverflow.com/questions/43679859/shouldchangetext-not-called-for-uitextfield-when-using-hardware-keyboard" target="_blank">원하던 답</a>을 찾게 되었다.<br />
+내부 로직은 원래대로 <strong>스스로(<code class="highlighter-rouge">self</code>)를 부모의 <code class="highlighter-rouge">delegate</code> 프로퍼티에 할당</strong>하고,
+외부 로직은 <strong>프록시와 포워딩</strong>을 통해 추가적으로 수행하게 만들 수 있다.</p>
+
+<p>위 답변을 보면, 다음과 같이 커스텀 클래스의 <code class="highlighter-rouge">delegate</code> 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">realDelegate</span><span class="p">:</span> <span class="kt">UITextFieldDelegate</span><span class="p">?</span>
+
+<span class="c1">// Keep track of the text field's real delegate</span>
+<span class="k">override</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">UITextFieldDelegate</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">get</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">realDelegate</span>
+    <span class="p">}</span>
+    <span class="k">set</span> <span class="p">{</span>
+        <span class="n">realDelegate</span> <span class="o">=</span> <span class="n">newValue</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>외부에서 <code class="highlighter-rouge">delegate</code>에 접근할 때는 부모의 <code class="highlighter-rouge">delegate</code>가 아닌 내부 전용 프로퍼티인 <code class="highlighter-rouge">realDelegate</code>에 접근하게 된다.
+이러고 생성자에서는 <code class="highlighter-rouge">super.delegate = self</code>와 같은 코드를 통해 부모의 <code class="highlighter-rouge">delegate</code>에는 <code class="highlighter-rouge">self</code>만 접근하도록 할 수 있다.</p>
+
+<p>그리고 다음과 같이 포워딩을 함으로써 특정 이벤트가 발생했을 때 외부에서만 정의한 로직이 있는 경우 수행할 수 있도록 해준다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="k">override</span> <span class="kd">func</span> <span class="nf">forwardingTarget</span><span class="p">(</span><span class="k">for</span> <span class="nv">aSelector</span><span class="p">:</span> <span class="kt">Selector</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Any</span><span class="p">?</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">realDelegate</span> <span class="o">=</span> <span class="n">realDelegate</span><span class="p">,</span> <span class="n">realDelegate</span><span class="o">.</span><span class="nf">responds</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">aSelector</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">realDelegate</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">super</span><span class="o">.</span><span class="nf">forwardingTarget</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">aSelector</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">responds</span><span class="p">(</span><span class="n">to</span> <span class="nv">aSelector</span><span class="p">:</span> <span class="kt">Selector</span><span class="o">!</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">realDelegate</span> <span class="o">=</span> <span class="n">realDelegate</span><span class="p">,</span> <span class="n">realDelegate</span><span class="o">.</span><span class="nf">responds</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">aSelector</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">super</span><span class="o">.</span><span class="nf">responds</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">aSelector</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>특정 이벤트에 대해 내부 로직을 수행하면서 추가적으로 외부 로직이 호출되기 원한다면,
+<code class="highlighter-rouge">realDelegate</code>를 통해 외부 로직도 호출해줘야 한다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// This only allows numbers to be typed into the text field.</span>
+<span class="c1">// Of course this can be changed to do whatever validation you need in this custom text field</span>
+<span class="kd">func</span> <span class="nf">textField</span><span class="p">(</span><span class="n">_</span> <span class="nv">textField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">,</span> <span class="n">shouldChangeCharactersIn</span> <span class="nv">range</span><span class="p">:</span> <span class="kt">NSRange</span><span class="p">,</span> <span class="n">replacementString</span> <span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">string</span><span class="o">.</span><span class="nf">rangeOfCharacter</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kt">CharacterSet</span><span class="o">.</span><span class="n">decimalDigits</span><span class="o">.</span><span class="n">inverted</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span> <span class="c1">// Not a number - fail</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// The string is valid, now let the real delegate decide</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">delegate</span> <span class="o">=</span> <span class="n">realDelegate</span><span class="p">,</span> <span class="n">delegate</span><span class="o">.</span><span class="nf">responds</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">textField(_:shouldChangeCharactersIn:replacementString:)</span><span class="kd">)</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">delegate</span><span class="o">.</span><span class="nf">textField</span><span class="o">!</span><span class="p">(</span><span class="n">textField</span><span class="p">,</span> <span class="nv">shouldChangeCharactersIn</span><span class="p">:</span> <span class="n">range</span><span class="p">,</span> <span class="nv">replacementString</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>위와 같은 방식은 Objective-C에서도 문법만 달라지고 로직은 동일하게 적용할 수 있다.</p>
+
+<p>커스텀 UI를 만들면 만들수록 새로 알아가는 개념들이 많아지고 있어 재밌고 뿌듯한 기분이 든다. 🤓</p>
+
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2021/03/10/programmers-problem-solving-42576/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/';
+      this.page.identifier = '/posts/2021/03/11/til-32-using-delegate-duplicately';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="Dev Blog by James Minsu Jeon" />
+<meta property="og:description" content="Dev Blog by James Minsu Jeon" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-10T00:00:00+09:00" />
+<script type="application/ld+json">
+{"url":"https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/","dateModified":"2021-03-10T00:00:00+09:00","datePublished":"2021-03-10T00:00:00+09:00","headline":"프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수","mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/algorithm" class="category-item">
+        Algorithm
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/problem-solving" class="tag-item">
+        #problem-solving
+      </a>
+    
+      <a href="/tags/programmers" class="tag-item">
+        #programmers
+      </a>
+    
+      <a href="/tags/python" class="tag-item">
+        #python
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-03-10 00:00:00 +0900">2021.03.10</time>
+  </div>
+
+  <p><img src="assets/programmers_42576.png" alt="42576 - 완주하지 못한 선수" /></p>
+
+<h2 id="문제-파악">문제 파악</h2>
+
+<p><a href="https://programmers.co.kr/learn/courses/30/lessons/42576" target="_blank">문제 링크</a></p>
+
+<p>동명이인이 있을 수 있다는 것에 주의해 문제를 풀어야 한다.</p>
+
+<h2 id="문제-풀이">문제 풀이</h2>
+
+<p><code class="highlighter-rouge">completion</code>의 길이가 <code class="highlighter-rouge">participant</code>의 길이보다 1이 작으므로,
+<code class="highlighter-rouge">completion</code> 배열을 순회하며 <code class="highlighter-rouge">participant</code> 배열에서 <code class="highlighter-rouge">remove</code> 함수로 한명씩 제거하면 최종적으로 1명이 남게 된다.
+그 1명이 완주하지 못한 선수가 된다.</p>
+
+<p>하지만, 이렇게 풀면 배열의 길이가 아주 큰 경우,
+<code class="highlighter-rouge">completion</code> 배열을 순회하는 것과 <code class="highlighter-rouge">participant</code> 배열에서 제거하기 위해 순회하는 것을 합쳐
+오랜 시간이 걸리므로, 최악의 경우 <code class="highlighter-rouge">O(n^2)</code>의 시간복잡도가 될 수 있다.</p>
+
+<p>따라서, <code class="highlighter-rouge">completion</code> 배열과 <code class="highlighter-rouge">participant</code> 배열을 <strong>이름을 키로 가지고 인원을 값으로 가지는 Dictionary</strong>로 변형해
+인원을 감소시키는 방식으로 순회한다면, 시간복잡도가 <code class="highlighter-rouge">O(n)</code>으로 줄어들 수 있다.</p>
+
+<p>Python에서는 <code class="highlighter-rouge">collections</code> 모듈의 <code class="highlighter-rouge">Counter</code> 클래스를 사용한다면,
+<strong>요소를 키로 가지고 빈도수를 값으로 가지는 Dictionary</strong>로 쉽게 변형시킬 수 있다.
+그리고 두 <code class="highlighter-rouge">Counter</code> 객체의 <code class="highlighter-rouge">-</code> 연산을 통해 차집합 효과를 낼 수 있다.</p>
+
+<p>최종적으로 빈도수가 1인 하나의 요소만 남게 되고, 해당 요소가 선수의 이름에 해당하므로 완주하지 못한 선수를 손쉽게 구할 수 있다.</p>
+
+<h2 id="풀이-소스">풀이 소스</h2>
+
+<p>문제 풀이 환경: Python 3</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">participant</span><span class="p">,</span> <span class="n">completion</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">participant</span><span class="p">)</span> <span class="o">-</span> <span class="n">Counter</span><span class="p">(</span><span class="n">completion</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+
+
+  
+    <div class="post-pagination">
+      
+        <a href="/posts/2021/03/11/til-32-using-delegate-duplicately/" class="left arrow">
+          <i class="fas fa-chevron-left fa-fw"></i>
+          <span class="left arrow-title">TIL 32: 중복으로 Delegate 사용하기</span>
+        </a>
+      
+      
+        <a href="/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/03/10/programmers-problem-solving-42576/';
+      this.page.identifier = '/posts/2021/03/10/programmers-problem-solving-42576';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

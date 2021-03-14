@@ -1,6 +1,24 @@
 [
   
     {
+      "title"      : "TIL 32: 중복으로 Delegate 사용하기",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, swift, objective-c",
+      "date"       : "2021.03.11",
+      "urlString"  : "/posts/2021/03/11/til-32-using-delegate-duplicately/",
+      "url"        : "/posts/2021/03/11/til-32-using-delegate-duplicately/"
+    },
+  
+    {
+      "title"      : "프로그래머스 문제 풀이: 42576 - 완주하지 못한 선수",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, programmers, python",
+      "date"       : "2021.03.10",
+      "urlString"  : "/posts/2021/03/10/programmers-problem-solving-42576/",
+      "url"        : "/posts/2021/03/10/programmers-problem-solving-42576/"
+    },
+  
+    {
       "title"      : "TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!",
       "categories" : "Etc > TIL",
       "tags"       : "ios, objective-c",
