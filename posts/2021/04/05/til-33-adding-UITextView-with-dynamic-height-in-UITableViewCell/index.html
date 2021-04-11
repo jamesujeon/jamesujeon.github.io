@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-05T00:00:00+09:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/","@type":"BlogPosting","headline":"TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법","dateModified":"2021-04-05T00:00:00+09:00","datePublished":"2021-04-05T00:00:00+09:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/etc" class="category-item">
+        Etc
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/etc/til" class="category-item">
+        TIL
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/ios" class="tag-item">
+        #ios
+      </a>
+    
+      <a href="/tags/ui" class="tag-item">
+        #ui
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-04-05 00:00:00 +0900">2021.04.05</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>텍스트의 변화에 따라 높이를 갱신하면, 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 구현할 수 있다.</li>
+</ul>
+
+<h2 id="테이블-뷰-셀-안에-자동으로-높이가-늘어나는-텍스트-뷰-넣기">테이블 뷰 셀 안에 자동으로 높이가 늘어나는 텍스트 뷰 넣기</h2>
+
+<p>일반적인 구현으로 테이블 뷰 셀 안에 텍스트 뷰를 넣으면, 높이가 고정되어 여러 줄의 텍스트를 입력해도 스크롤이 생길뿐 높이가 달라지지 않는다.
+안드로이드의 경우, 간단한 세팅을 통해 iOS의 <code class="highlighter-rouge">UITextView</code>에 해당하는 <code class="highlighter-rouge">EditText</code>의 높이가 자동으로 늘어나게 할 수 있지만,
+iOS에서는 <code class="highlighter-rouge">Auto Layout</code>이 생각한 대로 적용되지 않아 골치가 아플 것이다.</p>
+
+<p>그래서 여러가지를 적용해본 결과, <strong>텍스트의 변화에 따라 높이를 계속 갱신하는 방법</strong>이 가장 적절하게 적용되는 것을 확인할 수 있었다.
+이 <a href="https://www.damienpontifex.com/posts/self-sizing-uitableviewcell-with-uitextview-in-ios8/" target="_blank">링크</a>를 보면,
+<code class="highlighter-rouge">UITextViewDelegate</code>의 <code class="highlighter-rouge">textViewDidChange(_:)</code> 메소드를 정의해 높이를 갱신하는 방법을 사용하는 것을 볼 수 있다.</p>
+
+<p>하지만, 해당 링크의 글처럼 그대로 하면 버그가 좀 있어서 나만의 방식으로 변화를 주었다.
+다음과 같이 작성하면, 어느 정도 원하는 요구사항대로 동작하는 것을 확인할 수 있었다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">func</span> <span class="nf">textViewDidChange</span><span class="p">(</span><span class="n">_</span> <span class="nv">textView</span><span class="p">:</span> <span class="kt">UITextView</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">tableView</span> <span class="o">=</span> <span class="n">tableView</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+
+    <span class="k">let</span> <span class="nv">contentSize</span> <span class="o">=</span> <span class="n">textView</span><span class="o">.</span><span class="nf">sizeThatFits</span><span class="p">(</span><span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="n">textView</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="o">.</span><span class="n">infinity</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">textView</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">height</span> <span class="o">!=</span> <span class="n">contentSize</span><span class="o">.</span><span class="n">height</span> <span class="p">{</span>
+        <span class="n">tableView</span><span class="o">.</span><span class="n">contentOffset</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">contentSize</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">textView</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">height</span>
+
+        <span class="kt">UIView</span><span class="o">.</span><span class="nf">setAnimationsEnabled</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+        <span class="n">tableView</span><span class="o">.</span><span class="nf">beginUpdates</span><span class="p">()</span>
+        <span class="n">tableView</span><span class="o">.</span><span class="nf">endUpdates</span><span class="p">()</span>
+        <span class="kt">UIView</span><span class="o">.</span><span class="nf">setAnimationsEnabled</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>참고로 여기서 <code class="highlighter-rouge">tableView</code>는 일반적으로 <code class="highlighter-rouge">UITableViewCell</code>에 준비되어 있는 프로퍼티가 아니기 때문에 셀을 구성할 때 주입받거나
+다음과 같은 코드로 <code class="highlighter-rouge">tableView</code>를 찾아내는 코드를 추가하는 것이 편리하다.</p>
+
+<figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">extension</span> <span class="kt">UITableViewCell</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">tableView</span><span class="p">:</span> <span class="kt">UITableView</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">view</span> <span class="o">=</span> <span class="n">superview</span>
+        <span class="k">while</span> <span class="n">view</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">view</span> <span class="k">is</span> <span class="kt">UITableView</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">view</span> <span class="o">=</span> <span class="n">view</span><span class="p">?</span><span class="o">.</span><span class="n">superview</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">view</span> <span class="k">as?</span> <span class="kt">UITableView</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+
+  
+    <div class="post-pagination">
+      
+      
+        <a href="/posts/2021/03/11/til-32-using-delegate-duplicately/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 32: 중복으로 Delegate 사용하기</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/';
+      this.page.identifier = '/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>

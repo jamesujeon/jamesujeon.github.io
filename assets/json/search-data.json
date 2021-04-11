@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, ui",
+      "date"       : "2021.04.05",
+      "urlString"  : "/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/",
+      "url"        : "/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/"
+    },
+  
+    {
       "title"      : "TIL 32: 중복으로 Delegate 사용하기",
       "categories" : "Etc > TIL",
       "tags"       : "ios, swift, objective-c",
