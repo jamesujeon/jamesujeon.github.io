@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  
+  
+  
+
+  <title>Xcode의 파일 헤더 주석 변경하기 - Jamesu Devlog</title>
+
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Xcode의 파일 헤더 주석 변경하기" />
+<meta name="author" content="jamesujeon" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="description" content="TL;DR" />
+<meta property="og:description" content="TL;DR" />
+<link rel="canonical" href="https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/" />
+<meta property="og:url" content="https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/" />
+<meta property="og:site_name" content="Jamesu Devlog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-04-11T00:00:00+09:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/","@type":"BlogPosting","headline":"Xcode의 파일 헤더 주석 변경하기","dateModified":"2021-04-11T00:00:00+09:00","datePublished":"2021-04-11T00:00:00+09:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Additional SEO -->
+  <meta property="og:locale:alternate" content="en_US" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:800|Noto+Sans+KR:400,700,900|Noto+Sans&display=swap">
+  <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/icon/site.webmanifest">
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/assets/main.js"></script>
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="https://jamesu.dev/feed.xml" title="Jamesu Devlog" />
+
+  <!-- Google Analytics-->
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153146788-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153146788-1');
+</script>
+
+  
+
+  <!-- Google AdSense -->
+  <script data-ad-client="ca-pub-3613903034488199" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+
+  <body>
+    <div>
+      
+
+
+
+
+
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/posts">
+      <h2 class="nav-title">(this) -> <span>Jamesu</span></h2>
+    </a>
+
+    <ul>
+      <li class="selected">
+        <a href="/posts" class="menu">
+          <i class="fas fa-fw fa-book-open"></i>
+          <span>Posts</span>
+        </a>
+      </li>
+      <li >
+        <a href="/categories" class="menu">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Categories</span>
+        </a>
+      </li>
+      <li >
+        <a href="/tags" class="menu">
+          <i class="fas fa-fw fa-tags"></i>
+          <span>Tags</span>
+        </a>
+      </li>
+      <li >
+        <a href="/search" class="menu">
+          <i class="fas fa-fw fa-search"></i>
+          <span>Search</span>
+        </a>
+      </li>
+      <li >
+        <a href="/about" class="menu">
+          <i class="fas fa-fw fa-user-alt"></i>
+          <span>About</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+      <main>
+        <div class="post">
+  
+
+  
+  
+  <div class="category-items">
+    
+    
+      
+
+      <a href="/categories/mobile" class="category-item">
+        Mobile
+      </a>
+
+      
+        <span>></span>
+      
+    
+      
+
+      <a href="/categories/mobile/ios" class="category-item">
+        iOS
+      </a>
+
+      
+    
+  </div>
+
+
+
+  <h1 class="post-title">Xcode의 파일 헤더 주석 변경하기</h1>
+
+  
+
+  
+  
+  <div class="tag-items">
+    
+      <a href="/tags/ios" class="tag-item">
+        #ios
+      </a>
+    
+      <a href="/tags/xcode" class="tag-item">
+        #xcode
+      </a>
+    
+  </div>
+
+
+
+  <div class="post-time">
+    <time datetime="2021-04-11 00:00:00 +0900">2021.04.11</time>
+  </div>
+
+  <h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">IDETemplateMacros.plist</code> 파일을 생성해 <a href="https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0" target="_blank">매크로</a>와 함께
+일관성 있는 헤더 주석을 구성할 수 있다.</li>
+  <li>팀 프로젝트 내의 공유를 위해서는 Project shared data 경로에 <code class="highlighter-rouge">IDETemplateMacros.plist</code> 파일을 위치시키고 Git에 Push한다.</li>
+</ul>
+
+<h2 id="일관성-있는-파일-헤더-주석">일관성 있는 파일 헤더 주석</h2>
+
+<p>일반적으로 프로그래밍을 하는 회사라면 사내 코딩 스타일 가이드가 이미 있거나 도입을 고민할 것이다.
+그런 코딩 스타일 가이드에는 파일명이나 파일에 대한 일정한 규칙이 존재할 수 있다.
+특히, 소스 파일에는 파일의 상단부에 저작권 등 각 파일에 대한 정보를 명시하는 경우가 많다.</p>
+
+<p>파일의 상단부에 명시하는 주석을 Xcode에서는 <strong>File Header Text</strong>라 할 수 있는데, 여기서는 파일 헤더 주석이라 명칭한다.
+이 파일 헤더 주석은 코딩 스타일 가이드에 따라 회사마다 다 다를 수 있으므로, 커스터마이징이 필요한 시점이 올 것이다.</p>
+
+<p>Xcode에서는 일관성 있는 파일 헤더 주석을 설정할 수 있도록 설정 파일을 제공한다.
+그 파일을 추가해서 파일 헤더 주석을 설정해보고, 각자 입맛에 맞춰 프로젝트에 적용하도록 하자.</p>
+
+<p>여기서의 설정 방법은 Xcode 공식 문서 중 <a href="https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev91a7a31fc" target="_blank">Customize text macros</a>를 참고했다.</p>
+
+<h2 id="idetemplatemacrosplist-추가하기">IDETemplateMacros.plist 추가하기</h2>
+
+<p>파일 헤더 주석을 설정하기 위해 <code class="highlighter-rouge">IDETemplateMacros.plist</code>라는 Property List 파일을 Xcode의 특정 위치에 놓아야 한다.
+이 파일을 어디에 놓는지에 따라 해당 설정이 Xcode에 적용되는 범위가 다르다.</p>
+
+<ul>
+  <li>Project user data: 프로젝트의 현재 유저 전용 데이터<br />
+<code class="highlighter-rouge">&lt;ProjectName&gt;.xcodeproj/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist</code></li>
+  <li><strong>Project shared data</strong>: 프로젝트 내 공유 데이터<br />
+<code class="highlighter-rouge">&lt;ProjectName&gt;.xcodeproj/xcshareddata/IDETemplateMacros.plist</code></li>
+  <li>Workspace user data: 워크스페이스의 현재 유저 전용 데이터<br />
+<code class="highlighter-rouge">&lt;WorkspaceName&gt;.xcworkspace/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist</code></li>
+  <li><strong>Workspace shared data</strong>: 워크스페이스 내 공유 데이터<br />
+<code class="highlighter-rouge">&lt;WorkspaceName&gt;.xcworkspace/xcshareddata/IDETemplateMacros.plist</code></li>
+  <li>User Xcode data: 현재 컴퓨터 유저의 Xcode 전용 데이터<br />
+<code class="highlighter-rouge">~/Library/Developer/Xcode/UserData/IDETemplateMacros.plist</code></li>
+</ul>
+
+<p>일반적으로 팀 프로젝트를 진행할 때, <code class="highlighter-rouge">xcuserdata</code>는 유저 전용 데이터이므로
+<code class="highlighter-rouge">.gitignore</code> 파일에 항목을 추가해 Git에 공유하지 않는다.
+팀원들이 공유하고자 하는 정보는 <code class="highlighter-rouge">xcshareddata</code>을 통해 Git에 공유한다.</p>
+
+<p>따라서 사내 코딩 스타일 가이드를 따르기 위해서는 <strong>Project shared data</strong>를 이용하도록 하고,
+<code class="highlighter-rouge">CocoaPods</code>를 사용한다면 워크스페이스를 이용하므로 <strong>Workspace shared data</strong>를 이용한다.
+하지만, <strong>Project shared data</strong>에 세팅해도 워크스페이스에 적용되므로 <strong>Project shared data</strong>를 이용해도 된다.</p>
+
+<p>Property List 파일은 특정 규칙을 지닌 XML 파일이므로,
+<strong>다음 코드를 그대로 복사해 <code class="highlighter-rouge">IDETemplateMacros.plist</code> 파일을 생성하거나</strong>
+<strong>Xcode를 통해 Property List 파일을 생성한 후에 이동시키면 된다</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict/&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>그리고 해당 파일을 Xcode로 열어 수정하면, Xcode에 설정 내용을 적용할 수 있게 된다.</p>
+
+<h2 id="파일-헤더-주석-맛보기">파일 헤더 주석 맛보기</h2>
+
+<p><code class="highlighter-rouge">IDETemplateMacros.plist</code> 파일을 Xcode로 열어 <code class="highlighter-rouge">Root</code> 아래로 <code class="highlighter-rouge">FILEHEADER</code> 키를 추가하고, 아무 값이나 String 값으로 넣어보자.
+여기서는 <code class="highlighter-rouge">Test</code>라고 넣어 보았다.</p>
+
+<p><img src="assets/figure_1.png" alt="Figure 1" /></p>
+
+<p>그리고 <code class="highlighter-rouge">IDETemplateMacros.plist</code> 파일을 넣은 프로젝트에서 새로운 파일을 추가해보면, 다음과 같이 파일 상단부에 <code class="highlighter-rouge">//Test</code>라고 추가되는 것을 확인할 수 있다.</p>
+
+<p><img src="assets/figure_2.png" alt="Figure 2" /></p>
+
+<p>이제 본격적으로 꾸미고자 여러 줄을 넣고자 하면, Xcode를 통해서는 여러 줄을 수정하기가 불편한 것을 알 수 있다.
+그래서 XML 파일을 직접 수정하는 것이 훨씬 편하다.
+해당 파일을 VSCode 같은 다른 편집기로 열어보자.</p>
+
+<p>그러면 다음과 같은 코드를 볼 수 있고, <code class="highlighter-rouge">FILEHEADER</code> 키 태그랑 동일한 레벨에 있는 <code class="highlighter-rouge">string</code> 태그를 통해 값을 설정하면 된다는 것을 알 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>FILEHEADER<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>Test<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>개행도 넣어보고, 이것저것 작성해보면 헤더 주석이 어떻게 들어가는지 알 수 있다.
+다음과 같이 작성하면 새 파일을 추가했을 때 생각했던 것처럼 보이지 않고 이상하게 보여진다.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>FILEHEADER<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>Test
+Test2
+  Test3
+  <span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="assets/figure_3.png" alt="Figure 3" /></p>
+
+<p><strong>보는 것과 같이 첫 줄에만 <code class="highlighter-rouge">//</code> 문자열이 앞에 붙고, 그 이후부터는 일반 텍스트 취급</strong>을 하기 때문에 개행이나 띄어쓰기를 잘 작성해야 한다.
+심지어 마지막 <code class="highlighter-rouge">&lt;/string&gt;</code> 앞에 있는 띄어쓰기와 개행도 인식하는 것을 알 수 있다.</p>
+
+<p>개행, 띄어쓰기, 주석 문자열을 적절히 넣어 작성한다면 다음과 같이 작성할 수 있다.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>FILEHEADER<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span> Test
+// Test2
+// Test3<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="assets/figure_4.png" alt="Figure 4" /></p>
+
+<h2 id="파일-헤더-주석-구성하기">파일 헤더 주석 구성하기</h2>
+
+<p>기본적인 사용법을 알았다면, 이제 원하는 규칙대로 설정할 차례이다.</p>
+
+<p>Xcode 공식 문서의 <a href="https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/devc8a500cb9" target="_blank">Text macro format reference</a>와
+<a href="https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0" target="_blank">Text macros reference</a>를 보면,
+주석을 구성하기 위해 필요한 정보를 어떤 매크로를 통해 얻을 수 있는 지 알 수 있다.</p>
+
+<p>자세한 것은 위 링크에서 살펴보도록 하고, 여기서는 몇 가지 매크로만 예시로 사용할 것이다.<br />
+<strong>매크로의 앞 뒤에 <code class="highlighter-rouge">_</code> 문자를 각 3개씩 추가해서 매크로를 사용할 수 있다</strong>.</p>
+
+<ul>
+  <li>FILENAME: 현재 파일명</li>
+  <li>PROJECTNAME: 현재 프로젝트명</li>
+  <li>YEAR: 현재 연도</li>
+</ul>
+
+<p>다음과 같이 위 매크로와 함께 저작권을 고정시키고자 개인적인 아이디를 직접 넣어 작성해 보았다.</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+  <span class="nt">&lt;key&gt;</span>FILEHEADER<span class="nt">&lt;/key&gt;</span>
+  <span class="nt">&lt;string&gt;</span>
+//  ___FILENAME___
+//  ___PROJECTNAME___
+//
+//  Copyright (c) ___YEAR___ jamesujeon All rights reserved.
+//<span class="nt">&lt;/string&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="assets/figure_5.png" alt="Figure 5" /></p>
+
+<p>작성한 코드와 결과물을 비교해보면 어떻게 구성할 수 있을지 파악이 될 것이다.</p>
+
+
+
+  
+    <div class="post-pagination">
+      
+        <a href="/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/" class="left arrow">
+          <i class="fas fa-chevron-left fa-fw"></i>
+          <span class="left arrow-title">TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기</span>
+        </a>
+      
+      
+        <a href="/posts/2021/04/05/til-33-adding-UITextView-with-dynamic-height-in-UITableViewCell/" class="right arrow">
+          <i class="fas fa-chevron-right fa-fw"></i>
+          <span class="right arrow-title">TIL 33: 테이블 뷰 셀 안에 동적 높이 텍스트 뷰를 넣는 방법</span>
+        </a>
+      
+    </div>
+  
+
+  
+  <div id="disqus_thread"></div>
+  <script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    var disqus_config = function () {
+      this.page.url = 'https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/';
+      this.page.identifier = '/posts/2021/04/11/how-to-change-file-header-comments-in-xcode';
+    };
+
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jamesu-dev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- 반응형 광고 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3613903034488199"
+      data-ad-slot="6365003071"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+
+<button id="scrollToTop" class="top far fa-caret-square-up"></button>
+
+      </main>
+
+      <footer>
+  <a href="mailto:jamesujeon@gmail.com">
+    <i class="far fa-envelope fa-fw"></i>
+  </a>
+  <a href="https://github.com/jamesujeon" target="_blank">
+    <i class="fab fa-github fa-fw"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/minsu-jeon-532282198" target="_blank">
+    <i class="fab fa-linkedin fa-fw"></i>
+  </a>
+  <a href="https://twitter.com/jamesujeon" target="_blank">
+    <i class="fab fa-twitter fa-fw"></i>
+  </a>
+
+  <br>
+  <span>&copy; 2019 jamesujeon</span>
+</footer>
+
+    </div>
+  </body>
+</html>
