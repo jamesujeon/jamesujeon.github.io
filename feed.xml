@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-04-25T21:28:56+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기</title><link href="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/" rel="alternate" type="text/html" title="TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기" /><published>2021-04-16T00:00:00+09:00</published><updated>2021-04-16T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-05-06T00:20:29+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 35: 다양한 애니메이션 구현 방식</title><link href="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/" rel="alternate" type="text/html" title="TIL 35: 다양한 애니메이션 구현 방식" /><published>2021-04-21T00:00:00+09:00</published><updated>2021-04-21T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;: Raw 레벨 구현 방식&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드: 구현하기 간편한 방식&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;: 복잡한 애니메이션과 애니메이션 동작 제어가 가능한 방식&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;기존에-사용하던-뷰-애니메이션-구현-방식&quot;&gt;기존에 사용하던 뷰 애니메이션 구현 방식&lt;/h2&gt;
+
+&lt;p&gt;앱에 있어 애니메이션은 필수 불가결한 요소이다.
+앱에서 화면 이동과 같은 트랜지션에 애니메이션이 꼭 들어가야 사용자가 한 번에 이해할 수 있는 UX를 제공할 수 있다.
+그 밖에도 적절한 애니메이션을 제공하면, 앱의 퀄리티가 높아 보이게 만드는 효과가 있다.&lt;/p&gt;
+
+&lt;p&gt;그래서 줄곧 애니메이션을 많이 넣어 왔지만, 항상 사용하던 방법은 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드를 이용하는 것이었다.
+그동안 엄청 복잡한 애니메이션이 없었고, 어느 정도 복잡한 것도 위 메소드를 이용하면 충분히 가능했었다.&lt;/p&gt;
+
+&lt;p&gt;그러다 사내 프로젝트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 메소드가 아닌 다른 구현 방식이 필요할 것 같아서 조사를 했는데, iOS 10부터 등장한 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;라는 클래스가 눈에 띄었다.
+결론적으로 해당 클래스를 쓸 필요가 없어 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드로 해결을 했지만, 그 정체가 궁금해 더 조사를 해서 간단하게 분류를 해보았다.&lt;/p&gt;
+
+&lt;h2 id=&quot;용도에-따른-애니메이션-구현-방식&quot;&gt;용도에 따른 애니메이션 구현 방식&lt;/h2&gt;
+
+&lt;p&gt;iOS에서는 모든 애니메이션을 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;을 이용한다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드나 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt; 클래스 등은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;의 편의용 버전인 것이다.&lt;/p&gt;
+
+&lt;p&gt;각 애니메이션 구현 방식을 간단히 용도에 따라 구분한다면 다음과 같다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;가장 Raw한 애니메이션 방식이므로 다양한 조작이 가능하다.&lt;/li&gt;
+      &lt;li&gt;코드 작성이 까다롭거나 불편하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드
+    &lt;ul&gt;
+      &lt;li&gt;뷰 애니메이션을 처리하는 것이 간편하다.&lt;/li&gt;
+      &lt;li&gt;일부 제약이 있을 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;복잡한 뷰 애니메이션을 처리할 수 있으며 시작, 정지, 진행도 반영 등 동작도 제어가 가능하다.&lt;/li&gt;
+      &lt;li&gt;일부 제약이 있을 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위와 같은 특징때문에&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;평소에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드를 사용하다가&lt;/li&gt;
+  &lt;li&gt;추가로 동작 제어가 필요하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;를 사용하고&lt;/li&gt;
+  &lt;li&gt;그것으로도 안되는 애니메이션은 최후의 수단으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt; 관련 메소드로 Raw 레벨에서 애니메이션을 정의하면 된다. 😎&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="animation" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기</title><link href="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/" rel="alternate" type="text/html" title="TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기" /><published>2021-04-16T00:00:00+09:00</published><updated>2021-04-16T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;부모 뷰의 &lt;code class=&quot;highlighter-rouge&quot;&gt;convert(_:to:)&lt;/code&gt; 메소드에 현재 뷰의 프레임과 키 윈도우의 Root 뷰를 전달하면,
@@ -592,58 +646,4 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 &lt;p&gt;Xcode 재실행 시, Scheme이 다시 설정되므로 기존과 같이 사용할 수 있다.&lt;br /&gt;
 물론, 유저 데이터 중 필요한 파일이 있다면 잘 백업해서 복구하는 절차가 필요하다.&lt;/p&gt;
 
-&lt;p&gt;이렇게 Xcode의 자잘한 버그 중 하나로부터 탈출! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42840 - 모의고사</title><link href="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42840 - 모의고사" /><published>2021-02-25T00:00:00+09:00</published><updated>2021-02-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840</id><content type="html" xml:base="https://jamesu.dev/posts/2021/02/25/programmers-problem-solving-42840/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42840.png&quot; alt=&quot;42840 - 모의고사&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42840&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;3명의 수포자가 답을 찍는 패턴을 이용하는 것이 핵심이다.&lt;/p&gt;
-
-&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
-
-&lt;p&gt;각 수포자의 답을 찍는 패턴을 일반화 하는 것이 까다로우므로, 반복되는 부분을 패턴으로 취급하면 된다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1번 수포자: 1, 2, 3, 4, 5, …&lt;/li&gt;
-  &lt;li&gt;2번 수포자: 2, 1, 2, 3, 2, 4, 2, 5, …&lt;/li&gt;
-  &lt;li&gt;3번 수포자: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, …&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;위 패턴을 바탕으로 정답 배열을 순회하며 정답 여부를 모아 점수를 계산할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;이때, 패턴을 원형 큐와 같이 이용하고자 &lt;code class=&quot;highlighter-rouge&quot;&gt;%&lt;/code&gt; 연산을 통해 패턴 값에 접근해야 한다.&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;marks&lt;/code&gt;를 수포자 3명의 패턴 배열 목록이라 하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;j&lt;/code&gt;를 수포자 인덱스라 했을 때,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;marks[j][i % len(marks[j])]&lt;/code&gt;와 같이 원형 큐처럼 이용할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;마지막으로 가장 높은 점수를 받은 수포자만 걸러 정렬한 뒤 반환해야 한다.&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
-
-&lt;p&gt;문제 풀이 환경: Python 3&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;answers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;marks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;max_score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scores&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_score&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="brute-force" /><category term="python" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;이렇게 Xcode의 자잘한 버그 중 하나로부터 탈출! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>

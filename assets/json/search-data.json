@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 35: 다양한 애니메이션 구현 방식",
+      "categories" : "Etc > TIL",
+      "tags"       : "ios, ui, animation",
+      "date"       : "2021.04.21",
+      "urlString"  : "/posts/2021/04/21/til-35-ways-to-implement-view-animation/",
+      "url"        : "/posts/2021/04/21/til-35-ways-to-implement-view-animation/"
+    },
+  
+    {
       "title"      : "TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기",
       "categories" : "Etc > TIL",
       "tags"       : "ios, ui",
