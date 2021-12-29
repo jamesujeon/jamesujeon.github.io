@@ -11,7 +11,7 @@
   <title>TIL 25: HTML 태그가 포함된 텍스트 변환하기 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="TIL 25: HTML 태그가 포함된 텍스트 변환하기" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-22T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/","@type":"BlogPosting","headline":"TIL 25: HTML 태그가 포함된 텍스트 변환하기","dateModified":"2021-01-22T00:00:00+09:00","datePublished":"2021-01-22T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/"},"url":"https://jamesu.dev/posts/2021/01/22/til-25-converting-text-including-html-tags/","headline":"TIL 25: HTML 태그가 포함된 텍스트 변환하기","datePublished":"2021-01-22T00:00:00+09:00","dateModified":"2021-01-22T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -182,7 +182,7 @@
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>HTML 태그가 포함된 텍스트는 <code class="highlighter-rouge">NSAttributedString</code> 클래스를 이용해 일반 텍스트로 변환할 수 있다.</li>
+  <li>HTML 태그가 포함된 텍스트는 <code class="language-plaintext highlighter-rouge">NSAttributedString</code> 클래스를 이용해 일반 텍스트로 변환할 수 있다.</li>
   <li>텍스트 변환 후에는 적용되었던 텍스트 스타일이 초기화되므로 재설정 해줘야 한다.</li>
   <li>요구사항에 따라 깔끔하게 텍스트 스타일을 유지하며 변환하는 것이 힘들 수 있다.</li>
 </ul>
@@ -190,11 +190,11 @@
 <h2 id="불편한-ios의-html-텍스트-변환">불편한 iOS의 HTML 텍스트 변환</h2>
 
 <p>이번에 사내 앱 프로젝트에서 HTML 태그가 포함된 텍스트를 변환해 텍스트 스타일을 적용하는 요구사항이 생겼다.
-그래서 바로 리서치를 해보니, 안드로이드에서 간단히 <code class="highlighter-rouge">Html</code> 클래스를 이용하는 것처럼,
-iOS에서도 <code class="highlighter-rouge">NSAttributedString</code> 클래스를 이용해 간단히 처리할 수 있나 했더니 오산이었다.</p>
+그래서 바로 리서치를 해보니, 안드로이드에서 간단히 <code class="language-plaintext highlighter-rouge">Html</code> 클래스를 이용하는 것처럼,
+iOS에서도 <code class="language-plaintext highlighter-rouge">NSAttributedString</code> 클래스를 이용해 간단히 처리할 수 있나 했더니 오산이었다.</p>
 
-<p><code class="highlighter-rouge">NSAttributedString</code> 클래스를 이용해 변환하면, 기존에 적용되었던 폰트 등의 <strong>텍스트 스타일이 모두 초기화</strong>되는 것이었다.
-요구사항에서 언급된 HTML 태그로는 <code class="highlighter-rouge">&lt;b&gt;</code>, <code class="highlighter-rouge">&lt;i&gt;</code>, <code class="highlighter-rouge">&lt;u&gt;</code> 등과 같은 볼드, 이탤릭, 밑줄 처리를 하는 텍스트 스타일이었다.
+<p><code class="language-plaintext highlighter-rouge">NSAttributedString</code> 클래스를 이용해 변환하면, 기존에 적용되었던 폰트 등의 <strong>텍스트 스타일이 모두 초기화</strong>되는 것이었다.
+요구사항에서 언급된 HTML 태그로는 <code class="language-plaintext highlighter-rouge">&lt;b&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;i&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;u&gt;</code> 등과 같은 볼드, 이탤릭, 밑줄 처리를 하는 텍스트 스타일이었다.
 그래서 텍스트 변환 후에 일일이 각 텍스트 스타일이 적용된 부분을 찾아 폰트를 변경하는 처리를 해야 했는데,
 생각만큼 쉽게 모든 스타일이 적용되지 않았다.</p>
 

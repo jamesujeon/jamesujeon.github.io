@@ -11,7 +11,7 @@
   <title>TIL 29: Xcode의 'No Scheme' 버그 해결 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="TIL 29: Xcode의 ‘No Scheme’ 버그 해결" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-02T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/","@type":"BlogPosting","headline":"TIL 29: Xcode의 ‘No Scheme’ 버그 해결","dateModified":"2021-03-02T00:00:00+09:00","datePublished":"2021-03-02T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/"},"url":"https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/","headline":"TIL 29: Xcode의 ‘No Scheme’ 버그 해결","datePublished":"2021-03-02T00:00:00+09:00","dateModified":"2021-03-02T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -178,8 +178,8 @@
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li><code class="highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata/&lt;유저&gt;.xcuserdatad</code><br />
-또는 <code class="highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata</code> 삭제</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata/&lt;유저&gt;.xcuserdatad</code><br />
+또는 <code class="language-plaintext highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata</code> 삭제</li>
 </ul>
 
 <h2 id="xcode의-no-scheme-버그-해결">Xcode의 ‘No Scheme’ 버그 해결</h2>
@@ -191,8 +191,8 @@
 <strong>프로젝트 파일 내부의 유저 데이터 관련 디렉터리를 지워 초기화</strong>하는 것이다.</p>
 
 <ol>
-  <li><code class="highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata/&lt;유저&gt;.xcuserdatad</code><br />
-또는 <code class="highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata</code> 삭제</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata/&lt;유저&gt;.xcuserdatad</code><br />
+또는 <code class="language-plaintext highlighter-rouge">&lt;프로젝트&gt;.xcodeproj/xcuserdata</code> 삭제</li>
   <li>Xcode 재실행</li>
 </ol>
 

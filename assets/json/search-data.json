@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 36: 이직 후기",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2021.12.25",
+      "urlString"  : "/posts/2021/12/25/til-36-job-change-review/",
+      "url"        : "/posts/2021/12/25/til-36-job-change-review/"
+    },
+  
+    {
       "title"      : "TIL 35: 다양한 애니메이션 구현 방식",
       "categories" : "Etc > TIL",
       "tags"       : "ios, ui, animation",

@@ -11,7 +11,7 @@
   <title>Codeforces 문제 풀이: 230B - T-primes - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="Codeforces 문제 풀이: 230B - T-primes" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-12-23T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/","@type":"BlogPosting","headline":"Codeforces 문제 풀이: 230B - T-primes","dateModified":"2019-12-23T00:00:00+09:00","datePublished":"2019-12-23T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/"},"url":"https://jamesu.dev/posts/2019/12/23/codeforces-problem-solving-230b-t-primes/","headline":"Codeforces 문제 풀이: 230B - T-primes","datePublished":"2019-12-23T00:00:00+09:00","dateModified":"2019-12-23T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"Dev Blog by James Minsu Jeon","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -222,7 +222,7 @@
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">target</span> <span class="o">=</span> <span class="mi">1000000000000</span>
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target</span> <span class="o">**</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">target</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
@@ -246,9 +246,9 @@
 12
 13
 </pre></td><td class="code"><pre><span class="n">_</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
-<span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
 
-<span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000000000000</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1000000000000</span> <span class="o">**</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">[</span><span class="bp">True</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">limit</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">primes</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
@@ -256,7 +256,7 @@
       <span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
 
 <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
-  <span class="n">sqrt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span>
+  <span class="n">sqrt</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span> <span class="o">**</span> <span class="p">.</span><span class="mi">5</span><span class="p">)</span>
   <span class="k">print</span><span class="p">(</span><span class="s">"YES"</span> <span class="k">if</span> <span class="n">primes</span><span class="p">[</span><span class="n">sqrt</span><span class="p">]</span> <span class="ow">and</span> <span class="n">sqrt</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">==</span> <span class="n">num</span> <span class="k">else</span> <span class="s">"NO"</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 

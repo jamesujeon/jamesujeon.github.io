@@ -1,9 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-05-06T00:20:29+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 35: 다양한 애니메이션 구현 방식</title><link href="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/" rel="alternate" type="text/html" title="TIL 35: 다양한 애니메이션 구현 방식" /><published>2021-04-21T00:00:00+09:00</published><updated>2021-04-21T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2021-12-29T18:55:14+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 36: 이직 후기</title><link href="https://jamesu.dev/posts/2021/12/25/til-36-job-change-review/" rel="alternate" type="text/html" title="TIL 36: 이직 후기" /><published>2021-12-25T00:00:00+09:00</published><updated>2021-12-25T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/12/25/til-36-job-change-review</id><content type="html" xml:base="https://jamesu.dev/posts/2021/12/25/til-36-job-change-review/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;: Raw 레벨 구현 방식&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드: 구현하기 간편한 방식&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;: 복잡한 애니메이션과 애니메이션 동작 제어가 가능한 방식&lt;/li&gt;
+  &lt;li&gt;이직 과정이 힘들었지만 느낀 것도 많았다.&lt;/li&gt;
+  &lt;li&gt;앞으로의 숙제
+    &lt;ul&gt;
+      &lt;li&gt;언제나 어떤 개념을 누군가에게 설명할 수 있도록 공부 방법을 바꾸자.&lt;/li&gt;
+      &lt;li&gt;유명한 트렌드뿐만 아니라 최신 트렌드도 자주 알아보자.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;이직-후기&quot;&gt;이직 후기&lt;/h2&gt;
+
+&lt;p&gt;전직장에서 몇년 동안 이직에 대해 노래만 부르다가 마침내 올해 이직을 성공하여 어느새 약 3개월이 지났다.&lt;br /&gt;
+전직장에서는 다양한 분야의 업무를 진행했었는데, iOS 앱 개발에 집중하고 싶어 이직을 결정했다.&lt;br /&gt;
+현재 현직장에 만족하며 다니고 있으며, 제대로 된 이직 과정은 이번이 처음이기에 그 기억을 이 곳에 남기고 싶었다.&lt;/p&gt;
+
+&lt;p&gt;이직 준비는 오랫동안 조금씩 해왔고, 그 덕분인지 운이 좋게도 이직 시도부터 최종 합격까지 약 1달의 시간이 걸렸다.&lt;br /&gt;
+그 과정에서 다양한 채용 프로세스를 경험하며, 많은 것을 느낄 수 있었다.&lt;/p&gt;
+
+&lt;h3 id=&quot;1-첫-번째-전형으로는-사전-인터뷰-코딩-테스트-과제-전형-등으로-회사마다-스타일이-달랐다&quot;&gt;1. 첫 번째 전형으로는 사전 인터뷰, 코딩 테스트, 과제 전형 등으로 회사마다 스타일이 달랐다.&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;사전 인터뷰&lt;/strong&gt;는 간단한 기초 지식을 물어보며 해당 분야에 대한 기본적인 지식을 알고 있는지를 확인하기 위해 진행하는 것으로 보였다.
+제대로 답하지 못한 항목들이 있었지만, 100% 완벽하게 알지 않아도 통과되는 분위기였다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;코딩 테스트&lt;/strong&gt;는 회사마다 난이도 차이가 많이 났으며, 쉬운 문제로만 구성된 경우에는 최소한의 필터링을 위한 것으로 느껴졌다.
+어떤 회사들은 2문제 정도를 중상~상 난이도로 넣어두는 경우가 있는데, 운이 좋게도 공부할 때 풀었던 문제를 조금 응용한 문제가 나와서 잘 풀 수 있었다.&lt;br /&gt;
+문제를 많이 풀면 풀수록 코딩 테스트를 통과할 확률이 높아지는 것은 확실한 것 같다.&lt;br /&gt;
+(물론, 어느 정도 난이도를 섞어서 말이다. 🤔)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;과제 전형&lt;/strong&gt;은 며칠이나 일주일 정도 기한을 주고 요구사항에 맞게 앱을 만들어서 제출하는 것이었다.&lt;br /&gt;
+프로젝트를 구성하는 구조나 코드를 보면서 지원자의 능력을 파악하기 위한 것 같았다.&lt;br /&gt;
+개인적으로 완벽주의 성향이 있는 편이라 밤새가며 어디까지 보여줘야 할 지 계속 고민하고 수정을 거듭했다.&lt;br /&gt;
+회사를 다니면서 진행하니 몸이 많이 지치고 피곤한 전형이었다. 🤒&lt;/p&gt;
+
+&lt;h3 id=&quot;2-두-번째-전형은-입사-지원한-분야-관련-개발팀과-진행하는-기술-면접이-일반적이었다&quot;&gt;2. 두 번째 전형은 입사 지원한 분야 관련 개발팀과 진행하는 기술 면접이 일반적이었다.&lt;/h3&gt;
+
+&lt;p&gt;앞서 진행한 전형과 무관하게 경력을 바탕으로 진행한 업무에 대해 바로 물어보는 경우가 있는가 하면,
+진행한 코딩 테스트에 대해 왜 그렇게 코딩했는지 물어보거나, 제출한 과제에 대해 코드 리뷰를 진행하기도 했다.
+추가로 지원한 분야와 관련된 기술 질문은 하는 경우도, 하지 않는 경우도 있었다.&lt;/p&gt;
+
+&lt;p&gt;정답은 없으나, 첫 번째 전형에서 진행한 것이 무엇이든 상관없이 해당 전형에 대한 질의응답 대비는 필수로 해야 할 것 같다.&lt;br /&gt;
+그리고 기술 질문에 대한 대비는 평상시에도 항상 해야 한다고 생각한다.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-세-번째-전형은-임원급cto-ceo-등-사람들과-진행하는-임원-면접이-일반적이었다&quot;&gt;3. 세 번째 전형은 임원급(CTO, CEO 등) 사람들과 진행하는 임원 면접이 일반적이었다.&lt;/h3&gt;
+
+&lt;p&gt;지원자가 회사에 적합한 사람인지 판단하기 위해 여러가지 이야기를 하는 자리로 주제가 딱 정해져 있지 않은 것 같다.&lt;br /&gt;
+개인적으로 기술 면접이 실무진의 판단이 들어가기 때문에 가장 어려웠고, 최종 면접까지 온 경우에는 모두 합격했었다.&lt;br /&gt;
+이 전형까지 왔다면, 특별한 이유가 있는 것이 아닌 한 통과하기에 무리가 없을 것이다.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-최종-합격을-하게-되면-연봉협상을-진행한다&quot;&gt;4. 최종 합격을 하게 되면, 연봉협상을 진행한다.&lt;/h3&gt;
+
+&lt;p&gt;보통 최종 합격 안내가 오면, 사측에서 연봉을 책정하여 제안하거나 지원자가 희망 연봉을 제시하라는 안내가 온다.&lt;br /&gt;
+무엇이든 간에 직전 연봉 대비 원하는 인상폭의 금액이 아니라면, 적정 선에서 역제안을 하는 것이 좋다.&lt;br /&gt;
+개인적으로는 너무 적은 인상폭이 아니라면, 3~5% 정도만 얹혀서 다시 제안을 하면 잘 먹히는 것 같다.&lt;br /&gt;
+너무 적은 인상폭이라면, 한 번 정도는 큰 폭으로 제안을 해봐도 괜찮지 않을까..?&lt;/p&gt;
+
+&lt;p&gt;만약, 다른 곳에 합격한 상태로 연봉협상을 진행하게 된다면 더 유리한 위치에서 협상을 진행할 수 있다.&lt;br /&gt;
+다른 회사에서 제시한 연봉에 비해 부족한 것 같다며 희망 연봉을 다시 제안하는 것도 좋은 방법이다.&lt;br /&gt;
+말그대로 연봉협상이기 때문에 크게 겁먹고 사측에서 제시한 연봉이 마음에 들지 않는데도 불구하고 그대로 덜컥 받는 일이 없도록 하자.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-연봉협상까지-완료하면-출근-날짜를-정하게-된다&quot;&gt;5. 연봉협상까지 완료하면, 출근 날짜를 정하게 된다.&lt;/h3&gt;
+
+&lt;p&gt;연봉협상과 동시에 출근 날짜를 정하라는 경우도 있지만, 일반적으로는 연봉협상까지 완료 후에 출근 날짜를 정하게 되는데 굳이 너무 이르게 잡지 말자.
+회사를 다니면서 2~3주 이상 길게 쉴 수 있는 타이밍이 잘 생기지 않으니, 이직할 때 여유 시간을 두어 출근 날짜를 정하는 것을 추천한다.&lt;/p&gt;
+
+&lt;p&gt;나의 경우에는 퇴사 절차, 휴식 기간 등을 고려해 3주 이상의 기간을 두어 그 후에 출근할 수 있도록 날짜를 정하는 편이다.&lt;br /&gt;
+그 기간 동안, 그동안 보지 못했던 사람들도 만나고 휴식도 하며 여러모로 생각할 시간도 가질 수 있었던 좋은 시기였다.&lt;/p&gt;
+
+&lt;h2 id=&quot;앞으로의-숙제&quot;&gt;앞으로의 숙제&lt;/h2&gt;
+
+&lt;p&gt;첫 이직 때는 운이 좋게도 기회가 바로 잡혔고, 그 채용 과정도 면접 한 번으로 끝나서 이직 과정이 단순했다.&lt;br /&gt;
+이번 이직의 경우 두 번째 이직인데, 어떻게 보면 일반적인 이직 과정이라 볼 수 있는 첫 이직이었다.&lt;/p&gt;
+
+&lt;p&gt;나름 이직 준비를 해왔지만, 이직 경험도 적고 채용 과정을 리드한 적도 없기 때문에 정확히 무엇을 요구하는지 알기 어려웠다.
+특히, 기술 면접에서 무엇을 물어볼 지가 가장 걱정이 컸고 실제로 우려하던 일들이 일어났다.&lt;/p&gt;
+
+&lt;p&gt;특정한 범위 내에서 질문을 할 줄 알았지만, 그것은 일부분뿐이었고 회사마다 기술 면접에서 질문하는 것들은 모두 제각기였다.
+기본적인 기술 지식들은 당연하고, 그것을 바탕으로 꼬리에 꼬리를 물어 파고들거나, 특정 상황이 주어졌을 때 어떻게 하면 좋을지에 대해 물어봤다.
+주어진 상황을 실시간으로 분석하여 방법이나 대안을 제시해야 한다.
+면접 경험이 적다보니 당황해서 잘못 대답하거나 잘 모르겠다고 대답한 경우도 있었다.&lt;br /&gt;
+그래도 면접에서는 해결 과정을 보는듯하니 대답이 이상하다고 너무 풀이 죽을 것도 없을 것 같다.&lt;/p&gt;
+
+&lt;p&gt;수차례 면접을 보면서 느낀 것은 어떤 개념을 보면 머리로는 알지만 누군가에게 설명하려면 말이 잘 나오지 않는다는 것이다.&lt;br /&gt;
+단순히 공부량의 문제가 아니라 공부 방법을 바꿀 필요가 생겼다.&lt;br /&gt;
+또한, 유명한 트렌드는 알고 있지만 최신 트렌드를 아는 것은 아직 부족하다고 생각하기에 자주 트렌드를 알아보는 습관을 가져야겠다는 생각이 들었다.&lt;br /&gt;
+이런 것들이 잘 다져진다면, 어떤 상황에서도 유연하게 대처할 수 있는 힘이 더 강하게 길러지지 않을까? 💪&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 35: 다양한 애니메이션 구현 방식</title><link href="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/" rel="alternate" type="text/html" title="TIL 35: 다양한 애니메이션 구현 방식" /><published>2021-04-21T00:00:00+09:00</published><updated>2021-04-21T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/21/til-35-ways-to-implement-view-animation/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;: Raw 레벨 구현 방식&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드: 구현하기 간편한 방식&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;: 복잡한 애니메이션과 애니메이션 동작 제어가 가능한 방식&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;기존에-사용하던-뷰-애니메이션-구현-방식&quot;&gt;기존에 사용하던 뷰 애니메이션 구현 방식&lt;/h2&gt;
@@ -12,33 +99,33 @@
 앱에서 화면 이동과 같은 트랜지션에 애니메이션이 꼭 들어가야 사용자가 한 번에 이해할 수 있는 UX를 제공할 수 있다.
 그 밖에도 적절한 애니메이션을 제공하면, 앱의 퀄리티가 높아 보이게 만드는 효과가 있다.&lt;/p&gt;
 
-&lt;p&gt;그래서 줄곧 애니메이션을 많이 넣어 왔지만, 항상 사용하던 방법은 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드를 이용하는 것이었다.
+&lt;p&gt;그래서 줄곧 애니메이션을 많이 넣어 왔지만, 항상 사용하던 방법은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드를 이용하는 것이었다.
 그동안 엄청 복잡한 애니메이션이 없었고, 어느 정도 복잡한 것도 위 메소드를 이용하면 충분히 가능했었다.&lt;/p&gt;
 
-&lt;p&gt;그러다 사내 프로젝트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 메소드가 아닌 다른 구현 방식이 필요할 것 같아서 조사를 했는데, iOS 10부터 등장한 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;라는 클래스가 눈에 띄었다.
-결론적으로 해당 클래스를 쓸 필요가 없어 다시 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드로 해결을 했지만, 그 정체가 궁금해 더 조사를 해서 간단하게 분류를 해보았다.&lt;/p&gt;
+&lt;p&gt;그러다 사내 프로젝트에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 메소드가 아닌 다른 구현 방식이 필요할 것 같아서 조사를 했는데, iOS 10부터 등장한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;라는 클래스가 눈에 띄었다.
+결론적으로 해당 클래스를 쓸 필요가 없어 다시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드로 해결을 했지만, 그 정체가 궁금해 더 조사를 해서 간단하게 분류를 해보았다.&lt;/p&gt;
 
 &lt;h2 id=&quot;용도에-따른-애니메이션-구현-방식&quot;&gt;용도에 따른 애니메이션 구현 방식&lt;/h2&gt;
 
-&lt;p&gt;iOS에서는 모든 애니메이션을 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;을 이용한다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드나 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt; 클래스 등은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;의 편의용 버전인 것이다.&lt;/p&gt;
+&lt;p&gt;iOS에서는 모든 애니메이션을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;을 이용한다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView.animate()&lt;/code&gt; 메소드나 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt; 클래스 등은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;의 편의용 버전인 것이다.&lt;/p&gt;
 
 &lt;p&gt;각 애니메이션 구현 방식을 간단히 용도에 따라 구분한다면 다음과 같다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt;
     &lt;ul&gt;
       &lt;li&gt;가장 Raw한 애니메이션 방식이므로 다양한 조작이 가능하다.&lt;/li&gt;
       &lt;li&gt;코드 작성이 까다롭거나 불편하다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드
     &lt;ul&gt;
       &lt;li&gt;뷰 애니메이션을 처리하는 것이 간편하다.&lt;/li&gt;
       &lt;li&gt;일부 제약이 있을 수 있다.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;
     &lt;ul&gt;
       &lt;li&gt;복잡한 뷰 애니메이션을 처리할 수 있으며 시작, 정지, 진행도 반영 등 동작도 제어가 가능하다.&lt;/li&gt;
       &lt;li&gt;일부 제약이 있을 수 있다.&lt;/li&gt;
@@ -49,13 +136,13 @@
 &lt;p&gt;위와 같은 특징때문에&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;평소에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드를 사용하다가&lt;/li&gt;
-  &lt;li&gt;추가로 동작 제어가 필요하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;를 사용하고&lt;/li&gt;
-  &lt;li&gt;그것으로도 안되는 애니메이션은 최후의 수단으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt; 관련 메소드로 Raw 레벨에서 애니메이션을 정의하면 된다. 😎&lt;/li&gt;
+  &lt;li&gt;평소에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIView&lt;/code&gt;의 애니메이션 메소드를 사용하다가&lt;/li&gt;
+  &lt;li&gt;추가로 동작 제어가 필요하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewPropertyAnimator&lt;/code&gt;를 사용하고&lt;/li&gt;
+  &lt;li&gt;그것으로도 안되는 애니메이션은 최후의 수단으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Core Animation&lt;/code&gt; 관련 메소드로 Raw 레벨에서 애니메이션을 정의하면 된다. 😎&lt;/li&gt;
 &lt;/ol&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><category term="animation" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기</title><link href="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/" rel="alternate" type="text/html" title="TIL 34: 전체 화면 기준으로 현재 뷰의 프레임 얻기" /><published>2021-04-16T00:00:00+09:00</published><updated>2021-04-16T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/16/til-34-how-to-convert-frame-of-view-to-frame-of-full-screen/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;부모 뷰의 &lt;code class=&quot;highlighter-rouge&quot;&gt;convert(_:to:)&lt;/code&gt; 메소드에 현재 뷰의 프레임과 키 윈도우의 Root 뷰를 전달하면,
+  &lt;li&gt;부모 뷰의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;convert(_:to:)&lt;/code&gt; 메소드에 현재 뷰의 프레임과 키 윈도우의 Root 뷰를 전달하면,
 전체 화면 기준으로 현재 뷰의 프레임을 얻을 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -70,7 +157,7 @@
 그래서 전체 화면을 기준으로 각 뷰의 프레임을 얻는다면 간단하게 두 뷰 사이의 프레임을 비교할 수 있을 것이다.&lt;/p&gt;
 
 &lt;p&gt;다음과 같은 코드를 사용하면, 전체 화면 기준으로 해당 뷰의 프레임을 얻을 수 있다.
-물론, Nullable 하기 때문에 사용할 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt; 체크는 필수이다.&lt;/p&gt;
+물론, Nullable 하기 때문에 사용할 때 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt; 체크는 필수이다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;keyWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;windows&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isKeyWindow&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;convertedFrame&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;superview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;convert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rootViewController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
@@ -78,9 +165,9 @@
 &lt;p&gt;용도에 따라 좌표만 필요한 경우, 좌표만 변환할 수 있는 것도 존재하므로 그것을 이용하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">Xcode의 파일 헤더 주석 변경하기</title><link href="https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/" rel="alternate" type="text/html" title="Xcode의 파일 헤더 주석 변경하기" /><published>2021-04-11T00:00:00+09:00</published><updated>2021-04-11T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode</id><content type="html" xml:base="https://jamesu.dev/posts/2021/04/11/how-to-change-file-header-comments-in-xcode/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 생성해 &lt;a href=&quot;https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0&quot; target=&quot;_blank&quot;&gt;매크로&lt;/a&gt;와 함께
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 생성해 &lt;a href=&quot;https://help.apple.com/xcode/mac/9.0/index.html?localePath=en.lproj#/dev7fe737ce0&quot; target=&quot;_blank&quot;&gt;매크로&lt;/a&gt;와 함께
 일관성 있는 헤더 주석을 구성할 수 있다.&lt;/li&gt;
-  &lt;li&gt;팀 프로젝트 내의 공유를 위해서는 Project shared data 경로에 &lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 위치시키고 Git에 Push한다.&lt;/li&gt;
+  &lt;li&gt;팀 프로젝트 내의 공유를 위해서는 Project shared data 경로에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 위치시키고 Git에 Push한다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;일관성-있는-파일-헤더-주석&quot;&gt;일관성 있는 파일 헤더 주석&lt;/h2&gt;
@@ -99,32 +186,32 @@
 
 &lt;h2 id=&quot;idetemplatemacrosplist-추가하기&quot;&gt;IDETemplateMacros.plist 추가하기&lt;/h2&gt;
 
-&lt;p&gt;파일 헤더 주석을 설정하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt;라는 Property List 파일을 Xcode의 특정 위치에 놓아야 한다.
+&lt;p&gt;파일 헤더 주석을 설정하기 위해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt;라는 Property List 파일을 Xcode의 특정 위치에 놓아야 한다.
 이 파일을 어디에 놓는지에 따라 해당 설정이 Xcode에 적용되는 범위가 다르다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Project user data: 프로젝트의 현재 유저 전용 데이터&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.xcodeproj/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.xcodeproj/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Project shared data&lt;/strong&gt;: 프로젝트 내 공유 데이터&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.xcodeproj/xcshareddata/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;ProjectName&amp;gt;.xcodeproj/xcshareddata/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Workspace user data: 워크스페이스의 현재 유저 전용 데이터&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;WorkspaceName&amp;gt;.xcworkspace/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;WorkspaceName&amp;gt;.xcworkspace/xcuserdata/[username].xcuserdatad/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Workspace shared data&lt;/strong&gt;: 워크스페이스 내 공유 데이터&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;WorkspaceName&amp;gt;.xcworkspace/xcshareddata/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;WorkspaceName&amp;gt;.xcworkspace/xcshareddata/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;User Xcode data: 현재 컴퓨터 유저의 Xcode 전용 데이터&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;~/Library/Developer/Xcode/UserData/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/Library/Developer/Xcode/UserData/IDETemplateMacros.plist&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;일반적으로 팀 프로젝트를 진행할 때, &lt;code class=&quot;highlighter-rouge&quot;&gt;xcuserdata&lt;/code&gt;는 유저 전용 데이터이므로
-&lt;code class=&quot;highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; 파일에 항목을 추가해 Git에 공유하지 않는다.
-팀원들이 공유하고자 하는 정보는 &lt;code class=&quot;highlighter-rouge&quot;&gt;xcshareddata&lt;/code&gt;을 통해 Git에 공유한다.&lt;/p&gt;
+&lt;p&gt;일반적으로 팀 프로젝트를 진행할 때, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcuserdata&lt;/code&gt;는 유저 전용 데이터이므로
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; 파일에 항목을 추가해 Git에 공유하지 않는다.
+팀원들이 공유하고자 하는 정보는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcshareddata&lt;/code&gt;을 통해 Git에 공유한다.&lt;/p&gt;
 
 &lt;p&gt;따라서 사내 코딩 스타일 가이드를 따르기 위해서는 &lt;strong&gt;Project shared data&lt;/strong&gt;를 이용하도록 하고,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;CocoaPods&lt;/code&gt;를 사용한다면 워크스페이스를 이용하므로 &lt;strong&gt;Workspace shared data&lt;/strong&gt;를 이용한다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CocoaPods&lt;/code&gt;를 사용한다면 워크스페이스를 이용하므로 &lt;strong&gt;Workspace shared data&lt;/strong&gt;를 이용한다.
 하지만, &lt;strong&gt;Project shared data&lt;/strong&gt;에 세팅해도 워크스페이스에 적용되므로 &lt;strong&gt;Project shared data&lt;/strong&gt;를 이용해도 된다.&lt;/p&gt;
 
 &lt;p&gt;Property List 파일은 특정 규칙을 지닌 XML 파일이므로,
-&lt;strong&gt;다음 코드를 그대로 복사해 &lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 생성하거나&lt;/strong&gt;
+&lt;strong&gt;다음 코드를 그대로 복사해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 생성하거나&lt;/strong&gt;
 &lt;strong&gt;Xcode를 통해 Property List 파일을 생성한 후에 이동시키면 된다&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
@@ -143,12 +230,12 @@
 
 &lt;h2 id=&quot;파일-헤더-주석-맛보기&quot;&gt;파일 헤더 주석 맛보기&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 Xcode로 열어 &lt;code class=&quot;highlighter-rouge&quot;&gt;Root&lt;/code&gt; 아래로 &lt;code class=&quot;highlighter-rouge&quot;&gt;FILEHEADER&lt;/code&gt; 키를 추가하고, 아무 값이나 String 값으로 넣어보자.
-여기서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Test&lt;/code&gt;라고 넣어 보았다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 Xcode로 열어 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Root&lt;/code&gt; 아래로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FILEHEADER&lt;/code&gt; 키를 추가하고, 아무 값이나 String 값으로 넣어보자.
+여기서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Test&lt;/code&gt;라고 넣어 보았다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;assets/figure_1.png&quot; alt=&quot;Figure 1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;그리고 &lt;code class=&quot;highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 넣은 프로젝트에서 새로운 파일을 추가해보면, 다음과 같이 파일 상단부에 &lt;code class=&quot;highlighter-rouge&quot;&gt;//Test&lt;/code&gt;라고 추가되는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;그리고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;IDETemplateMacros.plist&lt;/code&gt; 파일을 넣은 프로젝트에서 새로운 파일을 추가해보면, 다음과 같이 파일 상단부에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;//Test&lt;/code&gt;라고 추가되는 것을 확인할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;assets/figure_2.png&quot; alt=&quot;Figure 2&quot; /&gt;&lt;/p&gt;
 
@@ -156,7 +243,7 @@
 그래서 XML 파일을 직접 수정하는 것이 훨씬 편하다.
 해당 파일을 VSCode 같은 다른 편집기로 열어보자.&lt;/p&gt;
 
-&lt;p&gt;그러면 다음과 같은 코드를 볼 수 있고, &lt;code class=&quot;highlighter-rouge&quot;&gt;FILEHEADER&lt;/code&gt; 키 태그랑 동일한 레벨에 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; 태그를 통해 값을 설정하면 된다는 것을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;그러면 다음과 같은 코드를 볼 수 있고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FILEHEADER&lt;/code&gt; 키 태그랑 동일한 레벨에 있는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; 태그를 통해 값을 설정하면 된다는 것을 알 수 있다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -205,8 +292,8 @@ Test2
 
 &lt;p&gt;&lt;img src=&quot;assets/figure_3.png&quot; alt=&quot;Figure 3&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;보는 것과 같이 첫 줄에만 &lt;code class=&quot;highlighter-rouge&quot;&gt;//&lt;/code&gt; 문자열이 앞에 붙고, 그 이후부터는 일반 텍스트 취급&lt;/strong&gt;을 하기 때문에 개행이나 띄어쓰기를 잘 작성해야 한다.
-심지어 마지막 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;/string&amp;gt;&lt;/code&gt; 앞에 있는 띄어쓰기와 개행도 인식하는 것을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;보는 것과 같이 첫 줄에만 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;//&lt;/code&gt; 문자열이 앞에 붙고, 그 이후부터는 일반 텍스트 취급&lt;/strong&gt;을 하기 때문에 개행이나 띄어쓰기를 잘 작성해야 한다.
+심지어 마지막 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;/string&amp;gt;&lt;/code&gt; 앞에 있는 띄어쓰기와 개행도 인식하는 것을 알 수 있다.&lt;/p&gt;
 
 &lt;p&gt;개행, 띄어쓰기, 주석 문자열을 적절히 넣어 작성한다면 다음과 같이 작성할 수 있다.&lt;/p&gt;
 
@@ -243,7 +330,7 @@ Test2
 주석을 구성하기 위해 필요한 정보를 어떤 매크로를 통해 얻을 수 있는 지 알 수 있다.&lt;/p&gt;
 
 &lt;p&gt;자세한 것은 위 링크에서 살펴보도록 하고, 여기서는 몇 가지 매크로만 예시로 사용할 것이다.&lt;br /&gt;
-&lt;strong&gt;매크로의 앞 뒤에 &lt;code class=&quot;highlighter-rouge&quot;&gt;_&lt;/code&gt; 문자를 각 3개씩 추가해서 매크로를 사용할 수 있다&lt;/strong&gt;.&lt;/p&gt;
+&lt;strong&gt;매크로의 앞 뒤에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_&lt;/code&gt; 문자를 각 3개씩 추가해서 매크로를 사용할 수 있다&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;FILENAME: 현재 파일명&lt;/li&gt;
@@ -292,12 +379,12 @@ Test2
 &lt;h2 id=&quot;테이블-뷰-셀-안에-자동으로-높이가-늘어나는-텍스트-뷰-넣기&quot;&gt;테이블 뷰 셀 안에 자동으로 높이가 늘어나는 텍스트 뷰 넣기&lt;/h2&gt;
 
 &lt;p&gt;일반적인 구현으로 테이블 뷰 셀 안에 텍스트 뷰를 넣으면, 높이가 고정되어 여러 줄의 텍스트를 입력해도 스크롤이 생길뿐 높이가 달라지지 않는다.
-안드로이드의 경우, 간단한 세팅을 통해 iOS의 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextView&lt;/code&gt;에 해당하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;EditText&lt;/code&gt;의 높이가 자동으로 늘어나게 할 수 있지만,
-iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt;이 생각한 대로 적용되지 않아 골치가 아플 것이다.&lt;/p&gt;
+안드로이드의 경우, 간단한 세팅을 통해 iOS의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextView&lt;/code&gt;에 해당하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EditText&lt;/code&gt;의 높이가 자동으로 늘어나게 할 수 있지만,
+iOS에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Auto Layout&lt;/code&gt;이 생각한 대로 적용되지 않아 골치가 아플 것이다.&lt;/p&gt;
 
 &lt;p&gt;그래서 여러가지를 적용해본 결과, &lt;strong&gt;텍스트의 변화에 따라 높이를 계속 갱신하는 방법&lt;/strong&gt;이 가장 적절하게 적용되는 것을 확인할 수 있었다.
 이 &lt;a href=&quot;https://www.damienpontifex.com/posts/self-sizing-uitableviewcell-with-uitextview-in-ios8/&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 보면,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UITextViewDelegate&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;textViewDidChange(_:)&lt;/code&gt; 메소드를 정의해 높이를 갱신하는 방법을 사용하는 것을 볼 수 있다.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextViewDelegate&lt;/code&gt;의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;textViewDidChange(_:)&lt;/code&gt; 메소드를 정의해 높이를 갱신하는 방법을 사용하는 것을 볼 수 있다.&lt;/p&gt;
 
 &lt;p&gt;하지만, 해당 링크의 글처럼 그대로 하면 버그가 좀 있어서 나만의 방식으로 변화를 주었다.
 다음과 같이 작성하면, 어느 정도 원하는 요구사항대로 동작하는 것을 확인할 수 있었다.&lt;/p&gt;
@@ -317,8 +404,8 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;참고로 여기서 &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt;는 일반적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITableViewCell&lt;/code&gt;에 준비되어 있는 프로퍼티가 아니기 때문에 셀을 구성할 때 주입받거나
-다음과 같은 코드로 &lt;code class=&quot;highlighter-rouge&quot;&gt;tableView&lt;/code&gt;를 찾아내는 코드를 추가하는 것이 편리하다.&lt;/p&gt;
+&lt;p&gt;참고로 여기서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tableView&lt;/code&gt;는 일반적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITableViewCell&lt;/code&gt;에 준비되어 있는 프로퍼티가 아니기 때문에 셀을 구성할 때 주입받거나
+다음과 같은 코드로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tableView&lt;/code&gt;를 찾아내는 코드를 추가하는 것이 편리하다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITableViewCell&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
@@ -333,37 +420,37 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="ui" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 32: 중복으로 Delegate 사용하기</title><link href="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/" rel="alternate" type="text/html" title="TIL 32: 중복으로 Delegate 사용하기" /><published>2021-03-11T00:00:00+09:00</published><updated>2021-03-11T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;내부 로직은 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당한다.&lt;/li&gt;
+  &lt;li&gt;내부 로직은 스스로(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당한다.&lt;/li&gt;
   &lt;li&gt;외부 로직은 프록시와 포워딩을 통해 이벤트와 연동되도록 한다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;일반적인-방법으로-delegate를-사용할-때의-문제점&quot;&gt;일반적인 방법으로 Delegate를 사용할 때의 문제점&lt;/h2&gt;
 
-&lt;p&gt;커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해 사용할 때가 있다.
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.&lt;/p&gt;
+&lt;p&gt;커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해 사용할 때가 있다.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.&lt;/p&gt;
 
-&lt;p&gt;예를 들어, 커스텀 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
+&lt;p&gt;예를 들어, 커스텀 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
 경우에 따라 입력 방지를 처리하고 싶을 때 Notification으로 처리를 할 수 없고,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 구현해 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해야 한다.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 구현해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입해야 한다.&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
-해당 클래스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 외부에서 구현해 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입하게 되면
-기존에 스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 대입했던 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
+해당 클래스의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextFieldDelegate&lt;/code&gt;를 외부에서 구현해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 대입하게 되면
+기존에 스스로(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 대입했던 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt;는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.&lt;/p&gt;
 
-&lt;p&gt;커스텀 &lt;code class=&quot;highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
+&lt;p&gt;커스텀 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UITextField&lt;/code&gt; 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
 그렇다면, &lt;strong&gt;내부 로직도 수행되면서 적절하게 외부 로직도 수행되게 하는 방법은 없을까&lt;/strong&gt;?&lt;/p&gt;
 
 &lt;h2 id=&quot;delegate-포워딩하기&quot;&gt;Delegate 포워딩하기&lt;/h2&gt;
 
 &lt;p&gt;구글링을 열심히 하다보니 &lt;a href=&quot;https://stackoverflow.com/questions/43679859/shouldchangetext-not-called-for-uitextfield-when-using-hardware-keyboard&quot; target=&quot;_blank&quot;&gt;원하던 답&lt;/a&gt;을 찾게 되었다.&lt;br /&gt;
-내부 로직은 원래대로 &lt;strong&gt;스스로(&lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당&lt;/strong&gt;하고,
+내부 로직은 원래대로 &lt;strong&gt;스스로(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;)를 부모의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티에 할당&lt;/strong&gt;하고,
 외부 로직은 &lt;strong&gt;프록시와 포워딩&lt;/strong&gt;을 통해 추가적으로 수행하게 만들 수 있다.&lt;/p&gt;
 
-&lt;p&gt;위 답변을 보면, 다음과 같이 커스텀 클래스의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;위 답변을 보면, 다음과 같이 커스텀 클래스의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt; 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;realDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITextFieldDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Keep track of the text field's real delegate&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Keep track of the text field&apos;s real delegate&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UITextFieldDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realDelegate&lt;/span&gt;
@@ -373,8 +460,8 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;외부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에 접근할 때는 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;가 아닌 내부 전용 프로퍼티인 &lt;code class=&quot;highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;에 접근하게 된다.
-이러고 생성자에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;super.delegate = self&lt;/code&gt;와 같은 코드를 통해 부모의 &lt;code class=&quot;highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;만 접근하도록 할 수 있다.&lt;/p&gt;
+&lt;p&gt;외부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에 접근할 때는 부모의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt;가 아닌 내부 전용 프로퍼티인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;에 접근하게 된다.
+이러고 생성자에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;super.delegate = self&lt;/code&gt;와 같은 코드를 통해 부모의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;delegate&lt;/code&gt;에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;만 접근하도록 할 수 있다.&lt;/p&gt;
 
 &lt;p&gt;그리고 다음과 같이 포워딩을 함으로써 특정 이벤트가 발생했을 때 외부에서만 정의한 로직이 있는 경우 수행할 수 있도록 해준다.&lt;/p&gt;
 
@@ -395,7 +482,7 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;특정 이벤트에 대해 내부 로직을 수행하면서 추가적으로 외부 로직이 호출되기 원한다면,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;를 통해 외부 로직도 호출해줘야 한다.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;realDelegate&lt;/code&gt;를 통해 외부 로직도 호출해줘야 한다.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-swift&quot; data-lang=&quot;swift&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// This only allows numbers to be typed into the text field.&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// Of course this can be changed to do whatever validation you need in this custom text field&lt;/span&gt;
@@ -424,20 +511,20 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
 
 &lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt;의 길이가 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt;의 길이보다 1이 작으므로,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하며 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;remove&lt;/code&gt; 함수로 한명씩 제거하면 최종적으로 1명이 남게 된다.
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt;의 길이가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;participant&lt;/code&gt;의 길이보다 1이 작으므로,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하며 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remove&lt;/code&gt; 함수로 한명씩 제거하면 최종적으로 1명이 남게 된다.
 그 1명이 완주하지 못한 선수가 된다.&lt;/p&gt;
 
 &lt;p&gt;하지만, 이렇게 풀면 배열의 길이가 아주 큰 경우,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하는 것과 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 제거하기 위해 순회하는 것을 합쳐
-오랜 시간이 걸리므로, 최악의 경우 &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt;의 시간복잡도가 될 수 있다.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열을 순회하는 것과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열에서 제거하기 위해 순회하는 것을 합쳐
+오랜 시간이 걸리므로, 최악의 경우 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt;의 시간복잡도가 될 수 있다.&lt;/p&gt;
 
-&lt;p&gt;따라서, &lt;code class=&quot;highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열과 &lt;code class=&quot;highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열을 &lt;strong&gt;이름을 키로 가지고 인원을 값으로 가지는 Dictionary&lt;/strong&gt;로 변형해
-인원을 감소시키는 방식으로 순회한다면, 시간복잡도가 &lt;code class=&quot;highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;으로 줄어들 수 있다.&lt;/p&gt;
+&lt;p&gt;따라서, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;completion&lt;/code&gt; 배열과 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;participant&lt;/code&gt; 배열을 &lt;strong&gt;이름을 키로 가지고 인원을 값으로 가지는 Dictionary&lt;/strong&gt;로 변형해
+인원을 감소시키는 방식으로 순회한다면, 시간복잡도가 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(n)&lt;/code&gt;으로 줄어들 수 있다.&lt;/p&gt;
 
-&lt;p&gt;Python에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;collections&lt;/code&gt; 모듈의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 클래스를 사용한다면,
+&lt;p&gt;Python에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;collections&lt;/code&gt; 모듈의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 클래스를 사용한다면,
 &lt;strong&gt;요소를 키로 가지고 빈도수를 값으로 가지는 Dictionary&lt;/strong&gt;로 쉽게 변형시킬 수 있다.
-그리고 두 &lt;code class=&quot;highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 객체의 &lt;code class=&quot;highlighter-rouge&quot;&gt;-&lt;/code&gt; 연산을 통해 차집합 효과를 낼 수 있다.&lt;/p&gt;
+그리고 두 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Counter&lt;/code&gt; 객체의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-&lt;/code&gt; 연산을 통해 차집합 효과를 낼 수 있다.&lt;/p&gt;
 
 &lt;p&gt;최종적으로 빈도수가 1인 하나의 요소만 남게 되고, 해당 요소가 선수의 이름에 해당하므로 완주하지 못한 선수를 손쉽게 구할 수 있다.&lt;/p&gt;
 
@@ -456,37 +543,37 @@ iOS에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Auto Layout&lt;/cod
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</title><link href="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" rel="alternate" type="text/html" title="TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!" /><published>2021-03-09T00:00:00+09:00</published><updated>2021-03-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부 요소를 접근할 때는 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드의 지역 변수에 외부 요소를 대입하고 사용하자.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 사용한 변수는 &lt;strong&gt;약한 참조&lt;/strong&gt;이기 때문에 언제든 &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 가능성이 있다는 것에 주의하자.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부 요소를 접근할 때는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드의 지역 변수에 외부 요소를 대입하고 사용하자.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 사용한 변수는 &lt;strong&gt;약한 참조&lt;/strong&gt;이기 때문에 언제든 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 가능성이 있다는 것에 주의하자.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;block-프로그래밍&quot;&gt;Block 프로그래밍&lt;/h2&gt;
 
-&lt;p&gt;Objective-C는 Swift의 Closure가 등장하기 이전에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;이란 것을 지원했다.
+&lt;p&gt;Objective-C는 Swift의 Closure가 등장하기 이전에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;이란 것을 지원했다.
 Closure와 유사하게 &lt;strong&gt;로직을 보관할 수 있는 함수 자료형&lt;/strong&gt;이라 생각하면 된다.
 그래서 유사한 특징을 가지기도 하는데, 그 중 하나가
-&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부의 요소를 접근할 시에 강한 참조를 가진다는 점&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부의 요소를 접근할 시에 강한 참조를 가진다는 점&lt;/strong&gt;이다.&lt;/p&gt;
 
-&lt;p&gt;이는 Closure에서도 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용함으로써 발생할 수 있는 점하고 유사하다.
-Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;를 사용해서 약한 참조로 캡처해 사용할 수 있다.&lt;/p&gt;
+&lt;p&gt;이는 Closure에서도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용함으로써 발생할 수 있는 점하고 유사하다.
+Closure에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;를 사용해서 약한 참조로 캡처해 사용할 수 있다.&lt;/p&gt;
 
-&lt;p&gt;그렇다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;에서는 어떻게 약한 참조로 사용할 수 있을까?&lt;/p&gt;
+&lt;p&gt;그렇다면, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에서는 어떻게 약한 참조로 사용할 수 있을까?&lt;/p&gt;
 
 &lt;h2 id=&quot;메모리-누수-해결&quot;&gt;메모리 누수 해결&lt;/h2&gt;
 
 &lt;p&gt;사내 프로젝트 유지보수 중에 숨겨져 있는 버그 하나를 발견했다.&lt;br /&gt;
-정상적으로 메모리 해제가 된다면, 자연스럽게 &lt;code class=&quot;highlighter-rouge&quot;&gt;dealloc&lt;/code&gt; 메소드가 호출되면서 특정 로직이 수행되어야 했는데
+정상적으로 메모리 해제가 된다면, 자연스럽게 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dealloc&lt;/code&gt; 메소드가 호출되면서 특정 로직이 수행되어야 했는데
 그렇지 못해서 비정상적인 동작을 하고 있었다.
 이 버그가 특정 상황에서만 발생했기 때문에 더욱 발견하기 어려웠다.&lt;/p&gt;
 
-&lt;p&gt;결론은 특정 비즈니스 로직에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하는데, 그 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 자연스럽게 접근하고 있는 것이었다.
-그로 인해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;에 대한 강한 참조를 가지고, 메모리에 &lt;strong&gt;좀비&lt;/strong&gt;로 남아 있어 메모리 해제가 되지 못한 것이다.&lt;/p&gt;
+&lt;p&gt;결론은 특정 비즈니스 로직에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하는데, 그 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 자연스럽게 접근하고 있는 것이었다.
+그로 인해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;에 대한 강한 참조를 가지고, 메모리에 &lt;strong&gt;좀비&lt;/strong&gt;로 남아 있어 메모리 해제가 되지 못한 것이다.&lt;/p&gt;
 
-&lt;p&gt;해결책은 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 정의하기 전에 내부에서 사용할 값을 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드로 지역 변수에 보관하고 그것을 사용하는 것&lt;/strong&gt;이다.
-예를 들어, &lt;code class=&quot;highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용해야 한다면 &lt;code class=&quot;highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;와 같은 변수에 대입해 놓고 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;를 쓰는 것이다.
-물론 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt; 사용 시, &lt;code class=&quot;highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 수 있다는 것에 주의해야 한다&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;해결책은 &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 정의하기 전에 내부에서 사용할 값을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드로 지역 변수에 보관하고 그것을 사용하는 것&lt;/strong&gt;이다.
+예를 들어, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용해야 한다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 통해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;와 같은 변수에 대입해 놓고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;를 쓰는 것이다.
+물론 &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt; 사용 시, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 수 있다는 것에 주의해야 한다&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;그래서 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하고 있는 코드를 전부 확인해서 기존에 숨겨져 있던 잠재적 버그까지 모두 수정했다.
+&lt;p&gt;그래서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하고 있는 코드를 전부 확인해서 기존에 숨겨져 있던 잠재적 버그까지 모두 수정했다.
 더 이상 메모리 누수로 골머리를 앓지 않기 위해서…&lt;/p&gt;
 
 &lt;p&gt;예전에는 Objective-C를 사용할 기회가 많이 없었는데,
@@ -495,16 +582,16 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 
 &lt;p&gt;하지만 나는 Swift와 더 친하게 지낼 것이다. 🙄&lt;/p&gt;
 
-&lt;p&gt;참고로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;참고로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용하면, 콜백 지옥에서 벗어나 새로운 방식으로 비즈니스 로직을 구현할 수 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용하면, 콜백 지옥에서 벗어나 새로운 방식으로 비즈니스 로직을 구현할 수 있다.&lt;/li&gt;
   &lt;li&gt;얼른 맛보자 😋&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;reactivex&quot;&gt;ReactiveX&lt;/h2&gt;
 
-&lt;p&gt;Observer 패턴, Iterator 패턴, 함수형 프로그래밍의 집합체로 정의된 &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;는
+&lt;p&gt;Observer 패턴, Iterator 패턴, 함수형 프로그래밍의 집합체로 정의된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;는
 &lt;strong&gt;흐름에 따른 비동기 프로그래밍&lt;/strong&gt; 방식을 지원해주는 유용한 API다.
 자세한 설명은 &lt;a href=&quot;http://reactivex.io/&quot; target=&quot;_blank&quot;&gt;공식 홈페이지&lt;/a&gt;에
 문서가 잘 되어 있으니 어떤 느낌인지 알아가는 데 도움이 될 것이다.&lt;/p&gt;
@@ -512,39 +599,39 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 &lt;p&gt;&lt;strong&gt;흐름&lt;/strong&gt;과 &lt;strong&gt;비동기&lt;/strong&gt;, 그리고 &lt;strong&gt;함수형&lt;/strong&gt;을 이용함으로써, 프로그래밍 방식이 매우 달라진다.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;흐름&lt;/code&gt;을 통해 여러 처리를 하나의 흐름으로 합쳐 동기적으로 동작하게 하거나,
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;흐름&lt;/code&gt;을 통해 여러 처리를 하나의 흐름으로 합쳐 동기적으로 동작하게 하거나,
 다수의 흐름을 병렬적으로 수행하고 하나의 흐름으로 결과를 내거나,
 중간에 에러를 발생시켜 흐름을 끊어버리는 등과 같이 다양한 조작으로 원하는 로직을 자연스럽게 처리할 수 있다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;비동기&lt;/code&gt;를 기반으로 하기 때문에 각 흐름의 입력과 출력에만 집중해 로직을 구현할 수 있다.
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;비동기&lt;/code&gt;를 기반으로 하기 때문에 각 흐름의 입력과 출력에만 집중해 로직을 구현할 수 있다.
 항상 처리를 기다릴 필요 없이 흐름의 출력을 바탕으로 원하는 로직으로 조립해 사용하면 된다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;함수형&lt;/code&gt; 프로그래밍이 기본이므로, 내부에서 상태를 조작하는 것보다는 입력과 출력에 집중해 비즈니스 로직을 구현할 수 있다.
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;함수형&lt;/code&gt; 프로그래밍이 기본이므로, 내부에서 상태를 조작하는 것보다는 입력과 출력에 집중해 비즈니스 로직을 구현할 수 있다.
 그로 인해 상태가 꼬이는 실수를 하거나 로직이 복잡해지는 등의 문제를 방지할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;이러한 장점을 느껴보고자 &lt;code class=&quot;highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;의 Swift 버전인 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 공부해서 사내 프로젝트에 일부 도입을 시도해봤고,
+&lt;p&gt;이러한 장점을 느껴보고자 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;의 Swift 버전인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 공부해서 사내 프로젝트에 일부 도입을 시도해봤고,
 성공적으로 적용되어 만족감을 느꼈다.&lt;/p&gt;
 
 &lt;h2 id=&quot;콜백-지옥에서-벗어나자&quot;&gt;콜백 지옥에서 벗어나자&lt;/h2&gt;
 
-&lt;p&gt;일단, &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 네트워크 처리 부분에 먼저 도입했다.&lt;br /&gt;
-기존에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; 오픈 소스 라이브러리를 사용해 사내 라이브러리에 맞게 커스텀한 부분을
-&lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 이용해 Wrapping하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Rx&lt;/code&gt; 버전을 추가로 구현했다.&lt;/p&gt;
+&lt;p&gt;일단, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 네트워크 처리 부분에 먼저 도입했다.&lt;br /&gt;
+기존에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; 오픈 소스 라이브러리를 사용해 사내 라이브러리에 맞게 커스텀한 부분을
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 이용해 Wrapping하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rx&lt;/code&gt; 버전을 추가로 구현했다.&lt;/p&gt;
 
 &lt;p&gt;네트워크 처리를 구현하면서 자주 사용하던 방식은 성공, 실패, 완료 등의 콜백 Closure를 전달한 방식이다.
 이는 다수의 네트워크 처리나 로직이 연쇄될 경우 &lt;strong&gt;콜백 지옥&lt;/strong&gt;을 야기할 수 있다.
 중괄호 Depth가 계속 생기는 것이다.
 콜백 지옥을 느껴보면, 코드의 품질이 낮아보이고 어떻게든 개선하고 싶은 욕구가 생길 것이다.&lt;/p&gt;
 
-&lt;p&gt;이 부분을 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용해 처리해보니,
+&lt;p&gt;이 부분을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용해 처리해보니,
 항상 매개변수로 전달하던 콜백 Closure는 사라지고,
 응답 흐름에 대해서 다른 흐름을 추가로 연쇄하거나 응답을 변형하는 등과 같이 원하는 로직을 자연스럽게 처리할 수 있었다.&lt;/p&gt;
 
 &lt;p&gt;그리고 다수의 네트워크 처리를 병렬로 수행해 그 결과에 따른 처리가 편해지고,
-&lt;code class=&quot;highlighter-rouge&quot;&gt;DisposeBag&lt;/code&gt;을 활용하니 효율적으로 리소스를 관리할 수 있었다.&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DisposeBag&lt;/code&gt;을 활용하니 효율적으로 리소스를 관리할 수 있었다.&lt;/p&gt;
 
 &lt;p&gt;이제 맛보기 단계인데 정말 맛있어서 얼른 다른 부분에도 적용하고 싶은 욕심이 생긴다.&lt;br /&gt;
-다른 오픈 소스 라이브러리와의 조합(특히, &lt;code class=&quot;highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;과 연동된 &lt;code class=&quot;highlighter-rouge&quot;&gt;RxCocoa&lt;/code&gt;)도 좋아서 차근차근 도입할 예정이다.
-최종적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt; 디자인 패턴을 사내 프로젝트에 적용할 예정이다.&lt;/p&gt;
+다른 오픈 소스 라이브러리와의 조합(특히, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;과 연동된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxCocoa&lt;/code&gt;)도 좋아서 차근차근 도입할 예정이다.
+최종적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MVVM&lt;/code&gt; 디자인 패턴을 사내 프로젝트에 적용할 예정이다.&lt;/p&gt;
 
 &lt;p&gt;아직도 재밌는 일이 많이 남아있어 프로그래밍을 놓을 수 없는 것 같다. 👨🏻‍💻&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><category term="reactive-x" /><category term="rxswift" /><summary type="html">TL;DR</summary></entry><entry><title type="html">프로그래머스 문제 풀이: 42862 - 체육복</title><link href="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/" rel="alternate" type="text/html" title="프로그래머스 문제 풀이: 42862 - 체육복" /><published>2021-03-03T00:00:00+09:00</published><updated>2021-03-03T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/03/programmers-problem-solving-42862/">&lt;p&gt;&lt;img src=&quot;assets/programmers_42862.png&quot; alt=&quot;42862 - 체육복&quot; /&gt;&lt;/p&gt;
 
@@ -574,7 +661,7 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 &lt;p&gt;이 말은 어떤 학생이 도난당한 학생에 속할 수도, 여벌의 체육복을 가진 학생에 속할 수도 있다는 것이다.
 따라서 이것을 먼저 필터링해 &lt;strong&gt;체육복을 빌려야만 하는 학생과 여벌의 체육복을 빌려줄 수 있는 학생&lt;/strong&gt;을 다시 구한다.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -584,13 +671,13 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+        &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;최종적으로 전체 학생 수 &lt;code class=&quot;highlighter-rouge&quot;&gt;n&lt;/code&gt;에서 체육복을 빌리지 못한 학생 수(도난당한 학생 목록에 남은 학생 수) &lt;code class=&quot;highlighter-rouge&quot;&gt;len(lost)&lt;/code&gt;를 빼면 된다.&lt;/p&gt;
+&lt;p&gt;최종적으로 전체 학생 수 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt;에서 체육복을 빌리지 못한 학생 수(도난당한 학생 목록에 남은 학생 수) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;len(lost)&lt;/code&gt;를 빼면 된다.&lt;/p&gt;
 
 &lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
 
@@ -610,40 +697,16 @@ Closure에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Capture List&lt
 12
 13
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intersection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sorted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve_lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;reserve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;remove&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 29: Xcode의 ‘No Scheme’ 버그 해결</title><link href="https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/" rel="alternate" type="text/html" title="TIL 29: Xcode의 'No Scheme' 버그 해결" /><published>2021-03-02T00:00:00+09:00</published><updated>2021-03-02T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/02/til-29-how-to-fix-no-scheme-bug-in-xcode/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata/&amp;lt;유저&amp;gt;.xcuserdatad&lt;/code&gt;&lt;br /&gt;
-또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata&lt;/code&gt; 삭제&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;xcode의-no-scheme-버그-해결&quot;&gt;Xcode의 ‘No Scheme’ 버그 해결&lt;/h2&gt;
-
-&lt;p&gt;Xcode를 쓰다보면 자잘한 버그가 발견되곤 하는데, 한창 집중하다가 그런 버그가 발생하면 집중력이 흩트러진다.
-이번에도 엄청 집중하며 개발을 하고 있었는데, &lt;strong&gt;‘No Scheme’ 버그&lt;/strong&gt;가 발생해 빌드조차 못하는 상황이 되버렸다.&lt;/p&gt;
-
-&lt;p&gt;잘 사용하던 Scheme이 갑자기 모두 사라지며, ‘No Scheme’이라 표시되는데 해결책은 매우 간단했다.
-&lt;strong&gt;프로젝트 파일 내부의 유저 데이터 관련 디렉터리를 지워 초기화&lt;/strong&gt;하는 것이다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata/&amp;lt;유저&amp;gt;.xcuserdatad&lt;/code&gt;&lt;br /&gt;
-또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;프로젝트&amp;gt;.xcodeproj/xcuserdata&lt;/code&gt; 삭제&lt;/li&gt;
-  &lt;li&gt;Xcode 재실행&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Xcode 재실행 시, Scheme이 다시 설정되므로 기존과 같이 사용할 수 있다.&lt;br /&gt;
-물론, 유저 데이터 중 필요한 파일이 있다면 잘 백업해서 복구하는 절차가 필요하다.&lt;/p&gt;
-
-&lt;p&gt;이렇게 Xcode의 자잘한 버그 중 하나로부터 탈출! 😎&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="xcode" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry></feed>

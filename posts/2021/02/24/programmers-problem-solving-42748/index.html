@@ -11,7 +11,7 @@
   <title>프로그래머스 문제 풀이: 42748 - K번째수 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="프로그래머스 문제 풀이: 42748 - K번째수" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-02-24T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/","@type":"BlogPosting","headline":"프로그래머스 문제 풀이: 42748 - K번째수","dateModified":"2021-02-24T00:00:00+09:00","datePublished":"2021-02-24T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/"},"url":"https://jamesu.dev/posts/2021/02/24/programmers-problem-solving-42748/","headline":"프로그래머스 문제 풀이: 42748 - K번째수","datePublished":"2021-02-24T00:00:00+09:00","dateModified":"2021-02-24T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"Dev Blog by James Minsu Jeon","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -194,12 +194,12 @@
 
 <h2 id="문제-풀이">문제 풀이</h2>
 
-<p><code class="highlighter-rouge">commands</code> 배열을 순회하며, 각 명령(<code class="highlighter-rouge">cmd</code>)에 대해 다음과 같이 단계별 로직을 적용해 변환할 수 있다.</p>
+<p><code class="language-plaintext highlighter-rouge">commands</code> 배열을 순회하며, 각 명령(<code class="language-plaintext highlighter-rouge">cmd</code>)에 대해 다음과 같이 단계별 로직을 적용해 변환할 수 있다.</p>
 
 <ol>
-  <li><code class="highlighter-rouge">cmd[0]</code>이 <code class="highlighter-rouge">i</code>이고 <code class="highlighter-rouge">cmd[1]</code>이 <code class="highlighter-rouge">j</code>이므로, <code class="highlighter-rouge">array[cmd[0] - 1:cmd[1]]</code>를 통해 배열을 자른다.</li>
-  <li><code class="highlighter-rouge">sorted</code> 함수를 통해 배열을 오름차순으로 정렬한다.</li>
-  <li><code class="highlighter-rouge">cmd[2]</code>가 <code class="highlighter-rouge">k</code>이므로, <code class="highlighter-rouge">[cmd[2] - 1]</code>와 같이 배열의 요소를 꺼낸다.</li>
+  <li><code class="language-plaintext highlighter-rouge">cmd[0]</code>이 <code class="language-plaintext highlighter-rouge">i</code>이고 <code class="language-plaintext highlighter-rouge">cmd[1]</code>이 <code class="language-plaintext highlighter-rouge">j</code>이므로, <code class="language-plaintext highlighter-rouge">array[cmd[0] - 1:cmd[1]]</code>를 통해 배열을 자른다.</li>
+  <li><code class="language-plaintext highlighter-rouge">sorted</code> 함수를 통해 배열을 오름차순으로 정렬한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">cmd[2]</code>가 <code class="language-plaintext highlighter-rouge">k</code>이므로, <code class="language-plaintext highlighter-rouge">[cmd[2] - 1]</code>와 같이 배열의 요소를 꺼낸다.</li>
 </ol>
 
 <p>최종적으로 꺼낸 요소를 모아 배열화 해서 반환하도록 한다.</p>

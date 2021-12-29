@@ -11,7 +11,7 @@
   <title>TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-11T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/","@type":"BlogPosting","headline":"TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2","dateModified":"2021-01-11T00:00:00+09:00","datePublished":"2021-01-11T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/"},"url":"https://jamesu.dev/posts/2021/01/11/til-22-improving-custom-container-view-controller-2/","headline":"TIL 22: 커스텀 컨테이너 뷰 컨트롤러 개선 2","datePublished":"2021-01-11T00:00:00+09:00","dateModified":"2021-01-11T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -178,25 +178,25 @@
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>커스텀 탭바 컨트롤러를 <code class="highlighter-rouge">UITabBarController</code>와 유사하도록 구현했다.</li>
-  <li><code class="highlighter-rouge">UITabBarController</code>와 <code class="highlighter-rouge">UINavigationController</code>의 자식 뷰 컨트롤러 관리 방식의 차이를 이해해야 한다.</li>
+  <li>커스텀 탭바 컨트롤러를 <code class="language-plaintext highlighter-rouge">UITabBarController</code>와 유사하도록 구현했다.</li>
+  <li><code class="language-plaintext highlighter-rouge">UITabBarController</code>와 <code class="language-plaintext highlighter-rouge">UINavigationController</code>의 자식 뷰 컨트롤러 관리 방식의 차이를 이해해야 한다.</li>
 </ul>
 
 <h2 id="탭바-컨트롤러-vs-네비게이션-컨트롤러">탭바 컨트롤러 vs. 네비게이션 컨트롤러</h2>
 
 <p>이번에도 역시나 요구사항에 맞추기 위해 커스텀 탭바 컨트롤러를 만들기로 했다.<br />
 <a href="https://jamesu.dev/posts/2021/01/09/til-21-improving-custom-container-view-controller/" target="_blank">이전</a>과 마찬가지로
-Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 신경 쓰며 <code class="highlighter-rouge">UITabBarController</code>의 리버스 엔지니어링을 시도했다.
+Root 뷰 생명 주기와 부모-자식 관계 설정의 생명 주기를 신경 쓰며 <code class="language-plaintext highlighter-rouge">UITabBarController</code>의 리버스 엔지니어링을 시도했다.
 헷갈리는 동작도 있었지만, 일부 동작의 경우 커스텀 탭바 컨트롤러와 다를 수 밖에 없기에 인지하고 다른 식으로 구현했다.</p>
 
-<p><code class="highlighter-rouge">UITabBarController</code>는 <code class="highlighter-rouge">UINavigationController</code>와 달리 미리 다수의 자식 뷰 컨트롤러를 추가해 놓는다.
-그래서 자식 뷰 컨트롤러 목록을 세팅한 후에는 <code class="highlighter-rouge">addChild</code>, <code class="highlighter-rouge">removeFromParent</code> 메소드를 호출할 일이 없었다.</p>
+<p><code class="language-plaintext highlighter-rouge">UITabBarController</code>는 <code class="language-plaintext highlighter-rouge">UINavigationController</code>와 달리 미리 다수의 자식 뷰 컨트롤러를 추가해 놓는다.
+그래서 자식 뷰 컨트롤러 목록을 세팅한 후에는 <code class="language-plaintext highlighter-rouge">addChild</code>, <code class="language-plaintext highlighter-rouge">removeFromParent</code> 메소드를 호출할 일이 없었다.</p>
 
-<p>또한, Root 뷰 생명 주기가 <code class="highlighter-rouge">UINavigationController</code>와는 좀 다른 순서로 호출되었다.
+<p>또한, Root 뷰 생명 주기가 <code class="language-plaintext highlighter-rouge">UINavigationController</code>와는 좀 다른 순서로 호출되었다.
 역시나 직접 리버스 엔지니어링을 하길 잘한 것 같다.
 예상만으로 구현했다면 뒤늦게 발견해서 고생하며 뒤집었을지도 모른다. 😞</p>
 
-<p><code class="highlighter-rouge">UITabBarController</code>와 <code class="highlighter-rouge">UINavigationController</code>의 차이를 계속 비교하며 커스텀 탭바 컨트롤러를 구현했다.
+<p><code class="language-plaintext highlighter-rouge">UITabBarController</code>와 <code class="language-plaintext highlighter-rouge">UINavigationController</code>의 차이를 계속 비교하며 커스텀 탭바 컨트롤러를 구현했다.
 일단 메뉴가 변동되는 경우는 거의 없기 때문에 가장 필요한 부분에 한해서 구현을 진행했다.
 필요하면 그때 계속 개선하면 되지 않을까..?</p>
 

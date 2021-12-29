@@ -11,7 +11,7 @@
   <title>백준 문제 풀이: 2193 - 이친수 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="백준 문제 풀이: 2193 - 이친수" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-01-09T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/","@type":"BlogPosting","headline":"백준 문제 풀이: 2193 - 이친수","dateModified":"2020-01-09T00:00:00+09:00","datePublished":"2020-01-09T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/"},"url":"https://jamesu.dev/posts/2020/01/09/baekjoon-problem-solving-2193/","headline":"백준 문제 풀이: 2193 - 이친수","datePublished":"2020-01-09T00:00:00+09:00","dateModified":"2020-01-09T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"Dev Blog by James Minsu Jeon","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -197,19 +197,19 @@
 따라서, 다른 방법을 생각해내야 하는데, 몇 가지 예시를 분석해보니 <a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95" target="_blank">동적 계획법(Dynamic Programming)</a>을 적용할 수 있었다.</p>
 
 <p>주어진 입력이 5인 경우를 예로 들어 모든 경우를 찾아보면 다음과 같다.<br />
-<code class="highlighter-rouge">100000 100001 100010 100100 100101 101000 101001 101010</code></p>
+<code class="language-plaintext highlighter-rouge">100000 100001 100010 100100 100101 101000 101001 101010</code></p>
 
-<p>이 중 <code class="highlighter-rouge">100000 100001 100010 100100 100101</code>은 입력이 4인 경우의 수와 같다.<br />
-그 이유는 앞에서 세번째 수가 0이라 했을 때(<code class="highlighter-rouge">100***</code>), 입력이 4인 경우의 수(<code class="highlighter-rouge">10***</code>)를 구하는 것과 같기 때문이다.</p>
+<p>이 중 <code class="language-plaintext highlighter-rouge">100000 100001 100010 100100 100101</code>은 입력이 4인 경우의 수와 같다.<br />
+그 이유는 앞에서 세번째 수가 0이라 했을 때(<code class="language-plaintext highlighter-rouge">100***</code>), 입력이 4인 경우의 수(<code class="language-plaintext highlighter-rouge">10***</code>)를 구하는 것과 같기 때문이다.</p>
 
-<p>비슷하게 나머지 <code class="highlighter-rouge">101000 101001 101010</code>은 입력이 3인 경우의 수와 같다.<br />
-그 이유는 앞에서 세번째 수가 1이라 했을 때(네번째 수는 0만 가능하므로, <code class="highlighter-rouge">1010**</code>), 입력이 3인 경우의 수(<code class="highlighter-rouge">10**</code>)를 구하는 것과 같기 때문이다.</p>
+<p>비슷하게 나머지 <code class="language-plaintext highlighter-rouge">101000 101001 101010</code>은 입력이 3인 경우의 수와 같다.<br />
+그 이유는 앞에서 세번째 수가 1이라 했을 때(네번째 수는 0만 가능하므로, <code class="language-plaintext highlighter-rouge">1010**</code>), 입력이 3인 경우의 수(<code class="language-plaintext highlighter-rouge">10**</code>)를 구하는 것과 같기 때문이다.</p>
 
-<p>따라서, 입력 <code class="highlighter-rouge">n</code>에 대한 이친수의 개수는 다음과 같은 공식을 구할 수 있다.<br />
-<code class="highlighter-rouge">count(n) = count(n-1) + count(n-2)</code></p>
+<p>따라서, 입력 <code class="language-plaintext highlighter-rouge">n</code>에 대한 이친수의 개수는 다음과 같은 공식을 구할 수 있다.<br />
+<code class="language-plaintext highlighter-rouge">count(n) = count(n-1) + count(n-2)</code></p>
 
 <p>이렇게 재귀식이 구해지면, 동적 계획법으로 해결하기 적합하고, 그 구현 또한 쉬워진다.<br />
-<code class="highlighter-rouge">n</code>이 <code class="highlighter-rouge">0 또는 1</code>인 경우의 초기값을 구해놓고, <code class="highlighter-rouge">2</code>부터 <code class="highlighter-rouge">n</code>까지 증가시키며 이친수의 개수를 구하면 된다.</p>
+<code class="language-plaintext highlighter-rouge">n</code>이 <code class="language-plaintext highlighter-rouge">0 또는 1</code>인 경우의 초기값을 구해놓고, <code class="language-plaintext highlighter-rouge">2</code>부터 <code class="language-plaintext highlighter-rouge">n</code>까지 증가시키며 이친수의 개수를 구하면 된다.</p>
 
 <h2 id="풀이-소스">풀이 소스</h2>
 
@@ -226,7 +226,7 @@
 
 <span class="n">counts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-  <span class="n">counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+  <span class="n">counts</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">counts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></td></tr></tbody></table></code></pre></figure>

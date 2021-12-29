@@ -11,7 +11,7 @@
   <title>TIL 23: CocoaPods로 인한 Warning 제거 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="TIL 23: CocoaPods로 인한 Warning 제거" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-18T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/","@type":"BlogPosting","headline":"TIL 23: CocoaPods로 인한 Warning 제거","dateModified":"2021-01-18T00:00:00+09:00","datePublished":"2021-01-18T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/"},"url":"https://jamesu.dev/posts/2021/01/18/til-23-removing-warnings-caused-by-cocoapods/","headline":"TIL 23: CocoaPods로 인한 Warning 제거","datePublished":"2021-01-18T00:00:00+09:00","dateModified":"2021-01-18T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -178,7 +178,7 @@
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>CocoaPods로 외부 라이브러리 설치 후 생기는 Warning은 <code class="highlighter-rouge">post_install</code> 훅으로 쉽게 제거할 수 있다.</li>
+  <li>CocoaPods로 외부 라이브러리 설치 후 생기는 Warning은 <code class="language-plaintext highlighter-rouge">post_install</code> 훅으로 쉽게 제거할 수 있다.</li>
 </ul>
 
 <h2 id="신경-쓰이는-warning-제거하기">신경 쓰이는 Warning 제거하기</h2>
@@ -188,22 +188,22 @@
 Warning이 치명적인 버그를 낳을 수도 있지만, 뭔가 잘못 코딩한 것 같은 느낌을 들게 하기 때문이다.</p>
 
 <p>사내에서 외부 라이브러리 연동으로 CocoaPods를 주로 사용하는데,
-언제부턴가 <code class="highlighter-rouge">pod install</code>로 외부 라이브러리를 설치하고 난 후에 Xcode에 몇몇 Warning이 뜨기 시작했다.</p>
+언제부턴가 <code class="language-plaintext highlighter-rouge">pod install</code>로 외부 라이브러리를 설치하고 난 후에 Xcode에 몇몇 Warning이 뜨기 시작했다.</p>
 
 <p>치명적인 Warning은 아니기 때문에 Xcode에서 제공하는 설정 값 갱신 기능을 사용하면 쉽게 제거할 수 있다.
 하지만, 다른 개발자가 프로젝트를 이어 받아 진행할 수도 있고, 외부 라이브러리 설치 시마다 거슬릴 수 있으므로
 설정 값 갱신조차 필요하지 않도록 하고 싶었다.</p>
 
-<h2 id="post_install-hook"><code class="highlighter-rouge">post_install</code> Hook</h2>
+<h2 id="post_install-hook"><code class="language-plaintext highlighter-rouge">post_install</code> Hook</h2>
 
-<p>CocoaPods에는 <code class="highlighter-rouge">post_install</code>
+<p>CocoaPods에는 <code class="language-plaintext highlighter-rouge">post_install</code>
 <a href="https://guides.cocoapods.org/syntax/podfile.html#post_install" target="_blank">훅</a>이 존재하는데,
-이를 이용하면 <strong><code class="highlighter-rouge">pod</code> 설치 후 수행할 처리</strong>를 정의할 수 있다.
+이를 이용하면 <strong><code class="language-plaintext highlighter-rouge">pod</code> 설치 후 수행할 처리</strong>를 정의할 수 있다.
 앞서 발생한 Warning은 외부 라이브러리에 특정 설정 값이 적절하지 않게 세팅되어 발생한 것으로 해당 값을
-<code class="highlighter-rouge">pod</code> 설치 후 적절하게 세팅하도록 처리하면 된다.</p>
+<code class="language-plaintext highlighter-rouge">pod</code> 설치 후 적절하게 세팅하도록 처리하면 된다.</p>
 
-<p>다음과 같은 훅을 추가해 설치된 외부 라이브러리의 <code class="highlighter-rouge">CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED</code>와
-<code class="highlighter-rouge">CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER</code> 값이 적절하게 세팅되도록 했다.</p>
+<p>다음과 같은 훅을 추가해 설치된 외부 라이브러리의 <code class="language-plaintext highlighter-rouge">CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED</code>와
+<code class="language-plaintext highlighter-rouge">CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER</code> 값이 적절하게 세팅되도록 했다.</p>
 
 <figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">post_install</span> <span class="k">do</span> <span class="o">|</span><span class="n">installer</span><span class="o">|</span>
   <span class="n">installer</span><span class="p">.</span><span class="nf">pods_project</span><span class="p">.</span><span class="nf">build_configurations</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>

@@ -11,7 +11,7 @@
   <title>백준 문제 풀이: 2156 - 포도주 시식 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="백준 문제 풀이: 2156 - 포도주 시식" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-01-10T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/01/10/baekjoon-problem-solving-2156/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesu.dev/posts/2020/01/10/baekjoon-problem-solving-2156/","@type":"BlogPosting","headline":"백준 문제 풀이: 2156 - 포도주 시식","dateModified":"2020-01-10T00:00:00+09:00","datePublished":"2020-01-10T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2020/01/10/baekjoon-problem-solving-2156/"},"url":"https://jamesu.dev/posts/2020/01/10/baekjoon-problem-solving-2156/","headline":"백준 문제 풀이: 2156 - 포도주 시식","datePublished":"2020-01-10T00:00:00+09:00","dateModified":"2020-01-10T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"Dev Blog by James Minsu Jeon","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -197,21 +197,21 @@
 <p><a href="https://ko.wikipedia.org/wiki/%EB%8F%99%EC%A0%81_%EA%B3%84%ED%9A%8D%EB%B2%95" target="_blank">동적 계획법(Dynamic Programming)</a>을 이용해 포도주의 잔이 적을 때부터 단계적으로 풀어나가면 된다.<br />
 여기서 핵심은 작은 문제에서 어떠한 값들을 기록하며 최종 문제에 도달할 것인지이다.</p>
 
-<p><code class="highlighter-rouge">i</code>번째에서 구한 최대 포도주 양을 <code class="highlighter-rouge">max_amount(i)</code>라 하면, 포도주가 한 잔 추가됐을 때의 최대 포도주 양을 어떻게 구할지 생각해봐야 한다.
+<p><code class="language-plaintext highlighter-rouge">i</code>번째에서 구한 최대 포도주 양을 <code class="language-plaintext highlighter-rouge">max_amount(i)</code>라 하면, 포도주가 한 잔 추가됐을 때의 최대 포도주 양을 어떻게 구할지 생각해봐야 한다.
 일단, 경우의 수가 어떤 것이 있는지 알아보자.</p>
 
-<p>이 문제에서 가장 중요한 규칙은 <code class="highlighter-rouge">"연속으로 놓여 있는 3잔을 모두 마실 수는 없다."</code>이다.<br />
+<p>이 문제에서 가장 중요한 규칙은 <code class="language-plaintext highlighter-rouge">"연속으로 놓여 있는 3잔을 모두 마실 수는 없다."</code>이다.<br />
 이 말은 즉, 연속으로 잔이 놓이지 않도록 경우를 나눠 생각해볼 수 있다.<br />
 이를 <strong>마지막에 연속으로 마신 잔의 수</strong>에 의한 기준으로 다음과 같이 경우를 나눌 수 있다.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">0</code>일 때: <code class="highlighter-rouge">i</code>번째 포도주는 마시지 않으므로, <strong>이전의 최대 포도주 양</strong>에 해당한다.</li>
-  <li><code class="highlighter-rouge">1</code>일 때: <code class="highlighter-rouge">i</code>번째 포도주는 마시고, <code class="highlighter-rouge">(i - 1)</code>번째 포도주는 마시지 않으므로, <code class="highlighter-rouge">(i - 1)</code>번째에 <strong>마지막에 연속으로 마신 잔의 수가 0일 때</strong>의 최대 포도주 양에 <code class="highlighter-rouge">i</code>번째 포도주 양을 더한다.</li>
-  <li><code class="highlighter-rouge">2</code>일 때: <code class="highlighter-rouge">i</code>, <code class="highlighter-rouge">(i - 1)</code>번째 포도주를 모두 마시므로, <code class="highlighter-rouge">(i - 1)</code>번째에 <strong>마지막에 연속으로 마신 잔의 수가 1일 때</strong>의 최대 포도주 양에 <code class="highlighter-rouge">i</code>번째 포도주 양을 더한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">0</code>일 때: <code class="language-plaintext highlighter-rouge">i</code>번째 포도주는 마시지 않으므로, <strong>이전의 최대 포도주 양</strong>에 해당한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">1</code>일 때: <code class="language-plaintext highlighter-rouge">i</code>번째 포도주는 마시고, <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째 포도주는 마시지 않으므로, <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째에 <strong>마지막에 연속으로 마신 잔의 수가 0일 때</strong>의 최대 포도주 양에 <code class="language-plaintext highlighter-rouge">i</code>번째 포도주 양을 더한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">2</code>일 때: <code class="language-plaintext highlighter-rouge">i</code>, <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째 포도주를 모두 마시므로, <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째에 <strong>마지막에 연속으로 마신 잔의 수가 1일 때</strong>의 최대 포도주 양에 <code class="language-plaintext highlighter-rouge">i</code>번째 포도주 양을 더한다.</li>
 </ul>
 
-<p>여기서 주의할 점은 <code class="highlighter-rouge">0</code>의 경우에서 <strong>이전의 최대 포도주 양</strong>을 구할 때, <code class="highlighter-rouge">(i - 1)</code>번째 <strong>최대 포도주 양 중의 최대값</strong>을 구해야 한다는 것이다.
-왜냐하면, <code class="highlighter-rouge">i</code>번째 포도주를 마시지 않으므로 <code class="highlighter-rouge">(i - 1)</code>번째의 마지막에 연속으로 마신 잔의 수는 무관하기 때문이다.
+<p>여기서 주의할 점은 <code class="language-plaintext highlighter-rouge">0</code>의 경우에서 <strong>이전의 최대 포도주 양</strong>을 구할 때, <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째 <strong>최대 포도주 양 중의 최대값</strong>을 구해야 한다는 것이다.
+왜냐하면, <code class="language-plaintext highlighter-rouge">i</code>번째 포도주를 마시지 않으므로 <code class="language-plaintext highlighter-rouge">(i - 1)</code>번째의 마지막에 연속으로 마신 잔의 수는 무관하기 때문이다.
 몇 잔을 마시든 최대 포도주 양만 구하면 된다.</p>
 
 <p>이런 식으로 <strong>마지막에 연속으로 마신 잔의 수에 따른 최대 포도주 양</strong>을 잔의 수에 따라 기록한다.<br />
@@ -219,23 +219,23 @@
 
 <h3 id="python-입력-방식에-따른-수행-속도-차이">Python 입력 방식에 따른 수행 속도 차이</h3>
 
-<p>기존에 하던 방식대로 <code class="highlighter-rouge">input()</code> 함수를 이용해 입력을 처리했더니, <code class="highlighter-rouge">약 436ms</code>의 속도가 나왔다.
-그런데 다른 사람의 수행 속도는 <code class="highlighter-rouge">64ms</code>로 큰 차이가 있었다.
+<p>기존에 하던 방식대로 <code class="language-plaintext highlighter-rouge">input()</code> 함수를 이용해 입력을 처리했더니, <code class="language-plaintext highlighter-rouge">약 436ms</code>의 속도가 나왔다.
+그런데 다른 사람의 수행 속도는 <code class="language-plaintext highlighter-rouge">64ms</code>로 큰 차이가 있었다.
 로직의 차이가 있는지 알았으나 큰 차이가 없었다.</p>
 
-<p>검색 끝에 알게된 사실은 Python으로 알고리즘 풀이를 할 때는 <code class="highlighter-rouge">input()</code> 함수 대신 <code class="highlighter-rouge">sys</code> 모듈의 <code class="highlighter-rouge">sys.stdin</code> 객체를 이용해야 속도가 향상된다는 것이다.
-실제로 <code class="highlighter-rouge">sys.stdin</code> 객체를 이용해 똑같은 로직을 적용하니, 다른 사람과 동일하게 <code class="highlighter-rouge">64ms</code>의 속도가 나왔다.
-이는 <code class="highlighter-rouge">input()</code> 함수와 <code class="highlighter-rouge">sys</code> 모듈의 입력 함수들의 로직에 차이가 존재하기 때문인 것 같다.
+<p>검색 끝에 알게된 사실은 Python으로 알고리즘 풀이를 할 때는 <code class="language-plaintext highlighter-rouge">input()</code> 함수 대신 <code class="language-plaintext highlighter-rouge">sys</code> 모듈의 <code class="language-plaintext highlighter-rouge">sys.stdin</code> 객체를 이용해야 속도가 향상된다는 것이다.
+실제로 <code class="language-plaintext highlighter-rouge">sys.stdin</code> 객체를 이용해 똑같은 로직을 적용하니, 다른 사람과 동일하게 <code class="language-plaintext highlighter-rouge">64ms</code>의 속도가 나왔다.
+이는 <code class="language-plaintext highlighter-rouge">input()</code> 함수와 <code class="language-plaintext highlighter-rouge">sys</code> 모듈의 입력 함수들의 로직에 차이가 존재하기 때문인 것 같다.
 (자세한 내용은 다양한 의견이 있으므로, 검색을 통해 공부하는 것이 좋을 것 같다.)</p>
 
-<p><code class="highlighter-rouge">sys.stdin</code> 객체는 파일의 끝까지 한 번에 입력받는 방식이다.
-CLI에서 입력을 완료하기 위해서 마지막에 <code class="highlighter-rouge">EOF(End Of File)</code> 문자 입력이 필요하다.
-<code class="highlighter-rouge">Control(Ctrl) + D</code> 키로 입력할 수 있다.<br />
-한 줄씩 입력한다면, <code class="highlighter-rouge">sys.stdin.readline()</code> 함수를 사용하면 된다. 이때는 <code class="highlighter-rouge">EOF</code> 문자를 입력할 필요가 없다.</p>
+<p><code class="language-plaintext highlighter-rouge">sys.stdin</code> 객체는 파일의 끝까지 한 번에 입력받는 방식이다.
+CLI에서 입력을 완료하기 위해서 마지막에 <code class="language-plaintext highlighter-rouge">EOF(End Of File)</code> 문자 입력이 필요하다.
+<code class="language-plaintext highlighter-rouge">Control(Ctrl) + D</code> 키로 입력할 수 있다.<br />
+한 줄씩 입력한다면, <code class="language-plaintext highlighter-rouge">sys.stdin.readline()</code> 함수를 사용하면 된다. 이때는 <code class="language-plaintext highlighter-rouge">EOF</code> 문자를 입력할 필요가 없다.</p>
 
-<p>이 문제에서는 첫 줄에 입력받는 <code class="highlighter-rouge">n</code>은 필요하지 않아, 간단히 <code class="highlighter-rouge">input()</code> 함수를 통해 버리도록 했다.<br />
-또한, <code class="highlighter-rouge">sys.stdin</code> 객체를 <code class="highlighter-rouge">for</code> 문에 바로 사용하거나, <code class="highlighter-rouge">map()</code> 함수로 바로 맵핑할 수도 있다.<br />
-이때, 한 줄마다 <code class="highlighter-rouge">for</code> 문 로직이 실행된다는 점과 <code class="highlighter-rouge">sys.stdin</code> 객체를 통해 반환되는 각 문자열은 <strong>개행 문자</strong>를 제거하지 않는다는 점에 주의하도록 한다.</p>
+<p>이 문제에서는 첫 줄에 입력받는 <code class="language-plaintext highlighter-rouge">n</code>은 필요하지 않아, 간단히 <code class="language-plaintext highlighter-rouge">input()</code> 함수를 통해 버리도록 했다.<br />
+또한, <code class="language-plaintext highlighter-rouge">sys.stdin</code> 객체를 <code class="language-plaintext highlighter-rouge">for</code> 문에 바로 사용하거나, <code class="language-plaintext highlighter-rouge">map()</code> 함수로 바로 맵핑할 수도 있다.<br />
+이때, 한 줄마다 <code class="language-plaintext highlighter-rouge">for</code> 문 로직이 실행된다는 점과 <code class="language-plaintext highlighter-rouge">sys.stdin</code> 객체를 통해 반환되는 각 문자열은 <strong>개행 문자</strong>를 제거하지 않는다는 점에 주의하도록 한다.</p>
 
 <p>다음과 같이 입력받은 대로 출력하는 코드를 실행시켜보면, 개행 문자가 포함되어 있는 것을 확인할 수 있다.</p>
 
@@ -243,7 +243,7 @@ CLI에서 입력을 완료하기 위해서 마지막에 <code class="highlighter
 2
 3
 </pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">:</span>
   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -284,7 +284,7 @@ World!
 </pre></td><td class="code"><pre><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="nb">input</span><span class="p">()</span>
-<span class="n">amounts</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="p">)</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">)</span>
 
 <span class="n">max_amounts</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">amounts</span><span class="p">:</span>

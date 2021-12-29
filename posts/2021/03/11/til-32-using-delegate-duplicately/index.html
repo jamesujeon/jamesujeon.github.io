@@ -11,7 +11,7 @@
   <title>TIL 32: 중복으로 Delegate 사용하기 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="TIL 32: 중복으로 Delegate 사용하기" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-03-11T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/","@type":"BlogPosting","headline":"TIL 32: 중복으로 Delegate 사용하기","dateModified":"2021-03-11T00:00:00+09:00","datePublished":"2021-03-11T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/"},"url":"https://jamesu.dev/posts/2021/03/11/til-32-using-delegate-duplicately/","headline":"TIL 32: 중복으로 Delegate 사용하기","datePublished":"2021-03-11T00:00:00+09:00","dateModified":"2021-03-11T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -182,33 +182,33 @@
   <h2 id="tldr">TL;DR</h2>
 
 <ul>
-  <li>내부 로직은 스스로(<code class="highlighter-rouge">self</code>)를 부모의 <code class="highlighter-rouge">delegate</code> 프로퍼티에 할당한다.</li>
+  <li>내부 로직은 스스로(<code class="language-plaintext highlighter-rouge">self</code>)를 부모의 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티에 할당한다.</li>
   <li>외부 로직은 프록시와 포워딩을 통해 이벤트와 연동되도록 한다.</li>
 </ul>
 
 <h2 id="일반적인-방법으로-delegate를-사용할-때의-문제점">일반적인 방법으로 Delegate를 사용할 때의 문제점</h2>
 
-<p>커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(<code class="highlighter-rouge">self</code>)를 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입해 사용할 때가 있다.
-<code class="highlighter-rouge">UIKit</code>에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.</p>
+<p>커스텀 클래스를 정의하다보면, 내부 로직을 정의하고 스스로(<code class="language-plaintext highlighter-rouge">self</code>)를 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티에 대입해 사용할 때가 있다.
+<code class="language-plaintext highlighter-rouge">UIKit</code>에서 제공하는 방법이 Delegate를 이용하게끔 강제하는 경우가 있기 때문이다.</p>
 
-<p>예를 들어, 커스텀 <code class="highlighter-rouge">UITextField</code> 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
+<p>예를 들어, 커스텀 <code class="language-plaintext highlighter-rouge">UITextField</code> 클래스를 정의할 때 텍스트 입력을 계속 추적하면서
 경우에 따라 입력 방지를 처리하고 싶을 때 Notification으로 처리를 할 수 없고,
-<code class="highlighter-rouge">UITextFieldDelegate</code>를 구현해 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입해야 한다.</p>
+<code class="language-plaintext highlighter-rouge">UITextFieldDelegate</code>를 구현해 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티에 대입해야 한다.</p>
 
-<p><code class="highlighter-rouge">delegate</code> 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
-해당 클래스의 <code class="highlighter-rouge">UITextFieldDelegate</code>를 외부에서 구현해 <code class="highlighter-rouge">delegate</code> 프로퍼티에 대입하게 되면
-기존에 스스로(<code class="highlighter-rouge">self</code>)를 대입했던 <code class="highlighter-rouge">delegate</code>는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.</p>
+<p><code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티는 하나의 구현체만 가리킬 수 있기 때문에,
+해당 클래스의 <code class="language-plaintext highlighter-rouge">UITextFieldDelegate</code>를 외부에서 구현해 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티에 대입하게 되면
+기존에 스스로(<code class="language-plaintext highlighter-rouge">self</code>)를 대입했던 <code class="language-plaintext highlighter-rouge">delegate</code>는 덮어씌워지기 때문에 내부에서 정의한 로직은 동작하지 않게 된다.</p>
 
-<p>커스텀 <code class="highlighter-rouge">UITextField</code> 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
+<p>커스텀 <code class="language-plaintext highlighter-rouge">UITextField</code> 클래스를 정의하면서 의도했던 내부 로직은 더 이상 동작하지 않기 때문에 원하던 방식은 아닐 것이다.
 그렇다면, <strong>내부 로직도 수행되면서 적절하게 외부 로직도 수행되게 하는 방법은 없을까</strong>?</p>
 
 <h2 id="delegate-포워딩하기">Delegate 포워딩하기</h2>
 
 <p>구글링을 열심히 하다보니 <a href="https://stackoverflow.com/questions/43679859/shouldchangetext-not-called-for-uitextfield-when-using-hardware-keyboard" target="_blank">원하던 답</a>을 찾게 되었다.<br />
-내부 로직은 원래대로 <strong>스스로(<code class="highlighter-rouge">self</code>)를 부모의 <code class="highlighter-rouge">delegate</code> 프로퍼티에 할당</strong>하고,
+내부 로직은 원래대로 <strong>스스로(<code class="language-plaintext highlighter-rouge">self</code>)를 부모의 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티에 할당</strong>하고,
 외부 로직은 <strong>프록시와 포워딩</strong>을 통해 추가적으로 수행하게 만들 수 있다.</p>
 
-<p>위 답변을 보면, 다음과 같이 커스텀 클래스의 <code class="highlighter-rouge">delegate</code> 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.</p>
+<p>위 답변을 보면, 다음과 같이 커스텀 클래스의 <code class="language-plaintext highlighter-rouge">delegate</code> 프로퍼티가 프록시 역할을 하도록 정의한 것을 볼 수 있다.</p>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="kd">private</span> <span class="k">var</span> <span class="nv">realDelegate</span><span class="p">:</span> <span class="kt">UITextFieldDelegate</span><span class="p">?</span>
 
@@ -222,8 +222,8 @@
     <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>외부에서 <code class="highlighter-rouge">delegate</code>에 접근할 때는 부모의 <code class="highlighter-rouge">delegate</code>가 아닌 내부 전용 프로퍼티인 <code class="highlighter-rouge">realDelegate</code>에 접근하게 된다.
-이러고 생성자에서는 <code class="highlighter-rouge">super.delegate = self</code>와 같은 코드를 통해 부모의 <code class="highlighter-rouge">delegate</code>에는 <code class="highlighter-rouge">self</code>만 접근하도록 할 수 있다.</p>
+<p>외부에서 <code class="language-plaintext highlighter-rouge">delegate</code>에 접근할 때는 부모의 <code class="language-plaintext highlighter-rouge">delegate</code>가 아닌 내부 전용 프로퍼티인 <code class="language-plaintext highlighter-rouge">realDelegate</code>에 접근하게 된다.
+이러고 생성자에서는 <code class="language-plaintext highlighter-rouge">super.delegate = self</code>와 같은 코드를 통해 부모의 <code class="language-plaintext highlighter-rouge">delegate</code>에는 <code class="language-plaintext highlighter-rouge">self</code>만 접근하도록 할 수 있다.</p>
 
 <p>그리고 다음과 같이 포워딩을 함으로써 특정 이벤트가 발생했을 때 외부에서만 정의한 로직이 있는 경우 수행할 수 있도록 해준다.</p>
 
@@ -244,7 +244,7 @@
 <span class="p">}</span></code></pre></figure>
 
 <p>특정 이벤트에 대해 내부 로직을 수행하면서 추가적으로 외부 로직이 호출되기 원한다면,
-<code class="highlighter-rouge">realDelegate</code>를 통해 외부 로직도 호출해줘야 한다.</p>
+<code class="language-plaintext highlighter-rouge">realDelegate</code>를 통해 외부 로직도 호출해줘야 한다.</p>
 
 <figure class="highlight"><pre><code class="language-swift" data-lang="swift"><span class="c1">// This only allows numbers to be typed into the text field.</span>
 <span class="c1">// Of course this can be changed to do whatever validation you need in this custom text field</span>

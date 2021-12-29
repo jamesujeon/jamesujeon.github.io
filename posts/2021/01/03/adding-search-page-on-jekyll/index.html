@@ -11,7 +11,7 @@
   <title>Jekyll에 검색 페이지 추가하기 - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="Jekyll에 검색 페이지 추가하기" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-03T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"TL;DR","url":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/","@type":"BlogPosting","headline":"Jekyll에 검색 페이지 추가하기","dateModified":"2021-01-03T00:00:00+09:00","datePublished":"2021-01-03T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/"},"url":"https://jamesu.dev/posts/2021/01/03/adding-search-page-on-jekyll/","headline":"Jekyll에 검색 페이지 추가하기","datePublished":"2021-01-03T00:00:00+09:00","dateModified":"2021-01-03T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"TL;DR","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -213,28 +213,28 @@
 <p>원하는 기능에 따라 필요한 파일은 다를 수 있지만, 기본적으로 다음과 같은 파일만 있으면 된다.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">simple-jekyll-search.min.js</code> 또는 <code class="highlighter-rouge">simple-jekyll-search.js</code>
+  <li><code class="language-plaintext highlighter-rouge">simple-jekyll-search.min.js</code> 또는 <code class="language-plaintext highlighter-rouge">simple-jekyll-search.js</code>
 (<a href="https://github.com/christian-fei/Simple-Jekyll-Search/tree/master/example/js" target="_blank">링크</a>)</li>
-  <li><code class="highlighter-rouge">search.json</code>
+  <li><code class="language-plaintext highlighter-rouge">search.json</code>
 (<a href="https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/search.json" target="_blank">링크</a>)</li>
 </ul>
 
 <p>JavaScript 파일은 검색 데이터로부터 <strong>검색 기능</strong>을 사용하기 위한 라이브러리 파일이고,
 JSON 파일은 검색 대상이 되는 <strong>검색 데이터</strong>를 준비하기 위한 파일이다.</p>
 
-<p><code class="highlighter-rouge">*.min.js</code> 파일은 <code class="highlighter-rouge">*.js</code> 파일의 압축 버전이라 보면 된다.<br />
+<p><code class="language-plaintext highlighter-rouge">*.min.js</code> 파일은 <code class="language-plaintext highlighter-rouge">*.js</code> 파일의 압축 버전이라 보면 된다.<br />
 동일한 로직으로 구현되어 있기 때문에 어느 쪽을 사용해도 무관하다.
-만약 커스터마이징을 하고 싶은 경우, <code class="highlighter-rouge">*.min.js</code> 파일을 수정하는 것은 매우 난감하기 때문에
-<code class="highlighter-rouge">*.js</code> 파일을 사용하는 것을 추천한다.</p>
+만약 커스터마이징을 하고 싶은 경우, <code class="language-plaintext highlighter-rouge">*.min.js</code> 파일을 수정하는 것은 매우 난감하기 때문에
+<code class="language-plaintext highlighter-rouge">*.js</code> 파일을 사용하는 것을 추천한다.</p>
 
-<p><code class="highlighter-rouge">simple_search_filter.rb</code>와 같은 플러그인은 왜 추가하지 않는지 의문이 있을 수 있다.
+<p><code class="language-plaintext highlighter-rouge">simple_search_filter.rb</code>와 같은 플러그인은 왜 추가하지 않는지 의문이 있을 수 있다.
 해당 코드를 보면 함수 몇가지를 정의해 놓았는데, 해당 함수를 사용하지 않으며 필수적으로 필요하지도 않기 때문에 첨부하지 않았다.</p>
 
 <h3 id="2-검색-데이터-준비">2. 검색 데이터 준비</h3>
 
 <p>Jekyll로 만든 블로그는 정적 사이트이기 때문에 검색을 하기 위해 미리 생성된 데이터가 필요하다.
 (물론, 별도의 서버를 가지고 있거나 데이터를 준비하는 곳이 있다면 상관 없다.)
-이를 위해 예제 프로젝트에 있는 <strong><code class="highlighter-rouge">search.json</code> 파일</strong>이 필요하다.</p>
+이를 위해 예제 프로젝트에 있는 <strong><code class="language-plaintext highlighter-rouge">search.json</code> 파일</strong>이 필요하다.</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -306,14 +306,14 @@ layout: none
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>이처럼 검색되길 원하는 문자열로 구성해 데이터를 준비할 수 있도록 한다.<br />
-(<code class="highlighter-rouge">urlString</code>의 경우, 추후 사용되는 목적이 있어 추가로 넣었다.)</p>
+(<code class="language-plaintext highlighter-rouge">urlString</code>의 경우, 추후 사용되는 목적이 있어 추가로 넣었다.)</p>
 
 <h3 id="3-검색-부분-레이아웃-구성">3. 검색 부분 레이아웃 구성</h3>
 
 <p>검색 기능을 위해 일반적으로 <strong>검색어 입력</strong>을 위한 입력 부분과 <strong>검색 결과</strong>를 보여주기 위한 출력 부분이 필요하다.
 <a href="https://github.com/christian-fei/Simple-Jekyll-Search/blob/master/example/_layouts/default.html" target="_blank">예제 프로젝트</a>에서는
-<code class="highlighter-rouge">search-demo-container</code> ID의 <code class="highlighter-rouge">div</code> 요소 안에 <code class="highlighter-rouge">search-input</code> ID의 <code class="highlighter-rouge">input</code> 요소를 입력 부분으로,
-<code class="highlighter-rouge">results-container</code> ID의 <code class="highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
+<code class="language-plaintext highlighter-rouge">search-demo-container</code> ID의 <code class="language-plaintext highlighter-rouge">div</code> 요소 안에 <code class="language-plaintext highlighter-rouge">search-input</code> ID의 <code class="language-plaintext highlighter-rouge">input</code> 요소를 입력 부분으로,
+<code class="language-plaintext highlighter-rouge">results-container</code> ID의 <code class="language-plaintext highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
 
 <p>일반적으로 그것과 동일하게 사용하면 된다.<br />
 참고로 현재 구현된 검색 페이지에 사용되는 레이아웃은 꾸미는 것을 가미해 다음과 같이 작성했다.</p>
@@ -346,8 +346,8 @@ layout: none
 <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"search-results"</span><span class="nt">&gt;&lt;/ul&gt;</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>예제 프로젝트와 비슷하게 <code class="highlighter-rouge">search-input</code> ID의 <code class="highlighter-rouge">input</code> 요소를 입력 부분으로,
-<code class="highlighter-rouge">search-results</code> ID의 <code class="highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
+<p>예제 프로젝트와 비슷하게 <code class="language-plaintext highlighter-rouge">search-input</code> ID의 <code class="language-plaintext highlighter-rouge">input</code> 요소를 입력 부분으로,
+<code class="language-plaintext highlighter-rouge">search-results</code> ID의 <code class="language-plaintext highlighter-rouge">ul</code> 요소를 출력 부분으로 사용하고 있다.</p>
 
 <h3 id="4-검색-기능-연동">4. 검색 기능 연동</h3>
 
@@ -384,10 +384,10 @@ layout: none
 <span class="nt">&lt;/script&gt;</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p><code class="highlighter-rouge">simple-jekyll-search.min.js</code> 파일을 불러와 사용하고 있으며, 해당 파일을 어디에 두었냐에 따라 경로는 변경될 수 있다.
+<p><code class="language-plaintext highlighter-rouge">simple-jekyll-search.min.js</code> 파일을 불러와 사용하고 있으며, 해당 파일을 어디에 두었냐에 따라 경로는 변경될 수 있다.
 또한, 편의를 위해 전체 JavaScript 파일을 불러오는 곳에서 해당 파일을 불러와도 된다.</p>
 
-<p>검색 기능을 연동하기 위해 <strong><code class="highlighter-rouge">SimpleJekyllSearch</code> 객체를 생성해 <code class="highlighter-rouge">window.simpleJekyllSearch</code>에 할당</strong>해야 한다.
+<p>검색 기능을 연동하기 위해 <strong><code class="language-plaintext highlighter-rouge">SimpleJekyllSearch</code> 객체를 생성해 <code class="language-plaintext highlighter-rouge">window.simpleJekyllSearch</code>에 할당</strong>해야 한다.
 그 이후부터는 전달한 옵션에 따라 검색 기능이 작동하게 된다.</p>
 
 <p>여기서 가장 중요한 부분은 필수 옵션을 정확히 세팅해야 한다는 것이다.<br />
@@ -395,11 +395,11 @@ layout: none
 세팅하길 바란다.</p>
 
 <ul>
-  <li><code class="highlighter-rouge">searchInput</code>: 입력 부분에 해당하는 요소</li>
-  <li><code class="highlighter-rouge">resultsContainer</code>: 출력 부분에 해당하는 요소</li>
-  <li><code class="highlighter-rouge">json</code>: 검색 대상이 되는 검색 데이터가 있는 JSON 파일</li>
-  <li><code class="highlighter-rouge">searchResultTemplate</code>: 검색된 항목이 출력 부분에 표시되는 레이아웃.<br />
-<code class="highlighter-rouge">{}</code> 안에 JSON 객체의 Key를 입력해 검색된 데이터를 맵핑한다.</li>
+  <li><code class="language-plaintext highlighter-rouge">searchInput</code>: 입력 부분에 해당하는 요소</li>
+  <li><code class="language-plaintext highlighter-rouge">resultsContainer</code>: 출력 부분에 해당하는 요소</li>
+  <li><code class="language-plaintext highlighter-rouge">json</code>: 검색 대상이 되는 검색 데이터가 있는 JSON 파일</li>
+  <li><code class="language-plaintext highlighter-rouge">searchResultTemplate</code>: 검색된 항목이 출력 부분에 표시되는 레이아웃.<br />
+<code class="language-plaintext highlighter-rouge">{}</code> 안에 JSON 객체의 Key를 입력해 검색된 데이터를 맵핑한다.</li>
 </ul>
 
 <p>참고로 현재 구현된 검색 페이지에 사용되는 JavaScript 코드는 다음과 같다.</p>
@@ -578,12 +578,12 @@ layout: none
 <span class="nt">&lt;/script&gt;</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>기본적인 것은 예제 프로젝트와 동일하지만, <code class="highlighter-rouge">searchResultTemplate</code> 옵션이 복잡해지고, <code class="highlighter-rouge">templateMiddleware</code> 옵션이 추가되었다.</p>
+<p>기본적인 것은 예제 프로젝트와 동일하지만, <code class="language-plaintext highlighter-rouge">searchResultTemplate</code> 옵션이 복잡해지고, <code class="language-plaintext highlighter-rouge">templateMiddleware</code> 옵션이 추가되었다.</p>
 
-<p><code class="highlighter-rouge">searchResultTemplate</code> 옵션은 검색 결과에 아이콘을 추가해 꾸미기 위해 복잡해졌고,
-<code class="highlighter-rouge">templateMiddleware</code> 옵션은 <code class="highlighter-rouge">searchResultTemplate</code>에 검색된 데이터가 맵핑되기 전에 수행할 변환 작업을 위해 사용되었다.</p>
+<p><code class="language-plaintext highlighter-rouge">searchResultTemplate</code> 옵션은 검색 결과에 아이콘을 추가해 꾸미기 위해 복잡해졌고,
+<code class="language-plaintext highlighter-rouge">templateMiddleware</code> 옵션은 <code class="language-plaintext highlighter-rouge">searchResultTemplate</code>에 검색된 데이터가 맵핑되기 전에 수행할 변환 작업을 위해 사용되었다.</p>
 
-<p><code class="highlighter-rouge">templateMiddleware</code> 옵션에 사용되는 함수의 로직이 굉장히 복잡해 보이는데,
+<p><code class="language-plaintext highlighter-rouge">templateMiddleware</code> 옵션에 사용되는 함수의 로직이 굉장히 복잡해 보이는데,
 그 목적은 <strong>검색어에 해당하는 부분을 강조 표시하기 위한 용도</strong>이다.
 더불어 실제 검색 대상이 되는 항목(제목, 카테고리, 태그 등)만 강조 표시를 하도록 로직을 추가했다.
 그 결과는 다음과 같다.</p>
@@ -595,8 +595,8 @@ layout: none
 <p>마지막으로 구성한 레이아웃과 구현한 JavaScript 코드를 원하는 곳에 넣고 페이지로 추가하면 된다.
 이것은 예제 프로젝트에는 없는 부분으로, 다른 페이지를 구성하던 방식과 동일하게 페이지를 추가할 수 있다.</p>
 
-<p>현재 구현된 검색 페이지는 <code class="highlighter-rouge">search.html</code> 파일에 HTML 레이아웃과 JavaScript 코드를 모두 넣고, <code class="highlighter-rouge">_layouts</code> 디렉터리에 포함시켰다.
-그리고 <code class="highlighter-rouge">_pages</code> 디렉터리에 <code class="highlighter-rouge">search.md</code> 파일을 만들어 <code class="highlighter-rouge">layout</code>으로 <code class="highlighter-rouge">search</code>를 작성했다.</p>
+<p>현재 구현된 검색 페이지는 <code class="language-plaintext highlighter-rouge">search.html</code> 파일에 HTML 레이아웃과 JavaScript 코드를 모두 넣고, <code class="language-plaintext highlighter-rouge">_layouts</code> 디렉터리에 포함시켰다.
+그리고 <code class="language-plaintext highlighter-rouge">_pages</code> 디렉터리에 <code class="language-plaintext highlighter-rouge">search.md</code> 파일을 만들어 <code class="language-plaintext highlighter-rouge">layout</code>으로 <code class="language-plaintext highlighter-rouge">search</code>를 작성했다.</p>
 
 <figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

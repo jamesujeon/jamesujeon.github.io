@@ -11,7 +11,7 @@
   <title>Codeforces 문제 풀이: 50A - Domino piling - Jamesu Devlog</title>
 
   <!-- Begin Jekyll SEO tag v2.5.0 -->
-<meta name="generator" content="Jekyll v3.8.6" />
+<meta name="generator" content="Jekyll v3.9.1" />
 <meta property="og:title" content="Codeforces 문제 풀이: 50A - Domino piling" />
 <meta name="author" content="jamesujeon" />
 <meta property="og:locale" content="ko_KR" />
@@ -23,7 +23,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-12-06T00:00:00+09:00" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/"},"author":{"@type":"Person","name":"jamesujeon"},"description":"Dev Blog by James Minsu Jeon","url":"https://jamesu.dev/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/","@type":"BlogPosting","headline":"Codeforces 문제 풀이: 50A - Domino piling","dateModified":"2019-12-06T00:00:00+09:00","datePublished":"2019-12-06T00:00:00+09:00","@context":"http://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://jamesu.dev/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/"},"url":"https://jamesu.dev/posts/2019/12/06/codeforces-problem-solving-50a-domino-piling/","headline":"Codeforces 문제 풀이: 50A - Domino piling","datePublished":"2019-12-06T00:00:00+09:00","dateModified":"2019-12-06T00:00:00+09:00","author":{"@type":"Person","name":"jamesujeon"},"@type":"BlogPosting","description":"Dev Blog by James Minsu Jeon","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -192,12 +192,12 @@
 
 <p>조각의 긴 변이 높이가 되도록 세운 후, 판의 좌상단 부분부터 채운다.<br />
 여기서 긴 변은 2가 되고, 1 크기의 변으로 한 줄부터 채운다고 생각하면, 판의 너비와 동일하게 된다.<br />
-따라서, 하나의 줄을 채우는데 필요한 조각 수는 <code class="highlighter-rouge">N</code>만큼이 된다.<br />
-반복적으로 여러 줄에 대해 채울 수 없을 때까지 조각을 채우면, 반복적으로 <code class="highlighter-rouge">N</code>을 개수에 더하면 된다.</p>
+따라서, 하나의 줄을 채우는데 필요한 조각 수는 <code class="language-plaintext highlighter-rouge">N</code>만큼이 된다.<br />
+반복적으로 여러 줄에 대해 채울 수 없을 때까지 조각을 채우면, 반복적으로 <code class="language-plaintext highlighter-rouge">N</code>을 개수에 더하면 된다.</p>
 
 <p>하나의 줄에 더 이상 조각을 세운 채로(긴 변이 높이가 되도록) 채울 수 없으면, 눕혀서 채운다.<br />
-조각을 눕히면 조각의 너비는 2가 되고, 판의 너비에 대해 최대로 넣는 개수는 <code class="highlighter-rouge">(N / 2)의 내림 수</code>만큼이 된다.<br />
-Python에서는 <code class="highlighter-rouge">int()</code> 함수를 이용하면, 정수로 변환하며 <strong>자동으로 소숫점을 내림 처리</strong>한다.<br />
+조각을 눕히면 조각의 너비는 2가 되고, 판의 너비에 대해 최대로 넣는 개수는 <code class="language-plaintext highlighter-rouge">(N / 2)의 내림 수</code>만큼이 된다.<br />
+Python에서는 <code class="language-plaintext highlighter-rouge">int()</code> 함수를 이용하면, 정수로 변환하며 <strong>자동으로 소숫점을 내림 처리</strong>한다.<br />
 눕혀서 채우는 것을 마지막으로 개수에 더하면, 총 조각 수를 구할 수 있다.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
@@ -208,7 +208,7 @@ Python에서는 <code class="highlighter-rouge">int()</code> 함수를 이용하
 6
 7
 8
-</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -231,7 +231,7 @@ Python에서는 <code class="highlighter-rouge">int()</code> 함수를 이용하
 9
 10
 11
-</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
 <span class="n">piece_height</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">piece_width</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -258,7 +258,7 @@ Python에서는 <code class="highlighter-rouge">int()</code> 함수를 이용하
 3
 4
 5
-</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</pre></td><td class="code"><pre><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">input</span><span class="p">().</span><span class="n">split</span><span class="p">())</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">n</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
 
