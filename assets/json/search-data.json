@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "백준 문제 풀이: 2839 - 설탕 배달",
+      "categories" : "Etc > Algorithm",
+      "tags"       : "problem-solving, baekjoon, greedy-algorithm, python",
+      "date"       : "2022.03.27",
+      "urlString"  : "/posts/2022/03/27/baekjoon-problem-solving-2839/",
+      "url"        : "/posts/2022/03/27/baekjoon-problem-solving-2839/"
+    },
+  
+    {
       "title"      : "TIL 37: 2021년 회고",
       "categories" : "Etc > TIL",
       "tags"       : "idea",

@@ -1,4 +1,59 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2022-01-06T17:22:53+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 37: 2021년 회고</title><link href="https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective/" rel="alternate" type="text/html" title="TIL 37: 2021년 회고" /><published>2022-01-01T00:00:00+09:00</published><updated>2022-01-01T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective</id><content type="html" xml:base="https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2022-03-27T21:00:07+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 2839 - 설탕 배달</title><link href="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/" rel="alternate" type="text/html" title="백준 문제 풀이: 2839 - 설탕 배달" /><published>2022-03-27T00:00:00+09:00</published><updated>2022-03-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839</id><content type="html" xml:base="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2839.png&quot; alt=&quot;2839 - 설탕 배달&quot; title=&quot;2839 - 설탕 배달&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.acmicpc.net/problem/2839&quot; target=&quot;_blank&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;최대한 적은 봉지를 들고 가려고 하므로, 5킬로그램 봉지의 개수가 최대가 되야 한다는 것을 알 수 있다.&lt;br /&gt;
+따라서, 5킬로그램 봉지의 개수를 기준으로 생각하면 문제를 수월하게 풀 수 있다.&lt;/p&gt;
+
+&lt;h2 id=&quot;문제-풀이&quot;&gt;문제 풀이&lt;/h2&gt;
+
+&lt;p&gt;5킬로그램 봉지 개수의 변화에 따라 그때그때 최적의 해를 구하면 그것이 최종적인 해가 될 수 있으므로,
+이 문제는 &lt;a href=&quot;https://namu.wiki/w/%EA%B7%B8%EB%A6%AC%EB%94%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98&quot; target=&quot;_blank&quot;&gt;탐욕(Greedy) 알고리즘&lt;/a&gt;이라 할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;주어진 N에 대해 3부터 차례대로 숫자를 증가시키며 확인하기에는 루프를 많이 돌게 되어 비효율적이다.&lt;br /&gt;
+5킬로그램 봉지 개수에 따라 3킬로그램 봉지 개수를 정할 것이므로,
+루프를 최소한으로 돌 수 있게 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n // 5&lt;/code&gt;와 같이 나누어 정수로 만들어 버리면, 5킬로그램 봉지의 개수가 될 수 있는 수만 남게 된다.&lt;br /&gt;
+또한, 5킬로그램 봉지 개수가 최대가 될 때를 찾는 것이므로 봉지 개수의 범위를 반대로 하여 루프를 구성하도록 한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;매 루프마다 전체 개수 N에서 5킬로그램 봉지 개수를 빼서 남은 개수를 구한다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;이제 남은 개수 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;m&lt;/code&gt;이 3으로 나누어 떨어질 때를 찾으면, 정확하게 N킬로그램을 만들 수 있다.&lt;br /&gt;
+정확하게 N킬로그램을 만들 수 있을 때, 3킬로그램 봉지의 개수를 더하면 해답이 된다.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;풀이-소스&quot;&gt;풀이 소스&lt;/h2&gt;
+
+&lt;p&gt;문제 풀이 환경: Python 3.9&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reversed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;five_bags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="baekjoon" /><category term="greedy-algorithm" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 37: 2021년 회고</title><link href="https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective/" rel="alternate" type="text/html" title="TIL 37: 2021년 회고" /><published>2022-01-01T00:00:00+09:00</published><updated>2022-01-01T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective</id><content type="html" xml:base="https://jamesu.dev/posts/2022/01/01/til-37-2021-retrospective/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;GitHub 연속 일일 커밋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;597&lt;/code&gt;일째 진행중이다.&lt;/li&gt;
@@ -718,55 +773,4 @@ Closure에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;
 
 &lt;p&gt;하지만 나는 Swift와 더 친하게 지낼 것이다. 🙄&lt;/p&gt;
 
-&lt;p&gt;참고로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry><entry><title type="html">TIL 30: RxSwift 맛보기</title><link href="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/" rel="alternate" type="text/html" title="TIL 30: RxSwift 맛보기" /><published>2021-03-05T00:00:00+09:00</published><updated>2021-03-05T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/05/til-30-tasting-rxswift/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용하면, 콜백 지옥에서 벗어나 새로운 방식으로 비즈니스 로직을 구현할 수 있다.&lt;/li&gt;
-  &lt;li&gt;얼른 맛보자 😋&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;reactivex&quot;&gt;ReactiveX&lt;/h2&gt;
-
-&lt;p&gt;Observer 패턴, Iterator 패턴, 함수형 프로그래밍의 집합체로 정의된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;는
-&lt;strong&gt;흐름에 따른 비동기 프로그래밍&lt;/strong&gt; 방식을 지원해주는 유용한 API다.
-자세한 설명은 &lt;a href=&quot;http://reactivex.io/&quot; target=&quot;_blank&quot;&gt;공식 홈페이지&lt;/a&gt;에
-문서가 잘 되어 있으니 어떤 느낌인지 알아가는 데 도움이 될 것이다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;흐름&lt;/strong&gt;과 &lt;strong&gt;비동기&lt;/strong&gt;, 그리고 &lt;strong&gt;함수형&lt;/strong&gt;을 이용함으로써, 프로그래밍 방식이 매우 달라진다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;흐름&lt;/code&gt;을 통해 여러 처리를 하나의 흐름으로 합쳐 동기적으로 동작하게 하거나,
-다수의 흐름을 병렬적으로 수행하고 하나의 흐름으로 결과를 내거나,
-중간에 에러를 발생시켜 흐름을 끊어버리는 등과 같이 다양한 조작으로 원하는 로직을 자연스럽게 처리할 수 있다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;비동기&lt;/code&gt;를 기반으로 하기 때문에 각 흐름의 입력과 출력에만 집중해 로직을 구현할 수 있다.
-항상 처리를 기다릴 필요 없이 흐름의 출력을 바탕으로 원하는 로직으로 조립해 사용하면 된다.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;함수형&lt;/code&gt; 프로그래밍이 기본이므로, 내부에서 상태를 조작하는 것보다는 입력과 출력에 집중해 비즈니스 로직을 구현할 수 있다.
-그로 인해 상태가 꼬이는 실수를 하거나 로직이 복잡해지는 등의 문제를 방지할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;이러한 장점을 느껴보고자 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ReactiveX&lt;/code&gt;의 Swift 버전인 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 공부해서 사내 프로젝트에 일부 도입을 시도해봤고,
-성공적으로 적용되어 만족감을 느꼈다.&lt;/p&gt;
-
-&lt;h2 id=&quot;콜백-지옥에서-벗어나자&quot;&gt;콜백 지옥에서 벗어나자&lt;/h2&gt;
-
-&lt;p&gt;일단, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 네트워크 처리 부분에 먼저 도입했다.&lt;br /&gt;
-기존에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Alamofire&lt;/code&gt; 오픈 소스 라이브러리를 사용해 사내 라이브러리에 맞게 커스텀한 부분을
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 이용해 Wrapping하여 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rx&lt;/code&gt; 버전을 추가로 구현했다.&lt;/p&gt;
-
-&lt;p&gt;네트워크 처리를 구현하면서 자주 사용하던 방식은 성공, 실패, 완료 등의 콜백 Closure를 전달한 방식이다.
-이는 다수의 네트워크 처리나 로직이 연쇄될 경우 &lt;strong&gt;콜백 지옥&lt;/strong&gt;을 야기할 수 있다.
-중괄호 Depth가 계속 생기는 것이다.
-콜백 지옥을 느껴보면, 코드의 품질이 낮아보이고 어떻게든 개선하고 싶은 욕구가 생길 것이다.&lt;/p&gt;
-
-&lt;p&gt;이 부분을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt;를 적용해 처리해보니,
-항상 매개변수로 전달하던 콜백 Closure는 사라지고,
-응답 흐름에 대해서 다른 흐름을 추가로 연쇄하거나 응답을 변형하는 등과 같이 원하는 로직을 자연스럽게 처리할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;그리고 다수의 네트워크 처리를 병렬로 수행해 그 결과에 따른 처리가 편해지고,
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DisposeBag&lt;/code&gt;을 활용하니 효율적으로 리소스를 관리할 수 있었다.&lt;/p&gt;
-
-&lt;p&gt;이제 맛보기 단계인데 정말 맛있어서 얼른 다른 부분에도 적용하고 싶은 욕심이 생긴다.&lt;br /&gt;
-다른 오픈 소스 라이브러리와의 조합(특히, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIKit&lt;/code&gt;과 연동된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxCocoa&lt;/code&gt;)도 좋아서 차근차근 도입할 예정이다.
-최종적으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MVVM&lt;/code&gt; 디자인 패턴을 사내 프로젝트에 적용할 예정이다.&lt;/p&gt;
-
-&lt;p&gt;아직도 재밌는 일이 많이 남아있어 프로그래밍을 놓을 수 없는 것 같다. 👨🏻‍💻&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="swift" /><category term="reactive-x" /><category term="rxswift" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;p&gt;참고로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry></feed>
