@@ -1,6 +1,15 @@
 [
   
     {
+      "title"      : "TIL 38: 2022년 회고",
+      "categories" : "Etc > TIL",
+      "tags"       : "idea",
+      "date"       : "2023.01.08",
+      "urlString"  : "/posts/2023/01/08/til-38-2022-retrospective/",
+      "url"        : "/posts/2023/01/08/til-38-2022-retrospective/"
+    },
+  
+    {
       "title"      : "백준 문제 풀이: 2839 - 설탕 배달",
       "categories" : "Etc > Algorithm",
       "tags"       : "problem-solving, baekjoon, greedy-algorithm, python",

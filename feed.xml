@@ -1,4 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2022-03-27T21:00:07+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">백준 문제 풀이: 2839 - 설탕 배달</title><link href="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/" rel="alternate" type="text/html" title="백준 문제 풀이: 2839 - 설탕 배달" /><published>2022-03-27T00:00:00+09:00</published><updated>2022-03-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839</id><content type="html" xml:base="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2839.png&quot; alt=&quot;2839 - 설탕 배달&quot; title=&quot;2839 - 설탕 배달&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko_KR"><generator uri="https://jekyllrb.com/" version="3.9.1">Jekyll</generator><link href="https://jamesu.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jamesu.dev/" rel="alternate" type="text/html" hreflang="ko_KR" /><updated>2023-01-09T04:14:57+09:00</updated><id>https://jamesu.dev/</id><title type="html">Jamesu Devlog</title><subtitle>Dev Blog by James Minsu Jeon</subtitle><author><name>jamesujeon</name><email>jamesujeon@gmail.com</email></author><entry><title type="html">TIL 38: 2022년 회고</title><link href="https://jamesu.dev/posts/2023/01/08/til-38-2022-retrospective/" rel="alternate" type="text/html" title="TIL 38: 2022년 회고" /><published>2023-01-08T00:00:00+09:00</published><updated>2023-01-08T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2023/01/08/til-38-2022-retrospective</id><content type="html" xml:base="https://jamesu.dev/posts/2023/01/08/til-38-2022-retrospective/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GitHub 연속 일일 커밋은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;962&lt;/code&gt;일째 진행중이다. 🌱&lt;/li&gt;
+  &lt;li&gt;작년의 가장 큰 성과는 &lt;strong&gt;대형 프로젝트의 성공적인 마무리&lt;/strong&gt;다. 😎&lt;/li&gt;
+  &lt;li&gt;올해도 &lt;strong&gt;프로젝트 설계&lt;/strong&gt;에 초점을 맞춰 공부를 하자. ✍️&lt;/li&gt;
+  &lt;li&gt;2023년에도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;설계에 깊이를 더한 iOS 개발자&lt;/code&gt;가 되보자. 💪&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;today-i-committed&quot;&gt;Today I Committed&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/github_2022_contributions.png&quot; alt=&quot;GitHub 2022 Contributions&quot; width=&quot;100%&quot; /&gt;
+&lt;em&gt;GitHub Contributions in 2022&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;2022년에도 일일 커밋을 이어가면서 365일을 모두 채워서, 연속 &lt;strong&gt;962일째&lt;/strong&gt;를 달성했다. 🥳&lt;/p&gt;
+
+&lt;p&gt;물론, 작년도 쉬운 문제를 풀어 잔디를 채우는 것이 주가 되었다.&lt;br /&gt;
+작년의 블로그 글이 심각하게 적어(2개..?) 대부분이 문제 풀이 관련 커밋이라 보면 된다.&lt;br /&gt;
+다른 일로 바뻐 신경을 많이 쓰지 못했지만, 2년 이상 꾸준하게 &lt;strong&gt;커밋하는 습관&lt;/strong&gt;이 생긴 것만으로도 만족스러운 성과라고 생각한다. 😎&lt;/p&gt;
+
+&lt;p&gt;부디 올해에는 문제 풀이가 아닌 다른 커밋으로 가득 차길, 미래의 나에게 바라본다. 🙄&lt;/p&gt;
+
+&lt;h2 id=&quot;today-i-worked&quot;&gt;Today I Worked&lt;/h2&gt;
+
+&lt;p&gt;재작년에 이직한 후에 규모가 큰 프로젝트도 참여하고, 팀원과의 협업도 제대로 한 것은 작년이 처음이었다.&lt;br /&gt;
+전체 프로젝트 기간이 거의 1년으로 긴 호흡으로 진행한 프로젝트였고, 전체적인 설계와 중요한 부분의 담당을 할 수 있어서 뜻깊은 프로젝트였다.&lt;br /&gt;
+우리 팀은 각 개발자가 담당하는 영역에 대해 담당자가 원하는 방향으로 설계하도록 자유를 제공하는 방향이라,
+서로에게 큰 영향을 주지 않고 독립적으로 개발을 진행할 수 있도록 구성하는 것에 초점을 맞춰 설계를 했다.&lt;br /&gt;
+다행히 그 구조는 잘 먹혔고, 큰 이슈 없이 프로젝트가 성공적으로 마무리 되었다. 😎&lt;/p&gt;
+
+&lt;p&gt;작년 한 해는 업무적으로 만족스런 해였다.&lt;br /&gt;
+꾸준히 담당하던 부분의 유지보수도 별 탈 없이 진행되었으며, 큰 프로젝트를 성공적으로 마치고 그 이후에도 버그가 별로 발생하지 않아서 뿌듯했다.
+그리고 열심히 타 부서와 의사소통을 하며 프로젝트를 챙겨서 그런지, 타 부서로부터의 칭찬 피드백도 많이 받아서, 그때 특히 기분이 좋았다. 🥹&lt;/p&gt;
+
+&lt;p&gt;올해도 작년의 좋은 피드백을 잊지 않으며, 프로젝트들이 성공적으로 마무리될 수 있도록 힘써봐야겠다! 🔥&lt;/p&gt;
+
+&lt;h2 id=&quot;today-i-learned&quot;&gt;Today I Learned&lt;/h2&gt;
+
+&lt;h3 id=&quot;글쓰기&quot;&gt;글쓰기&lt;/h3&gt;
+
+&lt;p&gt;작년에는 블로그 글이 2개.. 심지어 1개는 2021년 회고 글이니 제외한다면, 1개만 올렸던 최저의 해였다.&lt;br /&gt;
+진짜 생각하는 의자에 무릎 꿇고 앉아서 하루종일 반성해야겠다는 생각이 들었다.&lt;br /&gt;
+변명 아닌 변명으로, 회사 일과 다른 일들에 집중하다보니 바빠서 글을 못 쓰게 되고 미루고 미루다 2023년이 된 것 같다.&lt;br /&gt;
+많이 써야 그만큼 쓰는 것이 쉬워지고 부담스럽지 않은 작업이 되는 것인데 일일 커밋처럼 습관들기가 참으로 쉽지 않다. 😂&lt;/p&gt;
+
+&lt;p&gt;결론적으로 현재 내 인생의 우선순위에서 많이 밀려난 셈인데,&lt;br /&gt;
+&lt;strong&gt;(매번하는 다짐이지만) 올해는 글쓰기의 우선순위를 조금이라도 높여야겠다.&lt;/strong&gt; 🙄&lt;/p&gt;
+
+&lt;h3 id=&quot;combine-mvvm&quot;&gt;Combine, MVVM&lt;/h3&gt;
+
+&lt;p&gt;작년 초에 공부 목표로 RxSwift, Combine, MVVM, SwiftUI 등을 정했었는데, 이 중에 Combine, MVVM만 여러모로 맛을 봤던 한 해였다.&lt;br /&gt;
+iOS 타겟 버전이 많이 올라와 Combine을 사용하는데 문제가 없어 RxSwift는 자연스레 사용하지 않게 되었고,
+SwiftUI는 내가 담당하는 영역이 아직 적용할만한 부분은 아니라서 우선순위를 뒤로 미룬 상태였다.&lt;/p&gt;
+
+&lt;p&gt;작년에 회사에서 프로젝트를 진행하며 구조는 MVVM 위주로 설계하고, 신규 프로젝트에는 Combine을 일부 적용시키는 방향으로 개발을 했다.
+그 과정에서 더 나은 구조와 코드를 작성할 수 있도록 많이 공부하고 고민하며 시간을 보냈다.&lt;br /&gt;
+그 결과, 개인적으로는 만족스러운 구조로 설계되어 유지보수하기 편했으며, Combine은 MVVM 구조와 함께 사용하기에도 적절했다.
+특히, 이슈가 발생했을 때 어디를 고쳐야 할지를 바로 알 수 있어서 이슈 처리의 속도가 많이 향상되었다.&lt;/p&gt;
+
+&lt;p&gt;하지만, 아직도 MVVM의 베스트 프랙티스가 무엇인지 정립이 안돼서 갈 길이 먼 것 같다.&lt;br /&gt;
+MVVM뿐만 아니라 다른 구조도 참고해가며 설계에 대한 시야를 더 깊고 넓게 가져야 할 필요가 있다. 🤔&lt;/p&gt;
+
+&lt;h2 id=&quot;tomorrow-i-will-learn&quot;&gt;Tomorrow I will Learn&lt;/h2&gt;
+
+&lt;h3 id=&quot;설계feat-디자인-패턴&quot;&gt;설계(feat. 디자인 패턴)&lt;/h3&gt;
+
+&lt;p&gt;설계에 대한 공부는 아직도 끝이 없는 것 같다.&lt;br /&gt;
+현재는 MVVM 위주로 설계를 하고 있지만, 다른 패턴의 구조도 자세하게 참고해가며 설계에 대한 공부를 계속 하고자 한다.&lt;br /&gt;
+상황에 따라 적절한 패턴이 있을텐데 그때마다 베스트 프랙티스는 무엇인지 정립해서, 어떤 상황에서든 뚝딱뚝딱 설계하는 능력을 기르고 싶다.&lt;/p&gt;
+
+&lt;h3 id=&quot;접근성accessibility-및-그-외-기능들&quot;&gt;접근성(Accessibility) 및 그 외 기능들&lt;/h3&gt;
+
+&lt;p&gt;작년에 접근성(Accessibility) 관련 이슈가 많이 할당되었는데, 다른 일로 바빠서 최대한 미루다보니 올해까지 미뤄지게 되었다.
+올해는 몸이 불편하신 분들도 편리하게 쓸 수 있도록 신경써서 접근성 이슈를 처리할 예정이다.
+그리고 접근성을 위한 구조를 잡은 후에는 신규 기능이나 화면이 들어갈 때마다 항상 포함되도록 처리할 것이다.&lt;br /&gt;
+기존 기능에 영향이 가지 않도록 꼼꼼하게 확인하면서 개발하는 것이 중요할 것 같다.&lt;/p&gt;
+
+&lt;p&gt;기회가 된다면, 일반적인 기능이 아닌 비디오, 오디오, 워치, 위젯 등에 대한 것도 담당하고 싶다.&lt;br /&gt;
+프로젝트에 참여하게 된다면 공부 속도가 아주 빠르게 가속되기 때문에 가능하면 투입됐으면 좋겠다. 🔥&lt;/p&gt;
+
+&lt;h2 id=&quot;tomorrow-i-will-become&quot;&gt;Tomorrow I will Become&lt;/h2&gt;
+
+&lt;p&gt;작년의 목포였던 &lt;strong&gt;설계에 깊이를 더한 iOS 개발자&lt;/strong&gt;가 되는 것은 달성했을까?&lt;br /&gt;
+개인적으로 조금은 깊어졌다고 생각한다.&lt;br /&gt;
+확실히 예전보다 복잡한 프로젝트에 참여하다보니 설계할 때 다양한 사항을 고려해야만 했다.
+그 설계 과정을 겪어가며 한층 성장했다고 느꼈다.
+하지만, 아직 더 다양한 상황의 프로젝트를 겪어보지 않았기에 여전히 멀었다는 생각이 든다.&lt;/p&gt;
+
+&lt;p&gt;결론적으로, 올해의 목표도 작년의 목표와 동일하게 &lt;strong&gt;설계에 깊이를 더한 iOS 개발자&lt;/strong&gt;가 되는 것이다.&lt;br /&gt;
+올해는 웅덩이가 아닌 우물이 되기를 바라며 열심히 달려가야겠다! 💪&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="idea" /><summary type="html">TL;DR</summary></entry><entry><title type="html">백준 문제 풀이: 2839 - 설탕 배달</title><link href="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/" rel="alternate" type="text/html" title="백준 문제 풀이: 2839 - 설탕 배달" /><published>2022-03-27T00:00:00+09:00</published><updated>2022-03-27T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839</id><content type="html" xml:base="https://jamesu.dev/posts/2022/03/27/baekjoon-problem-solving-2839/">&lt;p&gt;&lt;img src=&quot;assets/baekjoon_2839.png&quot; alt=&quot;2839 - 설탕 배달&quot; title=&quot;2839 - 설탕 배달&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;문제-파악&quot;&gt;문제 파악&lt;/h2&gt;
 
@@ -731,46 +820,4 @@ iOS에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;
 
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;participant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;participant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Counter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="python" /><summary type="html"></summary></entry><entry><title type="html">TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!</title><link href="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/" rel="alternate" type="text/html" title="TIL 31: Objective-C의 Block 사용 시 메모리 누수 주의!" /><published>2021-03-09T00:00:00+09:00</published><updated>2021-03-09T00:00:00+09:00</updated><id>https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c</id><content type="html" xml:base="https://jamesu.dev/posts/2021/03/09/til-31-be-careful-of-memory-leaks-in-block-of-objective-c/">&lt;h2 id=&quot;tldr&quot;&gt;TL;DR&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부 요소를 접근할 때는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드의 지역 변수에 외부 요소를 대입하고 사용하자.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 사용한 변수는 &lt;strong&gt;약한 참조&lt;/strong&gt;이기 때문에 언제든 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 가능성이 있다는 것에 주의하자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;block-프로그래밍&quot;&gt;Block 프로그래밍&lt;/h2&gt;
-
-&lt;p&gt;Objective-C는 Swift의 Closure가 등장하기 이전에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;이란 것을 지원했다.
-Closure와 유사하게 &lt;strong&gt;로직을 보관할 수 있는 함수 자료형&lt;/strong&gt;이라 생각하면 된다.
-그래서 유사한 특징을 가지기도 하는데, 그 중 하나가
-&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 외부의 요소를 접근할 시에 강한 참조를 가진다는 점&lt;/strong&gt;이다.&lt;/p&gt;
-
-&lt;p&gt;이는 Closure에서도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용함으로써 발생할 수 있는 점하고 유사하다.
-Closure에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Capture List&lt;/code&gt;를 사용해서 약한 참조로 캡처해 사용할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;그렇다면, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에서는 어떻게 약한 참조로 사용할 수 있을까?&lt;/p&gt;
-
-&lt;h2 id=&quot;메모리-누수-해결&quot;&gt;메모리 누수 해결&lt;/h2&gt;
-
-&lt;p&gt;사내 프로젝트 유지보수 중에 숨겨져 있는 버그 하나를 발견했다.&lt;br /&gt;
-정상적으로 메모리 해제가 된다면, 자연스럽게 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dealloc&lt;/code&gt; 메소드가 호출되면서 특정 로직이 수행되어야 했는데
-그렇지 못해서 비정상적인 동작을 하고 있었다.
-이 버그가 특정 상황에서만 발생했기 때문에 더욱 발견하기 어려웠다.&lt;/p&gt;
-
-&lt;p&gt;결론은 특정 비즈니스 로직에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하는데, 그 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 자연스럽게 접근하고 있는 것이었다.
-그로 인해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;에 대한 강한 참조를 가지고, 메모리에 &lt;strong&gt;좀비&lt;/strong&gt;로 남아 있어 메모리 해제가 되지 못한 것이다.&lt;/p&gt;
-
-&lt;p&gt;해결책은 &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 정의하기 전에 내부에서 사용할 값을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드로 지역 변수에 보관하고 그것을 사용하는 것&lt;/strong&gt;이다.
-예를 들어, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;self&lt;/code&gt;를 직접 사용해야 한다면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__weak&lt;/code&gt; 키워드를 통해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;와 같은 변수에 대입해 놓고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt;를 쓰는 것이다.
-물론 &lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt; 내부에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weakSelf&lt;/code&gt; 사용 시, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;nil&lt;/code&gt;일 수 있다는 것에 주의해야 한다&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;그래서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;을 사용하고 있는 코드를 전부 확인해서 기존에 숨겨져 있던 잠재적 버그까지 모두 수정했다.
-더 이상 메모리 누수로 골머리를 앓지 않기 위해서…&lt;/p&gt;
-
-&lt;p&gt;예전에는 Objective-C를 사용할 기회가 많이 없었는데,
-여기서는 사내 프로젝트 중 일부가 그 언어로 되어 있어 유지보수를 통해 이런저런 일을 많이 겪을 수 있다.
-점점 더 Objective-C와 친해지고 있는 것 같다.&lt;/p&gt;
-
-&lt;p&gt;하지만 나는 Swift와 더 친하게 지낼 것이다. 🙄&lt;/p&gt;
-
-&lt;p&gt;참고로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Block&lt;/code&gt;에 대해 더 알고 싶다면, 이 &lt;a href=&quot;https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Blocks/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007502&quot; target=&quot;_blank&quot;&gt;링크&lt;/a&gt;를 참고하면 된다.&lt;/p&gt;</content><author><name>jamesujeon</name></author><category term="ios" /><category term="objective-c" /><summary type="html">TL;DR</summary></entry></feed>
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;</content><author><name>jamesujeon</name></author><category term="problem-solving" /><category term="programmers" /><category term="python" /><summary type="html"></summary></entry></feed>
